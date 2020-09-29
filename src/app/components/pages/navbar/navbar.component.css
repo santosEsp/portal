@@ -1,0 +1,17 @@
+.navbar-login {
+  width: 305px;
+  padding: 10px;
+  padding-bottom: 0px;
+}
+
+.navbar-login-session {
+  padding: 40px;
+  padding-bottom: 0px;
+  padding-top: 0px;
+}
+
+.icon-size {
+  font-size: 65px;
+  color: #007bff;
+}
+
