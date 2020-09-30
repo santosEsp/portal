@@ -1,0 +1,137 @@
+<app-navbar></app-navbar>
+
+<h1 class="m-5"> Usuarios</h1>
+
+<div class="container m-4">
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" href="#">Todos los Usuarios</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Mis Usuarios</a>
+        </li>
+
+    </ul>
+    <div class="btn-group m-5" style="text-align: right;;">
+        <div style=" text-align: right;;">
+            <form class="form-inline">
+                <input class="form-control mr-sm-2" type="search" placeholder="Buscar ..." aria-label="Buscar ...">
+            </form>
+        </div>
+
+
+    </div>
+
+    <button type="button" class="btn btn-outline-primary margenBoton float-right mt-5" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><svg width="1.2em" height="1.2em"
+        viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+            d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+    </svg> Crear Usuario</button>
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">Crear Usuario
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nombre del usuario</label>
+                            <input type="text" class="form-control" id="nombre">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Dirección de correo</label>
+                            <input type="text" class="form-control" id="pipeline">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Rol de usuario</label>
+                            <input type="text" class="form-control" id="etapa">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Password</label>
+                            <input type="text" class="form-control" id="cantidad">
+                        </div>
+
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-primary">Crear</button>
+                    <button type="button" class="btn btn-outline-primary">Crear y agregar otro</button>
+                    <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <table class="table table-striped fa-100px">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </div>
+                        </div>
+                    </div>
+                </th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Equipo</th>
+                <th scope="col">Acceso</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </div>
+                        </div>
+                    </div>
+                </th>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </div>
+                        </div>
+                    </div>
+                </th>
+                <td>Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+            </tr>
+            <tr>
+                <th scope="row">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <input type="checkbox" aria-label="Checkbox for following text input">
+                            </div>
+                        </div>
+                    </div>
+                </th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

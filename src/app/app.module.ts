@@ -10,6 +10,8 @@ import { ContactosComponent } from './components/pages/contactos/contactos.compo
 import { PipelineComponent } from './components/pages/pipeline/pipeline.component';
 import { NavbarComponent } from './components/pages/navbar/navbar.component';
 import { PerfilComponent } from './components/pages/perfil/perfil.component';
+import { InformesComponent } from './components/pages/informes/informes.component';
+import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { PerfilComponent } from './components/pages/perfil/perfil.component';
     ContactosComponent,
     PipelineComponent,
     NavbarComponent,
-    PerfilComponent
+    PerfilComponent,
+    InformesComponent,
+    UsuariosComponent
   ],
   imports: [
     BrowserModule,

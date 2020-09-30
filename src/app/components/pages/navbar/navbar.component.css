@@ -15,3 +15,18 @@
   color: #007bff;
 }
 
+.navbarContacto {
+  width: 305px;
+  padding: 10px;
+  padding-bottom: 0px;
+}
+
+a:hover {
+ background-color: #007bff;
+ color: white;
+ 
+}
+
+.negritas:hover{
+  font-weight: bold;
+}
