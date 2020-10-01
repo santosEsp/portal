@@ -1,14 +1,28 @@
-import { Component,  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import {Router} from '@angular/router';
+import { UsuarioLoginModel } from 'src/app/models/usuariosLogin.model';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
-export class LoginComponent  {
+export class LoginComponent implements OnInit {
+  loginUsuario: UsuarioLoginModel;
+  constructor() {}
 
-  constructor(private router: Router) { }
+  ngOnInit() {
+    this.loginUsuario = new UsuarioLoginModel();
+    this.loginUsuario.correo = 'usuario1@cs.clicksoft.mx';
+  }
 
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      return;
+    }
+
+    console.log('Formulario enviado');
+    console.log(this.loginUsuario);
+    console.log(form);
+  }
 }

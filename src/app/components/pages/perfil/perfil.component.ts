@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
   styleUrls: ['./perfil.component.css']
 })
-export class PerfilComponent implements OnInit {
+export class PerfilComponent  {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  fecha: Date = new Date();
+  constructor() {
+    console.log(this.fecha);
+   }
 
 }

@@ -12,7 +12,7 @@
 
 .icon-size {
   font-size: 65px;
-  color: #007bff;
+  color: #275995;
 }
 
 .navbarContacto {
@@ -22,11 +22,14 @@
 }
 
 a:hover {
- background-color: #007bff;
+ background-color:#275995;
  color: white;
  
 }
 
 .negritas:hover{
   font-weight: bold;
+}
+.colorCorporativo{
+  background-color: #275995;
 }

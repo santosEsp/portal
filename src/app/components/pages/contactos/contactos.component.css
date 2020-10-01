@@ -15,3 +15,13 @@ div.scrollmenu {
   div.scrollmenu a:hover {
     background-color: #777;
   }
+
+  .celdas{
+
+    width: 10%;
+    height: 3%;
+  }
+
+  .colorCorporativo{
+    background-color: #275995;
+  }

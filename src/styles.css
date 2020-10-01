@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+.estilosBotones{
+    border-color: #275995;
+    color: #275995;
+}
+
+.estilosBotonesHover:hover{
+    background-color: #275995;
+    color: white;
+}
+
+.bgCorp{
+
+    background-color: #275995;
+}

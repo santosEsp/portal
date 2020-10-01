@@ -16,7 +16,7 @@
 
           <button
             type="button"
-            class="btn btn-outline-primary paddingButtons"
+            class="btn estilosBotonesHover estilosBotones paddingButtons"
             data-toggle="modal"
             data-target="#modalNota"
             data-whatever="@mdo"
@@ -52,7 +52,7 @@
           >
             <div class="modal-dialog" role="document">
               <div class="modal-content">
-                <div class="modal-header bg-primary">
+                <div class="modal-header  bgCorp">
                   <h5 class="modal-title text-white" id="exampleModalLabel">
                     Nota
                   </h5>
@@ -81,12 +81,12 @@
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary">
+                  <button type="button" class="btn estilosBotonesHover estilosBotones">
                     Guardar
                   </button>
                   <button
                     type="button"
-                    class="btn btn-outline-primary"
+                    class="btn estilosBotonesHover estilosBotones"
                     data-dismiss="modal"
                   >
                     Cancelar
@@ -99,7 +99,7 @@
 
           <button
             type="button"
-            class="btn btn-outline-primary paddingButtons"
+            class="btn estilosBotonesHover estilosBotones paddingButtons"
             data-target="#modalCorreo"
             data-toggle="modal"
           >
@@ -131,7 +131,7 @@
           >
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
-                <div class="modal-header bg-primary">
+                <div class="modal-header bgCorp">
                   <h5 class="modal-title text-white" id="exampleModalLabel">
                     Registrar correo
                   </h5>
@@ -174,7 +174,7 @@
                                   <input
                                     class="form-control"
                                     type="date"
-                                    value="2020-09-29"
+                                    value="{{fecha | date: 'yyyy-MM-dd'}}"
                                     id="example-date-input"
                                   />
                                 </div>
@@ -204,17 +204,18 @@
                         id="exampleFormControlTextarea1"
                         rows="5"
                         placeholder="Descripción del correo"
-                      ></textarea>
+                      > 
+                    </textarea>
                     </div>
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary">
+                  <button type="button" class="btn estilosBotonesHover estilosBotones">
                     Guardar
                   </button>
                   <button
                     type="button"
-                    class="btn btn-outline-primary"
+                    class="btn estilosBotonesHover estilosBotones"
                     data-dismiss="modal"
                   >
                     Cancelar
@@ -230,8 +231,8 @@
 
           <button
             type="button"
-            class="btn btn-outline-primary paddingButtons"
-            data-target="#modalReunion"
+            class="btn estilosBotonesHover estilosBotones paddingButtons"
+            data-target="#modalLlamada"
             data-toggle="modal"
           >
             <svg
@@ -253,7 +254,7 @@
             class="modal fade"
             data-backdrop="static"
             data-keyboard="false"
-            id="modalReunion"
+            id="modalLlamada"
             tabindex="-1"
             role="dialog"
             aria-labelledby="exampleModalLabel"
@@ -261,7 +262,7 @@
           >
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
-                <div class="modal-header bg-primary">
+                <div class="modal-header bgCorp">
                   <h5 class="modal-title text-white" id="exampleModalLabel">
                     Registrar llamada
                   </h5>
@@ -318,7 +319,7 @@
                                   <input
                                     class="form-control"
                                     type="date"
-                                    value="2020-09-29"
+                                    value="{{fecha | date: 'yyyy-MM-dd'}}"
                                     id="example-date-input"
                                   />
                                 </div>
@@ -354,12 +355,12 @@
                   </form>
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn btn-outline-primary">
+                  <button type="button" class="btn estilosBotonesHover estilosBotones">
                     Guardar
                   </button>
                   <button
                     type="button"
-                    class="btn btn-outline-primary"
+                    class="btn estilosBotonesHover estilosBotones"
                     data-dismiss="modal"
                   >
                     Cancelar
@@ -371,7 +372,7 @@
 
           <!--Fin modal Llamada-->
 
-          <button type="button" class="btn btn-outline-primary paddingButtons" data-target="#modalReunion"
+          <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons" data-target="#modalReunion"
           data-toggle="modal">
             <svg
               width="1em"
@@ -406,7 +407,7 @@
          >
            <div class="modal-dialog modal-lg" role="document">
              <div class="modal-content">
-               <div class="modal-header bg-primary">
+               <div class="modal-header bgCorp">
                  <h5 class="modal-title text-white" id="exampleModalLabel">
                    Registrar reunión
                  </h5>
@@ -464,7 +465,7 @@
                                 <input
                                   class="form-control"
                                   type="date"
-                                  value="2020-09-29"
+                                  value="{{fecha | date: 'yyyy-MM-dd'}}"
                                   id="example-date-input"
                                 />
                               </div>
@@ -515,12 +516,12 @@
                  </form>
                </div>
                <div class="modal-footer">
-                 <button type="button" class="btn btn-outline-primary">
+                 <button type="button" class="btn estilosBotonesHover estilosBotones">
                    Guardar
                  </button>
                  <button
                    type="button"
-                   class="btn btn-outline-primary"
+                   class="btn estilosBotonesHover estilosBotones"
                    data-dismiss="modal"
                  >
                    Cancelar
@@ -717,7 +718,7 @@
         <div class="card-heading clearfix">
           <button
             type="button"
-            class="btn btn-outline-primary margenBoton"
+            class="btn estilosBotonesHover estilosBotones margenBoton"
             data-toggle="modal"
             data-target="#exampleModal"
             data-whatever="@mdo"
@@ -753,7 +754,7 @@
         >
           <div class="modal-dialog" role="document">
             <div class="modal-content">
-              <div class="modal-header bg-primary">
+              <div class="modal-header bgCorp">
                 <h5 class="modal-title text-white" id="exampleModalLabel">
                   Agregar negocio a este contacto
                 </h5>
@@ -798,15 +799,15 @@
                 </form>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-outline-primary">
+                <button type="button" class="btn estilosBotonesHover estilosBotones">
                   Crear
                 </button>
-                <button type="button" class="btn btn-outline-primary">
+                <button type="button" class="btn estilosBotonesHover estilosBotones">
                   Crear y agregar otra
                 </button>
                 <button
                   type="button"
-                  class="btn btn-outline-primary"
+                  class="btn estilosBotonesHover estilosBotones"
                   data-dismiss="modal"
                 >
                   Cancelar

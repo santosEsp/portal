@@ -2,7 +2,7 @@
 
 <div>
 <span class="float-right">
-  <button type="button" class="btn btn-outline-primary mt-4 mr-4" data-toggle="modal" data-target="#modalCrearContacto"
+  <button type="button" class="btn estilosBotones estilosBotonesHover colo mt-4 mr-4" data-toggle="modal" data-target="#modalCrearContacto"
     data-whatever="@mdo">
     <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
       xmlns="http://www.w3.org/2000/svg">
@@ -29,7 +29,7 @@
     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
-        <div class="modal-header bg-primary">
+        <div class="modal-header bgCorp">
           <h5 class="modal-title text-white" id="exampleModalLabel">
             Agregar contacto
           </h5>
@@ -72,13 +72,13 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-outline-primary">
+          <button type="button" class="btn estilosBotonesHover estilosBotones">
             Crear
           </button>
-          <button type="button" class="btn btn-outline-primary">
+          <button type="button" class="btn estilosBotonesHover estilosBotones">
             Crear y agregar otra
           </button>
-          <button type="button" class="btn btn-outline-primary" data-dismiss="modal">
+          <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
             Cancelar
           </button>
         </div>
@@ -118,9 +118,9 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
+        <tr >
           <th scope="row">1</th>
-          <td>Chabeli Sarahí Ixta Angulo</td>
+          <td ><a [routerLink] = "['/Perfil']">Chabeli Sarahí Ixta Angulo</a> </td>
           <td>Chabeli.ixt@walmart.com</td>
           <td>@mdogsdfgfdgfgsdfgdfdfgd</td>
           <td>Markgdfgsfdgsdfgfdg</td>
@@ -132,7 +132,7 @@
         </tr>
         <tr>
           <th scope="row">2</th>
-          <td>Jacob</td>
+          <td class="celdas">  Jacob</td>
           <td>Thornton</td>
           <td>@fat</td>
           <td>Mark</td>
@@ -142,7 +142,7 @@
           <td>fddsgsgsgsgd</td>
           <td>kjdhjkdffgsssssdfg</td>
         </tr>
-        <tr>
+        <tr width="5" heigth="5">
           <th scope="row">3</th>
           <td>Larry</td>
           <td>the Bird</td>
