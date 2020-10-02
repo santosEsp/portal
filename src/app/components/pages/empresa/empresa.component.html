@@ -38,29 +38,45 @@
           </button>
         </div>
         <div class="modal-body">
-          <form>
+          <form (ngSubmit)="agregarEmpresa(f)" #f="ngForm">
+            
+            
+            
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nombre de la empresa </label>
-              <input type="text" class="form-control" id="nombre" />
+              <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="empresa.nombre" required minlength="5" />
+
+              <small *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger ">
+                Nombre de empresa obligatorio
+              </small>
+
             </div>
 
+            
+            
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Propietario del registro</label>
                 <div class="col-22">
-                  <select class="form-control" id="sel2">
-                    <option>--Seleccione--</option>
+                  <select class="form-control" id="propietario" name="propietario" [(ngModel)]="empresa.propietario" required>
+                    
                     <option>Usuario 1</option>
                     <option>Usuario 2</option>
                     <option>Usuario 3</option>
                   </select>
+
+                  <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger ">
+                    Propietario de registro obligatorio
+                  </small>
                 </div>
               </div>
+
+              
 
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Industria</label>
                 <div class="col-22">
-                  <select class="form-control" id="sel2">
-                    <option>--Seleccione--</option>
+                  <select class="form-control" id="industria" name="industria" [(ngModel)]="empresa.industria" required>
+                    ><label for="industria">--seleccione--</label>
                     <option>Contabilidad</option>
                     <option>Aviación</option>
                     <option>Medicina</option>
@@ -69,81 +85,151 @@
                     <option>Ingeniería civil</option>
                     <option>Bienes y raices</option>
                   </select>
+
+                  <small *ngIf="f.submitted && f.controls['industria'].errors" class="text-danger ">
+                    La industria es obligatoria
+                  </small>
+
                 </div>
               </div>
 
+              
+
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Número de teléfono</label>
-              <input type="text" class="form-control" id="cantidad" />
+              <input type="text" class="form-control" id="telefono"  name="telefono" [(ngModel)]="empresa.telefono" required minlength="8"/>
+
+              <small *ngIf="f.submitted && f.controls['telefono'].errors" class="text-danger ">
+                Número de teléfono obligatorio
+              </small>
             </div>
+
+            
 
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Tipo</label>
                 <div class="col-22">
-                  <select class="form-control" id="sel2">
-                    <option>--Seleccione--</option>
+                  <select class="form-control" id="tipo" name="tipo" [(ngModel)]="empresa.tipo" required>
+                    
                     <option>Cliente potencial</option>
                     <option>Socio</option>
                     <option>Revendedor</option>
                     <option>Proveedor</option>
                     <option>Otra</option>
                   </select>
+
+                  <small *ngIf="f.submitted && f.controls['tipo'].errors" class="text-danger ">
+                    El tipo es obligatorio
+                  </small>
                 </div>
               </div>
 
+              
+
+              
+
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Ciudad</label>
-              <input type="text" class="form-control" id="etapa" />
+              <input type="text" class="form-control" id="ciudad" name="ciudad" [(ngModel)]="empresa.ciudad" required />
+
+              <small *ngIf="f.submitted && f.controls['ciudad'].errors" class="text-danger ">
+                Ciudad obligatoria
+              </small>
             </div>
+
+            
 
             <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Estado o región</label>
-                <input type="text" class="form-control" id="etapa" />
-              </div>
+                <input type="text" class="form-control" id="etapa"  name="estado" [(ngModel)]="empresa.estado" required/>
 
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Código postal</label>
-                <input type="text" class="form-control" id="etapa" />
-              </div>
-
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Número de empleados</label>
-                <input type="text" class="form-control" id="etapa" />
-              </div>
-
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Ingresos anuales</label>
-                <input type="text" class="form-control" id="etapa" />
+                <small *ngIf="f.submitted && f.controls['estado'].errors" class="text-danger ">
+                  El estado es obligatorio
+                </small>
               </div>
 
               
+
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Código postal</label>
+                <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="empresa.cp" required />
+                
+                <small *ngIf="f.submitted && f.controls['codigo'].errors" class="text-danger ">
+                  El código postal es obligatorio
+                </small>
+              </div>
+
+              
+
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Número de empleados</label>
+                <input type="text" class="form-control" id="empleados" name="empleados" [(ngModel)]="empresa.noEmpleados" required />
+
+                <small *ngIf="f.submitted && f.controls['empleados'].errors" class="text-danger ">
+                  La cantidad es obligatoria
+                </small>
+
+              </div>
+
+              
+
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Ingresos anuales</label>
+                <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="empresa.ingresos" required />
+
+                <small *ngIf="f.submitted && f.controls['ingresos'].errors" class="text-danger ">
+                  Obligatorio
+                </small>
+              </div>
+
+              
+              
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Zona horaria</label>
-                <input type="text" class="form-control" id="etapa" />
+                <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="empresa.zonaHoraria" required />
+
+                <small *ngIf="f.submitted && f.controls['zona'].errors" class="text-danger ">
+                  La zona horaria es obligatoria
+                </small>
               </div>
+
 
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Descripción</label>
-                <input type="text" class="form-control" id="etapa" />
+                <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="empresa.descripcion" required/>
+
+                
+              <small *ngIf="f.submitted && f.controls['descripcion'].errors" class="text-danger ">
+                La descripción es obligatoria
+              </small>
               </div>
+
+              
 
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Página corporativa</label>
-                <input type="text" class="form-control" id="etapa" />
+                <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="empresa.pagina" required />
+                
+                <small *ngIf="f.submitted && f.controls['pagina'].errors" class="text-danger ">
+                  La página corporativa es obligatoria
+                </small>
               </div>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn estilosBotonesHover estilosBotones">
+                  Crear
+                </button>
+                <button type="submit" class="btn estilosBotonesHover estilosBotones">
+                  Crear y agregar otra
+                </button>
+                <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
+                  Cancelar
+                </button>
+              </div>
+
           </form>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn estilosBotonesHover estilosBotones">
-            Crear
-          </button>
-          <button type="button" class="btn estilosBotonesHover estilosBotones">
-            Crear y agregar otra
-          </button>
-          <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
-            Cancelar
-          </button>
-        </div>
+        
       </div>
     </div>
   </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UsuarioLoginModel } from 'src/app/models/usuariosLogin.model';
+import { Router } from '@angular/router';
+import { UsuarioModel } from 'src/app/models/usuarios.model';
 
 @Component({
   selector: 'app-login',
@@ -8,21 +9,23 @@ import { UsuarioLoginModel } from 'src/app/models/usuariosLogin.model';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginUsuario: UsuarioLoginModel;
-  constructor() {}
+  usuario: UsuarioModel;
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
-    this.loginUsuario = new UsuarioLoginModel();
-    this.loginUsuario.correo = 'usuario1@cs.clicksoft.mx';
+    this.usuario = new UsuarioModel();
+    this.usuario.correo = 'usuario@cs.clicksoft.com.mx';
   }
 
   onSubmit(form: NgForm) {
     if (form.invalid) {
       return;
     }
+    this.router.navigateByUrl('/contactos');
 
     console.log('Formulario enviado');
-    console.log(this.loginUsuario);
+
     console.log(form);
   }
 }

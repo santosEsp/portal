@@ -10,14 +10,13 @@ import { UsuariosComponent } from './components/pages/usuarios/usuarios.componen
 
 
 const routes: Routes = [
-  
-  {path: 'Contactos', component: ContactosComponent},
-  {path: 'Login', component: LoginComponent},
-  {path: 'Empresas', component: EmpresaComponent},
-  {path: 'Perfil', component: PerfilComponent},
-  {path: 'Informes', component: InformesComponent},
-  {path: 'Usuarios', component: UsuariosComponent},
-  {path: '**', pathMatch: 'full', redirectTo: 'Login+'}
+  {path: 'contactos', component: ContactosComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'empresas', component: EmpresaComponent},
+  {path: 'perfil', component: PerfilComponent},
+  {path: 'informes', component: InformesComponent},
+  {path: 'usuarios', component: UsuariosComponent},
+  {path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 
 @NgModule({
