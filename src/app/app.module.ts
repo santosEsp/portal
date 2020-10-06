@@ -1,12 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {DataTablesModule} from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 
+import {HttpClientModule} from '@angular/common/http';
+
+
+import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
 
-//componentes 
+
 import { LoginComponent } from './components/Login/login.component';
 import { EmpresaComponent } from './components/pages/empresa/empresa.component';
 import { ContactosComponent } from './components/pages/contactos/contactos.component';
@@ -15,6 +18,8 @@ import { NavbarComponent } from './components/pages/navbar/navbar.component';
 import { PerfilComponent } from './components/pages/perfil/perfil.component';
 import { InformesComponent } from './components/pages/informes/informes.component';
 import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
+import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
+
 
 @NgModule({
   declarations: [
@@ -26,12 +31,15 @@ import { UsuariosComponent } from './components/pages/usuarios/usuarios.componen
     NavbarComponent,
     PerfilComponent,
     InformesComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    ConfiguracionComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

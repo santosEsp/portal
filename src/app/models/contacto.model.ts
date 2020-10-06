@@ -4,5 +4,6 @@ export class ContactoModel{
     apellido: string;
     propietario: string;
     departamento: string;
-    telefono: number; 
+    telefono: number;
+    empresa: string;
 }

@@ -11,8 +11,9 @@
           <h4 class="text-center h6 mt-2">Nombre del contacto</h4>
           <p class="text-center small">Cargo del contacto</p>
 
-          <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons" data-toggle="modal"
-            data-target="#modalNota" data-whatever="@mdo">
+          <button type="button" data-toggle="mensaje" title="Algo mas"
+            class="btn estilosBotonesHover estilosBotones paddingButtons" data-toggle="modal" data-target="#modalNota"
+            data-whatever="@mdo">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square" fill="currentColor"
               xmlns="http://www.w3.org/2000/svg">
               <path
@@ -40,10 +41,11 @@
                 </div>
                 <div class="modal-body">
                   <form (ngSubmit)="registrarNota(f)" #f="ngForm">
-                    
+
 
                     <div class="form-group">
                       <label for="recipient-name" class="col-form-label">Descripción de la nota</label>
+                      <hr>
                       <small *ngIf="f.submitted && f.controls['descripcion'].errors" class="text-danger">
                         Campo obligatorio
                       </small>
@@ -95,12 +97,12 @@
                     <div class="form-group">
                       <table class="table table-borderless text-left ">
                         <tbody>
-                          
+
                           <tr>
                             <td>
                               <div class="form-group row">
                                 <div class="col-22">
-                                  
+
                                   <label class="col-form-label">Contactado</label>
 
                                   <select class="form-control" id="contactado" name="contactado"
@@ -123,35 +125,35 @@
                             <td>
                               <div class="form-group row">
                                 <div class="col-10">
-                                  
+
 
                                   <label class="col-form-label">Fecha</label>
                                   <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}"
                                     id="example-date-input" name="fecha" [(ngModel)]="correo.fecha" required />
 
-                                    <small *ngIf="
+                                  <small *ngIf="
                                       fCorreo.submitted &&
                                       fCorreo.controls['fecha'].errors
                                     " class="text-danger">
                                     Campo obligatorio
-                                    </small>
+                                  </small>
                                 </div>
                               </div>
                             </td>
                             <td>
                               <div class="form-group row">
                                 <div class="col-15">
-                                  
+
                                   <label class="col-form-label">Hora</label>
                                   <input class="form-control" type="time" value="00:00:00" id="example-time-input"
                                     name="hora" [(ngModel)]="correo.hora" required />
 
-                                    <small *ngIf="
+                                  <small *ngIf="
                                       fCorreo.submitted &&
                                       fCorreo.controls['hora'].errors
                                     " class="text-danger">
                                     Campo obligatorio
-                                    </small>
+                                  </small>
 
                                 </div>
                               </div>
@@ -190,7 +192,7 @@
 
           <!--fin del formulario modal Correo -->
 
-         
+
 
           <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons"
             data-target="#modalLlamada" data-toggle="modal">
@@ -202,14 +204,14 @@
           </button>
 
 
-           <!--Inicio modal llamada-->
+          <!--Inicio modal llamada-->
 
           <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalLlamada" tabindex="-1"
             role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
               <div class="modal-content">
                 <div class="modal-header bgCorp">
-                  
+
                   <h5 class="modal-title text-white" id="exampleModalLabel">
                     Registrar llamada
                   </h5>
@@ -231,7 +233,7 @@
                               <label class="col-form-label">Contactado</label>
                               <div class="form-group row">
                                 <div class="col-22 pl-3">
-                                  
+
 
                                   <select class="form-control" id="sel2" name="contactadoLlamada" required
                                     [(ngModel)]="llamada.contactado">
@@ -252,7 +254,7 @@
                               <label class="col-form-label">Resultado de la llamada</label>
                               <div class="form-group row">
                                 <div class="col-22">
-                                  
+
 
                                   <select class="form-control" id="sel2" name="resultadoLlamada" required
                                     [(ngModel)]="llamada.resultado">
@@ -280,17 +282,17 @@
                               <label class="col-form-label">Fecha</label>
                               <div class="form-group row">
                                 <div class="col-10">
-                                  
+
 
                                   <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}"
                                     id="example-date-input" name="fechaLlamada" required [(ngModel)]="llamada.fecha" />
 
-                                    <small *ngIf="
+                                  <small *ngIf="
                                       fLlamada.submitted &&
                                       fLlamada.controls['fechaLlamada'].errors
                                     " class="text-danger">
                                     Campo obligatorio
-                                    </small>
+                                  </small>
                                 </div>
                               </div>
                             </td>
@@ -298,16 +300,16 @@
                               <label class="col-form-label">Hora</label>
                               <div class="form-group row">
                                 <div class="col-15">
-                                  
+
                                   <input class="form-control" type="time" value="00:00:00" id="example-time-input"
                                     name="horaLlamada" required [(ngModel)]="llamada.hora" />
 
-                                    <small *ngIf="
+                                  <small *ngIf="
                                       fLlamada.submitted &&
                                       fLlamada.controls['horaLlamada'].errors
                                     " class="text-danger">
                                     Campo obligatorio
-                                    </small>
+                                  </small>
 
                                 </div>
                               </div>
@@ -332,7 +334,8 @@
 
                       <div class="modal-footer">
                         <button type="submit" class="btn estilosBotones estilosBotonesHover">Crear</button>
-                        <button type="submit" class="btn estilosBotones estilosBotonesHover">Crear y agregar otra</button>
+                        <button type="submit" class="btn estilosBotones estilosBotonesHover">Crear y agregar
+                          otra</button>
                         <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
                           Cancelar
                         </button>
@@ -386,18 +389,14 @@
                     <div class="form-group">
                       <table class="table table-borderless text-left">
                         <tbody>
-                          <tr>
-                            <td>Asistentes</td>
-                            <td>Resultado</td>
-                            <td>Fecha</td>
-                            <td>Hora</td>
-                          </tr>
 
                           <tr>
                             <td>
                               <div class="form-group row">
                                 <div class="col-22">
-                                  
+
+                                  <label>Asistentes</label>
+
 
                                   <select class="form-control" id="sel4" name="asistentesReunion" required
                                     [(ngModel)]="reunion.asistentes">
@@ -421,7 +420,7 @@
                               <div class="form-group row">
                                 <div class="col-22">
 
-                                  
+                                  <label>Resultado</label>
 
                                   <select class="form-control" id="sel4" name="resultadoReunion" required
                                     [(ngModel)]="reunion.resultado">
@@ -447,12 +446,12 @@
                               <div class="form-group row">
                                 <div class="col-10">
 
-                                  
+                                  <label>Fecha</label>
 
                                   <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}"
                                     id="example-date-input" name="fechaReunion" required [(ngModel)]="reunion.fecha" />
 
-                                    <small *ngIf="
+                                  <small *ngIf="
                                       fReunion.submitted &&
                                       fReunion.controls['fechaReunion']
                                         .errors
@@ -467,31 +466,30 @@
                               <div class="form-group row">
                                 <div class="col-15">
 
-                                  
+                                  <label>Hora</label>
+
                                   <input class="form-control" type="time" value="00:00:00" id="example-time-input"
                                     name="horaReunion" required [(ngModel)]="reunion.hora" />
 
-                                    <small *ngIf="
+                                  <small *ngIf="
                                       fReunion.submitted &&
                                       fReunion.controls['horaReunion']
                                         .errors
                                     " class="text-danger">
                                     Campo obligatorio
-                                    </small>
+                                  </small>
 
                                 </div>
                               </div>
                             </td>
                           </tr>
-                          <tr>
-                            <td>Duración</td>
-                          </tr>
+
                           <tr>
                             <td>
                               <div class="form-group row">
                                 <div class="col-22">
 
-                                  
+                                  <label>Duración</label>
 
                                   <select class="form-control" id="sel4" name="duracionReunion" required
                                     [(ngModel)]="reunion.duracion">
@@ -522,7 +520,7 @@
                                       fReunion.controls['descripcionReunion']
                                         .errors
                                     " class="text-danger">
-                                    Campo obligatorio
+                        Campo obligatorio
                       </small>
                       <div class="form-group">
 
@@ -686,11 +684,12 @@
       </div>
     </div>
 
-    <!--Tercera sección-->
+    <!--Tercera sección
+    -----------------------------------------------------------
+    --------------------------------------------------------------->
     <div class="col-lg-12 col-xl-3 scroll">
-      <div class="card card-white grid-margin">
-        <div class="card-heading clearfix">
-          <button type="button" class="btn estilosBotonesHover estilosBotones margenBoton" data-toggle="modal"
+
+      <button type="button" class="btn estilosBotonesHover estilosBotones margenBoton mt-4" data-toggle="modal"
             data-target="#exampleModal" data-whatever="@mdo">
             <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
               xmlns="http://www.w3.org/2000/svg">
@@ -699,8 +698,11 @@
             </svg>
             Agregar negocio
           </button>
+
           <hr />
-        </div>
+
+          
+
 
         <!--Inicio del formulario modal Negocio-->
         <div class="modal fade" data-backdrop="static" data-keyboard="false" id="exampleModal" tabindex="-1"
@@ -790,25 +792,26 @@
         </div>
         <!--fin del formulario modal-->
 
-        <div class="card" style="width: 18rem">
-          <div class="card-body">
-            <h5 class="card-title">Negocios</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Asunto</h6>
-            <p class="card-text">Sin negocios registrados</p>
-          </div>
-        </div>
-      </div>
-      <div class="card card-white grid-margin">
-        <div class="card-heading clearfix">
-          <h4 class="card-title">Información</h4>
-        </div>
+        
+
+
+      
+      <div class="card bg-light mb-3" style="max-width: 18rem;">
+        <div class="card-header font-weight-bold">Contactos relacionados</div>
         <div class="card-body">
-          <p>
-            Usa los negocios para hacer seguimiento de todas tus oportunidades
-            de ingresos.
-          </p>
+          <div class="container">
+          <ul class="list-group">
+            <li><a href="#">Contacto 1 </a></li>
+            <li><a href="#">Contacto 2</a></li>
+            
+          </ul>
+
+        </div>
         </div>
       </div>
+
+      
+
     </div>
   </div>
   <!-- Row -->

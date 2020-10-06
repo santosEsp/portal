@@ -1,12 +1,13 @@
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { from } from 'rxjs';
 import {LoginComponent} from './components/Login/login.component';
 import {ContactosComponent} from './components/pages/contactos/contactos.component';
 import { EmpresaComponent } from './components/pages/empresa/empresa.component';
 import { PerfilComponent } from './components/pages/perfil/perfil.component';
 import { InformesComponent } from './components/pages/informes/informes.component';
 import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
+import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
+
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   {path: 'perfil', component: PerfilComponent},
   {path: 'informes', component: InformesComponent},
   {path: 'usuarios', component: UsuariosComponent},
+  {path: 'configuracion', component: ConfiguracionComponent},
   {path: '**', pathMatch: 'full', redirectTo: 'login'}
 ];
 
