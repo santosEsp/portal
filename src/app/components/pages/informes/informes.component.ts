@@ -1,5 +1,6 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { Component, OnInit } from '@angular/core';
+
 
 @Component({
   selector: 'app-informes',
@@ -7,7 +8,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
   styleUrls: ['./informes.component.css'],
 })
 export class InformesComponent implements OnInit {
-  constructor(private http: HttpClient) {}
+  constructor() {}
 
   ngOnInit(): void {}
 }

@@ -1,6 +1,6 @@
-export class UsuarioModel{
- nombre?: string;
- correo: string;
- password: string;
- rol?: string;
+export class UsuarioModel {
+  email: string;
+  password: string;
+  nombre?: string;
+  rol?: string;
 }

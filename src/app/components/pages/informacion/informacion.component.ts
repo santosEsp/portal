@@ -8,10 +8,10 @@ import { NegocioModel } from '../../../models/negocio.model';
 
 @Component({
   selector: 'app-perfil',
-  templateUrl: './perfil.component.html',
-  styleUrls: ['./perfil.component.css'],
+  templateUrl: './informacion.component.html',
+  styleUrls: ['./informacion.component.css'],
 })
-export class PerfilComponent implements OnInit {
+export class InformacionComponent implements OnInit {
   nota: NotaModel;
   correo: RegistrarCorreoModel;
   llamada: RegistrarLlamadaModel;

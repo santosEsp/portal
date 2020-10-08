@@ -10,26 +10,25 @@
     <br />
     <br />
     <br />
-    <form (ngSubmit)="onSubmit(f)"
+    <form (ngSubmit)="login(f)"
           #f="ngForm"
           >
 
           
       <div class="form-group">
-        <label for="exampleInputEmail1">Dirección de correo</label>
+        <label for="email">Dirección de correo</label>
         <input 
           type="email"
           class="form-control"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          name="correo"
-          [(ngModel)]="usuario.correo"
+          id="email"
+          name="email"
+          [(ngModel)]="loginUser.email"
           required
           email
           
         />
 
-        <small *ngIf="f.submitted && f.controls['correo'].errors" class="text-danger ">
+        <small *ngIf="f.submitted && f.controls['email'].errors" class="text-danger ">
           El correo es obligatorio
         </small>
       </div>
@@ -40,9 +39,9 @@
         <input
           type="password"
           class="form-control"
-          id="exampleInputPassword1"
+          id="password"
           name="password"
-          [(ngModel)]="usuario.password"
+          [(ngModel)]="loginUser.password"
           required
           minlength="5"
         />
@@ -54,8 +53,8 @@
 
 
       <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-        <label class="form-check-label" for="exampleCheck1">Recordarme</label>
+        <input [(ngModel)]="recordarme" type="checkbox" class="form-check-input" id="recordar" name="recordar" />
+        <label class="form-check-label" for="recordar">Recordarme</label>
 
         <a href="#" class="float-right">¿Olvidaste la contraseña?</a>
       </div>

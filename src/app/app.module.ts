@@ -1,10 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {DataTablesModule} from 'angular-datatables';
 import { AppRoutingModule } from './app-routing.module';
-
 import {HttpClientModule} from '@angular/common/http';
-
 
 import { AppComponent } from './app.component';
 import {FormsModule} from '@angular/forms';
@@ -15,7 +12,7 @@ import { EmpresaComponent } from './components/pages/empresa/empresa.component';
 import { ContactosComponent } from './components/pages/contactos/contactos.component';
 import { PipelineComponent } from './components/pages/pipeline/pipeline.component';
 import { NavbarComponent } from './components/pages/navbar/navbar.component';
-import { PerfilComponent } from './components/pages/perfil/perfil.component';
+import { InformacionComponent } from './components/pages/informacion/informacion.component';
 import { InformesComponent } from './components/pages/informes/informes.component';
 import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
 import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
@@ -29,7 +26,7 @@ import { ConfiguracionComponent } from './components/pages/configuracion/configu
     ContactosComponent,
     PipelineComponent,
     NavbarComponent,
-    PerfilComponent,
+    InformacionComponent,
     InformesComponent,
     UsuariosComponent,
     ConfiguracionComponent
@@ -38,7 +35,6 @@ import { ConfiguracionComponent } from './components/pages/configuracion/configu
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    DataTablesModule,
     HttpClientModule
   ],
   providers: [],
