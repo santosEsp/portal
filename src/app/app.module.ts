@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 
 import {FormsModule} from '@angular/forms';
 
+// Graficos
+import { ChartsModule } from 'ng2-charts';
+
 //componentes 
 import { LoginComponent } from './components/Login/login.component';
 import { EmpresaComponent } from './components/pages/empresa/empresa.component';
@@ -31,7 +34,8 @@ import { UsuariosComponent } from './components/pages/usuarios/usuarios.componen
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

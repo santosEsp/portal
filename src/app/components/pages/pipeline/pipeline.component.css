@@ -1,0 +1,38 @@
+.margen {
+    border-style: solid;
+    border-color: #DCDDE2;
+    border-width: thin;
+}
+
+.paddings {
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-top: 1%;
+}
+
+.paddings2 {
+    padding-left: 10%;
+    padding-right: 4%;
+    padding-top: 1%;
+}
+
+.center-h {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 10px;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 10px;
+}
+
+.container2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin: 10px;
+}
