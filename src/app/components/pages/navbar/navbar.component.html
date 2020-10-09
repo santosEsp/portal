@@ -1,12 +1,22 @@
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark colorCorporativo">
-        <a class="navbar-brand" href="#">ClickSoft</a>
+        
+        <img
+      class="img-fluid rounded mx-auto d-block"
+      src="../../assets/image/pnglogoblanco.png"
+      alt="clicksoft"
+      width="11%"
+      height="11%"
+    />
+        
+        
+
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon "></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse ml-4" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
 
                 <li class="nav-item dropdown">
@@ -15,19 +25,16 @@
                         Contactos
                     </a>
                     <div class="dropdown-menu navbarContacto" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" [routerLink]="['/Contactos']">Contactos</a>
-                        <a class="dropdown-item" [routerLink]="['/Empresas']">Empresas</a>
+                        <a class="dropdown-item" [routerLink]="['/contactos']">Contactos</a>
+                        <a class="dropdown-item" [routerLink]="['/empresas']">Empresas</a>
                         <div class="dropdown-divider"></div>
                     </div>
                 </li>
 
                 <li>
-                    <a class="nav-link color active negritas" [routerLink]="['/Informes']">Informes <span class="sr-only">(current)</span></a>
+                    <a class="nav-link color active negritas" [routerLink]="['/informes']">Informes <span class="sr-only">(current)</span></a>
                 </li>
 
-                <li>
-                    <a class="nav-link color active negritas" [routerLink]="['/Perfil']" >Perfil contacto <span class="sr-only">(current)</span></a>
-                </li>
 
 
             </ul>
@@ -82,8 +89,8 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <p>
-                                                <a class="dropdown-item" href="#">Perfil</a>
-                                                <a class="dropdown-item" [routerLink]="['/Usuarios']">Usuarios</a>
+                                                <a class="dropdown-item" [routerLink]="['/configuracion']">Configuración</a>
+                                                <a class="dropdown-item" [routerLink]="['/usuarios']">Usuarios</a>
                                             </p>
                                         </div>
                                     </div>
@@ -96,7 +103,7 @@
                                     <div class="row">
                                         <div class="col-lg-12">
                                             <p>
-                                                <Button class="btn btn-outline-danger btn-block" [routerLink]="['/Login']">
+                                                <Button class="btn btn-outline-danger btn-block" (click)="salir()">
                                                     Cerrar Sesion
                                                 </Button> 
                                             </p>

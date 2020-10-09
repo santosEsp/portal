@@ -1,15 +1,34 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { ConsultasService } from '../../../services/consultas.service';
+import { ContactoModel } from '../../../models/contacto.model';
 
 @Component({
   selector: 'app-contactos',
   templateUrl: './contactos.component.html',
-  styleUrls: ['./contactos.component.css']
+  styleUrls: ['./contactos.component.css'],
 })
 export class ContactosComponent implements OnInit {
 
-  constructor() { }
+  contacto = new ContactoModel();
 
-  ngOnInit(): void {
+  arregloContactos: ContactoModel[] = [];
+  contador = 0;
+
+  constructor(private consultas: ConsultasService) { }
+
+  ngOnInit() {
+
+    this.arregloContactos = this.consultas.getContactos();
+    console.log(this.arregloContactos);
+
   }
 
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      return 'Formulario inválido';
+    }
+
+    console.log(form);
+  }
 }

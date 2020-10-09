@@ -25,3 +25,10 @@ div.scrollmenu {
   .colorCorporativo{
     background-color: #275995;
   }
+
+  .encabezado{
+
+    color: black;
+    font-size: 30px;
+    padding-top: 5px;
+  }

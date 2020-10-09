@@ -1,25 +1,26 @@
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { from } from 'rxjs';
 import {LoginComponent} from './components/Login/login.component';
 import {ContactosComponent} from './components/pages/contactos/contactos.component';
 import { EmpresaComponent } from './components/pages/empresa/empresa.component';
-import { PerfilComponent } from './components/pages/perfil/perfil.component';
+import { InformacionComponent } from './components/pages/informacion/informacion.component';
 import { InformesComponent } from './components/pages/informes/informes.component';
 import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
+import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
+import { AuthGuard } from './guards/auth.guard';
 import { PipelineComponent } from './components/pages/pipeline/pipeline.component';
 
-
 const routes: Routes = [
+  {path: 'login', component: LoginComponent},
+  {path: 'contactos', component: ContactosComponent, canActivate: [AuthGuard] },
+  {path: 'empresas', component: EmpresaComponent , canActivate: [AuthGuard]},
+  {path: 'informacion/:id', component: InformacionComponent, canActivate: [AuthGuard]},
+  {path: 'informes', component: InformesComponent, canActivate: [AuthGuard]},
+  {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
+  {path: 'Pipeline', component: PipelineComponent, canActivate: [AuthGuard]},
+  {path: 'configuracion', component: ConfiguracionComponent, canActivate: [AuthGuard]},
+  {path: '**', pathMatch: 'full', redirectTo: 'login'}
 
-  {path: 'Contactos', component: ContactosComponent},
-  {path: 'Login', component: LoginComponent},
-  {path: 'Empresas', component: EmpresaComponent},
-  {path: 'Perfil', component: PerfilComponent},
-  {path: 'Informes', component: InformesComponent},
-  {path: 'Usuarios', component: UsuariosComponent},
-  {path: 'Pipeline', component: PipelineComponent},
-  {path: '**', pathMatch: 'full', redirectTo: 'Login'}
 ];
 
 @NgModule({

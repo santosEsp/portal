@@ -1,66 +1,91 @@
 <app-navbar></app-navbar>
 
 <div>
-<span class="float-right">
-  <button type="button" class="btn  mt-4 mr-4 estilosBotones estilosBotonesHover" data-toggle="modal" data-target="#modalCrearContacto"
-    data-whatever="@mdo">
-    <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
-      xmlns="http://www.w3.org/2000/svg">
-      <path fill-rule="evenodd"
-        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-    </svg>
-    Agregar empresa
-  </button>
-</span>
+  <div class="float-right">
+    <button type="button" class="btn  mt-4 mr-4 estilosBotones estilosBotonesHover" data-toggle="modal"
+      data-target="#modalAgregarEmpresa" data-whatever="@mdo">
+      <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+      </svg>
+      Agregar empresa
+    </button>
 
-<div>
+    <button type="button" class="btn  mt-4 mr-4 estilosBotones estilosBotonesHover" data-toggle="modal"
+      data-target="#modalCrearContacto" data-whatever="@mdo">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+        <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z"/>
+      </svg>
+      Exportar empresas
+    </button>
+
+  </div>
+
+  <div>
+
+    <div class="container-fluid mt-3">
+      <span class="encabezado">Empresas</span>
+      <br>
+      <small>10 empresas</small>
+    </div>
+
+    <!--Inicio del formulario modal agregar empresa-->
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalAgregarEmpresa" tabindex="-1"
+      role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header bgCorp">
+            <h5 class="modal-title text-white" id="exampleModalLabel">
+              Agregar empresa
+            </h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form (ngSubmit)="agregarEmpresa(f)" #f="ngForm">
 
 
 
-  <h2 class="pl-4 m-3">Empresas</h2>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nombre de la empresa </label>
+                <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="empresa.nombre" required
+                  minlength="5" />
+
+                <small *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger ">
+                  Campo obligatorio
+                </small>
+
+              </div>
 
 
 
-  <small class="pl-4 m-3">10 empresas</small>
-
-
-  <!--Inicio del formulario modal Crear contacto-->
-  <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalCrearContacto" tabindex="-1"
-    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header bgCorp">
-          <h5 class="modal-title text-white" id="exampleModalLabel">
-            Agregar empresa
-          </h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Nombre de la empresa </label>
-              <input type="text" class="form-control" id="nombre" />
-            </div>
-
-            <div class="form-group">
+              <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Propietario del registro</label>
                 <div class="col-22">
-                  <select class="form-control" id="sel2">
-                    <option>--Seleccione--</option>
+                  <select class="form-control" id="propietario" name="propietario" [(ngModel)]="empresa.propietario"
+                    required>
+
                     <option>Usuario 1</option>
                     <option>Usuario 2</option>
                     <option>Usuario 3</option>
                   </select>
+
+                  <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger ">
+                    Campo obligatorio
+                  </small>
                 </div>
               </div>
+
+
 
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Industria</label>
                 <div class="col-22">
-                  <select class="form-control" id="sel2">
-                    <option>--Seleccione--</option>
+                  <select class="form-control" id="industria" name="industria" [(ngModel)]="empresa.industria" required>
+                    ><label for="industria">--seleccione--</label>
                     <option>Contabilidad</option>
                     <option>Aviación</option>
                     <option>Medicina</option>
@@ -69,157 +94,311 @@
                     <option>Ingeniería civil</option>
                     <option>Bienes y raices</option>
                   </select>
+
+                  <small *ngIf="f.submitted && f.controls['industria'].errors" class="text-danger ">
+                    Campo obligatorio
+                  </small>
+
                 </div>
               </div>
 
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Número de teléfono</label>
-              <input type="text" class="form-control" id="cantidad" />
-            </div>
 
-            <div class="form-group">
+
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Número de teléfono</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="empresa.telefono"
+                  required minlength="8" />
+
+                <small *ngIf="f.submitted && f.controls['telefono'].errors" class="text-danger ">
+                  Campo obligatorio
+                </small>
+              </div>
+
+
+
+              <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Tipo</label>
                 <div class="col-22">
-                  <select class="form-control" id="sel2">
-                    <option>--Seleccione--</option>
+                  <select class="form-control" id="tipo" name="tipo" [(ngModel)]="empresa.tipo" required>
+
                     <option>Cliente potencial</option>
                     <option>Socio</option>
                     <option>Revendedor</option>
                     <option>Proveedor</option>
                     <option>Otra</option>
                   </select>
+
+                  <small *ngIf="f.submitted && f.controls['tipo'].errors" class="text-danger ">
+                    Campo obligatorio
+                  </small>
                 </div>
               </div>
 
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Ciudad</label>
-              <input type="text" class="form-control" id="etapa" />
-            </div>
 
-            <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Estado o región</label>
-                <input type="text" class="form-control" id="etapa" />
+
+
+
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Ciudad</label>
+                <input type="text" class="form-control" id="ciudad" name="ciudad" [(ngModel)]="empresa.ciudad"
+                  required />
+
+                <small *ngIf="f.submitted && f.controls['ciudad'].errors" class="text-danger ">
+                  Campo obligatorio
+                </small>
               </div>
+
+
+
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Estado o región</label>
+                <input type="text" class="form-control" id="etapa" name="estado" [(ngModel)]="empresa.estado"
+                  required />
+
+                <small *ngIf="f.submitted && f.controls['estado'].errors" class="text-danger ">
+                  Campo obligatorio
+                </small>
+              </div>
+
+
 
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Código postal</label>
-                <input type="text" class="form-control" id="etapa" />
+                <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="empresa.cp" required />
+
+                <small *ngIf="f.submitted && f.controls['codigo'].errors" class="text-danger ">
+                  Campo obligatorio
+                </small>
               </div>
+
+
 
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Número de empleados</label>
-                <input type="text" class="form-control" id="etapa" />
+                <input type="text" class="form-control" id="empleados" name="empleados"
+                  [(ngModel)]="empresa.noEmpleados" required />
+
+                <small *ngIf="f.submitted && f.controls['empleados'].errors" class="text-danger ">
+                  Campo obligatorio
+                </small>
+
               </div>
+
+
 
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Ingresos anuales</label>
-                <input type="text" class="form-control" id="etapa" />
+                <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="empresa.ingresos"
+                  required />
+
+                <small *ngIf="f.submitted && f.controls['ingresos'].errors" class="text-danger ">
+                  Campo obligatorio
+                </small>
               </div>
 
-              
+
+
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Zona horaria</label>
-                <input type="text" class="form-control" id="etapa" />
+                <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="empresa.zonaHoraria"
+                  required />
+
+                <small *ngIf="f.submitted && f.controls['zona'].errors" class="text-danger ">
+                  Campo obligatorio
+                </small>
               </div>
+
 
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Descripción</label>
-                <input type="text" class="form-control" id="etapa" />
+                <input type="text" class="form-control" id="descripcion" name="descripcion"
+                  [(ngModel)]="empresa.descripcion" required />
+
+
+                <small *ngIf="f.submitted && f.controls['descripcion'].errors" class="text-danger ">
+                  Campo obligatorio
+                </small>
               </div>
+
+
 
               <div class="form-group">
                 <label for="recipient-name" class="col-form-label">Página corporativa</label>
-                <input type="text" class="form-control" id="etapa" />
+                <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="empresa.pagina"
+                  required />
+
+                <small *ngIf="f.submitted && f.controls['pagina'].errors" class="text-danger ">
+                  Campo obligatorio
+                </small>
               </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn estilosBotonesHover estilosBotones">
-            Crear
-          </button>
-          <button type="button" class="btn estilosBotonesHover estilosBotones">
-            Crear y agregar otra
-          </button>
-          <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
-            Cancelar
-          </button>
+
+              <div class="modal-footer">
+                <button type="submit" class="btn estilosBotonesHover estilosBotones">
+                  Crear
+                </button>
+                <button type="submit" class="btn estilosBotonesHover estilosBotones">
+                  Crear y agregar otra
+                </button>
+                <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
+                  Cancelar
+                </button>
+              </div>
+
+            </form>
+          </div>
+
         </div>
       </div>
     </div>
-  </div>
 
-</div>
+  </div>
   <!--Fin formulario crear contacto-->
-  <div class="container m-4">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link active" href="#">Todos las empresas</a>
+
+  <!--Tabs-->
+  <div class="container-fluid pt-3">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#todosLosContactos" role="tab"
+          aria-controls="home" aria-selected="true">Todas las empresas</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Mis empresas</a>
+      <li class="nav-item" role="presentation">
+        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#misContactos" role="tab" aria-controls="profile"
+          aria-selected="false">Mis empresas</a>
       </li>
 
     </ul>
 
+    <!--Contenido de los tabs
+    ---------------------------->
+    <div class="tab-content con" id="myTabContent">
+      <!--Contenido tab 1-->
+      <div class="tab-pane fade show active" id="todosLosContactos" role="tabpanel" aria-labelledby="home-tab">
+        <div class="table-responsive">
+          <table class="table mt-3">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <th scope="col">A ver</th>
+                <th scope="col">Si html</th>
+                <th scope="col">hace que</th>
+                <th scope="col">aparezca el scroll</th>
+                <th scope="col">hace que</th>
+                <th scope="col">aparezca el scroll</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>
+                  <a [routerLink]="['/informacion']">Chabeli Sarahí Ixta Angulo</a>
+                </td>
+                <td>Chabeli.ixt@walmart.com</td>
+                <td>@mdogsdfgfdgfgsdfgdfdfgd</td>
+                <td>Markgdfgsfdgsdfgfdg</td>
+                <td>Ottofgsdfgsdfgdfg</td>
+                <td>fddsgsgsgsgd</td>
+                <td>kjdhjkdffgsssssdfg</td>
+                <td>fddsgsgsgsgd</td>
+                <td>kjdhjkdffgsssssdfg</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td class="celdas">Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>fd</td>
+                <td>kjdhjkdf</td>
+                <td>fddsgsgsgsgd</td>
+                <td>kjdhjkdffgsssssdfg</td>
+              </tr>
+              <tr width="5" heigth="5">
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>fd</td>
+                <td>kjdhjkdf</td>
+                <td>fddsgsgsgsgd</td>
+                <td>kjdhjkdffgsssssdfg</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
 
-    <div class="table-responsive">
-    <table class="table mt-3">
-      <thead class="thead-dark">
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">First</th>
-          <th scope="col">Last</th>
-          <th scope="col">Handle</th>
-          <th scope="col">A ver</th>
-          <th scope="col">Si html</th>
-          <th scope="col">hace  que </th>
-          <th scope="col">aparezca el scroll</th>
-          <th scope="col">hace  que </th>
-          <th scope="col">aparezca el scroll</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Chabeli Sarahí Ixta Angulo</td>
-          <td>Chabeli.ixt@walmart.com</td>
-          <td>@mdogsdfgfdgfgsdfgdfdfgd</td>
-          <td>Markgdfgsfdgsdfgfdg</td>
-          <td>Ottofgsdfgsdfgdfg</td>
-          <td>fddsgsgsgsgd</td>
-          <td>kjdhjkdffgsssssdfg</td>
-          <td>fddsgsgsgsgd</td>
-          <td>kjdhjkdffgsssssdfg</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>fd</td>
-          <td>kjdhjkdf</td>
-          <td>fddsgsgsgsgd</td>
-          <td>kjdhjkdffgsssssdfg</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Larry</td>
-          <td>the Bird</td>
-          <td>@twitter</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>fd</td>
-          <td>kjdhjkdf</td>
-          <td>fddsgsgsgsgd</td>
-          <td>kjdhjkdffgsssssdfg</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-    
+
+      </div>
+      <!--Contenido tab 2-->
+      <div class="tab-pane fade" id="misContactos" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="table-responsive">
+          <table class="table mt-3">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">First</th>
+                <th scope="col">Last</th>
+                <th scope="col">Handle</th>
+                <th scope="col">A ver</th>
+                <th scope="col">Si html</th>
+                <th scope="col">hace que</th>
+                <th scope="col">aparezca el scroll</th>
+                <th scope="col">hace que</th>
+                <th scope="col">aparezca el scroll</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>
+                  <a [routerLink]="['/perfil']">Una empresa</a>
+                </td>
+                <td>Chabeli.ixt@walmart.com</td>
+                <td>@mdogsdfgfdgfgsdfgdfdfgd</td>
+                <td>Markgdfgsfdgsdfgfdg</td>
+                <td>Ottofgsdfgsdfgdfg</td>
+                <td>fddsgsgsgsgd</td>
+                <td>kjdhjkdffgsssssdfg</td>
+                <td>fddsgsgsgsgd</td>
+                <td>kjdhjkdffgsssssdfg</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td class="celdas">Jacob</td>
+                <td>Thornton</td>
+                <td>@fat</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>fd</td>
+                <td>kjdhjkdf</td>
+                <td>fddsgsgsgsgd</td>
+                <td>kjdhjkdffgsssssdfg</td>
+              </tr>
+              <tr width="5" heigth="5">
+                <th scope="row">3</th>
+                <td>Larry</td>
+                <td>the Bird</td>
+                <td>@twitter</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>fd</td>
+                <td>kjdhjkdf</td>
+                <td>fddsgsgsgsgd</td>
+                <td>kjdhjkdffgsssssdfg</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </div>
   </div>
 
 

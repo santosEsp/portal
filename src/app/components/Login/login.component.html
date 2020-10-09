@@ -1,39 +1,76 @@
 <div class="container">
-    <div class="paddings">
-        <img class="img-fluid rounded mx-auto d-block" src="../../assets/image/clicksoft.jpg" alt="clicksoft" width="70%" height="70%" />
-        <br />
-        <br />
-        <br />
-        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
 
-            <span *ngIf="f.controls">
+  <div class="paddings">
+    <img
+      class="img-fluid rounded mx-auto d-block"
+      src="../../assets/image/clicksoft.jpg"
+      alt="clicksoft"
+      width="70%"
+      height="70%"
+    />
+    <br />
+    <br />
+    <br />
+    <form (ngSubmit)="login(f)"
+          #f="ngForm"
+          >
 
-          </span>
+          
+      <div class="form-group">
+        <label for="email">Dirección de correo</label>
+        <input 
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          [(ngModel)]="loginUser.email"
+          required
+          email
+          
+        />
 
-            <div class="form-group">
-                <label for="exampleInputEmail1">Dirección de correo</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="correo" [(ngModel)]="loginUsuario.correo" email />
-            </div>
-            <div class="form-group">
-                <label for="exampleInputPassword1">Contraseña</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" name="password" [(ngModel)]="loginUsuario.password" minlength="5" />
-            </div>
+        <small *ngIf="f.submitted && f.controls['email'].errors" class="text-danger ">
+          El correo es obligatorio
+        </small>
+      </div>
 
-            <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="exampleCheck1" />
-                <label class="form-check-label" for="exampleCheck1">Recordarme</label>
-            </div>
+      
+      <div class="form-group">
+        <label for="exampleInputPassword1">Contraseña</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          [(ngModel)]="loginUser.password"
+          required
+          minlength="5"
+        />
 
-            <div data-toggle="modal" data-target="#recuperarContraseña" data-whatever="@mdo">
+        <small *ngIf="f.submitted && f.controls['password'].errors" class="text-danger ">
+          La contraseña es obligatoria
+        </small>
+      </div>
+
+
+      <div class="form-group form-check">
+        <input [(ngModel)]="recordarme" type="checkbox" class="form-check-input" id="recordar" name="recordar" />
+        <label class="form-check-label" for="recordar">Recordarme</label>
+
+        <div data-toggle="modal" data-target="#recuperarContraseña" data-whatever="@mdo">
 
                 <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 
               </svg> ¿Olvidaste pwd?
 
             </div>
-
-
-            <button type="button" type="submit" class="btn estilosBotones estilosBotonesHover btn-block" [routerLink]="['/Contactos']">
+        
+      </div>
+      <button
+        type="submit"
+        class="btn estilosBotones estilosBotonesHover btn-block"
+        
+      >
         Iniciar sesión
       </button>
         </form>

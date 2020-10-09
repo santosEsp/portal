@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { UsuarioLoginModel } from 'src/app/models/usuariosLogin.model';
+import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
+import Swal from 'sweetalert2';
+import { UsuarioModel } from '../../models/usuarios.model';
 
 @Component({
   selector: 'app-login',
@@ -8,21 +11,53 @@ import { UsuarioLoginModel } from 'src/app/models/usuariosLogin.model';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  loginUsuario: UsuarioLoginModel;
-  constructor() {}
+  loginUser: UsuarioModel = new UsuarioModel();
+  recordarme = false;
+
+  constructor(private router: Router, private auth: AuthService) {}
 
   ngOnInit() {
-    this.loginUsuario = new UsuarioLoginModel();
-    this.loginUsuario.correo = 'usuario1@cs.clicksoft.mx';
+    if (localStorage.getItem('email')) {
+      this.loginUser.email = localStorage.getItem('email');
+      this.recordarme = true;
+    }
   }
 
-  onSubmit(form: NgForm) {
+  login(form: NgForm) {
     if (form.invalid) {
       return;
     }
 
-    console.log('Formulario enviado');
-    console.log(this.loginUsuario);
-    console.log(form);
+    Swal.fire({
+      allowOutsideClick: false,
+      text: 'Espere por favor ... ',
+      icon: 'info',
+    });
+    Swal.showLoading();
+
+    this.auth.login(this.loginUser).subscribe(
+      (resp) => {
+        Swal.close();
+
+        console.log('Se cerro el swal');
+        if (this.recordarme) {
+          localStorage.setItem('email', this.loginUser.email);
+        }
+
+        console.log('Ya viene el enrutado');
+
+        this.router.navigateByUrl('/contactos');
+        console.log(resp);
+      },
+      (err) => {
+        console.log(err.error.error.message);
+
+        Swal.fire({
+          title: 'Error al autenticar',
+          text: err.error.error.message,
+          icon: 'error',
+        });
+      }
+    );
   }
 }
