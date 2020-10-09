@@ -8,8 +8,7 @@ import { InformesComponent } from './components/pages/informes/informes.componen
 import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
 import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
 import { AuthGuard } from './guards/auth.guard';
-
-
+import { PipelineComponent } from './components/pages/pipeline/pipeline.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -18,8 +17,10 @@ const routes: Routes = [
   {path: 'informacion/:id', component: InformacionComponent, canActivate: [AuthGuard]},
   {path: 'informes', component: InformesComponent, canActivate: [AuthGuard]},
   {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
+  {path: 'Pipeline', component: PipelineComponent, canActivate: [AuthGuard]},
   {path: 'configuracion', component: ConfiguracionComponent, canActivate: [AuthGuard]},
   {path: '**', pathMatch: 'full', redirectTo: 'login'}
+
 ];
 
 @NgModule({
