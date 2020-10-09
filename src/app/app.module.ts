@@ -16,7 +16,8 @@ import { InformacionComponent } from './components/pages/informacion/informacion
 import { InformesComponent } from './components/pages/informes/informes.component';
 import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
 import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
-
+import { ConsultasService } from './services/consultas.service';
+import { from } from 'rxjs';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { ConfiguracionComponent } from './components/pages/configuracion/configu
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    ConsultasService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

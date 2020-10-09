@@ -5,6 +5,9 @@ import { RegistrarCorreoModel } from '../../../models/registrarCorreo.model';
 import { RegistrarLlamadaModel } from '../../../models/registrarLlamada.model';
 import { RegistrarReunionModel } from '../../../models/registrarReunion.model';
 import { NegocioModel } from '../../../models/negocio.model';
+import { ActivatedRoute } from '@angular/router';
+import { ConsultasService } from '../../../services/consultas.service';
+import { ContactoModel } from '../../../models/contacto.model';
 
 @Component({
   selector: 'app-perfil',
@@ -17,9 +20,18 @@ export class InformacionComponent implements OnInit {
   llamada: RegistrarLlamadaModel;
   reunion: RegistrarReunionModel;
   negocio: NegocioModel;
-
   fecha: Date = new Date();
-  constructor() {
+
+  unContacto = new ContactoModel();
+
+  constructor(private activatedRoute: ActivatedRoute, private consultaService: ConsultasService) {
+
+    this.activatedRoute.params.subscribe(params => {
+      console.log(params['id']);
+      this.unContacto = this.consultaService.getContacto(params['id']);
+      console.log(this.unContacto);
+    });
+
     console.log(this.fecha);
   }
 
@@ -47,7 +59,7 @@ export class InformacionComponent implements OnInit {
     console.log(form);
   }
 
-  registrarLlamada(form: NgForm){
+  registrarLlamada(form: NgForm) {
     if (form.invalid) {
       return 'Formulario no válido';
     }

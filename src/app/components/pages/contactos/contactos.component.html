@@ -3,9 +3,8 @@
 
 
 <div>
-  <div class="float-right">
-    <button type="button" class="btn estilosBotones estilosBotonesHover mt-4 mr-4" data-toggle="modal"
-      data-target="#modalCrearContacto" data-whatever="@mdo">
+    <div class="float-right">
+        <button type="button" class="btn estilosBotones estilosBotonesHover mt-4 mr-4" data-toggle="modal" data-target="#modalCrearContacto" data-whatever="@mdo">
       <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
         xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd"
@@ -15,8 +14,7 @@
     </button>
 
 
-    <button type="button" class="btn  mt-4 mr-4 estilosBotones estilosBotonesHover" 
-       data-whatever="@mdo">
+        <button type="button" class="btn  mt-4 mr-4 estilosBotones estilosBotonesHover" data-whatever="@mdo">
       <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor"
         xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd"
@@ -26,286 +24,248 @@
       </svg>
       Exportar contactos
     </button>
-  </div>
-
-  <div>
-    <div class="container-fluid mt-3">
-      <span class="encabezado">Contactos</span>
-      <br>
-      <small>20 contactos</small>
     </div>
 
+    <div>
+        <div class="container-fluid mt-3">
+            <span class="encabezado">Contactos</span>
+            <br>
+            <small>20 contactos</small>
+        </div>
 
-    <!--Inicio del formulario modal Crear contacto-->
-    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalCrearContacto" tabindex="-1"
-      role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header bgCorp">
-            <h5 class="modal-title text-white" id="exampleModalLabel">
-              Agregar contacto
-            </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+
+        <!--Inicio del formulario modal Crear contacto-->
+        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalCrearContacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bgCorp">
+                        <h5 class="modal-title text-white" id="exampleModalLabel">
+                            Agregar contacto
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
-          </div>
-          <div class="modal-body">
-            <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                    </div>
+                    <div class="modal-body">
+                        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
 
 
 
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Correo</label>
-                <input type="text" class="form-control" id="correo" name="correo" [(ngModel)]="contacto.correo" required
-                  email />
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Correo</label>
+                                <input type="text" class="form-control" id="correo" name="correo" [(ngModel)]="contacto.correo" required email />
 
-                <small *ngIf="f.submitted && f.controls['correo'].errors" class="text-danger ">
+                                <small *ngIf="f.submitted && f.controls['correo'].errors" class="text-danger ">
                   Campo obligatorio
                 </small>
-              </div>
+                            </div>
 
 
 
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Nombre</label>
-                <input type="text" class="form-control" id="pipeline" name="nombre" [(ngModel)]="contacto.nombre"
-                  required minlength="3" />
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Nombre</label>
+                                <input type="text" class="form-control" id="pipeline" name="nombre" [(ngModel)]="contacto.nombre" required minlength="3" />
 
-                <small *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger ">
+                                <small *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger ">
                   Campo obligatorio
                 </small>
 
-              </div>
+                            </div>
 
 
 
 
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Apellido</label>
-                <input type="text" class="form-control" id="etapa" name="apellido" [(ngModel)]="contacto.apellido"
-                  required minlength="3" />
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Apellido</label>
+                                <input type="text" class="form-control" id="etapa" name="apellido" [(ngModel)]="contacto.apellido" required minlength="3" />
 
-                <small *ngIf="f.submitted && f.controls['apellido'].errors" class="text-danger ">
+                                <small *ngIf="f.submitted && f.controls['apellido'].errors" class="text-danger ">
                   Campo obligatorio
                 </small>
-              </div>
+                            </div>
 
 
 
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Propietario del contacto</label>
-                <input type="text" class="form-control" id="cantidad" name="propietario"
-                  [(ngModel)]="contacto.propietario" required />
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Propietario del contacto</label>
+                                <input type="text" class="form-control" id="cantidad" name="propietario" [(ngModel)]="contacto.propietario" required />
 
-                <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger ">
+                                <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger ">
                   Campo obligatorio
                 </small>
-              </div>
+                            </div>
 
 
 
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Empresa</label>
-                <input type="text" class="form-control" id="pipeline" name="departamento" [(ngModel)]="contacto.empresa"
-                  required />
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Empresa</label>
+                                <input type="text" class="form-control" id="pipeline" name="departamento" [(ngModel)]="contacto.empresa" required />
 
-                <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger ">
+                                <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger ">
                   Campo obligatorio
                 </small>
-              </div>
+                            </div>
 
 
 
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Departamento</label>
-                <input type="text" class="form-control" id="pipeline" name="departamento"
-                  [(ngModel)]="contacto.departamento" required />
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Departamento</label>
+                                <input type="text" class="form-control" id="pipeline" name="departamento" [(ngModel)]="contacto.departamento" required />
 
-                <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger ">
+                                <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger ">
                   Campo obligatorio
                 </small>
-              </div>
+                            </div>
 
 
 
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Número de teléfono</label>
-                <input type="text" class="form-control" id="etapa" name="telefono" [(ngModel)]="contacto.telefono"
-                  required minlength="8" />
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Número de teléfono</label>
+                                <input type="text" class="form-control" id="etapa" name="telefono" [(ngModel)]="contacto.telefono" required minlength="8" />
 
-                <small *ngIf="f.submitted && f.controls['telefono'].errors" class="text-danger ">
+                                <small *ngIf="f.submitted && f.controls['telefono'].errors" class="text-danger ">
                   Campo obligatorio
                 </small>
-              </div>
+                            </div>
 
 
-              <div class="modal-footer">
-                <button type="submit" class="btn estilosBotonesHover estilosBotones">
+                            <div class="modal-footer">
+                                <button type="submit" class="btn estilosBotonesHover estilosBotones">
                   Crear
                 </button>
-                <button type="submit" class="btn estilosBotonesHover estilosBotones">
+                                <button type="submit" class="btn estilosBotonesHover estilosBotones">
                   Crear y agregar otra
                 </button>
-                <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
+                                <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
                   Cancelar
                 </button>
-              </div>
+                            </div>
 
 
-            </form>
-          </div>
+                        </form>
+                    </div>
 
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <!--Fin formulario crear contacto-->
+    <!--Fin formulario crear contacto-->
 
 
 
-  <div class="container-fluid pt-3">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-      <li class="nav-item" role="presentation">
-        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#todosLosContactos" role="tab"
-          aria-controls="home" aria-selected="true">Todos los contactos</a>
-      </li>
-      <li class="nav-item" role="presentation">
-        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#misContactos" role="tab" aria-controls="profile"
-          aria-selected="false">Mis contactos</a>
-      </li>
+    <div class="container-fluid pt-3">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#todosLosContactos" role="tab" aria-controls="home" aria-selected="true">Todos los contactos</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#misContactos" role="tab" aria-controls="profile" aria-selected="false">Mis contactos</a>
+            </li>
 
-    </ul>
+        </ul>
 
-    <!--Contenido de los tabs
+        <!--Contenido de los tabs
     ---------------------------->
-    <div class="tab-content con" id="myTabContent">
-      <!--Contenido tab 1-->
-      <div class="tab-pane fade show active" id="todosLosContactos" role="tabpanel" aria-labelledby="home-tab">
-        <div class="table-responsive">
-          <table class="table mt-3">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-                <th scope="col">A ver</th>
-                <th scope="col">Si html</th>
-                <th scope="col">hace que</th>
-                <th scope="col">aparezca el scroll</th>
-                <th scope="col">hace que</th>
-                <th scope="col">aparezca el scroll</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>
-                  <a [routerLink]="['/informacion']">Chabeli Sarahí Ixta Angulo</a>
-                </td>
-                <td>Chabeli.ixt@walmart.com</td>
-                <td>@mdogsdfgfdgfgsdfgdfdfgd</td>
-                <td>Markgdfgsfdgsdfgfdg</td>
-                <td>Ottofgsdfgsdfgdfg</td>
-                <td>fddsgsgsgsgd</td>
-                <td>kjdhjkdffgsssssdfg</td>
-                <td>fddsgsgsgsgd</td>
-                <td>kjdhjkdffgsssssdfg</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td class="celdas">Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>fd</td>
-                <td>kjdhjkdf</td>
-                <td>fddsgsgsgsgd</td>
-                <td>kjdhjkdffgsssssdfg</td>
-              </tr>
-              <tr width="5" heigth="5">
-                <th scope="row">3</th>
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>fd</td>
-                <td>kjdhjkdf</td>
-                <td>fddsgsgsgsgd</td>
-                <td>kjdhjkdffgsssssdfg</td>
-              </tr>
-            </tbody>
-          </table>
+        <div class="tab-content con" id="myTabContent">
+            <!--Contenido tab 1-->
+            <div class="tab-pane fade show active" id="todosLosContactos" role="tabpanel" aria-labelledby="home-tab">
+                <div class="table-responsive">
+                    <table class="table mt-3">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Correo</th>
+                                <th scope="col">Nombre</th>
+                                <th scope="col">Apellido</th>
+                                <th scope="col">Propietario</th>
+                                <th scope="col">Departamento</th>
+                                <th scope="col">Teléfono</th>
+                                <th scope="col">Empresa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let contactos of arregloContactos; let i = index">
+                                <th scope="row">{{i+1}}</th>
+                                <td><a [routerLink]="['/informacion',i]">{{contactos.correo}}</a> </td>
+                                <td>{{contactos.nombre}}</td>
+                                <td>{{contactos.apellido}}</td>
+                                <td>{{contactos.propietario}}</td>
+                                <td>{{contactos.departamento}}</td>
+                                <td>{{contactos.telefono}}</td>
+                                <td>{{contactos.empresa}}</td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+            </div>
+            <!--Contenido tab 2-->
+            <div class="tab-pane fade" id="misContactos" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="table-responsive">
+                    <table id="tablaContactos" class="table mt-3 display">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">First</th>
+                                <th scope="col">Last</th>
+                                <th scope="col">Handle</th>
+                                <th scope="col">A ver</th>
+                                <th scope="col">Si html</th>
+                                <th scope="col">hace que</th>
+                                <th scope="col">aparezca el scroll</th>
+                                <th scope="col">hace que</th>
+                                <th scope="col">aparezca el scroll</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+
+                                <td><a [routerLink]="['/informacion']">Mi contacto</a></td>
+                                <td>Chabeli.ixt@walmart.com</td>
+                                <td>@mdogsdfgfdgfgsdfgdfdfgd</td>
+                                <td>Markgdfgsfdgsdfgfdg</td>
+                                <td>Ottofgsdfgsdfgdfg</td>
+                                <td>fddsgsgsgsgd</td>
+                                <td>kjdhjkdffgsssssdfg</td>
+                                <td>fddsgsgsgsgd</td>
+                                <td>kjdhjkdffgsssssdfg</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td class="celdas">Jacob</td>
+                                <td>Thornton</td>
+                                <td>@fat</td>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>fd</td>
+                                <td>kjdhjkdf</td>
+                                <td>fddsgsgsgsgd</td>
+                                <td>kjdhjkdffgsssssdfg</td>
+                            </tr>
+                            <tr>
+
+                                <td>Larry</td>
+                                <td>the Bird</td>
+                                <td>@twitter</td>
+                                <td>Mark</td>
+                                <td>Otto</td>
+                                <td>fd</td>
+                                <td>kjdhjkdf</td>
+                                <td>fddsgsgsgsgd</td>
+                                <td>kjdhjkdffgsssssdfg</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
         </div>
-
-
-
-      </div>
-      <!--Contenido tab 2-->
-      <div class="tab-pane fade" id="misContactos" role="tabpanel" aria-labelledby="profile-tab">
-        <div class="table-responsive">
-          <table id="tablaContactos" class="table mt-3 display">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-                <th scope="col">A ver</th>
-                <th scope="col">Si html</th>
-                <th scope="col">hace que</th>
-                <th scope="col">aparezca el scroll</th>
-                <th scope="col">hace que</th>
-                <th scope="col">aparezca el scroll</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-
-                <td><a [routerLink]="['/perfil']">Mi contacto</a></td>
-                <td>Chabeli.ixt@walmart.com</td>
-                <td>@mdogsdfgfdgfgsdfgdfdfgd</td>
-                <td>Markgdfgsfdgsdfgfdg</td>
-                <td>Ottofgsdfgsdfgdfg</td>
-                <td>fddsgsgsgsgd</td>
-                <td>kjdhjkdffgsssssdfg</td>
-                <td>fddsgsgsgsgd</td>
-                <td>kjdhjkdffgsssssdfg</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td class="celdas">Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>fd</td>
-                <td>kjdhjkdf</td>
-                <td>fddsgsgsgsgd</td>
-                <td>kjdhjkdffgsssssdfg</td>
-              </tr>
-              <tr>
-
-                <td>Larry</td>
-                <td>the Bird</td>
-                <td>@twitter</td>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>fd</td>
-                <td>kjdhjkdf</td>
-                <td>fddsgsgsgsgd</td>
-                <td>kjdhjkdffgsssssdfg</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-
     </div>
-  </div>
 
 
 
