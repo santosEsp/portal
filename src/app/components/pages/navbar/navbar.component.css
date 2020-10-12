@@ -1,35 +1,39 @@
 .navbar-login {
-  width: 305px;
-  padding: 10px;
-  padding-bottom: 0px;
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
 }
 
 .navbar-login-session {
-  padding: 40px;
-  padding-bottom: 0px;
-  padding-top: 0px;
+    padding: 40px;
+    padding-bottom: 0px;
+    padding-top: 0px;
 }
 
 .icon-size {
-  font-size: 65px;
-  color: #275995;
+    font-size: 65px;
+    color: #275995;
 }
 
 .navbarContacto {
-  width: 305px;
-  padding: 10px;
-  padding-bottom: 0px;
+    width: 305px;
+    padding: 10px;
+    padding-bottom: 0px;
 }
 
 a:hover {
- background-color:#275995;
- color: white;
- 
+    background-color: #275995;
+    color: white;
 }
 
-.negritas:hover{
-  font-weight: bold;
+.negritas:hover {
+    font-weight: bold;
 }
-.colorCorporativo{
-  background-color: #275995;
+
+.colorCorporativo {
+    background-color: #275995;
+}
+
+.colorSection {
+    background-color: aqua;
 }

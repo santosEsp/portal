@@ -11,16 +11,22 @@ import { ContactoModel } from '../../../models/contacto.model';
 export class ContactosComponent implements OnInit {
 
   contacto = new ContactoModel();
-
   arregloContactos: ContactoModel[] = [];
-  contador = 0;
+  contadorContactos = 0;
+  tipo: string;
 
-  constructor(private consultas: ConsultasService) { }
+  constructor(private consultas: ConsultasService) {
+    
+    this.tipo = "contacto";
+    this.arregloContactos = this.consultas.getContactos();
+    this.contadorContactos = this.arregloContactos.length;
+    console.log(this.contadorContactos);
+    console.log(this.arregloContactos);
+  }
 
   ngOnInit() {
 
-    this.arregloContactos = this.consultas.getContactos();
-    console.log(this.arregloContactos);
+    
 
   }
 

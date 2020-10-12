@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ContactoModel } from '../models/contacto.model';
+import { EmpresaModel } from '../models/empresa.model';
 
 @Injectable({
   providedIn: 'root'
@@ -12,17 +13,17 @@ export class ConsultasService {
   },
   {
     correo: 'Gerardo@walmart.com', nombre: 'Santos', apellido: 'Espíritu',
-    propietario: 'Usuario1', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
+    propietario: 'Admin', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
   },
 
   {
-    correo: 'raul456@oxxo.com', nombre: 'Santos', apellido: 'Espíritu',
-    propietario: 'Usuario1', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
+    correo: 'raul456@oxxo.com', nombre: 'Raúl', apellido: 'Vázquez',
+    propietario: 'Usuario1', departamento: 'Desarrollo', telefono: 2334534595, empresa: 'OXXO, S.A. de C.V.'
   },
 
   {
     correo: 'yopppp@outlook.com', nombre: 'Santos', apellido: 'Espíritu',
-    propietario: 'Usuario1', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
+    propietario: 'Admin', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
   },
   {
     correo: 'heyey@twitter.com', nombre: 'Santos', apellido: 'Espíritu',
@@ -39,7 +40,7 @@ export class ConsultasService {
   },
   {
     correo: 'manuel@gmail.com', nombre: 'Santos', apellido: 'Espíritu',
-    propietario: 'Usuario1', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
+    propietario: 'Admin', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
   },
 
   {
@@ -58,16 +59,16 @@ export class ConsultasService {
 
   {
     correo: 'elescorpiondorado@gmail.com', nombre: 'Santos', apellido: 'Espíritu',
-    propietario: 'Usuario1', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
+    propietario: 'Admin', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
   },
 
   {
     correo: 'lusitocomunica@gmail.com', nombre: 'Santos', apellido: 'Espíritu',
-    propietario: 'Usuario1', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
+    propietario: 'Admin', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
   },
   {
     correo: 'werever@gmail.com', nombre: 'Santos', apellido: 'Espíritu',
-    propietario: 'Usuario1', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
+    propietario: 'Admin', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
   },
 
   {
@@ -138,14 +139,25 @@ export class ConsultasService {
   {
     correo: 'marinela123@gmail.com', nombre: 'Santos', apellido: 'Espíritu',
     propietario: 'Usuario1', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
-  },
-
-  {
-    correo: 'gapsa456@gmail.com', nombre: 'Santos', apellido: 'Espíritu',
-    propietario: 'Usuario1', departamento: 'Desarrollo', telefono: 2311004595, empresa: 'ClickSoft'
   }
 
-];
+  ];
+
+
+
+  arregloEmpresas: EmpresaModel[] = [
+    {
+      nombre: 'Walmart', propietario: 'Usuario 1 ', industria: 'Aviación', telefono: '4563452312', tipo: 'Revendedor',
+      ciudad: 'Panzacola', estado: 'Tlaxacala', cp: '345456', noEmpleados: '1600', ingresos: '10,000,000',
+      zonaHoraria: 'Zona Mexico UTC', descripcion: 'Nueva empresa', pagina: 'walmartsadecv@wmt.com'
+    },
+    {
+      nombre: 'Bancomer', propietario: 'Usuario 2 ', industria: 'Banca', telefono: '4563452456', tipo: 'Cliente potencial',
+      ciudad: 'Mexico', estado: 'Mexico', cp: '59545', noEmpleados: '20000', ingresos: '900,000,000',
+      zonaHoraria: 'Zona Mexico UTC', descripcion: 'Nueva empresa', pagina: 'bancomer@bcm.com'
+    }
+
+  ];
 
   constructor() {
 
@@ -153,13 +165,22 @@ export class ConsultasService {
 
   }
 
-  getContactos(){
+  getContactos() {
     return this.arregloContactos;
   }
 
-  getContacto(idx: string){
-    
-    return this.arregloContactos[idx];
+  getContacto(idx: string) {
+
+    return this.arregloContactos[idx] ;
+  }
+
+
+  getEmpresas() {
+    return this.arregloEmpresas;
+  }
+
+  getEmpresa(idx: string) {
+    return this.arregloEmpresas[idx];
   }
 
 }

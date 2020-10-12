@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
 import { UsuarioModel } from '../../models/usuarios.model';
+import { RecuperarPasword } from '../../models/recuperarPassword.model';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,11 @@ import { UsuarioModel } from '../../models/usuarios.model';
 })
 export class LoginComponent implements OnInit {
   loginUser: UsuarioModel = new UsuarioModel();
+  recuperarPassword: RecuperarPasword = new RecuperarPasword();
+
   recordarme = false;
 
-  constructor(private router: Router, private auth: AuthService) {}
+  constructor(private router: Router, private auth: AuthService) { }
 
   ngOnInit() {
     if (localStorage.getItem('email')) {
@@ -59,5 +62,22 @@ export class LoginComponent implements OnInit {
         });
       }
     );
+  }
+
+  recupera(form1: NgForm){
+
+
+    if (form1.invalid) {
+      return;
+    }
+    Swal.fire({
+      allowOutsideClick: true,
+      text: 'Se ha enviado un mensaje a su correo ',
+      icon: 'info'
+    });
+
+    console.log(form1);
+
+
   }
 }
