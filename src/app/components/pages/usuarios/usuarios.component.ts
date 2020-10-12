@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
 import { UsuarioModel } from '../../../models/usuarios.model';
 
 @Component({
@@ -9,17 +10,29 @@ import { UsuarioModel } from '../../../models/usuarios.model';
 })
 export class UsuariosComponent implements OnInit {
   usuario: UsuarioModel;
-  constructor() {}
+  usuarios: UsuarioModel[] = [];
+  constructor(private _usuarioService : UsuarioService) {}
 
   ngOnInit() {
     this.usuario = new UsuarioModel();
+    this.cargarUsuarios();
   }
 
-  agregarUsuario(form: NgForm) {
-    if (form.invalid) {
+  agregarUsuario(forma: NgForm) {
+    if (forma.invalid) {
       return 'Formulario no válido';
     }
+    this.usuario.nombre = forma.value.nombre;
+    this.usuario.password = forma.value.password;
+    this.usuario.email = forma.value.correo;
+    this.usuario.rol = forma.value.rol;
 
-    console.log(form);
+    
+    this._usuarioService.crearUsuario(this.usuario).subscribe();
+  }
+
+
+  cargarUsuarios(){
+    this._usuarioService.cargarUsuarios().subscribe(usuarios => this.usuarios = usuarios)
   }
 }
