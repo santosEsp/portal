@@ -148,10 +148,7 @@
                                                                         <option>Usuario 3</option>
                                                                     </select>
 
-                                                                    <small *ngIf="
-                                      fCorreo.submitted &&
-                                      fCorreo.controls['contactado'].errors
-                                    " class="text-danger">
+                                                                    <small *ngIf="fCorreo.submitted && fCorreo.controls['contactado'].errors " class="text-danger">
                                                                         Campo obligatorio
                                                                     </small>
                                                                 </div>
@@ -165,10 +162,7 @@
                                                                     <label class="col-form-label">Fecha</label>
                                                                     <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="example-date-input" name="fecha" [(ngModel)]="correo.fecha" required />
 
-                                                                    <small *ngIf="
-                                      fCorreo.submitted &&
-                                      fCorreo.controls['fecha'].errors
-                                    " class="text-danger">
+                                                                    <small *ngIf="fCorreo.submitted && fCorreo.controls['fecha'].errors" class="text-danger">
                                                                         Campo obligatorio
                                                                     </small>
                                                                 </div>
@@ -181,10 +175,7 @@
                                                                     <label class="col-form-label">Hora</label>
                                                                     <input class="form-control" type="time" value="00:00:00" id="example-time-input" name="hora" [(ngModel)]="correo.hora" required />
 
-                                                                    <small *ngIf="
-                                      fCorreo.submitted &&
-                                      fCorreo.controls['hora'].errors
-                                    " class="text-danger">
+                                                                    <small *ngIf="fCorreo.submitted && fCorreo.controls['hora'].errors " class="text-danger">
                                                                         Campo obligatorio
                                                                     </small>
 
@@ -196,15 +187,12 @@
                                             </table>
                                             <hr />
 
-                                            <small *ngIf="
-                          fCorreo.submitted &&
-                          fCorreo.controls['descripcion'].errors
-                        " class="text-danger">
+                                            <small *ngIf="fCorreo.submitted && fCorreo.controls['descripcion'].errors" class="text-danger">
                                                 Campo obligatorio
                                             </small>
 
                                             <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Descripción del correo" name="descripcion" [(ngModel)]="correo.descripcion" required>
-                      </textarea>
+                                            </textarea>
 
                                             <div class="modal-footer">
                                                 <button type="submit" class="btn estilosBotonesHover estilosBotones">
@@ -291,11 +279,7 @@
                                                                         <option>Sin respuesta</option>
                                                                     </select>
 
-                                                                    <small *ngIf="
-                                      fLlamada.submitted &&
-                                      fLlamada.controls['resultadoLlamada']
-                                        .errors
-                                    " class="text-danger">
+                                                                    <small *ngIf=" fLlamada.submitted &&fLlamada.controls['resultadoLlamada'].errors" class="text-danger">
                                                                         Campo obligatorio
                                                                     </small>
 
@@ -313,10 +297,7 @@
 
                                                                     <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="example-date-input" name="fechaLlamada" required [(ngModel)]="llamada.fecha" />
 
-                                                                    <small *ngIf="
-                                      fLlamada.submitted &&
-                                      fLlamada.controls['fechaLlamada'].errors
-                                    " class="text-danger">
+                                                                    <small *ngIf="fLlamada.submitted && fLlamada.controls['fechaLlamada'].errors " class="text-danger">
                                                                         Campo obligatorio
                                                                     </small>
                                                                 </div>
@@ -329,10 +310,7 @@
 
                                                                     <input class="form-control" type="time" value="00:00:00" id="example-time-input" name="horaLlamada" required [(ngModel)]="llamada.hora" />
 
-                                                                    <small *ngIf="
-                                      fLlamada.submitted &&
-                                      fLlamada.controls['horaLlamada'].errors
-                                    " class="text-danger">
+                                                                    <small *ngIf="fLlamada.submitted && fLlamada.controls['horaLlamada'].errors " class="text-danger">
                                                                         Campo obligatorio
                                                                     </small>
 
@@ -345,10 +323,7 @@
                                             <hr />
 
                                             <div>
-                                                <small *ngIf="
-                            fLlamada.submitted &&
-                            fLlamada.controls['descripcionLlamada'].errors
-                          " class="text-danger">
+                                                <small *ngIf="fLlamada.submitted && fLlamada.controls['descripcionLlamada'].errors" class="text-danger">
                                                     Campo obligatorio
                                                 </small>
 
@@ -426,11 +401,7 @@
                                                                         <option>Usuario 3</option>
                                                                     </select>
 
-                                                                    <small *ngIf="
-                                      fReunion.submitted &&
-                                      fReunion.controls['asistentesReunion']
-                                        .errors
-                                    " class="text-danger">
+                                                                    <small *ngIf=" fReunion.submitted && fReunion.controls['asistentesReunion'].errors" class="text-danger">
                                                                         Campo obligatorio
                                                                     </small>
                                                                 </div>
@@ -450,11 +421,7 @@
                                                                         <option>Completadas</option>
                                                                     </select>
 
-                                                                    <small *ngIf="
-                                      fReunion.submitted &&
-                                      fReunion.controls['resultadoReunion']
-                                        .errors
-                                    " class="text-danger">
+                                                                    <small *ngIf=" fReunion.submitted && fReunion.controls['resultadoReunion'].errors" class="text-danger">
                                                                         Campo obligatorio
                                                                     </small>
                                                                 </div>
@@ -469,11 +436,7 @@
 
                                                                     <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="example-date-input" name="fechaReunion" required [(ngModel)]="reunion.fecha" />
 
-                                                                    <small *ngIf="
-                                      fReunion.submitted &&
-                                      fReunion.controls['fechaReunion']
-                                        .errors
-                                    " class="text-danger">
+                                                                    <small *ngIf="fReunion.submitted && fReunion.controls['fechaReunion'].errors" class="text-danger">
                                                                         Campo obligatorio
                                                                     </small>
                                                                 </div>
@@ -488,11 +451,7 @@
 
                                                                     <input class="form-control" type="time" value="00:00:00" id="example-time-input" name="horaReunion" required [(ngModel)]="reunion.hora" />
 
-                                                                    <small *ngIf="
-                                      fReunion.submitted &&
-                                      fReunion.controls['horaReunion']
-                                        .errors
-                                    " class="text-danger">
+                                                                    <small *ngIf="fReunion.submitted && fReunion.controls['horaReunion'].errors" class="text-danger">
                                                                         Campo obligatorio
                                                                     </small>
 
@@ -516,11 +475,7 @@
                                                                         <option>1 Hora</option>
                                                                     </select>
 
-                                                                    <small *ngIf="
-                                      fReunion.submitted &&
-                                      fReunion.controls['duracionReunion']
-                                        .errors
-                                    " class="text-danger">
+                                                                    <small *ngIf="fReunion.submitted && fReunion.controls['duracionReunion'].errors" class="text-danger">
                                                                         Campo obligatorio
                                                                     </small>
                                                                 </div>
@@ -531,11 +486,7 @@
                                             </table>
                                             <hr />
 
-                                            <small *ngIf="
-                                      fReunion.submitted &&
-                                      fReunion.controls['descripcionReunion']
-                                        .errors
-                                    " class="text-danger">
+                                            <small *ngIf="fReunion.submitted && fReunion.controls['descripcionReunion'].errors " class="text-danger">
                                                 Campo obligatorio
                                             </small>
                                             <div class="form-group">

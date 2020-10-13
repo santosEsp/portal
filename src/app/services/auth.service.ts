@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/Operators';
 import { UsuarioModel } from '../models/usuarios.model';
+import { URL_SERVICIOS } from '../config/config';
 
 @Injectable({
   providedIn: 'root',
@@ -11,12 +12,9 @@ export class AuthService {
     'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
   private apikey = 'AIzaSyAm2QMxrRFc2CvwUPMreGHyYKtOYdFaXMI';
 
-  userToken: string;
-  // Para el sign in
-  // https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=[API_KEY]
+  // private url = URL_SERVICIOS + '/login/'; Conexion a BD no usada 
 
-  // Sing up que no usaré
-  // https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=[API_KEY]
+  userToken: string;
 
   constructor(private http: HttpClient) {
     this.leerToken();
@@ -44,7 +42,7 @@ export class AuthService {
   private guardarToken(idToken: string) {
     this.userToken = idToken;
     localStorage.setItem('token', idToken);
-    
+
     let hoy = new Date();
     hoy.setSeconds(3600);
 

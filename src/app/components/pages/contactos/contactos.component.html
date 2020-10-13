@@ -1,38 +1,36 @@
 <app-navbar></app-navbar>
 
-
-
 <div>
     <div class="float-right">
         <button type="button" class="btn estilosBotones estilosBotonesHover mt-4 mr-4" data-toggle="modal" data-target="#modalCrearContacto" data-whatever="@mdo">
-      <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd"
-          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-      </svg>
-      Agregar contacto
-    </button>
+            <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1
+                    0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+            </svg>
+            Agregar contacto
+        </button>
 
-
-        <button type="button" class="btn  mt-4 mr-4 estilosBotones estilosBotonesHover" data-whatever="@mdo">
-      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor"
-        xmlns="http://www.w3.org/2000/svg">
-        <path fill-rule="evenodd"
-          d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
-        <path fill-rule="evenodd"
-          d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
-      </svg>
-      Exportar contactos
-    </button>
+        <button type="button" class="btn mt-4 mr-4 estilosBotones estilosBotonesHover" data-whatever="@mdo">
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0
+                        0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0
+                        1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+                <path fill-rule="evenodd" d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0
+                            0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1
+                            0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+            </svg>
+            Exportar contactos
+        </button>
     </div>
 
     <div>
         <div class="container-fluid mt-3">
             <span class="encabezado">Contactos</span>
-            <br>
-            <small>{{contadorContactos}} contactos</small>
+            <br />
+            <small>{{ contadorContactos }} contactos</small>
         </div>
-
 
         <!--Inicio del formulario modal Crear contacto-->
         <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalCrearContacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -43,115 +41,98 @@
                             Agregar contacto
                         </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                     <div class="modal-body">
                         <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-
-
-
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Correo</label>
                                 <input type="text" class="form-control" id="correo" name="correo" [(ngModel)]="contacto.correo" required email />
 
-                                <small *ngIf="f.submitted && f.controls['correo'].errors" class="text-danger ">
-                  Campo obligatorio
-                </small>
+                                <small *ngIf="f.submitted && f.controls['correo'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
                             </div>
-
-
 
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Nombre</label>
                                 <input type="text" class="form-control" id="pipeline" name="nombre" [(ngModel)]="contacto.nombre" required minlength="3" />
 
-                                <small *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger ">
-                  Campo obligatorio
-                </small>
-
+                                <small *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
                             </div>
-
-
-
 
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Apellido</label>
                                 <input type="text" class="form-control" id="etapa" name="apellido" [(ngModel)]="contacto.apellido" required minlength="3" />
 
-                                <small *ngIf="f.submitted && f.controls['apellido'].errors" class="text-danger ">
-                  Campo obligatorio
-                </small>
+                                <small *ngIf="f.submitted && f.controls['apellido'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
                             </div>
-
-
 
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Propietario del contacto</label>
-                                <input type="text" class="form-control" id="cantidad" name="propietario" [(ngModel)]="contacto.propietario" required />
+                                <label for="recipient-name" class="col-form-label">Propietario del registro</label>
+                                <div class="col-22">
+                                    <select class="form-control" id="propietario" name="propietario" [(ngModel)]="contacto.propietario" required>
+                                        <option>Usuario 1</option>
+                                        <option>Usuario 2</option>
+                                        <option>Usuario 3</option>
+                                    </select>
 
-                                <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger ">
-                  Campo obligatorio
-                </small>
+                                    <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger">
+                                        Campo obligatorio
+                                    </small>
+                                </div>
                             </div>
-
-
 
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Empresa</label>
                                 <input type="text" class="form-control" id="pipeline" name="departamento" [(ngModel)]="contacto.empresa" required />
 
-                                <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger ">
-                  Campo obligatorio
-                </small>
+                                <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
                             </div>
-
-
 
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Departamento</label>
                                 <input type="text" class="form-control" id="pipeline" name="departamento" [(ngModel)]="contacto.departamento" required />
 
-                                <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger ">
-                  Campo obligatorio
-                </small>
+                                <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
                             </div>
-
-
 
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Número de teléfono</label>
                                 <input type="text" class="form-control" id="etapa" name="telefono" [(ngModel)]="contacto.telefono" required minlength="8" />
 
-                                <small *ngIf="f.submitted && f.controls['telefono'].errors" class="text-danger ">
-                  Campo obligatorio
-                </small>
+                                <small *ngIf="f.submitted && f.controls['telefono'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
                             </div>
-
 
                             <div class="modal-footer">
                                 <button type="submit" class="btn estilosBotonesHover estilosBotones">
-                  Crear
-                </button>
+                                    Crear
+                                </button>
                                 <button type="submit" class="btn estilosBotonesHover estilosBotones">
-                  Crear y agregar otra
-                </button>
+                                    Crear y agregar otra
+                                </button>
                                 <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
-                  Cancelar
-                </button>
+                                    Cancelar
+                                </button>
                             </div>
-
-
                         </form>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
     <!--Fin formulario crear contacto-->
-
-
 
     <div class="container-fluid pt-3">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -161,7 +142,6 @@
             <li class="nav-item" role="presentation">
                 <a class="nav-link" id="profile-tab" data-toggle="tab" href="#misContactos" role="tab" aria-controls="profile" aria-selected="false">Mis contactos</a>
             </li>
-
         </ul>
 
         <!--Contenido de los tabs
@@ -185,23 +165,20 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let contactos of arregloContactos; let i = index">
-                                <th scope="row">{{i+1}}</th>
-                                <td><a [routerLink]="['/informacion',tipo, i]">{{contactos.correo}}</a> </td>
-                                <td>{{contactos.nombre}}</td>
-                                <td>{{contactos.apellido}}</td>
-                                <td>{{contactos.propietario}}</td>
-                                <td>{{contactos.departamento}}</td>
-                                <td>{{contactos.telefono}}</td>
-                                <td>{{contactos.empresa}}</td>
+                                <th scope="row">{{ i + 1 }}</th>
+                                <td>
+                                    <a [routerLink]="['/informacion', tipo, i]">{{contactos.correo }}</a>
+                                </td>
+                                <td>{{ contactos.nombre }}</td>
+                                <td>{{ contactos.apellido }}</td>
+                                <td>{{ contactos.propietario }}</td>
+                                <td>{{ contactos.departamento }}</td>
+                                <td>{{ contactos.telefono }}</td>
+                                <td>{{ contactos.empresa }}</td>
                             </tr>
-
-
                         </tbody>
                     </table>
                 </div>
-
-
-
             </div>
             <!--Contenido tab 2-->
             <div class="tab-pane fade" id="misContactos" role="tabpanel" aria-labelledby="profile-tab">
@@ -221,25 +198,21 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let contactos of arregloContactos; let i = index">
-                                <th scope="row">{{i+1}}</th>
-                                <td><a [routerLink]="['/informacion',i]">{{contactos.correo}}</a> </td>
-                                <td>{{contactos.nombre}}</td>
-                                <td>{{contactos.apellido}}</td>
-                                <td>{{contactos.propietario}}</td>
-                                <td>{{contactos.departamento}}</td>
-                                <td>{{contactos.telefono}}</td>
-                                <td>{{contactos.empresa}}</td>
+                                <th scope="row">{{ i + 1 }}</th>
+                                <td>
+                                    <a [routerLink]="['/informacion', i]">{{contactos.correo}}</a>
+                                </td>
+                                <td>{{ contactos.nombre }}</td>
+                                <td>{{ contactos.apellido }}</td>
+                                <td>{{ contactos.propietario }}</td>
+                                <td>{{ contactos.departamento }}</td>
+                                <td>{{ contactos.telefono }}</td>
+                                <td>{{ contactos.empresa }}</td>
                             </tr>
-
                         </tbody>
                     </table>
                 </div>
-
             </div>
-
         </div>
     </div>
-
-
-
 </div>

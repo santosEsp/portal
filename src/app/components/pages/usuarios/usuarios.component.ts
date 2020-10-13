@@ -33,6 +33,6 @@ export class UsuariosComponent implements OnInit {
 
 
   cargarUsuarios(){
-    this._usuarioService.cargarUsuarios().subscribe(usuarios => this.usuarios = usuarios)
+    this._usuarioService.cargarUsuarios().subscribe(lista => this.usuarios = lista);
   }
 }
