@@ -1,39 +1,55 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs/Operators';
-import { UsuarioModel } from '../models/usuarios.model';
-import { URL_SERVICIOS } from '../config/config';
+import { UsuarioModel } from '../../models/usuarios.model';
+import { URL_SERVICIOS } from '../../config/config';
+
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthService {
-  private url =
-    'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=';
-  private apikey = 'AIzaSyAm2QMxrRFc2CvwUPMreGHyYKtOYdFaXMI';
+export class LoginService {
 
-  // private url = URL_SERVICIOS + '/login/'; Conexion a BD no usada 
+
+
+  private url = URL_SERVICIOS + '/login/';
 
   userToken: string;
+  nombre: string;
+  email: string;
+
 
   constructor(private http: HttpClient) {
-    this.leerToken();
+
+
   }
 
   login(usuario: UsuarioModel) {
-    const authData = {
-      ...usuario,
-      returnSecureToken: true,
-    };
 
-    return this.http.post(`${this.url}${this.apikey}`, authData).pipe(
-      map((resp) => {
-        console.log('Entró en el mapa de rxjs');
-        this.guardarToken(resp['idToken']);
+    return this.http.post(this.url, usuario).pipe(
+      map((resp: any) => {
+        this.guardarToken(resp['token']);
+        console.log(resp.token);
         return resp;
+
       })
     );
+
+    
+
+    // return this.http.post(`${this.url}`, authData).pipe(
+    //   map((resp) => {
+    //     console.log('Entró en el mapa de rxjs');
+    //     this.guardarToken(resp['idToken']);
+    //     return resp;
+    //   })
+    // );
+
+
+
   }
+
+  
 
   logout() {
     localStorage.removeItem('token');

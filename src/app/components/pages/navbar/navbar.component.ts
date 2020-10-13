@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../../../services/auth.service';
+import { LoginService } from '../../../services/login/login.service';
 import { ConsultasService } from '../../../services/consultas.service';
 
 @Component({
@@ -10,19 +10,18 @@ import { ConsultasService } from '../../../services/consultas.service';
 })
 export class NavbarComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router, private consultas: ConsultasService) { }
+  nombreUsuario: string;
+  correo: string;
+  constructor(private auth: LoginService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  salir(){
+  salir() {
     this.auth.logout();
     this.router.navigateByUrl('/login');
+
   }
 
-  
-
-
-  
 
 }

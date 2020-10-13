@@ -11,7 +11,7 @@ import { UsuarioModel } from '../../../models/usuarios.model';
 export class UsuariosComponent implements OnInit {
   usuario: UsuarioModel;
   usuarios: UsuarioModel[] = [];
-  constructor(private _usuarioService : UsuarioService) {}
+  constructor(private _usuarioService: UsuarioService) { }
 
   ngOnInit() {
     this.usuario = new UsuarioModel();
@@ -22,17 +22,21 @@ export class UsuariosComponent implements OnInit {
     if (forma.invalid) {
       return 'Formulario no válido';
     }
+
+    console.log('Estas en agregar usuario');
     this.usuario.nombre = forma.value.nombre;
     this.usuario.password = forma.value.password;
     this.usuario.email = forma.value.correo;
     this.usuario.rol = forma.value.rol;
 
-    
+
     this._usuarioService.crearUsuario(this.usuario).subscribe();
   }
 
 
-  cargarUsuarios(){
+  cargarUsuarios() {
+
+    console.log('estas en cargar usuarios');
     this._usuarioService.cargarUsuarios().subscribe(lista => this.usuarios = lista);
   }
 }

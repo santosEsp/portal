@@ -10,22 +10,14 @@
 
 
 
-<div class="container m-4">
+<div class=" m-4 align-items-center">
     <ul class="nav nav-tabs">
         <li class="nav-item">
             <a class="nav-link active" href="#">Todos los Usuarios</a>
         </li>
 
     </ul>
-    <div class="btn-group m-5" style="text-align: right;;">
-        <div style=" text-align: right;;">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Buscar ..." aria-label="Buscar ...">
-            </form>
-        </div>
 
-
-    </div>
 
 
     <div class="modal fade" data-backdrop="static" data-keyboard="false" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -63,8 +55,8 @@
                             <br>
                             <select class="form-control" name="rol" id="rol" required [(ngModel)]=usuario.rol>
                                
-                                <option value="1">Administrador</option> 
-                                <option value="2">Usuario</option> 
+                                <option value="ADMIN">Administrador</option> 
+                                <option value="USER">Usuario</option> 
 
                             </select>
 
@@ -96,15 +88,13 @@
         </div>
     </div>
 
-    <table class="table table-striped fa-100px">
+    <table class="table table-striped fa-100px mt-3 table">
         <thead class="thead-dark">
             <tr>
                 <th scope="col">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <div class="input-group-text">
-                                <input type="checkbox" aria-label="Checkbox for following text input">
-                            </div>
+
                         </div>
                     </div>
                 </th>

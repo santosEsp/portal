@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { LoginService} from '../../services/login/login.service';
 import Swal from 'sweetalert2';
 import { UsuarioModel } from '../../models/usuarios.model';
 import { RecuperarPasword } from '../../models/recuperarPassword.model';
@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
 
   recordarme = false;
 
-  constructor(private router: Router, private auth: AuthService) { }
+  constructor(private router: Router, private _loginService: LoginService) { }
 
   ngOnInit() {
     if (localStorage.getItem('email')) {
@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
     });
     Swal.showLoading();
 
-    this.auth.login(this.loginUser).subscribe(
-      (resp) => {
+    this._loginService.login(this.loginUser).subscribe(
+      (resp: any) => {
         Swal.close();
 
         console.log('Se cerro el swal');
@@ -50,14 +50,13 @@ export class LoginComponent implements OnInit {
         console.log('Ya viene el enrutado');
 
         this.router.navigateByUrl('/contactos');
-        console.log(resp);
+        
       },
       (err) => {
-        console.log(err.error.error.message);
 
         Swal.fire({
           title: 'Error al autenticar',
-          text: err.error.error.message,
+          text: 'Hubo un error',
           icon: 'error',
         });
       }
