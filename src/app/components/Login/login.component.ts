@@ -24,6 +24,8 @@ export class LoginComponent implements OnInit {
       this.loginUser.email = localStorage.getItem('email');
       this.recordarme = true;
     }
+
+    
   }
 
   login(form: NgForm) {
@@ -46,8 +48,13 @@ export class LoginComponent implements OnInit {
         if (this.recordarme) {
           localStorage.setItem('email', this.loginUser.email);
         }
+        else{
+          localStorage.removeItem('email');
+        }
 
         console.log('Ya viene el enrutado');
+
+        
 
         this.router.navigateByUrl('/contactos');
         
