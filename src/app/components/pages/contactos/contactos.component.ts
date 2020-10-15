@@ -20,8 +20,8 @@ export class ContactosComponent implements OnInit {
     this.tipo = "contacto";
     this.arregloContactos = this.consultas.getContactos();
     this.contadorContactos = this.arregloContactos.length;
-    console.log(this.contadorContactos);
-    console.log(this.arregloContactos);
+    // console.log(this.contadorContactos);
+    // console.log(this.arregloContactos);
   }
 
   ngOnInit() {
