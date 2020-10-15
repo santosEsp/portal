@@ -1,4 +1,5 @@
 export class ContactoModel{
+    id?: string;
     correo: string;
     nombre: string;
     apellido: string;
