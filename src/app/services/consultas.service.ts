@@ -161,7 +161,7 @@ export class ConsultasService {
 
   constructor() {
 
-    console.log('Servicio creado para las consultas y asignaciones');
+    // console.log('Servicio creado para las consultas y asignaciones');
 
   }
 
