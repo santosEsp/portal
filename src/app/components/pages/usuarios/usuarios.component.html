@@ -101,6 +101,8 @@
                 <th scope="col">Nombre</th>
                 <th scope="col">Correo</th>
                 <th scope="col">Rol</th>
+                <th scope="col">Editar</th>
+                <th scope="col">Eliminar</th>
             </tr>
         </thead>
 
@@ -112,9 +114,19 @@
                         </div>
                     </div>
                 </th>
-                <td>{{usuario.nombre}}</td>
-                <td>{{usuario.email}}</td>
+                <td> <input [(ngModel)]="usuario.nombre" type="text" name="nombre" class="form-control" placeholder="nombre"></td>
+                <td> <input [(ngModel)]="usuario.email" type="text" name="email" class="form-control" placeholder="email"> </td>
                 <td>{{usuario.rol}}</td>
+                <td> 
+                    <button (click)="actualizarUsuario(usuario)" class="btn btn-primary m-r-10">
+                        <i class='fa fa-save'></i>
+                    </button>
+                </td>
+                <td>
+                    <button (click)="eliminarUsuario(usuario)" class="btn btn-danger">
+                        <i class='fas fa-trash-alt'></i>
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>

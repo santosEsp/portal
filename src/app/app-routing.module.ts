@@ -12,13 +12,13 @@ import { PipelineComponent } from './components/pages/pipeline/pipeline.componen
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'contactos', component: ContactosComponent },
-  {path: 'empresas', component: EmpresaComponent },
-  {path: 'informacion/:tipo/:id', component: InformacionComponent},
-  {path: 'informes', component: InformesComponent},
-  {path: 'usuarios', component: UsuariosComponent},
-  {path: 'pipeline', component: PipelineComponent},
-  {path: 'configuracion', component: ConfiguracionComponent},
+  {path: 'contactos', component: ContactosComponent, canActivate:[AuthGuard] },
+  {path: 'empresas', component: EmpresaComponent,  canActivate:[AuthGuard]},
+  {path: 'informacion/:tipo/:id', component: InformacionComponent, canActivate:[AuthGuard]},
+  {path: 'informes', component: InformesComponent, canActivate:[AuthGuard]},
+  {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard]},
+  {path: 'pipeline', component: PipelineComponent, canActivate:[AuthGuard]},
+  {path: 'configuracion', component: ConfiguracionComponent, canActivate:[AuthGuard]},
   {path: '**', pathMatch: 'full', redirectTo: 'login'}
 
 ];

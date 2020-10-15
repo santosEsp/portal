@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from '../../../services/login/login.service';
 import { ConsultasService } from '../../../services/consultas.service';
+import { UsuarioModel } from 'src/app/models/usuarios.model';
 
 @Component({
   selector: 'app-navbar',
@@ -9,18 +10,20 @@ import { ConsultasService } from '../../../services/consultas.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+   
+   usuario : UsuarioModel;
 
-  nombreUsuario: string;
-  correo: string;
-  constructor(private auth: LoginService, private router: Router) { }
+  constructor(private _loginService: LoginService, private router: Router) { 
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));        
+  }
 
   ngOnInit(): void {
+
   }
 
   salir() {
-    this.auth.logout();
+    this._loginService.logout();
     this.router.navigateByUrl('/login');
-
   }
 
 
