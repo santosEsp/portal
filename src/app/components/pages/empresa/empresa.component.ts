@@ -19,19 +19,16 @@ export class EmpresaComponent implements OnInit {
 
   arregloEmpresas: EmpresaModel[] = [];
 
-<<<<<<< HEAD
-  constructor() {
-    this.tipo = "empresa";
-    
-    this.contadorEmpresas = this.arregloEmpresas.length;
-=======
+
   // Para obtener el id_del usuario
   usuarioActual : UsuarioModel;
 
   constructor(
               private _empresaService: EmpresaService) {
     this.tipo = "empresa";
->>>>>>> 7b22adafe108f08e14fa531c3f1fd9532d92248f
+    
+    this.contadorEmpresas = this.arregloEmpresas.length;
+
     
    }
 
