@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { UsuarioModel } from '../../models/usuarios.model'
-import { map } from 'rxjs/operators'
-import { URL_SERVICIOS } from 'src/app/config/config'
+import { HttpClient } from '@angular/common/http';
+import { UsuarioModel } from '../../models/usuarios.model';
+import { map } from 'rxjs/operators';
+import { URL_SERVICIOS } from 'src/app/config/config';
 import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsuarioService {
-  token : any;
+  token: any;
   constructor(private http: HttpClient)  {
     this.token = localStorage.getItem('token');
    }
@@ -35,11 +35,12 @@ export class UsuarioService {
     // NOTA
     // AGREGAR LA VERIFIACION DEL TOKEN
     let url = URL_SERVICIOS + '/usuarios/' + id;
-
+    console.log(url);
     return this.http.delete(url).pipe(
       map(
         (resp : any) => {
           Swal.fire('Usuario eliminado', 'Eliminado Correctamente', 'success');
+          
           return true;
         }
       )

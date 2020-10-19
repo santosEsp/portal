@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ConsultasService } from '../../../services/consultas.service';
 import { ContactoModel } from '../../../models/contacto.model';
+import { ContactoService } from '../../../services/contactos/contacto.service';
 
 @Component({
   selector: 'app-contactos',
@@ -11,23 +11,32 @@ import { ContactoModel } from '../../../models/contacto.model';
 export class ContactosComponent implements OnInit {
 
   contacto = new ContactoModel();
-  arregloContactos: ContactoModel[] = [];
+  contactos: ContactoModel[] = [];
   contadorContactos = 0;
   tipo: string;
+  miUsuario: string;
 
-  constructor(private consultas: ConsultasService) {
-    
+  constructor(private _ContactoService: ContactoService) {
+
     this.tipo = "contacto";
-    this.arregloContactos = this.consultas.getContactos();
-    this.contadorContactos = this.arregloContactos.length;
+    this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
+    
+
+    this.contacto.propietario_registro = this.miUsuario.nombre;
+    
+    // this.Contactos = this.consultas.getContactos();
     // console.log(this.contadorContactos);
     // console.log(this.arregloContactos);
+
   }
 
   ngOnInit() {
 
-    
+  this.cargarContactos();
+  this.contadorContactos = this.contactos.length;
+  console.log('Contactos desde BD', this.contactos);
 
+  
   }
 
   onSubmit(form: NgForm) {
@@ -37,4 +46,13 @@ export class ContactosComponent implements OnInit {
 
     console.log(form);
   }
+
+
+
+  cargarContactos() {
+    this._ContactoService.cargarContactos().subscribe(lista => this.contactos = lista);
+    
+  }
+
+
 }

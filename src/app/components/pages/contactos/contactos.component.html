@@ -73,10 +73,21 @@
                                 </small>
                             </div>
 
+
+
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Propietario del registro</label>
+                                <label for="recipient-name" class="col-form-label">Propietario de registro</label>
+                                <input type="text" class="form-control" id="pipeline" name="empresa" [(ngModel)]="contacto.propietario_registro" required disabled />
+
+                                <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Empresa</label>
                                 <div class="col-22">
-                                    <select class="form-control" id="propietario" name="propietario" [(ngModel)]="contacto.propietario" required>
+                                    <select class="form-control" id="propietario" name="propietario" [(ngModel)]="contacto.fkempresa" required>
                                         <option>Usuario 1</option>
                                         <option>Usuario 2</option>
                                         <option>Usuario 3</option>
@@ -86,15 +97,6 @@
                                         Campo obligatorio
                                     </small>
                                 </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Empresa</label>
-                                <input type="text" class="form-control" id="pipeline" name="departamento" [(ngModel)]="contacto.empresa" required />
-
-                                <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger">
-                                    Campo obligatorio
-                                </small>
                             </div>
 
                             <div class="form-group">
@@ -164,17 +166,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let contactos of arregloContactos; let i = index">
+                            <tr *ngFor="let contacto of contactos; let i = index">
                                 <th scope="row">{{ i + 1 }}</th>
                                 <td>
-                                    <a [routerLink]="['/informacion', tipo, i]">{{contactos.correo }}</a>
+                                    <a [routerLink]="['/informacion', tipo, i]">{{contacto.correo }}</a>
                                 </td>
-                                <td>{{ contactos.nombre }}</td>
-                                <td>{{ contactos.apellido }}</td>
-                                <td>{{ contactos.propietario }}</td>
-                                <td>{{ contactos.departamento }}</td>
-                                <td>{{ contactos.telefono }}</td>
-                                <td>{{ contactos.empresa }}</td>
+                                <td>{{ contacto.nombre }}</td>
+                                <td>{{ contacto.apellido }}</td>
+                                <td>{{ contacto.propietario_registro }}</td>
+                                <td>{{ contacto.departamento}}</td>
+                                <td>{{ contacto.telefono }}</td>
+                                <td>{{ contacto.fkempresa }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -197,17 +199,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let contactos of arregloContactos; let i = index">
+                            <tr *ngFor="let contacto of contactos; let i = index">
                                 <th scope="row">{{ i + 1 }}</th>
                                 <td>
-                                    <a [routerLink]="['/informacion', i]">{{contactos.correo}}</a>
+                                    <a [routerLink]="['/informacion', i]">{{contacto.correo}}</a>
                                 </td>
-                                <td>{{ contactos.nombre }}</td>
-                                <td>{{ contactos.apellido }}</td>
-                                <td>{{ contactos.propietario }}</td>
-                                <td>{{ contactos.departamento }}</td>
-                                <td>{{ contactos.telefono }}</td>
-                                <td>{{ contactos.empresa }}</td>
+                                <td>{{ contacto.nombre }}</td>
+                                <td>{{ contacto.apellido }}</td>
+                                <td>{{ contacto.propietario_registro }}</td>
+                                <td>{{ contacto.departamento }}</td>
+                                <td>{{ contacto.telefono }}</td>
+                                <td>{{ contacto.fkempresa }}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -69,16 +69,19 @@ export class ContactoService {
 
 
   cargarContactos() {
-    let url = URL_SERVICIOS + '/contactos/'
+    let url = URL_SERVICIOS + '/contactos/';
 
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
+            console.log(resp.contactos);
             return resp.contactos;
           }
         )
       )
   }
+
+
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { EmpresaModel } from '../../../models/empresa.model';
-import { ConsultasService } from '../../../services/consultas.service';
+
 
 @Component({
   selector: 'app-empresa',
@@ -15,9 +15,9 @@ export class EmpresaComponent implements OnInit {
 
   arregloEmpresas: EmpresaModel[] = [];
 
-  constructor(private consultas: ConsultasService) {
+  constructor() {
     this.tipo = "empresa";
-    this.arregloEmpresas = this.consultas.getEmpresas();
+    
     this.contadorEmpresas = this.arregloEmpresas.length;
     
    }

@@ -26,10 +26,11 @@ export class UsuariosComponent implements OnInit {
     }
 
     this.usuario = {
-      email: forma.value.correo, 
-      password: forma.value.password, 
+      email: forma.value.correo,
+      password: forma.value.password,
       nombre: forma.value.nombre,
-      rol: forma.value.rol};
+      rol: forma.value.rol
+    };
 
 
     this._usuarioService.crearUsuario(this.usuario).subscribe();
@@ -39,15 +40,15 @@ export class UsuariosComponent implements OnInit {
   cargarUsuarios() {
     this._usuarioService.cargarUsuarios().subscribe(lista => this.usuarios = lista);
   }
-  
-  eliminarUsuario(usuario: UsuarioModel ){
-    let usuarioLogeado : UsuarioModel;
-    usuarioLogeado =  JSON.parse(localStorage.getItem('usuario'))
 
-    if(usuario.id_usuario ===  usuarioLogeado.id_usuario){
+  eliminarUsuario(usuario: UsuarioModel) {
+    let usuarioLogeado: UsuarioModel;
+    usuarioLogeado = JSON.parse(localStorage.getItem('usuario'))
+
+    if (usuario.id_usuario === usuarioLogeado.id_usuario) {
       Swal.fire('No se puede eliminar',
-      'No se puede eliminar asi mismo','error');
-        return;
+        'No se puede eliminar asi mismo', 'error');
+      return;
     }
 
     Swal.fire({
@@ -60,23 +61,23 @@ export class UsuariosComponent implements OnInit {
       confirmButtonText: 'Eliminar'
 
     })
-    .then((borrar) => {
-      if (borrar.isConfirmed) {
+      .then((borrar) => {
+        if (borrar.isConfirmed) {
 
-        this._usuarioService.eliminarUsuario(usuario.id_usuario).subscribe(() => {
-          Swal.fire(
-            'Eliminado',
-            'Usuario eliminado',
-            'success'
-          )
-          this.cargarUsuarios();
-        })
-        
-      }
-    })
+          this._usuarioService.eliminarUsuario(usuario.id_usuario).subscribe(() => {
+            Swal.fire(
+              'Eliminado',
+              'Usuario eliminado',
+              'success'
+            )
+            this.cargarUsuarios();
+          })
+
+        }
+      })
   }
 
-  actualizarUsuario(usuario: UsuarioModel){
+  actualizarUsuario(usuario: UsuarioModel) {
     this._usuarioService.actualizarUsuario(usuario).subscribe();
   }
 }

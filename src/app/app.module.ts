@@ -19,7 +19,6 @@ import { InformacionComponent } from './components/pages/informacion/informacion
 import { InformesComponent } from './components/pages/informes/informes.component';
 import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
 import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
-import { ConsultasService } from './services/consultas.service';
 import { from } from 'rxjs';
 
 @NgModule({
@@ -43,7 +42,6 @@ import { from } from 'rxjs';
     HttpClientModule
   ],
   providers: [
-    ConsultasService
   ],
   bootstrap: [AppComponent]
 })

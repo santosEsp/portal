@@ -6,7 +6,6 @@ import { RegistrarLlamadaModel } from '../../../models/registrarLlamada.model';
 import { RegistrarReunionModel } from '../../../models/registrarReunion.model';
 import { NegocioModel } from '../../../models/negocio.model';
 import { ActivatedRoute, Params } from '@angular/router';
-import { ConsultasService } from '../../../services/consultas.service';
 import { ContactoModel } from '../../../models/contacto.model';
 import { EmpresaModel } from '../../../models/empresa.model';
 
@@ -29,14 +28,14 @@ export class InformacionComponent implements OnInit {
 
   ruta: { tipo: string, id: string };
 
-  constructor(private rutaActiva: ActivatedRoute, private consultaService: ConsultasService) {
+  constructor(private rutaActiva: ActivatedRoute) {
 
 
     
 
     this.rutaActiva.params.subscribe(params => {
 
-      this.unContacto = this.consultaService.getContacto(params['id']);
+      // this.unContacto = this.consultaService.getContacto(params['id']);
 
       console.log("Se suscribió contacto");
       console.log(this.unContacto);
@@ -48,7 +47,7 @@ export class InformacionComponent implements OnInit {
 
     this.rutaActiva.params.subscribe(params => {
 
-      this.unaEmpresa = this.consultaService.getEmpresa(params['id']);
+      // this.unaEmpresa = this.consultaService.getEmpresa(params['id']);
 
       console.log('Se suscribió empresa');
       console.log(this.unaEmpresa);
