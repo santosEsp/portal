@@ -72,7 +72,7 @@
                                 <label for="recipient-name" class="col-form-label">Propietario
                                     del registro</label>
                                 <div class="col-22">
-                                    <select class="form-control" id="propietario" name="propietario" [(ngModel)]="empresa.propietario" required>
+                                    <select class="form-control" id="propietario" name="propietario" [(ngModel)]="empresa.propietario_registro" required>
 
                                         <option>Usuario 1</option>
                                         <option>Usuario 2</option>
@@ -115,7 +115,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Número de
                                     teléfono</label>
-                                <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="empresa.telefono" required minlength="8" />
+                                <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="empresa.no_telefono" required minlength="8" />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['telefono'].errors" class="text-danger">
@@ -128,7 +128,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Tipo</label>
                                 <div class="col-22">
-                                    <select class="form-control" id="tipo" name="tipo" [(ngModel)]="empresa.tipo" required>
+                                    <select class="form-control" id="tipo" name="tipo" [(ngModel)]="empresa.tipo_cliente" required>
 
                                         <option>Cliente potencial</option>
                                         <option>Socio</option>
@@ -163,7 +163,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Estado o
                                     región</label>
-                                <input type="text" class="form-control" id="etapa" name="estado" [(ngModel)]="empresa.estado" required />
+                                <input type="text" class="form-control" id="etapa" name="estado" [(ngModel)]="empresa.estado_region" required />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['estado'].errors" class="text-danger">
@@ -176,7 +176,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Código
                                     postal</label>
-                                <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="empresa.cp" required />
+                                <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="empresa.codigo_postal" required />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['codigo'].errors" class="text-danger">
@@ -189,7 +189,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Número de
                                     empleados</label>
-                                <input type="text" class="form-control" id="empleados" name="empleados" [(ngModel)]="empresa.noEmpleados" required />
+                                <input type="text" class="form-control" id="empleados" name="empleados" [(ngModel)]="empresa.no_empleados" required />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['empleados'].errors" class="text-danger">
@@ -203,7 +203,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Ingresos
                                     anuales</label>
-                                <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="empresa.ingresos" required />
+                                <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="empresa.ingresos_anuales" required />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['ingresos'].errors" class="text-danger">
@@ -216,7 +216,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Zona
                                     horaria</label>
-                                <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="empresa.zonaHoraria" required />
+                                <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="empresa.zona_horaria" required />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['zona'].errors" class="text-danger">
@@ -241,7 +241,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Página
                                     corporativa</label>
-                                <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="empresa.pagina" required />
+                                <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="empresa.pagina_corporativa" required />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['pagina'].errors" class="text-danger">
@@ -315,24 +315,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let empresas of
-                                            arregloEmpresas; let i= index">
+                            <tr *ngFor="let empresa of empresas; let i= index">
                                 <th scope="row">{{i+1}}</th>
 
                                 <td><a [routerLink]="['/informacion',tipo,
-                                                    i]">{{empresas.nombre}}</a></td>
-                                <td>{{empresas.propietario}}</td>
-                                <td>{{empresas.industria}}</td>
-                                <td>{{empresas.telefono}}</td>
-                                <td>{{empresas.tipo}}</td>
-                                <td>{{empresas.ciudad}}</td>
-                                <td>{{empresas.estado}}</td>
-                                <td>{{empresas.cp}}</td>
-                                <td>{{empresas.noEmpleados}}</td>
-                                <td>{{empresas.ingresos}}</td>
-                                <td>{{empresas.zonaHoraria}}</td>
-                                <td>{{empresas.descripcion}}</td>
-                                <td>{{empresas.pagina}}</td>
+                                                    i]">{{empresa.nombre}}</a></td>
+                                                    <td>{{empresa.propietario_registro}}</td>
+                                                    <td>{{empresa.industria}}</td>
+                                                    <td>{{empresa.no_telefono}}</td>
+                                                    <td>{{empresa.tipo_cliente}}</td>
+                                                    <td>{{empresa.ciudad}}</td>
+                                                    <td>{{empresa.estado_region}}</td>
+                                                    <td>{{empresa.codigo_postal}}</td>
+                                                    <td>{{empresa.no_empleados}}</td>
+                                                    <td>{{empresa.ingresos_anuales}}</td>
+                                                    <td>{{empresa.zona_horaria}}</td>
+                                                    <td>{{empresa.descripcion}}</td>
+                                                    <td>{{empresa.pagina_corporativa}}</td>
                             </tr>
 
                         </tbody>
@@ -370,18 +369,18 @@
                                 <th scope="row">{{i+1}}</th>
 
                                 <td><a [routerLink]="['/informacion']">{{empresas.nombre}}</a></td>
-                                <td>{{empresas.propietario}}</td>
+                                <td>{{empresas.propietario_registro}}</td>
                                 <td>{{empresas.industria}}</td>
-                                <td>{{empresas.telefono}}</td>
-                                <td>{{empresas.tipo}}</td>
+                                <td>{{empresas.no_telefono}}</td>
+                                <td>{{empresas.tipo_cliente}}</td>
                                 <td>{{empresas.ciudad}}</td>
-                                <td>{{empresas.estado}}</td>
-                                <td>{{empresas.cp}}</td>
-                                <td>{{empresas.noEmpleados}}</td>
-                                <td>{{empresas.ingresos}}</td>
-                                <td>{{empresas.zonaHoraria}}</td>
+                                <td>{{empresas.estado_region}}</td>
+                                <td>{{empresas.codigo_postal}}</td>
+                                <td>{{empresas.no_empleados}}</td>
+                                <td>{{empresas.ingresos_anuales}}</td>
+                                <td>{{empresas.zona_horaria}}</td>
                                 <td>{{empresas.descripcion}}</td>
-                                <td>{{empresas.pagina}}</td>
+                                <td>{{empresas.pagina_corporativa}}</td>
                             </tr>
 
                         </tbody>
