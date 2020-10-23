@@ -20,6 +20,13 @@ import { InformesComponent } from './components/pages/informes/informes.componen
 import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
 import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
 import { from } from 'rxjs';
+import { NegocioComponent } from './components/pages/negocios/negocios.component';
+
+//servicios
+import { InformesService } from './services/informes/informes.service';
+import { ConsultasService } from './services/consultas.service';
+
+
 
 @NgModule({
   declarations: [
@@ -32,7 +39,8 @@ import { from } from 'rxjs';
     InformacionComponent,
     InformesComponent,
     UsuariosComponent,
-    ConfiguracionComponent
+    ConfiguracionComponent,
+    NegocioComponent
   ],
   imports: [
     BrowserModule,

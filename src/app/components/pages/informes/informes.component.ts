@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-
+import { InformesService, Informe } from '../../../services/informes/informes.service';
 
 @Component({
   selector: 'app-informes',
@@ -10,6 +10,18 @@ import { Component, OnInit } from '@angular/core';
 
 export class InformesComponent{
 
+ 
+  informes: Informe [] = [];
+  constructor(private _informesService:InformesService){
+
+  }
+  
+  ngOnInit(){
+    this.informes = this._informesService.getInformes();
+
+    console.log(this.informes);
+  }
+
   public barChartOptions: any = {
     scaleShowVerticalLines: true,
     responsive: true
@@ -18,6 +30,7 @@ export class InformesComponent{
   public barChartLabels: string[] = ['Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado', 'Domingo'];
   public barChartType = 'bar';
   public barChartLegend = false;
+
 
   public barChartData: any[] = [
     {data: [28, 48, 40, 19, 86, 27, 90],
@@ -52,6 +65,4 @@ export class InformesComponent{
       ]
     }
   ];
-
-
 }
