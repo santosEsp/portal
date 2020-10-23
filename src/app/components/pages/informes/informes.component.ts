@@ -1,6 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
-
+import { InformesService, Informe } from '../../../services/informes/informes.service';
 
 @Component({
   selector: 'app-informes',
@@ -9,6 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class InformesComponent{
+
+ 
+  informes: Informe [] = [];
+  constructor(private _informesService:InformesService){
+
+  }
+  
+  ngOnInit(){
+    this.informes = this._informesService.getInformes();
+
+    console.log(this.informes);
+  }
 
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
@@ -19,9 +31,7 @@ export class InformesComponent{
   public barChartType = 'bar';
   public barChartLegend = false;
 
-  public barChartData: any[] = [
-    {data: [28, 48, 40, 19, 86, 27, 90]}
-  ];
+  public barChartData: any[] = [{data: [100, 100, 100, 100, 100, 100, 100]}];
 
 
 

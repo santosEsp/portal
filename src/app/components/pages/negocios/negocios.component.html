@@ -1,0 +1,279 @@
+<app-navbar></app-navbar>
+<div>
+    <div class="float-right">
+        <select class="btn estilosBotones  mt-4 mr-4" data-toggle="modal" data-target="#modalCrearContacto" data-whatever="@mdo">
+            <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd"
+                d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+            </svg>
+            <option>Todos los Negocios</option>
+            <option>Mis Negocios</option>
+        </select>
+        <button type="button" class="btn estilosBotones estilosBotonesHover mt-4 mr-4" data-toggle="modal" data-target="#etapa" data-whatever="@mdo">
+      <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+      </svg>
+      Agregar Negocio
+    </button>
+
+
+        <button type="button" class="btn  mt-4 mr-4 estilosBotones estilosBotonesHover" data-whatever="@mdo">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-download" fill="currentColor"
+        xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd"
+          d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z" />
+        <path fill-rule="evenodd"
+          d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z" />
+      </svg>
+      Exportar Negocios
+    </button>
+    </div>
+
+    <div>
+        <div class="container-fluid mt-3">
+            <span class="encabezado">Negocios</span>
+            <br>
+            <small>20 Negocios</small>
+        </div>
+        <br>
+        <hr>
+        <div id="div1">
+            <table class="table mt-3">
+                <thead class="thead-dark">
+                    <tr class="text-center">
+                        <th scope="col">
+                            Nueva oportunidad creada
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </th>
+                        <th scope="col">Primera reunión
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </th>
+                        <th scope="col">
+                            <div class="btn-group">
+                                Preparando propuesta
+
+                            </div>
+
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </th>
+                        <th scope="col">Propuesta enviada
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </th>
+                        <th>Negociando condiciones
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </th>
+                        <th>Oportunidad cerrada/perdida
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tr>
+                    <th>
+                        <div id="div2">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">MINERIA DE PROCESOS - ELOY SEGURA</h5>
+                                    <p class="card-text">Cantidad: $750,000.00</p>
+                                    <p class="card-text">Fecha de cierre: 30 de Octubre de 2020</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </th>
+                    <th>
+                        <div id="div2">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">MIGRACIÓN DE WB 9.7 A 10.2</h5>
+                                    <p class="card-text">Fecha de cierre: 30 de Septiembre de 2020</p>
+                                </div>
+                            </div>
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">ASIGNACIÓN DE CONSULTOR SQP PI</h5>
+                                    <p class="card-text">Fecha de cierre: 30 de Septiembre de 2020</p>
+                                </div>
+                            </div>
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">CONSULTOR SQL SERVER</h5>
+                                    <p class="card-text">Fecha de cierre: 30 de Septiembre de 2020</p>
+                                </div>
+                            </div>
+
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">CRM OXXO</h5>
+                                    <p class="card-text">Fecha de cierre: 30 de Septiembre de 2020</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </th>
+                    <th>
+                        <div id="div2">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">IMPLEMENTACIÓN ARIS</h5>
+                                    <p class="card-text">Fecha de cierre: 30 de Junio de 2021</p>
+                                </div>
+                            </div>
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">CONSULTARÍA WEBMETHODS</h5>
+                                    <p class="card-text">Fecha de cierre: 1 de Junio de 2021</p>
+                                </div>
+                            </div>
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">JAVA CREACIÓN DE REPORTES</h5>
+                                    <p class="card-text">Fecha de cierre: 31 de Mayo de 2021</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </th>
+                    <th>
+                        <div id="div2">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </th>
+                    <th>
+                        <div id="div2">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </th>
+                    <th>
+                        <div id="div2">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-body">
+                                    <h5 class="card-title">Special title treatment</h5>
+                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </th>
+                </tr>
+                <tr class="text-center">
+                    <th scope="row">Total: $750,000.00</th>
+                    <td>Total: $ 0.0</td>
+                    <td>Total: $ 0.0</td>
+                    <td>Total: $ 0.0</td>
+                    <td>Total: $ 0.0</td>
+                    <td>Total: $ 0.0</td>
+                </tr>
+            </table>
+
+        </div>
+
+
+
+        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="etapa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-primary">
+                        <h5 class="modal-title text-white" id="exampleModalLabel">Agregar nuevo negocio
+                        </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                            <div id="div2">
+
+
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Nombre del negocio</label>
+                                    <input minlength="2" type="text" required class="form-control" id="nombre_nego" name="nombre_nego" [(ngModel)]="negocio.nombre">
+                                    <span *ngIf="f.submitted && f.controls['nombre_nego'].errors" class="text-danger animated fadeIn"><small>Campo Obligatorio</small></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Etapa del negocio</label>
+                                    <input minlength="2" type="text" required class="form-control" id="etapa_nego" name="etapa_nego" [(ngModel)]="negocio.etapa">
+                                    <span *ngIf="f.submitted && f.controls['etapa_nego'].errors" class="text-danger animated fadeIn"><small>Campo Obligatorio</small></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Pipeline</label>
+                                    <input type="text" minlength="2" required class="form-control" id="pipeline_nego" name="pipeline_nego" [(ngModel)]="negocio.pipeline">
+                                    <span *ngIf="f.submitted && f.controls['pipeline_nego'].errors" class="text-danger animated fadeIn"><small>Campo Obligatorio</small></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Cantidad</label>
+                                    <input minlength="1" type="text" required class="form-control" id="cantidad_nego" name="cantidad_nego" [(ngModel)]="negocio.cantidad">
+                                    <span *ngIf="f.submitted && f.controls['cantidad_nego'].errors" class="text-danger animated fadeIn"><small>Campo Obligatorio</small></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputState">Empresa</label>
+                                    <select required id="empresa_nego" minlength="1" class="form-control" name="empresa_nego" [(ngModel)]="negocio.fkempresa">
+                                          <option value="-1">Selecciona</option>
+                                          <option selected>oxxo</option>
+                                    </select>
+                                    <span *ngIf="f.submitted && f.controls['empresa_nego'].errors" class="text-danger animated fadeIn"><small>Campo Obligatorio</small></span>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="inputState">Contacto</label>
+                                    <select required id="contacto_nego" minlength="1" class="form-control" name="contacto_nego" [(ngModel)]="negocio.fkrelaciones">
+                                          <option value="-1">Selecciona</option>
+                                          <option selected>Dariam</option>
+                                          <option selected>Germán</option>
+                                          <option selected>Gustavo</option>
+                                    </select>
+                                    <span *ngIf="f.submitted && f.controls['empresa_nego'].errors" class="text-danger animated fadeIn"><small>Campo Obligatorio</small></span>
+                                </div>
+
+                                <div>
+                                    <label for="recipient-name" class="col-form-label">Fecha de cierre</label>
+                                    <input _ngcontent-cmf-c49="" type="date" id="example-date-input" name="fechacierre" required class="form-control" ng-reflect-required="" [(ngModel)]="negocio.fecha_cierre" ng-reflect-name="fechaLlamada">
+                                    <span *ngIf="f.submitted && f.controls['fechacierre'].errors" class="text-danger animated fadeIn"><small>Campo Obligatorio</small></span>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-outline-primary">Agregar Negocio</button>
+                                <button class="btn btn-outline-primary">Agregar y crear otro</button>
+                                <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>

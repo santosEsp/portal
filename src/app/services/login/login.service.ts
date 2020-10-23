@@ -51,7 +51,8 @@ export class LoginService {
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
     this.usuario = usuario;
-    this.token = token;    
+    this.token = token;
+
   }
 
   // private guardarToken(idToken: string) {

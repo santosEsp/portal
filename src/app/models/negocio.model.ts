@@ -3,4 +3,7 @@ export class NegocioModel{
     pipeline: string;
     etapa: string;
     cantidad: number;
+    fkempresa: number;
+    fecha_cierre:Date;
+    fkrelaciones:number;
 }
