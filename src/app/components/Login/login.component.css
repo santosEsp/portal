@@ -1,11 +1,9 @@
+.paddings {
+    padding-left: 30%;
+    padding-right: 30%;
+    padding-top: 7%;
+}
 
-
- .paddings{
-
-   padding-left: 30%;
-   padding-right: 30%;
-   padding-top: 7%;
-   
- }
-
- 
+.image-fondo {
+    background-image: url("src\assets\image\Fondo.png");
+}
