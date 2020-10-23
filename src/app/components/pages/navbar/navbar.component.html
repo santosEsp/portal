@@ -1,7 +1,8 @@
 <header>
+
     <nav class="navbar navbar-expand-lg navbar-dark colorCorporativo">
 
-        <img class="img-fluid rounded mx-auto d-block" src="../../assets/image/pnglogoblanco.png" alt="clicksoft" width="11%" height="11%" />
+        <img class="img-fluid rounded d-block" src="../../assets/image/pnglogoblanco.png" alt="clicksoft" width="11%" height="11%" />
 
 
 
@@ -9,40 +10,47 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon "></span>
         </button>
+        <div class="container menu">
+            <div class="paddings">
 
-        <div class="collapse navbar-collapse ml-4" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
+                <div class="collapse navbar-collapse ml-4 " id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
 
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle active negritas" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle active negritas" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Contactos
                     </a>
-                    <div class="dropdown-menu navbarContacto" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" [routerLink]="['/contactos']">Contactos</a>
-                        <a class="dropdown-item" [routerLink]="['/empresas']">Empresas</a>
-                        <div class="dropdown-divider"></div>
-                    </div>
+                            <div class="dropdown-menu navbarContacto" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" [routerLink]="['/contactos']">Contactos</a>
+                                <a class="dropdown-item" [routerLink]="['/empresas']">Empresas</a>
+                                <div class="dropdown-divider"></div>
+                            </div>
 
 
 
-                </li>
+                        </li>
 
-                <li>
-                    <a class="nav-link color active negritas" [routerLink]="['/informes']">Informes <span class="sr-only">(current)</span></a>
-                </li>
+                        <li>
+                            <a class="nav-link color active negritas" [routerLink]="['/informes']">Informes <span class="sr-only">(current)</span></a>
+                        </li>
 
-                <li>
-                    <a class="nav-link color active negritas" [routerLink]="['/pipeline']">Pipeline <span class="sr-only">(current)</span></a>
-                </li>
-
-
-
-            </ul>
-            <form class="form-inline my-2 my-lg-0 ">
-                <div class="dropdown ">
+                        <li>
+                            <a class="nav-link color active negritas" [routerLink]="['/pipeline']">Pipeline <span class="sr-only">(current)</span></a>
+                        </li>
 
 
-                    <button class="btn btn-outline-light dropdown-toggle " type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+
+                    </ul>
+
+                    <div class="col-md-12"></div>
+                    <div class="col-md-12"></div>
+                    <div class="col-md-1"></div>
+
+                    <form class="form-inline my-2 my-lg-0 ">
+                        <div class="dropdown ">
+
+
+                            <button class="btn btn-outline-light dropdown-toggle " type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person-circle"
                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -105,22 +113,25 @@
                                                 <Button class="btn btn-outline-danger btn-block" (click)="salir()">
                                                     Cerrar Sesion
                                                 </Button>
-                    </p>
+
+                            </p>
+                        </div>
                 </div>
-        </div>
-        </div>
-        </li>
+            </div>
+            </li>
 
-        </ul>
+            </ul>
 
 
-        </button>
+            </button>
 
 
 
 
         </div>
         </form>
+        </div>
+        </div>
         </div>
     </nav>
 </header>

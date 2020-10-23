@@ -1,5 +1,5 @@
-
-<app-navbar></app-navbar>
+<app-navbar>
+</app-navbar>
 <br>
 
 
@@ -19,81 +19,82 @@
 
 <br><br><br>
 
+<div class="container paddings2">
+    <div class="row">
+        <div class="col-sm">
+            <h4> Total de contactos creados por dia </h4>
+            <br><br>
 
-<div class="container center-h">
-
-
-    <div>
-
-
-        <h4> Total de contactos creados por dia </h4>
-        <br><br>
-
-        <div class="margen">
             <div class="container center-h">
-
-
                 <div>
-                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)" height="283" width="500"></canvas>
-                </div>
 
-                <div class="menu" id="menu">
+
+                    <div>
+                        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" width="390%" height="285%"></canvas>
+                    </div>
+
+
+
+                </div>
+                <div class="menu">
                     <div class="linea-1"></div>
                     <div class="linea-2"></div>
                     <div class="linea-3"></div>
                 </div>
-
             </div>
         </div>
-    </div>
 
-    <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
 
-    <div>
-        <h4> Cantidad de contactos</h4>
-        <br><br>
 
-        <div class="margen">
+        <div class="col-sm"></div>
+        <div class="col-sm"></div>
+
+
+
+
+        <div class="col-sm-30">
+            <h4> Cantidad de contactos</h4>
+            <br><br>
+
             <div class="container center-h">
+                <div class="table-responsive">
 
-                <table height="283" width="500">
-                    <tr>
-                        <td>
-                            <h6>Total creado en el intervalo</h6> &nbsp; <br>
-                            <h5>13</h5>
-                        </td>
-                        <td>
-                            <h6> Promedio </h6><br>
-                            <h5>7</h5>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
+                    <table class="table-light">
+                        <tr>
+                            <td>
+                                <h6>Total creado en el intervalo</h6> &nbsp; <br>
+                                <h3>13</h3>
+                            </td>
+                            <td>
+                                <h6> Promedio </h6><br>
+                                <h3>7</h3>
+                            </td>
+                        </tr>
+                        <tr>
                             &nbsp;
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <h6>Mejor semana de intervalo al crear contactos</h6> <br>
-                            <h5>22</h5>
-                        </td>
-                        <td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <br><br><br>
+                                <h6>Mejor semana de intervalo al crear contactos</h6> <br>
+                                <h3>22</h3>
+                            </td>
+                            <td>
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
 
-                </table>
+                    </table>
 
-                <div class="menu" id="menu">
+
+
+                </div>
+                <div class="menu">
                     <div class="linea-1"></div>
                     <div class="linea-2"></div>
                     <div class="linea-3"></div>
                 </div>
-
             </div>
         </div>
-
     </div>
-
 </div>
-

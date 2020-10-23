@@ -1,95 +1,103 @@
-<div class="container">
+<body>
+    <div class="image-fondo">
+        <br><br><br>
+        <div class="container">
 
-    <div class="paddings">
-        <img class="img-fluid rounded mx-auto d-block" src="../../assets/image/clicksoft.jpg" alt="clicksoft" width="70%" height="70%" />
-        <br />
-        <br />
-        <br />
-        <form (ngSubmit)="login(f)" #f="ngForm">
+            <div class="paddings">
+                <img class="img-fluid rounded mx-auto d-block" src="../../assets/image/clicksoft.jpg" alt="clicksoft" width="70%" height="70%" />
+                <br />
+                <br />
+                <br />
+                <form (ngSubmit)="login(f)" #f="ngForm">
 
 
-            <div class="form-group">
-                <label for="email">Dirección de correo</label>
-                <input type="email" class="form-control" id="email" name="email" [(ngModel)]="loginUser.email" required email />
+                    <div class="form-group">
+                        <label for="email">Dirección de correo</label>
+                        <input type="email" class="form-control" id="email" name="email" [(ngModel)]="loginUser.email" required email />
 
-                <small *ngIf="f.submitted && f.controls['email'].errors" class="text-danger ">
+                        <small *ngIf="f.submitted && f.controls['email'].errors" class="text-danger ">
           El correo es obligatorio
         </small>
-            </div>
+                    </div>
 
 
-            <div class="form-group">
-                <label for="exampleInputPassword1">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" [(ngModel)]="loginUser.password" required minlength="5" />
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Contraseña</label>
+                        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="loginUser.password" required minlength="5" />
 
-                <small *ngIf="f.submitted && f.controls['password'].errors" class="text-danger ">
+                        <small *ngIf="f.submitted && f.controls['password'].errors" class="text-danger ">
           La contraseña es obligatoria
         </small>
-            </div>
+                    </div>
 
 
-            <div class="form-group form-check">
-                <input [(ngModel)]="recordarme" type="checkbox" class="form-check-input" id="recordar" name="recordar" />
-                <label class="form-check-label" for="recordar">Recordarme</label>
-
-
-
-                <a href="#" class="float-right" data-target="#recuperarContraseña" data-toggle="modal">Olvidé la contraseña</a>
+                    <div class="form-group form-check">
+                        <input [(ngModel)]="recordarme" type="checkbox" class="form-check-input" id="recordar" name="recordar" />
+                        <label class="form-check-label" for="recordar">Recordarme</label>
 
 
 
-            </div>
-            <button type="submit" class="btn estiloBotonLogin estilosBotonesHover btn-block">
+                        <a href="#" class="float-right" data-target="#recuperarContraseña" data-toggle="modal">Olvidé la contraseña</a>
+
+
+
+
+                    </div>
+                    <button type="submit" class="btn estilosBotones estilosBotonesHover btn-block">
+            
+
         Iniciar sesión
       </button>
-        </form>
-        <hr />
-    </div>
+                </form>
+                <hr />
+            </div>
 
-    <!--Formulario modal Recuperar contraseña-->
+            <!--Formulario modal Recuperar contraseña-->
 
-    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="recuperarContraseña" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bgCorp">
-                    <a></a>
-                    <h5 class="modal-title text-white" id="exampleModalLabel">
-                        Recuperar contraseña
-                    </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <div class="modal fade" data-backdrop="static" data-keyboard="false" id="recuperarContraseña" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bgCorp">
+                            <a></a>
+                            <h5 class="modal-title text-white" id="exampleModalLabel">
+                                Recuperar contraseña
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
-                </div>
-                <div class="modal-body">
-                    <form (ngSubmit)="recupera(fr)" #fr="ngForm">
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Ingrese su correo electrónico</label>
-                            <input type="text" class="form-control" id="recuperaPasword" name="recuperaPassword" [(ngModel)]="recuperarPassword.email" email required />
+                        </div>
+                        <div class="modal-body">
+                            <form (ngSubmit)="recupera(fr)" #fr="ngForm">
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Ingrese su correo electrónico</label>
+                                    <input type="text" class="form-control" id="recuperaPasword" name="recuperaPassword" [(ngModel)]="recuperarPassword.email" email required />
 
-                            <small *ngIf="fr.submitted && fr.controls['recuperaPassword'].errors" class="text-danger ">
+                                    <small *ngIf="fr.submitted && fr.controls['recuperaPassword'].errors" class="text-danger ">
                                 Ingresa un correo 
                               </small>
 
-                        </div>
+                                </div>
 
-                        <div class="modal-footer">
+                                <div class="modal-footer">
 
-                            <button type="submit" class="btn estilosBotonesHover estilosBotones">
+                                    <button type="submit" class="btn estilosBotonesHover estilosBotones">
                     Enviar
                   </button>
 
-                            <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
+                                    <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
                     Cancelar
                   </button>
 
 
+                                </div>
+                            </form>
                         </div>
-                    </form>
-                </div>
 
+                    </div>
+                </div>
             </div>
+
+
         </div>
     </div>
-
-
-</div>
+</body>
