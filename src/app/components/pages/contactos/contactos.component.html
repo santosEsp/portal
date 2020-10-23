@@ -3,11 +3,9 @@
 <div>
     <div class="float-right">
         <button type="button" class="btn estilosBotones estilosBotonesHover mt-4 mr-4" data-toggle="modal" data-target="#modalCrearContacto" data-whatever="@mdo">
-            <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
-                xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1
-                    0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-            </svg>
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+              </svg>
             Agregar contacto
         </button>
 
@@ -40,17 +38,17 @@
                         <h5 class="modal-title text-white" id="exampleModalLabel">
                             Agregar contacto
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+                        <form (ngSubmit)="agregarContacto(f)" #f="ngForm">
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Correo</label>
-                                <input type="text" class="form-control" id="correo" name="correo" [(ngModel)]="contacto.correo" required email />
+                                <input type="text" class="form-control" id="email" name="email" [(ngModel)]="contacto.email" required email />
 
-                                <small *ngIf="f.submitted && f.controls['correo'].errors" class="text-danger">
+                                <small *ngIf="f.submitted && f.controls['email'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
                             </div>
@@ -77,9 +75,9 @@
 
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Propietario de registro</label>
-                                <input type="text" class="form-control" id="pipeline" name="empresa" [(ngModel)]="contacto.propietario_registro" required disabled />
+                                <input type="text" class="form-control" id="pipeline" name="propietario" [(ngModel)]="propietario.propietario_registro" required disabled />
 
-                                <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger">
+                                <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
                             </div>
@@ -87,13 +85,12 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Empresa</label>
                                 <div class="col-22">
-                                    <select class="form-control" id="propietario" name="propietario" [(ngModel)]="contacto.fkempresa" required>
-                                        <option>Usuario 1</option>
-                                        <option>Usuario 2</option>
-                                        <option>Usuario 3</option>
+                                    <select class="form-control" id="fkempresa" name="fkempresa" [(ngModel)]="contacto.fkempresa">
+                                        <option  *ngFor="let lista of listaEmpresas" [ngValue]="lista.id_empresa">{{lista.nombre}}</option>
+                                        
                                     </select>
 
-                                    <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger">
+                                    <small *ngIf="f.submitted && f.controls['fkempresa'].errors" class="text-danger">
                                         Campo obligatorio
                                     </small>
                                 </div>
@@ -118,15 +115,10 @@
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" class="btn estilosBotonesHover estilosBotones">
-                                    Crear
-                                </button>
-                                <button type="submit" class="btn estilosBotonesHover estilosBotones">
-                                    Crear y agregar otra
-                                </button>
-                                <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
-                                    Cancelar
-                                </button>
+                                <button type="submit" class="btn estilosBotonesHover estilosBotones">Crear</button>
+
+                                <button type="submit" class="btn estilosBotonesHover estilosBotones">Crear y agregar otro</button>
+                                <button (click)="vaciarFormulario()" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">Cancelar</button>
                             </div>
                         </form>
                     </div>
@@ -155,7 +147,7 @@
                     <table class="table mt-3">
                         <thead class="grisSecundario">
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">Núm.</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellido</th>
@@ -163,32 +155,63 @@
                                 <th scope="col">Departamento</th>
                                 <th scope="col">Teléfono</th>
                                 <th scope="col">Empresa</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let contacto of contactos; let i = index">
+                            <tr *ngFor="let contacto of contactos; let i = index;">
                                 <th scope="row">{{ i + 1 }}</th>
                                 <td>
-                                    <a [routerLink]="['/informacion', tipo, i]">{{contacto.correo }}</a>
+                                    <a [routerLink]="['/informacion',tipo, contacto.id_contacto]">{{contacto.email }}</a>
                                 </td>
-                                <td>{{ contacto.nombre }}</td>
-                                <td>{{ contacto.apellido }}</td>
-                                <td>{{ contacto.propietario_registro }}</td>
-                                <td>{{ contacto.departamento}}</td>
-                                <td>{{ contacto.telefono }}</td>
-                                <td>{{ contacto.fkempresa }}</td>
+                                <td><input [(ngModel)]="contacto.nombre" type="text" name="nombre" class="form-control" placeholder="Nombre" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="contacto.apellido" type="text" name="apellido" class="form-control" placeholder="Apellido" style="width: fit-content;"></td>
+                                <td>{{contacto.propietario_registro }}</td>
+                                <td><input [(ngModel)]="contacto.departamento" type="text" name="departamento" class="form-control" placeholder="Departamento" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="contacto.telefono" type="text" name="telefono" class="form-control" placeholder="Teléfono" style="width: fit-content;"></td>
+                                <td>{{contacto.fkempresa }}</td>
+                                <td>
+                                    <button (click)="actualizarContacto(contacto)" class="btn btn-primary m-r-10">
+                                        <i class='fa fa-save'></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button (click)="eliminarContacto(contacto)" class="btn btn-danger">
+                                        <i class='fas fa-trash-alt'></i>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
+                <div class="row" *ngIf="contactos.length == 0">
+                    <div class="col-md-12">
+                        <div class="alert alert-info" role="alert">
+                            <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                                <circle cx="8" cy="4.5" r="1"/>
+                              </svg> &nbsp;&nbsp; Aún no tienes contactos registrados, empieza a crearlos y aparecerán aquí
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
             <!--Contenido tab 2-->
             <div class="tab-pane fade" id="misContactos" role="tabpanel" aria-labelledby="profile-tab">
+
+
+
+
+
                 <div class="table-responsive">
                     <table id="tablaContactos" class="table mt-3 display">
                         <thead class="grisSecundario">
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">Núm.</th>
                                 <th scope="col">Correo</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Apellido</th>
@@ -196,25 +219,54 @@
                                 <th scope="col">Departamento</th>
                                 <th scope="col">Teléfono</th>
                                 <th scope="col">Empresa</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
                             </tr>
                         </thead>
+
                         <tbody>
-                            <tr *ngFor="let contacto of contactos; let i = index">
+                            <tr *ngFor="let misContactos of listaMisContactos; let i = index">
                                 <th scope="row">{{ i + 1 }}</th>
                                 <td>
-                                    <a [routerLink]="['/informacion', i]">{{contacto.correo}}</a>
+                                    <a [routerLink]="['/informacion',tipo, misContactos.id_contacto]">{{misContactos.email}}</a>
                                 </td>
-                                <td>{{ contacto.nombre }}</td>
-                                <td>{{ contacto.apellido }}</td>
-                                <td>{{ contacto.propietario_registro }}</td>
-                                <td>{{ contacto.departamento }}</td>
-                                <td>{{ contacto.telefono }}</td>
-                                <td>{{ contacto.fkempresa }}</td>
+                                <td><input [(ngModel)]="misContactos.nombre" type="text" name="nombre" class="form-control" placeholder="Nombre" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="misContactos.apellido" type="text" name="nombre" class="form-control" placeholder="Nombre" style="width: fit-content;"></td>
+                                <td>{{ misContactos.propietario_registro }}</td>
+                                <td><input [(ngModel)]="misContactos.departamento" type="text" name="nombre" class="form-control" placeholder="Nombre" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="misContactos.telefono" type="text" name="nombre" class="form-control" placeholder="Nombre" style="width: fit-content;"></td>
+                                <td>{{ misContactos.fkempresa }}</td>
+                                <td>
+                                    <button (click)="actualizarContacto(misContactos)" class="btn btn-primary m-r-10">
+                                        <i class='fa fa-save'></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button (click)="eliminarContacto(misContactos)" class="btn btn-danger">
+                                        <i class='fas fa-trash-alt'></i>
+                                    </button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
+
+                <div class="row" *ngIf="listaMisContactos.length == 0">
+                    <div class="col-md-12">
+                        <div class="alert alert-info" role="alert">
+                            <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                                <circle cx="8" cy="4.5" r="1"/>
+                              </svg> &nbsp;&nbsp; Aún no tienes contactos registrados, empieza a crearlos y aparecerán aquí
+                        </div>
+                    </div>
+                </div>
             </div>
+
+
+
+
         </div>
     </div>
 </div>

@@ -9,11 +9,15 @@ import Swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class ContactoService {
-  constructor(private http: HttpClient) { }
+  token: any;
+  constructor(private http: HttpClient) {
+    this.token = localStorage.getItem('token');
+  }
 
 
-  crearContacto(contacto: ContactoModel) {
+  crearContacto(contacto: ContactoModel): any {
     let url = URL_SERVICIOS + '/contactos/';
+    url += '?token=' + this.token;
 
     return this.http.post(url, contacto).pipe(
       map(
@@ -26,9 +30,10 @@ export class ContactoService {
   }
 
 
-  eliminarContacto(id: string) {
+  eliminarContacto(id: string): any {
 
     let url = URL_SERVICIOS + '/contactos/' + id;
+    url += '?token=' + this.token;
 
     return this.http.delete(url)
       .pipe(
@@ -43,13 +48,14 @@ export class ContactoService {
             return true;
           }
         )
-      )
+      );
   }
 
 
-  actualizarContacto(contacto: ContactoModel) {
+  actualizarContacto(contacto: ContactoModel): any {
 
-    let url = URL_SERVICIOS + '/contactos' + contacto.id;
+    let url = URL_SERVICIOS + '/contactos/' + contacto.id_contacto;
+    url += '?token=' + this.token;
 
     return this.http.put(url, contacto)
       .pipe(
@@ -64,24 +70,80 @@ export class ContactoService {
             return resp.contacto;
           }
         )
-      )
+      );
   }
 
 
-  cargarContactos() {
+  actualizarMiContacto(contacto: ContactoModel): any {
+
+    let url = URL_SERVICIOS + '/contactos/' + contacto.id_contacto;
+    url += '?token=' + this.token;
+
+    return this.http.put(url, contacto)
+      .pipe(
+        map(
+          (resp: any) => {
+            Swal.fire({
+              title: 'Contacto actualizado',
+              text: 'Actualizado correctaente',
+              icon: 'success',
+            });
+
+            return resp.contacto;
+          }
+        )
+      );
+  }
+
+  cargarContactos(): any {
     let url = URL_SERVICIOS + '/contactos/';
+    url += '?token=' + this.token;
 
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log(resp.contactos);
+            console.log('todos contactos: ', resp.contactos);
             return resp.contactos;
           }
         )
-      )
+      );
   }
 
+  cargarMisContactos(miId: string): any {
+
+    console.log('service miId', miId);
+    let url = URL_SERVICIOS + '/contactos/miscontactos/' + miId;
+    url += '?token=' + this.token;
+    console.log('url consulta', url);
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log('misContactos service: ', resp.misContactos);
+            return resp.misContactos;
+          }
+        )
+      );
+  }
+
+
+  cargarUnContacto(idContacto: string): any {
+
+    console.log('service idContacto', idContacto);
+    let url = URL_SERVICIOS + '/contactos/' + idContacto;
+    url += '?token=' + this.token;
+    console.log('url consulta', url);
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log('cargarUnContacto service: ', resp.unContacto);
+            return resp.unContacto;
+          }
+        )
+      );
+  }
 
 
 }

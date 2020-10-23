@@ -9,7 +9,7 @@ import {FormsModule} from '@angular/forms';
 // Graficos
 import { ChartsModule } from 'ng2-charts';
 
-//componentes
+// componentes
 import { LoginComponent } from './components/Login/login.component';
 import { EmpresaComponent } from './components/pages/empresa/empresa.component';
 import { ContactosComponent } from './components/pages/contactos/contactos.component';

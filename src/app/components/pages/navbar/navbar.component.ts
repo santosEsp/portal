@@ -9,18 +9,18 @@ import { UsuarioModel } from 'src/app/models/usuarios.model';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-   
-   usuario : UsuarioModel;
 
-  constructor(private _loginService: LoginService, private router: Router) { 
-    this.usuario = JSON.parse(localStorage.getItem('usuario'));        
+  usuario: UsuarioModel;
+
+  constructor(private _loginService: LoginService, private router: Router) {
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));
   }
 
   ngOnInit(): void {
 
   }
 
-  salir() {
+  salir(): any {
     this._loginService.logout();
     this.router.navigateByUrl('/login');
   }
