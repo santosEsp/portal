@@ -10,6 +10,11 @@
     padding-top: 0px;
 }
 
+.navbar-login-bordes {
+    border-color: rgb(039, 089, 149);
+    box-shadow: 0 1px 1px rgba(75, 115, 201, 0.075)inset, 0 0 8px rgba(75, 115, 201);
+}
+
 .icon-size {
     font-size: 65px;
     color: #275995;
@@ -36,4 +41,26 @@ a:hover {
 
 .colorSection {
     background-color: aqua;
+}
+
+.container {
+    display: flex;
+    align-items: start;
+}
+
+.center-h {
+    justify-content: space-evenly;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    cursor: pointer;
+    transition: 0.4s ease-out;
+}
+
+.paddings {
+    padding-left: 65%;
+    padding-right: 66%;
 }

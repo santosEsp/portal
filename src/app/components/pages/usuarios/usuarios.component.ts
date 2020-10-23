@@ -12,42 +12,75 @@ import { UsuarioModel } from '../../../models/usuarios.model';
 export class UsuariosComponent implements OnInit {
   usuario: UsuarioModel;
   usuarios: UsuarioModel[] = [];
+  contadorUsuarios = 0;
 
   constructor(private _usuarioService: UsuarioService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.usuario = new UsuarioModel();
     this.cargarUsuarios();
   }
 
-  agregarUsuario(forma: NgForm) {
+  agregarUsuario(forma: NgForm): any {
     if (forma.invalid) {
       return 'Formulario no válido';
     }
 
     this.usuario = {
-      email: forma.value.correo, 
-      password: forma.value.password, 
+      email: forma.value.correo,
+      password: forma.value.password,
       nombre: forma.value.nombre,
-      rol: forma.value.rol};
+      rol: forma.value.rol
+    };
 
 
-    this._usuarioService.crearUsuario(this.usuario).subscribe();
+    this._usuarioService.crearUsuario(this.usuario).subscribe(
+      (resp: any) => {
+        Swal.fire(this.usuario.nombre, 'Usuario creado correctamente', 'success');
+
+      },
+      (error): any => {
+
+        console.log(error);
+
+        if (error.error.errors.name === 'SequelizeUniqueConstraintError') {
+          Swal.fire({
+            title: 'El correo debe ser único para cada usuario',
+            text: 'Hubo un error, verifique',
+            icon: 'error',
+          });
+        }
+
+      }
+    );
+  }
+
+  vaciarForm(): any {
+    this.usuario = {
+      email: '',
+      password: '',
+      nombre: '',
+      rol: ''
+    };
   }
 
 
-  cargarUsuarios() {
-    this._usuarioService.cargarUsuarios().subscribe(lista => this.usuarios = lista);
+  cargarUsuarios(): any {
+    this._usuarioService.cargarUsuarios().subscribe(lista => {
+      this.usuarios = lista;
+      this.contadorUsuarios = this.usuarios.length;
+      console.log('N usuarios', this.contadorUsuarios);
+    });
   }
-  
-  eliminarUsuario(usuario: UsuarioModel ){
-    let usuarioLogeado : UsuarioModel;
-    usuarioLogeado =  JSON.parse(localStorage.getItem('usuario'))
 
-    if(usuario.id_usuario ===  usuarioLogeado.id_usuario){
+  eliminarUsuario(usuario: UsuarioModel): any {
+    let usuarioLogeado: UsuarioModel;
+    usuarioLogeado = JSON.parse(localStorage.getItem('usuario'));
+
+    if (usuario.id_usuario === usuarioLogeado.id_usuario) {
       Swal.fire('No se puede eliminar',
-      'No se puede eliminar asi mismo','error');
-        return;
+        'No se puede eliminar a sí mismo', 'error');
+      return;
     }
 
     Swal.fire({
@@ -60,23 +93,23 @@ export class UsuariosComponent implements OnInit {
       confirmButtonText: 'Eliminar'
 
     })
-    .then((borrar) => {
-      if (borrar.isConfirmed) {
+      .then((borrar) => {
+        if (borrar.isConfirmed) {
 
-        this._usuarioService.eliminarUsuario(usuario.id_usuario).subscribe(() => {
-          Swal.fire(
-            'Eliminado',
-            'Usuario eliminado',
-            'success'
-          )
-          this.cargarUsuarios();
-        })
-        
-      }
-    })
+          this._usuarioService.eliminarUsuario(usuario.id_usuario).subscribe(() => {
+            Swal.fire(
+              'Eliminado',
+              'Usuario eliminado',
+              'success'
+            );
+            this.cargarUsuarios();
+          });
+
+        }
+      });
   }
 
-  actualizarUsuario(usuario: UsuarioModel){
+  actualizarUsuario(usuario: UsuarioModel): any {
     this._usuarioService.actualizarUsuario(usuario).subscribe();
   }
 }

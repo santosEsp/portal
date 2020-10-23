@@ -1,9 +1,12 @@
 export class ContactoModel{
-    correo: string;
+    id_contacto?: string;
+    email: string;
     nombre: string;
     apellido: string;
-    propietario: string;
+    propietario_registro: string;
     departamento: string;
-    telefono: number;
-    empresa: string;
+    telefono: string;
+    fkempresa: number;
+    ultimaActividad?: string;
+    createdAt?: string;
 }

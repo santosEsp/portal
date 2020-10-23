@@ -281,3 +281,7 @@ body {
 .linkBlack {
     color: #000;
 }
+
+.cardColorBorde {
+    border-color: #c5bfbf;
+}

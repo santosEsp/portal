@@ -16,13 +16,13 @@ export class LoginComponent implements OnInit {
   loginUser: UsuarioModel = new UsuarioModel();
   recuperarPassword: RecuperarPasword = new RecuperarPasword();
 
-  recordarme: boolean = false;
+  recordarme = false;
   email: string;
 
   constructor(private router: Router,
     private _loginService: LoginService) { }
 
-  ngOnInit() {
+  ngOnInit(): void {
     // LocalStrogare del recordatorio del correo
     if (localStorage.getItem('email')) {
       this.loginUser.email = localStorage.getItem('email');
@@ -30,13 +30,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  login(form: NgForm) {
+  login(form: NgForm): any {
     if (form.invalid) {
       return;
     }
     this._loginService.login(this.loginUser, this.recordarme).subscribe(
       (resp: any) => {
-        Swal.close()
+        Swal.close();
         this.router.navigateByUrl('/contactos');
       },
       (err) => {
@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  recupera(form1: NgForm) {
+  recupera(form1: NgForm): any {
 
     if (form1.invalid) {
       return;

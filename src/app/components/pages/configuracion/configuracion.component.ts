@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import { PerfilComponent } from '../perfil/perfil.component';
 import { PipelineModel } from '../../../models/Pipeline.model';
 import { ContraseñaModel } from '../../../models/contraseña.model';
 import { CorreoModel } from '../../../models/correo.model';
@@ -27,34 +26,34 @@ export class ConfiguracionComponent implements OnInit {
     this.contrasena.con_actual = 'Gilberto@1998';
     this.contrasena.con_nueva = 'Gilberto1998PL';
     this.correo.correo_actual = 'gilbertozte98@gmail.com';
-    this.correo.correo_nuevo='peraltaleyvagilberto@gmail.com';
+    this.correo.correo_nuevo = 'peraltaleyvagilberto@gmail.com';
   }
 
-  onSubmit (form:NgForm){
-    if(form.invalid){
+  onSubmit(form: NgForm): any {
+    if (form.invalid) {
       console.log('Algo salio mal :(');
       console.log(form);
       return;
     }
-    console.log("Etapa nueva Agregada");
+    console.log('Etapa nueva Agregada');
     console.log(this.pipeline);
     console.log(form);
   }
-  onCon(form:NgForm){
-    if(form.invalid){
-      console.log("Algo salio mal :(");
+  onCon(form: NgForm): any {
+    if (form.invalid) {
+      console.log('Algo salio mal :(');
       return;
     }
     console.log('Nueva Contraseña Agregada');
     console.log(this.contrasena);
     console.log(form);
   }
-  onCorreo( form:NgForm){
-    if(form.invalid){
-      console.log("Algo salio mal :(");
+  onCorreo(form: NgForm) {
+    if (form.invalid) {
+      console.log('Algo salio mal :(');
       return;
     }
-    console.log("Correo nuevo Agregado");
+    console.log('Correo nuevo Agregado');
     console.log(this.correo);
     console.log(form);
   }
