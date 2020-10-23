@@ -9,6 +9,7 @@ import { UsuariosComponent } from './components/pages/usuarios/usuarios.componen
 import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
 import { AuthGuard } from './guards/auth.guard';
 import { PipelineComponent } from './components/pages/pipeline/pipeline.component';
+import { NegocioComponent } from './components/pages/negocios/negocios.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -19,6 +20,7 @@ const routes: Routes = [
   {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard]},
   {path: 'pipeline', component: PipelineComponent, canActivate:[AuthGuard]},
   {path: 'configuracion', component: ConfiguracionComponent, canActivate:[AuthGuard]},
+  {path: 'negocios',component:NegocioComponent,canActivate:[AuthGuard]},
   {path: '**', pathMatch: 'full', redirectTo: 'login'}
 
 ];
