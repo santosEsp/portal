@@ -9,7 +9,7 @@ import {FormsModule} from '@angular/forms';
 // Graficos
 import { ChartsModule } from 'ng2-charts';
 
-//componentes
+// componentes
 import { LoginComponent } from './components/Login/login.component';
 import { EmpresaComponent } from './components/pages/empresa/empresa.component';
 import { ContactosComponent } from './components/pages/contactos/contactos.component';
@@ -19,7 +19,6 @@ import { InformacionComponent } from './components/pages/informacion/informacion
 import { InformesComponent } from './components/pages/informes/informes.component';
 import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
 import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
-import { ConsultasService } from './services/consultas.service';
 import { from } from 'rxjs';
 
 @NgModule({
@@ -43,7 +42,6 @@ import { from } from 'rxjs';
     HttpClientModule
   ],
   providers: [
-    ConsultasService
   ],
   bootstrap: [AppComponent]
 })

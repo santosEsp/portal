@@ -1,7 +1,9 @@
 export class RegistrarLlamadaModel{
-    contactado: string;
-    resultado: string;
+    fkcontacto: string;
+    resultado_llamada: string;
     fecha: string;
     hora: string;
     descripcion: string;
+    createdAt?: string;
+    updatedAt?: string;
 }

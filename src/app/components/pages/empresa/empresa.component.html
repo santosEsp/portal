@@ -4,11 +4,10 @@
     <div class="float-right">
         <button type="button" class="btn mt-4 mr-4 estilosBotones
             estilosBotonesHover" data-toggle="modal" data-target="#modalAgregarEmpresa" data-whatever="@mdo">
-            <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi
-                bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1
-                    0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-            </svg>
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-building" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694L1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z"/>
+                <path d="M2 11h1v1H2v-1zm2 0h1v1H4v-1zm-2 2h1v1H2v-1zm2 0h1v1H4v-1zm4-4h1v1H8V9zm2 0h1v1h-1V9zm-2 2h1v1H8v-1zm2 0h1v1h-1v-1zm2-2h1v1h-1V9zm0 2h1v1h-1v-1zM8 7h1v1H8V7zm2 0h1v1h-1V7zm2 0h1v1h-1V7zM8 5h1v1H8V5zm2 0h1v1h-1V5zm2 0h1v1h-1V5zm0-2h1v1h-1V3z"/>
+              </svg>
             Agregar empresa
         </button>
 
@@ -34,7 +33,7 @@
         <div class="container-fluid mt-3">
             <span class="encabezado">Empresas</span>
             <br>
-            <small>10 empresas</small>
+            <small>{{contadorEmpresas}} Empresas</small>
         </div>
 
         <!--Inicio del formulario modal agregar empresa-->
@@ -45,7 +44,7 @@
                         <h5 class="modal-title text-white" id="exampleModalLabel">
                             Agregar empresa
                         </h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
@@ -69,21 +68,12 @@
 
 
                             <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Propietario
-                                    del registro</label>
-                                <div class="col-22">
-                                    <select class="form-control" id="propietario" name="propietario" [(ngModel)]="empresa.propietario" required>
+                                <label for="recipient-name" class="col-form-label">Propietario de registro</label>
+                                <input type="text" class="form-control" id="pipeline" name="propietario" [(ngModel)]="propietario.propietario_registro" required disabled />
 
-                                        <option>Usuario 1</option>
-                                        <option>Usuario 2</option>
-                                        <option>Usuario 3</option>
-                                    </select>
-
-                                    <small *ngIf="f.submitted &&
-                                                    f.controls['propietario'].errors" class="text-danger">
-                                        Campo obligatorio
-                                    </small>
-                                </div>
+                                <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
                             </div>
 
 
@@ -115,7 +105,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Número de
                                     teléfono</label>
-                                <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="empresa.telefono" required minlength="8" />
+                                <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="empresa.no_telefono" required minlength="8" />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['telefono'].errors" class="text-danger">
@@ -128,7 +118,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Tipo</label>
                                 <div class="col-22">
-                                    <select class="form-control" id="tipo" name="tipo" [(ngModel)]="empresa.tipo" required>
+                                    <select class="form-control" id="tipo" name="tipo" [(ngModel)]="empresa.tipo_cliente" required>
 
                                         <option>Cliente potencial</option>
                                         <option>Socio</option>
@@ -163,7 +153,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Estado o
                                     región</label>
-                                <input type="text" class="form-control" id="etapa" name="estado" [(ngModel)]="empresa.estado" required />
+                                <input type="text" class="form-control" id="etapa" name="estado" [(ngModel)]="empresa.estado_region" required />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['estado'].errors" class="text-danger">
@@ -176,7 +166,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Código
                                     postal</label>
-                                <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="empresa.cp" required />
+                                <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="empresa.codigo_postal" required />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['codigo'].errors" class="text-danger">
@@ -189,7 +179,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Número de
                                     empleados</label>
-                                <input type="text" class="form-control" id="empleados" name="empleados" [(ngModel)]="empresa.noEmpleados" required />
+                                <input type="text" class="form-control" id="empleados" name="empleados" [(ngModel)]="empresa.no_empleados" required />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['empleados'].errors" class="text-danger">
@@ -203,7 +193,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Ingresos
                                     anuales</label>
-                                <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="empresa.ingresos" required />
+                                <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="empresa.ingresos_anuales" required />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['ingresos'].errors" class="text-danger">
@@ -216,7 +206,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Zona
                                     horaria</label>
-                                <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="empresa.zonaHoraria" required />
+                                <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="empresa.zona_horaria" required />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['zona'].errors" class="text-danger">
@@ -241,7 +231,7 @@
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Página
                                     corporativa</label>
-                                <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="empresa.pagina" required />
+                                <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="empresa.pagina_corporativa" required />
 
                                 <small *ngIf="f.submitted &&
                                                 f.controls['pagina'].errors" class="text-danger">
@@ -260,7 +250,7 @@
                                                 estilosBotones">
                                     Crear y agregar otra
                                 </button>
-                                <button type="button" class="btn
+                                <button (click)="vaciarFormulario()" class="btn
                                                 estilosBotonesHover
                                                 estilosBotones" data-dismiss="modal">
                                     Cancelar
@@ -294,11 +284,12 @@
         <div class="tab-content con" id="myTabContent">
             <!--Contenido tab 1-->
             <div class="tab-pane fade show active" id="todosLosContactos" role="tabpanel" aria-labelledby="home-tab">
+
                 <div class="table-responsive">
                     <table class="table mt-3">
                         <thead class="grisSecundario">
                             <tr>
-                                <th scope="col">#</th>
+                                <th scope="col">Núm.</th>
                                 <th scope="col">Nombre</th>
                                 <th scope="col">Propietario</th>
                                 <th scope="col">Industria</th>
@@ -312,27 +303,38 @@
                                 <th scope="col">Zona Horaria</th>
                                 <th scope="col">Descripción</th>
                                 <th scope="col">Página corporativa</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let empresas of
-                                            arregloEmpresas; let i= index">
+
+                            <tr *ngFor="let empresa of empresas; let i= index">
                                 <th scope="row">{{i+1}}</th>
 
-                                <td><a [routerLink]="['/informacion',tipo,
-                                                    i]">{{empresas.nombre}}</a></td>
-                                <td>{{empresas.propietario}}</td>
-                                <td>{{empresas.industria}}</td>
-                                <td>{{empresas.telefono}}</td>
-                                <td>{{empresas.tipo}}</td>
-                                <td>{{empresas.ciudad}}</td>
-                                <td>{{empresas.estado}}</td>
-                                <td>{{empresas.cp}}</td>
-                                <td>{{empresas.noEmpleados}}</td>
-                                <td>{{empresas.ingresos}}</td>
-                                <td>{{empresas.zonaHoraria}}</td>
-                                <td>{{empresas.descripcion}}</td>
-                                <td>{{empresas.pagina}}</td>
+                                <td><a [routerLink]="['/informacion',tipo, empresa.id_empresa]">{{empresa.nombre}}</a></td>
+                                <td>{{empresa.propietario_registro}}</td>
+                                <td>{{empresa.industria}}</td>
+                                <td><input [(ngModel)]="empresa.no_telefono" type="text" name="nombre" class="form-control" placeholder="Teléfono" style="width: fit-content;" minlength="8" maxlength="15" required></td>
+                                <td>{{empresa.tipo_cliente}}</td>
+                                <td><input [(ngModel)]="empresa.ciudad" type="text" name="nombre" class="form-control" placeholder="Ciudad" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="empresa.estado_region" type="text" name="nombre" class="form-control" placeholder="Estado / Región" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="empresa.codigo_postal" type="text" name="nombre" class="form-control" placeholder="Código postal" style="width: fit-content;" required></td>
+                                <td><input [(ngModel)]="empresa.no_empleados" type="text" name="nombre" class="form-control" placeholder="Número de empleados" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="empresa.ingresos_anuales" type="text" name="nombre" class="form-control" placeholder="Ingresos anuales" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="empresa.zona_horaria" type="text" name="nombre" class="form-control" placeholder="Zona horaria" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="empresa.descripcion" type="text" name="nombre" class="form-control" placeholder="Descripción" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="empresa.pagina_corporativa" type="text" name="nombre" class="form-control" placeholder="Página corporativa" style="width: fit-content;"></td>
+                                <td>
+                                    <button (click)="actualizarEmpresa(empresa)" class="btn btn-primary m-r-10">
+                                        <i class='fa fa-save'></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button (click)="eliminarEmpresa(empresa)" class="btn btn-danger">
+                                        <i class='fas fa-trash-alt'></i>
+                                    </button>
+                                </td>
                             </tr>
 
                         </tbody>
@@ -362,26 +364,36 @@
                                 <th scope="col">Zona Horaria</th>
                                 <th scope="col">Descripción</th>
                                 <th scope="col">Página corporativa</th>
+                                <th scope="col">Editar</th>
+                                <th scope="col">Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let empresas of
-                                            arregloEmpresas; let i= index">
+                            <tr *ngFor="let misEmpresas of listaMisEmpresas; let i= index">
                                 <th scope="row">{{i+1}}</th>
-
-                                <td><a [routerLink]="['/informacion']">{{empresas.nombre}}</a></td>
-                                <td>{{empresas.propietario}}</td>
-                                <td>{{empresas.industria}}</td>
-                                <td>{{empresas.telefono}}</td>
-                                <td>{{empresas.tipo}}</td>
-                                <td>{{empresas.ciudad}}</td>
-                                <td>{{empresas.estado}}</td>
-                                <td>{{empresas.cp}}</td>
-                                <td>{{empresas.noEmpleados}}</td>
-                                <td>{{empresas.ingresos}}</td>
-                                <td>{{empresas.zonaHoraria}}</td>
-                                <td>{{empresas.descripcion}}</td>
-                                <td>{{empresas.pagina}}</td>
+                                <td><a [routerLink]="['/informacion',tipo, misEmpresas.id_empresa]">{{misEmpresas.nombre}}</a></td>
+                                <td>{{misEmpresas.propietario_registro}}</td>
+                                <td>{{misEmpresas.industria}}</td>
+                                <td><input [(ngModel)]="misEmpresas.no_telefono" type="text" name="nombre" class="form-control" placeholder="Teléfono" style="width: fit-content;" minlength="8" maxlength="15" required></td>
+                                <td>{{misEmpresas.tipo_cliente}}</td>
+                                <td><input [(ngModel)]="misEmpresas.ciudad" type="text" name="nombre" class="form-control" placeholder="Ciudad" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="misEmpresas.estado_region" type="text" name="nombre" class="form-control" placeholder="Estado / Región" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="misEmpresas.codigo_postal" type="text" name="nombre" class="form-control" placeholder="Código postal" style="width: fit-content;" required></td>
+                                <td><input [(ngModel)]="misEmpresas.no_empleados" type="text" name="nombre" class="form-control" placeholder="Número de empleados" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="misEmpresas.ingresos_anuales" type="text" name="nombre" class="form-control" placeholder="Ingresos anuales" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="misEmpresas.zona_horaria" type="text" name="nombre" class="form-control" placeholder="Zona horaria" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="misEmpresas.descripcion" type="text" name="nombre" class="form-control" placeholder="Descripción" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="misEmpresas.pagina_corporativa" type="text" name="nombre" class="form-control" placeholder="Página corporativa" style="width: fit-content;"></td>
+                                <td>
+                                    <button (click)="actualizarEmpresa(misEmpresas)" class="btn btn-primary m-r-10">
+                                        <i class='fa fa-save'></i>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button (click)="eliminarEmpresa(misEmpresas)" class="btn btn-danger">
+                                        <i class='fas fa-trash-alt'></i>
+                                    </button>
+                                </td>
                             </tr>
 
                         </tbody>
