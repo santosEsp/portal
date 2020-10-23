@@ -24,7 +24,7 @@ import { NegocioComponent } from './components/pages/negocios/negocios.component
 
 //servicios
 import { InformesService } from './services/informes/informes.service';
-import { ConsultasService } from './services/consultas.service';
+
 
 
 
