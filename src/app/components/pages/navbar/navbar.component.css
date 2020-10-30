@@ -10,9 +10,9 @@
     padding-top: 0px;
 }
 
-.navbar-login-bordes {
-    border-color: rgb(039, 089, 149);
-    box-shadow: 0 1px 1px rgba(75, 115, 201, 0.075)inset, 0 0 8px rgba(75, 115, 201);
+.navbar-cuenta-bordes {
+    border-color: #6D6D71;
+    /* box-shadow: 0 1px 1px rgba(75, 115, 201, 0.075)inset, 0 0 8px rgba(75, 115, 201);*/
 }
 
 .icon-size {
@@ -26,13 +26,13 @@
     padding-bottom: 0px;
 }
 
-a:hover {
-    background-color: #275995;
+.subligas:hover {
+    background-color: rgb(41, 61, 83);
     color: white;
 }
 
-.negritas:hover {
-    font-weight: bold;
+.negritas {
+    font-size: medium;
 }
 
 .colorCorporativo {
@@ -60,7 +60,60 @@ a:hover {
     transition: 0.4s ease-out;
 }
 
-.paddings {
-    padding-left: 65%;
-    padding-right: 66%;
+
+/* ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(039, 089, 149);
+}
+
+
+li {
+    float: left;
+} */
+
+.ligaHover {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 8px 10px;
+    text-decoration: none;
+}
+
+
+/* Change the link color to #111 (black) on hover */
+
+.ligaHover:hover {
+    background-color: rgb(31, 65, 107);
+}
+
+.contenedor {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.centrado {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.colorIniciales {
+    color: white;
+    font-weight: bolder;
+    font-size: 35px;
+}
+
+.user-profile-image {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}
+
+.user-profile-card {
+    text-align: center;
 }

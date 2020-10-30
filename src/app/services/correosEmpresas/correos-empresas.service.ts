@@ -3,24 +3,25 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { map } from 'rxjs/Operators';
 import Swal from 'sweetalert2';
-import { RegistrarCorreoModel } from '../../models/registrarCorreo.model';
+import { CorreosEmpresasModel } from '../../models/correosEmpresas';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrarCorreoService {
+export class CorreosEmpresasService {
   token: string;
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient) { 
     this.token = localStorage.getItem('token');
   }
 
-  registrarCorreo(correo: RegistrarCorreoModel): any {
-    let url = URL_SERVICIOS + '/rcorreos/';
+
+  registrarCorreo(correo: CorreosEmpresasModel): any {
+    let url = URL_SERVICIOS + '/correosempresas/';
     url += '?token=' + this.token;
     return this.http.post(url, correo).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Nota', 'Correo registrado', 'success');
+          Swal.fire('Correo', 'Correo registrado', 'success');
           return resp.correo;
         }
       )
@@ -30,7 +31,7 @@ export class RegistrarCorreoService {
 
   eliminarCorreo(idNota: string): any {
 
-    let url = URL_SERVICIOS + '/rcorreos/' + idNota;
+    let url = URL_SERVICIOS + '/correosempresas/' + idNota;
     url += '?token=' + this.token;
 
     return this.http.delete(url)
@@ -50,9 +51,9 @@ export class RegistrarCorreoService {
   }
 
 
-  actualizarCorreo(correo: RegistrarCorreoModel): any {
+  actualizarNota(correo: CorreosEmpresasModel): any {
 
-    let url = URL_SERVICIOS + '/rcorreos/' + correo.id;
+    let url = URL_SERVICIOS + '/correosempresas/' + correo.id_rcorreo;
     url += '?token=' + this.token;
 
     return this.http.put(url, correo)
@@ -74,20 +75,19 @@ export class RegistrarCorreoService {
 
   cargarCorreos(idContacto: string): any {
 
-    console.log('R correo service miId', idContacto);
-    let url = URL_SERVICIOS + '/rcorreos/' + idContacto;
+    console.log('Correos empresa service Id', idContacto);
+    let url = URL_SERVICIOS + '/correosempresas/' + idContacto;
     url += '?token=' + this.token;
     console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('Correos service: ', resp.correos);
+            console.log('Correos empresas service: ', resp.correos);
             return resp.correos;
           }
         )
       );
   }
-
 
 }

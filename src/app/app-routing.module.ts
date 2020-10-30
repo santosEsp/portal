@@ -13,14 +13,14 @@ import { NegocioComponent } from './components/pages/negocios/negocios.component
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'contactos', component: ContactosComponent, canActivate:[AuthGuard] },
-  {path: 'empresas', component: EmpresaComponent,  canActivate:[AuthGuard]},
-  {path: 'informacion/:tipo/:id', component: InformacionComponent, canActivate:[AuthGuard]},
-  {path: 'informes', component: InformesComponent, canActivate:[AuthGuard]},
-  {path: 'usuarios', component: UsuariosComponent, canActivate:[AuthGuard]},
-  {path: 'pipeline', component: PipelineComponent, canActivate:[AuthGuard]},
+  {path: 'contactos', component: ContactosComponent, canActivate: [AuthGuard] },
+  {path: 'empresas', component: EmpresaComponent,  canActivate: [AuthGuard]},
+  {path: 'informacion/:tipo/:id', component: InformacionComponent, canActivate: [AuthGuard]},
+  {path: 'informes', component: InformesComponent, canActivate: [AuthGuard]},
+  {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
+  {path: 'pipeline', component: PipelineComponent, canActivate: [AuthGuard]},
   {path: 'configuracion', component: ConfiguracionComponent, canActivate:[AuthGuard]},
-  {path: 'negocios',component:NegocioComponent,canActivate:[AuthGuard]},
+  {path: 'negocios',component:NegocioComponent, canActivate: [AuthGuard]},
   {path: '**', pathMatch: 'full', redirectTo: 'login'}
 
 ];

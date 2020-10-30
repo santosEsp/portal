@@ -3,34 +3,36 @@ import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { map } from 'rxjs/Operators';
 import Swal from 'sweetalert2';
-import { RegistrarCorreoModel } from '../../models/registrarCorreo.model';
+import { ReunionesEmpresasModel } from '../../models/reunionesEmpresas';
 
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrarCorreoService {
+export class ReunionesEmpresasService {
   token: string;
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
-  }
+   }
 
-  registrarCorreo(correo: RegistrarCorreoModel): any {
-    let url = URL_SERVICIOS + '/rcorreos/';
+
+
+   registrarReunion(reunion: ReunionesEmpresasModel): any {
+    let url = URL_SERVICIOS + '/reunionesempresas/';
     url += '?token=' + this.token;
-    return this.http.post(url, correo).pipe(
+    return this.http.post(url, reunion).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Nota', 'Correo registrado', 'success');
-          return resp.correo;
+          Swal.fire('Reunión', 'Reunión registrado', 'success');
+          return resp.reunion;
         }
       )
     );
   }
 
 
-  eliminarCorreo(idNota: string): any {
+  eliminarCorreo(id: string): any {
 
-    let url = URL_SERVICIOS + '/rcorreos/' + idNota;
+    let url = URL_SERVICIOS + '/reunionesempresas/' + id;
     url += '?token=' + this.token;
 
     return this.http.delete(url)
@@ -38,7 +40,7 @@ export class RegistrarCorreoService {
         map(
           (resp: any) => {
             Swal.fire({
-              title: 'Correo eliminado',
+              title: 'Reunión eliminado',
               text: 'Eliminado correctamente',
               icon: 'success',
             });
@@ -50,44 +52,42 @@ export class RegistrarCorreoService {
   }
 
 
-  actualizarCorreo(correo: RegistrarCorreoModel): any {
+  actualizarReunion(reunion: ReunionesEmpresasModel): any {
 
-    let url = URL_SERVICIOS + '/rcorreos/' + correo.id;
+    let url = URL_SERVICIOS + '/reunionesempresas/' + reunion.id;
     url += '?token=' + this.token;
 
-    return this.http.put(url, correo)
+    return this.http.put(url, reunion)
       .pipe(
         map(
           (resp: any) => {
             Swal.fire({
-              title: 'Nota actualizada',
-              text: 'Actualizada correctaente',
+              title: 'Reunión actualizado',
+              text: 'Actualizado correctaente',
               icon: 'success',
             });
 
-            return resp.correo;
+            return resp.reunion;
           }
         )
       );
   }
 
 
-  cargarCorreos(idContacto: string): any {
+  cargarReuniones(id: string): any {
 
-    console.log('R correo service miId', idContacto);
-    let url = URL_SERVICIOS + '/rcorreos/' + idContacto;
+    console.log('Reuniones Empresa service ID', id);
+    let url = URL_SERVICIOS + '/reunionesempresas/' + id;
     url += '?token=' + this.token;
     console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('Correos service: ', resp.correos);
-            return resp.correos;
+            console.log('Reuniones service: ', resp.reuniones);
+            return resp.reuniones;
           }
         )
       );
   }
-
-
 }

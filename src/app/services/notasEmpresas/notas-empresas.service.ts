@@ -1,36 +1,33 @@
 import { Injectable } from '@angular/core';
+import { NotasEmpresasModel } from '../../models/notasEmpresas';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { map } from 'rxjs/Operators';
 import Swal from 'sweetalert2';
-import { RegistrarCorreoModel } from '../../models/registrarCorreo.model';
-
 @Injectable({
   providedIn: 'root'
 })
-export class RegistrarCorreoService {
+export class NotasEmpresasService {
   token: string;
-  constructor(private http: HttpClient) {
-    this.token = localStorage.getItem('token');
-  }
+  constructor(private http: HttpClient) { this.token = localStorage.getItem('token'); }
 
-  registrarCorreo(correo: RegistrarCorreoModel): any {
-    let url = URL_SERVICIOS + '/rcorreos/';
+  crearNota(nota: NotasEmpresasModel): any {
+    let url = URL_SERVICIOS + '/notasempresas/';
     url += '?token=' + this.token;
-    return this.http.post(url, correo).pipe(
+
+    return this.http.post(url, nota).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Nota', 'Correo registrado', 'success');
-          return resp.correo;
+          Swal.fire('Nota', 'Nota agregada correctamente', 'success');
+          return resp.nota;
         }
       )
     );
   }
 
+  eliminarNota(id: string): any {
 
-  eliminarCorreo(idNota: string): any {
-
-    let url = URL_SERVICIOS + '/rcorreos/' + idNota;
+    let url = URL_SERVICIOS + '/notasempresas/' + id;
     url += '?token=' + this.token;
 
     return this.http.delete(url)
@@ -38,8 +35,8 @@ export class RegistrarCorreoService {
         map(
           (resp: any) => {
             Swal.fire({
-              title: 'Correo eliminado',
-              text: 'Eliminado correctamente',
+              title: 'Nota eliminada',
+              text: 'Eliminada correctamente',
               icon: 'success',
             });
 
@@ -49,13 +46,12 @@ export class RegistrarCorreoService {
       );
   }
 
+  actualizarNota(nota: NotasEmpresasModel): any {
 
-  actualizarCorreo(correo: RegistrarCorreoModel): any {
-
-    let url = URL_SERVICIOS + '/rcorreos/' + correo.id;
+    let url = URL_SERVICIOS + '/notasempresas/' + nota.id;
     url += '?token=' + this.token;
 
-    return this.http.put(url, correo)
+    return this.http.put(url, nota)
       .pipe(
         map(
           (resp: any) => {
@@ -65,29 +61,26 @@ export class RegistrarCorreoService {
               icon: 'success',
             });
 
-            return resp.correo;
+            return resp.nota;
           }
         )
       );
   }
 
+  cargarNotas(id: string): any {
 
-  cargarCorreos(idContacto: string): any {
-
-    console.log('R correo service miId', idContacto);
-    let url = URL_SERVICIOS + '/rcorreos/' + idContacto;
+    console.log('Notas Empre ID recibido', id);
+    let url = URL_SERVICIOS + '/notasempresas/' + id;
     url += '?token=' + this.token;
     console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('Correos service: ', resp.correos);
-            return resp.correos;
+            console.log('Notas service: ', resp.notas);
+            return resp.notas;
           }
         )
       );
   }
-
-
 }

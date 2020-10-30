@@ -167,10 +167,10 @@
                                 </td>
                                 <td><input [(ngModel)]="contacto.nombre" type="text" name="nombre" class="form-control" placeholder="Nombre" style="width: fit-content;"></td>
                                 <td><input [(ngModel)]="contacto.apellido" type="text" name="apellido" class="form-control" placeholder="Apellido" style="width: fit-content;"></td>
-                                <td>{{contacto.propietario_registro }}</td>
+                                <td><input [(ngModel)]="contacto.propietario" type="text" name="propietario" class="form-control" placeholder="Apellido" style="width: fit-content;" disabled></td>
                                 <td><input [(ngModel)]="contacto.departamento" type="text" name="departamento" class="form-control" placeholder="Departamento" style="width: fit-content;"></td>
                                 <td><input [(ngModel)]="contacto.telefono" type="text" name="telefono" class="form-control" placeholder="Teléfono" style="width: fit-content;"></td>
-                                <td>{{contacto.fkempresa }}</td>
+                                <td><input [(ngModel)]="contacto.empresa" type="text" name="empresa" class="form-control" placeholder="Empresa" style="width: fit-content;" disabled></td>
                                 <td>
                                     <button (click)="actualizarContacto(contacto)" class="btn btn-primary m-r-10">
                                         <i class='fa fa-save'></i>
@@ -231,11 +231,11 @@
                                     <a [routerLink]="['/informacion',tipo, misContactos.id_contacto]">{{misContactos.email}}</a>
                                 </td>
                                 <td><input [(ngModel)]="misContactos.nombre" type="text" name="nombre" class="form-control" placeholder="Nombre" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="misContactos.apellido" type="text" name="nombre" class="form-control" placeholder="Nombre" style="width: fit-content;"></td>
-                                <td>{{ misContactos.propietario_registro }}</td>
-                                <td><input [(ngModel)]="misContactos.departamento" type="text" name="nombre" class="form-control" placeholder="Nombre" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="misContactos.telefono" type="text" name="nombre" class="form-control" placeholder="Nombre" style="width: fit-content;"></td>
-                                <td>{{ misContactos.fkempresa }}</td>
+                                <td><input [(ngModel)]="misContactos.apellido" type="text" name="nombre" class="form-control" placeholder="Apellido" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="misContactos.propietario" type="text" name="nombre" class="form-control" placeholder="Propietario" style="width: fit-content;" disabled></td>
+                                <td><input [(ngModel)]="misContactos.departamento" type="text" name="nombre" class="form-control" placeholder="Departamento" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="misContactos.telefono" type="text" name="nombre" class="form-control" placeholder="Telefono" style="width: fit-content;"></td>
+                                <td><input [(ngModel)]="misContactos.empresa" type="text" name="nombre" class="form-control" placeholder="Empresa" style="width: fit-content;" disabled></td>
                                 <td>
                                     <button (click)="actualizarContacto(misContactos)" class="btn btn-primary m-r-10">
                                         <i class='fa fa-save'></i>

@@ -6,7 +6,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 
-// Importacion de modelos
+// Importacion de modelos para contactos
 import { ContactoModel } from '../../../models/contacto.model';
 import { EmpresaModel } from '../../../models/empresa.model';
 import { RegistrarCorreoModel } from '../../../models/registrarCorreo.model';
@@ -14,7 +14,8 @@ import { RegistrarLlamadaModel } from '../../../models/registrarLlamada.model';
 import { RegistrarReunionModel } from '../../../models/registrarReunion.model';
 import { NegocioModel } from '../../../models/negocio.model';
 
-// Importacion de servicios
+
+// Importacion de servicios para contactos
 import { ContactoService } from '../../../services/contactos/contacto.service';
 import { NotasService } from '../../../services/notas/notas.service';
 import { EmpresaService } from '../../../services/empresas/empresa.service';
@@ -23,7 +24,17 @@ import { LlamadasService } from '../../../services/llamadas/llamadas.service';
 import { RegistrarReunionService } from '../../../services/registrarReunion/registrar-reunion.service';
 import { UsuarioService } from '../../../services/usuarios/usuario.service';
 import { UsuarioModel } from 'src/app/models/usuarios.model';
+import Swal from 'sweetalert2';
 
+// Importacion de modelos, servicios para empresas
+import { NotasEmpresasService } from '../../../services/notasEmpresas/notas-empresas.service';
+import { NotasEmpresasModel } from 'src/app/models/notasEmpresas';
+import { ReunionesEmpresasService } from '../../../services/reunionesEmpresas/reuniones-empresas.service';
+import { ReunionesEmpresasModel } from 'src/app/models/reunionesEmpresas';
+import { LlamadasEmpresasModel } from '../../../models/llamadasEmpresas';
+import { LlamadasEmpresasService} from '../../../services/llamadasEmpresas/llamadas-empresas.service';
+import { CorreosEmpresasService } from '../../../services/correosEmpresas/correos-empresas.service';
+import { CorreosEmpresasModel } from 'src/app/models/correosEmpresas';
 
 
 
@@ -33,70 +44,65 @@ import { UsuarioModel } from 'src/app/models/usuarios.model';
   styleUrls: ['./informacion.component.css'],
 })
 export class InformacionComponent implements OnInit {
-  tipoEmpresa: string;
-  nota: NotaModel;
-  correo: RegistrarCorreoModel;
-  llamada: RegistrarLlamadaModel;
-  reunion: RegistrarReunionModel;
-  negocio: NegocioModel;
-  fecha: Date = new Date();
+
+  // Variables, modelos y arrays para obtener info de contactos
+  nota = new NotaModel();
+  correo = new RegistrarCorreoModel();
+  llamada = new RegistrarLlamadaModel();
+  reunion = new RegistrarReunionModel();
+  negocio = new NegocioModel();
+
   unContacto = new ContactoModel();
-  unaEmpresa = new EmpresaModel();
-  idContacto: string;
-  idEmpresa: number;
   correosR: RegistrarCorreoModel[] = [];
   notasR: NotaModel[] = [];
   llamadasR: RegistrarLlamadaModel[] = [];
   reunionesR: RegistrarReunionModel[] = [];
   nombreEmpresa = new EmpresaModel();
   fkempresaContacto: number;
+  idContacto: string;
   nombrePropietario = new UsuarioModel();
-  nombrePropietarioEmpresa = new UsuarioModel();
   fkpropietarioContacto: number;
+
+  // variable para la fecha
+  fecha: Date = new Date();
+
+  // variables para cargar info de empresas
+  unaEmpresa = new EmpresaModel();
+  idEmpresa: number;
+  nombrePropietarioEmpresa = new UsuarioModel();
   fkpropietarioEmpresa: number;
   listaContactosRelacionados: ContactoModel[] = [];
+  notasEmpresa: NotasEmpresasModel[] = [];
+  ReunionesEmpresa: ReunionesEmpresasModel[] = [];
+  llamadasEmpresa: LlamadasEmpresasModel[] = [];
+  correosEmpresa: CorreosEmpresasModel[] = [];
+  
 
   ruta: { tipo: string, id: string };
 
   constructor(private rutaActiva: ActivatedRoute, private _contactoService: ContactoService, private _empresaService: EmpresaService,
     private _registrarCorreoService: RegistrarCorreoService, private _notasService: NotasService,
     private _llamadasService: LlamadasService, private _registrarReunionService: RegistrarReunionService,
-    private _usuarioService: UsuarioService, private router: Router) {
-
-    this.tipoEmpresa = 'empresa';
+    private _usuarioService: UsuarioService, private router: Router,
+    private _notasEmpresasService : NotasEmpresasService, private _reunionesEmpresas:ReunionesEmpresasService,
+    private _llamadasEmpresa: LlamadasEmpresasService,
+    private _correosEmpresas: CorreosEmpresasService
+    ) {
 
     this.rutaActiva.params.subscribe(params => {
-
-      // this.unContacto = this.consultaService.getContacto(params['id']);
-
       console.log('Se suscribió contacto');
       console.log(this.unContacto);
-
-
     });
 
-
-
     this.rutaActiva.params.subscribe(params => {
-
-      // this.unaEmpresa = this.consultaService.getEmpresa(params['id']);
-
       console.log('Se suscribió empresa');
       console.log(this.unaEmpresa);
-
-
     });
 
     console.log(this.fecha);
   }
 
   ngOnInit(): void {
-
-    this.nota = new NotaModel();
-    this.correo = new RegistrarCorreoModel();
-    this.llamada = new RegistrarLlamadaModel();
-    this.reunion = new RegistrarReunionModel();
-    this.negocio = new NegocioModel();
 
     this.ruta = {
       tipo: this.rutaActiva.snapshot.params.tipo,
@@ -118,24 +124,45 @@ export class InformacionComponent implements OnInit {
     console.log(this.ruta.tipo);
 
     if (this.ruta.tipo === 'contacto') {
+      Swal.fire(
+        'Cargando',
+        'Obteniendo datos',
+        'info'
+      );
+      Swal.showLoading();
+
       this.infoContacto();
+      this.cargarCorreosRegistrados();
+      this.cargarNotas();
+      this.cargarLlamadas();
+      this.cargarReuniones();
+
+      Swal.close();
+
       console.log('Se cumple condicion contactos');
     }
     else {
-      this.infoEmpresa();
       console.log('Se cumple condicion empresas');
-    }
 
-    this.cargarCorreosRegistrados();
-    this.cargarNotas();
-    this.cargarLlamadas();
-    this.cargarReuniones();
+      Swal.fire(
+        'Cargando',
+        'Obteniendo datos',
+        'info'
+      );
+      Swal.showLoading();
+
+      this.infoEmpresa();
+      this.cargarNotasEmpresas();
+      this.cargarReunionesEmpresas();
+      this.cargarLlamadasEmpresas();
+      this.cargarCorreosEmpresas();
+
+      Swal.close();
+    }
 
   }
 
-  // '/informacion',tipo, empresa.id_empresa
-
-
+  // Métodos para cargar info de contactos
   cargarCorreosRegistrados(): any {
     this._registrarCorreoService.cargarCorreos(this.idContacto).subscribe(listaCorreosR => {
       this.correosR = listaCorreosR;
@@ -185,7 +212,7 @@ export class InformacionComponent implements OnInit {
   }
 
   cargaEmpresaDeContacto() {
-    console.log('CargarNombreEmpresa valor:', this.fkempresaContacto);
+    console.log('Cargar empresa relacionada id:', this.fkempresaContacto);
     this._empresaService.cargarUnaEmpresa(this.fkempresaContacto).subscribe(nombreEmpresa => {
       this.nombreEmpresa = nombreEmpresa;
       console.log('Nombre empresa comp: ', this.nombreEmpresa);
@@ -202,6 +229,8 @@ export class InformacionComponent implements OnInit {
   }
 
 
+  // Cargando datos de empresas si se cumple la condicion
+  // Métodos para cargar info de empresas
 
   infoEmpresa(): any {
     this._empresaService.cargarUnaEmpresa(this.idEmpresa).subscribe(empresa => {
@@ -225,11 +254,43 @@ export class InformacionComponent implements OnInit {
   }
 
   cargarContactosRelacionados(): any {
-    this._contactoService.cargarMisContactos(this.unaEmpresa.id_empresa).subscribe(listaContactosRelacionados => {
+    this._contactoService.cargarContactosRelacionados(this.unaEmpresa.id_empresa).subscribe(listaContactosRelacionados => {
       this.listaContactosRelacionados = listaContactosRelacionados;
       console.log('Lista contactos Relacionados component', listaContactosRelacionados);
     });
 
+  }
+
+  cargarNotasEmpresas(): any {
+    this._notasEmpresasService.cargarNotas( this.idEmpresa.toString()).subscribe(listaNotasEmpresas => {
+      this.notasEmpresa = listaNotasEmpresas;
+      console.log('Notas de empresas comp', this.notasEmpresa);
+
+    });
+  }
+
+  cargarReunionesEmpresas(): any {
+    this._reunionesEmpresas.cargarReuniones(this.idEmpresa.toString()).subscribe(listaReunionesEmpresas => {
+      this.ReunionesEmpresa = listaReunionesEmpresas;
+      console.log('Reuniones Empresa comp', this.ReunionesEmpresa);
+
+    });
+  }
+
+  cargarLlamadasEmpresas(): any {
+    this._llamadasEmpresa.cargarLlamadas(this.idEmpresa.toString()).subscribe(listaLlamadasEmpresas => {
+      this.llamadasEmpresa = listaLlamadasEmpresas;
+      console.log('Llamadas empresas comp', this.llamadasEmpresa);
+
+    });
+  }
+
+  cargarCorreosEmpresas(): any {
+    this._correosEmpresas.cargarCorreos(this.idContacto).subscribe(listaCorreosEmpresas => {
+      this.correosEmpresa = listaCorreosEmpresas;
+      console.log('Correos empresa comp', this.correosEmpresa);
+
+    });
   }
 
 

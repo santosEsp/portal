@@ -313,7 +313,7 @@
                                 <th scope="row">{{i+1}}</th>
 
                                 <td><a [routerLink]="['/informacion',tipo, empresa.id_empresa]">{{empresa.nombre}}</a></td>
-                                <td>{{empresa.propietario_registro}}</td>
+                                <td><input [(ngModel)]="empresa.propietario" type="text" name="nombre" class="form-control" placeholder="Propietario" style="width: fit-content;" disabled></td>
                                 <td>{{empresa.industria}}</td>
                                 <td><input [(ngModel)]="empresa.no_telefono" type="text" name="nombre" class="form-control" placeholder="Teléfono" style="width: fit-content;" minlength="8" maxlength="15" required></td>
                                 <td>{{empresa.tipo_cliente}}</td>
@@ -372,8 +372,8 @@
                             <tr *ngFor="let misEmpresas of listaMisEmpresas; let i= index">
                                 <th scope="row">{{i+1}}</th>
                                 <td><a [routerLink]="['/informacion',tipo, misEmpresas.id_empresa]">{{misEmpresas.nombre}}</a></td>
-                                <td>{{misEmpresas.propietario_registro}}</td>
-                                <td>{{misEmpresas.industria}}</td>
+                                <td><input [(ngModel)]="misEmpresas.propietario" type="text" name="nombre" class="form-control" placeholder="Propietario" style="width: fit-content;" disabled></td>
+                                <td><input [(ngModel)]="misEmpresas.industria" type="text" name="nombre" class="form-control" placeholder="Industria" style="width: fit-content;" disabled></td>
                                 <td><input [(ngModel)]="misEmpresas.no_telefono" type="text" name="nombre" class="form-control" placeholder="Teléfono" style="width: fit-content;" minlength="8" maxlength="15" required></td>
                                 <td>{{misEmpresas.tipo_cliente}}</td>
                                 <td><input [(ngModel)]="misEmpresas.ciudad" type="text" name="nombre" class="form-control" placeholder="Ciudad" style="width: fit-content;"></td>

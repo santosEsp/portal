@@ -128,6 +128,23 @@ export class ContactoService {
   }
 
 
+  cargarContactosRelacionados(miId: string): any {
+
+    console.log('service miId', miId);
+    let url = URL_SERVICIOS + '/contactos/relacionados/' + miId;
+    url += '?token=' + this.token;
+    console.log('url consulta', url);
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log('contactos relacionados service: ', resp.contactos);
+            return resp.contactos;
+          }
+        )
+      );
+  }
+
   cargarUnContacto(idContacto: string): any {
 
     console.log('service idContacto', idContacto);

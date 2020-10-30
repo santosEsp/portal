@@ -117,7 +117,7 @@ export class EmpresaService {
     console.log('service idEmpresa', idEmpresa);
     let url = URL_SERVICIOS + '/empresas/' + idEmpresa;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
+    console.log('url consulta una empresa', url);
     return this.http.get(url)
       .pipe(
         map(

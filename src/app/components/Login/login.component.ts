@@ -34,6 +34,13 @@ export class LoginComponent implements OnInit {
     if (form.invalid) {
       return;
     }
+    Swal.fire(
+      'Iniciando sesión',
+      'Espere',
+      'info'
+    );
+    Swal.showLoading();
+
     this._loginService.login(this.loginUser, this.recordarme).subscribe(
       (resp: any) => {
         Swal.close();
