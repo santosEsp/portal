@@ -1,5 +1,6 @@
 <app-navbar>
 </app-navbar>
+<app-modal-shared></app-modal-shared>
 <!-- start page main wrapper -->
 
 <div id="main-wrapper" class="ocultarScrollV">
@@ -21,9 +22,6 @@
                 </svg>
             </button>
                 </div>
-
-
-
                 <div *ngIf="ruta.tipo=='empresa'">
                     <button type="button" class="btn btnRegresa ml-n1 mt-3" [routerLink]="['/empresas']"><svg width="1em" height=".8em"
                     viewBox="0 0 16 16" class="bi bi-chevron-left" fill="currentColor"
@@ -39,9 +37,6 @@
 
             </button>
                 </div>
-
-
-
                 <div class="card-body user-profile-card mb-3">
 
                     <div class="contenedor">
@@ -60,68 +55,20 @@
                         <p class="text-center small"> {{unaEmpresa.pagina_corporativa}}</p>
                     </div>
 
+                    <!--Botones que se muestran abajo del contacto o empresa-->
+                    <!-- Boton 1 crear Notas-->
                     <button type="button" data-toggle="mensaje" title="Crear nota" class="btn estilosBotonesHover estilosBotones paddingButtons circular" data-toggle="modal" data-target="#modalNota" data-whatever="@mdo">
-                        
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil-square"
                             fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
                             <path fill-rule="evenodd"
                                 d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
-                        </svg>
-
-                        
+                        </svg>  
                     </button>
 
-
-
-                    <!--Inicio del formulario modal nota
-                    --------------------------------------------------
-                        ------------------------------------------------>
-
-                    <div class="modal fade text-left" data-backdrop="static" data-keyboard="false" id="modalNota" tabindex="-1" role="dialog" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bgCorp">
-                                    <h5 class="modal-title text-white" id="exampleModalLabel">
-                                        Nota
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form (ngSubmit)="registrarNota(f)" #f="ngForm">
-
-
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="col-form-label">Descripción de la
-                                                nota</label>
-                                            <hr>
-                                            <small *ngIf="f.submitted && f.controls['descripcion'].errors" class="text-danger">
-                                                Campo obligatorio
-                                            </small>
-
-                                            <textarea class="form-control" id="message-text" rows="5" id="nota" name="descripcion" [(ngModel)]="nota.comentario" required></textarea>
-                                        </div>
-
-                                        <div class="modal-footer">
-                                            <button type="submit" class="btn estilosBotonesHover estilosBotones">
-                                                Guardar
-                                            </button>
-                                            <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
-                                                Cancelar
-                                            </button>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--fin del formulario modal nota-->
-
-                    <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons circular" data-target="#modalCorreo" data-toggle="modal" title="Registrar correo">
+                    <!--Boton 2: Enviar correo -->
+                    <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons circular" data-target="#" data-toggle="modal" title="Enviar correo">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -129,400 +76,42 @@
                         </svg>
                     </button>
 
-                    <!--Inicio del formulario modal Correo-->
-                    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalCorreo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bgCorp">
-                                    <h5 class="modal-title text-white" id="exampleModalLabel">
-                                        Registrar correo
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form (ngSubmit)="registrarCorreo(fCorreo)" #fCorreo="ngForm">
-                                        <div class="form-group">
-                                            <table class="table table-borderless text-left ">
-                                                <tbody>
-
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-group row">
-                                                                <div class="col-22">
-
-                                                                    <label class="col-form-label">Contactado</label>
-
-                                                                    <select class="form-control" style="width: fit-content;" id="contactado" name="contactado" [(ngModel)]="correo.fkcontacto" required>
-                                                                        <option>Seleccione</option>
-                                                                        <option>Usuario 1</option>
-                                                                        <option>Usuario 2</option>
-                                                                        <option>Usuario 3</option>
-                                                                    </select>
-
-                                                                    <small *ngIf="fCorreo.submitted && fCorreo.controls['contactado'].errors " class="text-danger">
-                                                                        Campo obligatorio
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="form-group row">
-                                                                <div class="col-10">
-
-
-                                                                    <label class="col-form-label">Fecha</label>
-                                                                    <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="example-date-input" name="fecha" [(ngModel)]="correo.fecha" required />
-
-                                                                    <small *ngIf="fCorreo.submitted && fCorreo.controls['fecha'].errors" class="text-danger">
-                                                                        Campo obligatorio
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="form-group row">
-                                                                <div class="col-15">
-
-                                                                    <label class="col-form-label">Hora</label>
-                                                                    <input class="form-control" type="time" value="00:00:00" id="example-time-input" name="hora" [(ngModel)]="correo.hora" required />
-
-                                                                    <small *ngIf="fCorreo.submitted && fCorreo.controls['hora'].errors " class="text-danger">
-                                                                        Campo obligatorio
-                                                                    </small>
-
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <hr />
-
-                                            <small *ngIf="fCorreo.submitted && fCorreo.controls['descripcion'].errors" class="text-danger">
-                                                Campo obligatorio
-                                            </small>
-
-                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Descripción del correo" name="descripcion" [(ngModel)]="correo.descripcion" required>
-                                            </textarea>
-
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn estilosBotonesHover estilosBotones">
-                                                    Guardar
-                                                </button>
-                                                <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
-                                                    Cancelar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--fin del formulario modal Correo -->
-
-
-
-                    <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons circular" data-target="#modalLlamada" data-toggle="modal" title="Registrar llamada">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-plus"
-                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM12.5 1a.5.5 0 0 1 .5.5V3h1.5a.5.5 0 0 1 0 1H13v1.5a.5.5 0 0 1-1 0V4h-1.5a.5.5 0 0 1 0-1H12V1.5a.5.5 0 0 1 .5-.5z" />
-                        </svg>
+                    <!--Boton 3: Programar reunion -->
+                    <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons circular" data-target="#moda" data-toggle="modal" title="Programar reunion">
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar2-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+                            <path fill-rule="evenodd" d="M8 8a.5.5 0 0 1 .5.5V10H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V11H6a.5.5 0 0 1 0-1h1.5V8.5A.5.5 0 0 1 8 8z"/>
+                          </svg>
                     </button>
 
 
-                    <!--Inicio modal llamada-->
 
-                    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalLlamada" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bgCorp">
-
-                                    <h5 class="modal-title text-white" id="exampleModalLabel">
-                                        Registrar llamada
-                                    </h5>
-
-
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-
-
-                                <div class="modal-body">
-                                    <form (ngSubmit)="registrarLlamada(fLlamada)" #fLlamada="ngForm">
-                                        <div class="form-group">
-                                            <table class="table table-borderless text-left">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <label class="col-form-label">Contactado</label>
-                                                            <div class="form-group row">
-                                                                <div class="col-22 pl-3">
-
-
-                                                                    <select class="form-control" id="sel2" name="contactadoLlamada" required [(ngModel)]="llamada.fkcontacto">
-                                                                        <option>Seleccione</option>
-                                                                        <option>Usuario 1</option>
-                                                                        <option>Usuario 2</option>
-                                                                        <option>Usuario 3</option>
-                                                                    </select>
-
-                                                                    <small *ngIf="fLlamada.submitted && fLlamada.controls['contactadoLlamada'].errors" class="text-danger">
-                                                                        Campo obligatorio
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <label class="col-form-label">Resultado de la
-                                                                llamada</label>
-                                                            <div class="form-group row">
-                                                                <div class="col-22">
-
-
-                                                                    <select class="form-control" id="sel2" name="resultadoLlamada" required [(ngModel)]="llamada.resultado_llamada">
-                                                                        <option>Selecciona un resultado</option>
-                                                                        <option>Ocupado</option>
-                                                                        <option>Conectado</option>
-                                                                        <option>Sin respuesta</option>
-                                                                    </select>
-
-                                                                    <small *ngIf=" fLlamada.submitted &&fLlamada.controls['resultadoLlamada'].errors" class="text-danger">
-                                                                        Campo obligatorio
-                                                                    </small>
-
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <label class="col-form-label">Fecha</label>
-                                                            <div class="form-group row">
-                                                                <div class="col-10">
-
-
-                                                                    <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="example-date-input" name="fechaLlamada" required [(ngModel)]="llamada.fecha" />
-
-                                                                    <small *ngIf="fLlamada.submitted && fLlamada.controls['fechaLlamada'].errors " class="text-danger">
-                                                                        Campo obligatorio
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <label class="col-form-label">Hora</label>
-                                                            <div class="form-group row">
-                                                                <div class="col-15">
-
-                                                                    <input class="form-control" type="time" value="00:00:00" id="example-time-input" name="horaLlamada" required [(ngModel)]="llamada.hora" />
-
-                                                                    <small *ngIf="fLlamada.submitted && fLlamada.controls['horaLlamada'].errors " class="text-danger">
-                                                                        Campo obligatorio
-                                                                    </small>
-
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <hr />
-
-                                            <div>
-                                                <small *ngIf="fLlamada.submitted && fLlamada.controls['descripcionLlamada'].errors" class="text-danger">
-                                                    Campo obligatorio
-                                                </small>
-
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Descripción de la llamada" name="descripcionLlamada" required [(ngModel)]="llamada.descripcion"></textarea>
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn estilosBotones estilosBotonesHover">Crear</button>
-                                                <button type="submit" class="btn estilosBotones estilosBotonesHover">Crear y agregar
-                                                    otra</button>
-                                                <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
-                                                    Cancelar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
-
-
-
-
-                    <!--Fin modal Llamada-->
-
-                    <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons circular" data-target="#modalReunion" data-toggle="modal" title="Registrar reunión">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-plus"
-                            fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z" />
-                            <path fill-rule="evenodd"
-                                d="M8 7a.5.5 0 0 1 .5.5V9H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V10H6a.5.5 0 0 1 0-1h1.5V7.5A.5.5 0 0 1 8 7z" />
-                        </svg>
+                    <!--Boton 5: Lista de acciones  -->
+                    <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons circular dropdown" title="Registrar Reunión" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Registrar reunión">
+                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                          </svg>
                     </button>
 
-                    <!--Inicio del formulario modal Registrar Reunion-->
-                    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalReunion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header bgCorp">
-                                    <h5 class="modal-title text-white" id="exampleModalLabel">
-                                        Registrar reunión
-                                    </h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <form (ngSubmit)="registrarReunion(fReunion)" #fReunion="ngForm">
-                                        <div class="form-group">
-                                            <table class="table table-borderless text-left">
-                                                <tbody>
-
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-group row">
-                                                                <div class="col-22">
-
-                                                                    <label>Asistentes</label>
-
-
-                                                                    <select class="form-control" id="sel4" name="asistentesReunion" required [(ngModel)]="reunion.fkcontacto">
-                                                                        <option>--Seleccione--</option>
-                                                                        <option>Usuario 1</option>
-                                                                        <option>Usuario 2</option>
-                                                                        <option>Usuario 3</option>
-                                                                    </select>
-
-                                                                    <small *ngIf=" fReunion.submitted && fReunion.controls['asistentesReunion'].errors" class="text-danger">
-                                                                        Campo obligatorio
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td>
-                                                            <div class="form-group row">
-                                                                <div class="col-22">
-
-                                                                    <label>Resultado</label>
-
-                                                                    <select class="form-control" id="sel4" name="resultadoReunion" required [(ngModel)]="reunion.resultado">
-                                                                        <option>--Seleccione--</option>
-                                                                        <option>Programadas</option>
-                                                                        <option>Completadas</option>
-                                                                        <option>No asistió</option>
-                                                                        <option>Completadas</option>
-                                                                    </select>
-
-                                                                    <small *ngIf=" fReunion.submitted && fReunion.controls['resultadoReunion'].errors" class="text-danger">
-                                                                        Campo obligatorio
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="form-group row">
-                                                                <div class="col-10">
-
-                                                                    <label>Fecha</label>
-
-                                                                    <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="example-date-input" name="fechaReunion" required [(ngModel)]="reunion.fecha" />
-
-                                                                    <small *ngIf="fReunion.submitted && fReunion.controls['fechaReunion'].errors" class="text-danger">
-                                                                        Campo obligatorio
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-
-                                                        <td>
-                                                            <div class="form-group row">
-                                                                <div class="col-15">
-
-                                                                    <label>Hora</label>
-
-                                                                    <input class="form-control" type="time" value="00:00:00" id="example-time-input" name="horaReunion" required [(ngModel)]="reunion.hora" />
-
-                                                                    <small *ngIf="fReunion.submitted && fReunion.controls['horaReunion'].errors" class="text-danger">
-                                                                        Campo obligatorio
-                                                                    </small>
-
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-group row">
-                                                                <div class="col-22">
-
-                                                                    <label>Duración</label>
-
-                                                                    <select class="form-control" id="sel4" name="duracionReunion" required [(ngModel)]="reunion.duracion">
-                                                                        <option>--Seleccione--</option>
-                                                                        <option>15 minutos</option>
-                                                                        <option>30 minutos</option>
-                                                                        <option>45 minutos</option>
-                                                                        <option>1 Hora</option>
-                                                                    </select>
-
-                                                                    <small *ngIf="fReunion.submitted && fReunion.controls['duracionReunion'].errors" class="text-danger">
-                                                                        Campo obligatorio
-                                                                    </small>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                            <hr />
-
-                                            <small *ngIf="fReunion.submitted && fReunion.controls['descripcionReunion'].errors " class="text-danger">
-                                                Campo obligatorio
-                                            </small>
-                                            <div class="form-group">
-
-                                                <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Descripción del correo" name="descripcionReunion" required [(ngModel)]="reunion.descripcion"></textarea>
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn estilosBotonesHover estilosBotones">
-                                                    Guardar
-                                                </button>
-                                                <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
-                                                    Cancelar
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <button type="button" class="list-group-item list-group-item-action  estilosBotonesHover" data-target="#modalReunion" data-toggle="modal"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar2-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+                            <path fill-rule="evenodd" d="M8 8a.5.5 0 0 1 .5.5V10H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V11H6a.5.5 0 0 1 0-1h1.5V8.5A.5.5 0 0 1 8 8z"/>
+                          </svg>&nbsp;
+                           Registrar una reunión
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action  estilosBotonesHover" data-target="#modalLlamada" data-toggle="modal"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511zM12.5 1a.5.5 0 0 1 .5.5V3h1.5a.5.5 0 0 1 0 1H13v1.5a.5.5 0 0 1-1 0V4h-1.5a.5.5 0 0 1 0-1H12V1.5a.5.5 0 0 1 .5-.5z"/>
+                          </svg>&nbsp;
+                          Registrar una llamada
+                        </button>
+                        <button type="button" class="list-group-item list-group-item-action estilosBotonesHover " data-target="#modalCorreo" data-toggle="modal"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                          </svg>&nbsp; Registrar un correo</button>
                     </div>
 
-                    <!--Fin del formulario modal Registar Reunion-->
                 </div>
                 <hr size="8px" color="gray" />
                 <div *ngIf="ruta.tipo=='contacto'">
@@ -530,65 +119,27 @@
                     <table class="table table-hover mb-0 ml-3 mt-3">
                         <tbody>
                             <tr>
-                                <td>
-                                    <small class="text-muted">Correo</small>
-                                    <br/> {{unContacto.email}}
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td>
-                                    <small class="text-muted">Nombre</small>
-                                    <br/> {{unContacto.nombre}}
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td>
-                                    <small class="text-muted">Apellido</small>
-                                    <br> {{unContacto.apellido}}
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td>
-                                    <small class="text-muted">Propietario</small>
-                                    <br/> {{nombrePropietario.nombre}}
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td>
-                                    <small class="text-muted">Departamento</small>
-                                    <br>{{unContacto.departamento}}
-                                </td>
+                                <td><small class="text-muted">Correo</small><br/> {{unContacto.email}}</td>
                             </tr>
                             <tr>
-
+                                <td><small class="text-muted">Nombre</small><br/> {{unContacto.nombre}}</td>
                             </tr>
                             <tr>
-                                <td>
-                                    <small class="text-muted">Número de teléfono</small>
-                                    <br>{{unContacto.telefono}}
-                                </td>
-                            </tr>
-
-
-                            <tr>
-                                <td>
-                                    <small class="text-muted">Contactado por última vez</small>
-                                    <br/> ------
-
-                                </td>
+                                <td><small class="text-muted">Apellido</small><br> {{unContacto.apellido}}</td>
                             </tr>
                             <tr>
-                                <td>
-                                    <small class="text-muted"></small>
-                                </td>
+                                <td><small class="text-muted">Propietario</small><br/> {{nombrePropietario.nombre}}</td>
                             </tr>
+                            <tr>
+                                <td><small class="text-muted">Departamento</small><br>{{unContacto.departamento}}</td>
+                            </tr>
+                            <tr>
+                                <td><small class="text-muted">Número de teléfono</small><br>{{unContacto.telefono}}</td>
+                            </tr>
+                            <tr>
+                                <td><small class="text-muted">Contactado por última vez</small><br/> ------</td>
+                            </tr>
+
                         </tbody>
                     </table>
 
@@ -599,102 +150,46 @@
                     <table class="table table-hover mb-0 ml-3 mt-3">
                         <tbody>
                             <tr>
-                                <td>
-                                    <small class="text-muted">Nombre</small>
-                                    <br>{{unaEmpresa.nombre}}
-                                </td>
+                                <td><small class="text-muted">Nombre</small><br>{{unaEmpresa.nombre}} </td>
                             </tr>
-
-
                             <tr>
-                                <td>
-                                    <small class="text-muted">Propietario de registro</small>
-                                    <br> {{nombrePropietarioEmpresa.nombre}}
-                                </td>
+                                <td><small class="text-muted">Propietario de registro</small><br> {{nombrePropietarioEmpresa.nombre}}</td>
                             </tr>
-
                             <tr>
-                                <td>
-                                    <small class="text-muted">Industria</small>
-                                    <br>{{unaEmpresa.industria}}
-                                </td>
+                                <td><small class="text-muted">Industria</small><br>{{unaEmpresa.industria}}</td>
                             </tr>
-
                             <tr>
-                                <td>
-                                    <small class="text-muted">Número de teléfono</small>
-                                    <br>{{unaEmpresa.no_telefono}}
-                                </td>
+                                <td><small class="text-muted">Número de teléfono</small><br>{{unaEmpresa.no_telefono}}</td>
                             </tr>
-
                             <tr>
-                                <td>
-                                    <small class="text-muted">Tipo</small>
-                                    <br> {{unaEmpresa.tipo_cliente}}
-                                </td>
+                                <td><small class="text-muted">Tipo</small><br> {{unaEmpresa.tipo_cliente}}</td>
                             </tr>
-
                             <tr>
-                                <td>
-                                    <small class="text-muted">Ciudad</small>
-                                    <br>{{unaEmpresa.ciudad}}
-                                </td>
+                                <td><small class="text-muted">Ciudad</small><br>{{unaEmpresa.ciudad}}</td>
                             </tr>
-
                             <tr>
-                                <td>
-                                    <small class="text-muted">Estado o región</small>
-                                    <br>{{unaEmpresa.estado_region}}
-                                </td>
+                                <td><small class="text-muted">Estado o región</small><br>{{unaEmpresa.estado_region}}</td>
                             </tr>
-
                             <tr>
-                                <td>
-                                    <small class="text-muted">Código postal</small>
-                                    <br>{{unaEmpresa.codigo_postal}}
-                                </td>
+                                <td><small class="text-muted">Código postal</small><br>{{unaEmpresa.codigo_postal}}</td>
                             </tr>
-
                             <tr>
-                                <td>
-                                    <small class="text-muted">Número de empleados</small>
-                                    <br>{{unaEmpresa.no_empleados}}
-                                </td>
+                                <td><small class="text-muted">Número de empleados</small><br>{{unaEmpresa.no_empleados}}</td>
                             </tr>
-
                             <tr>
-                                <td>
-                                    <small class="text-muted">Ingresos anuales</small>
-                                    <br>{{unaEmpresa.ingresos_anuales}}
-                                </td>
+                                <td><small class="text-muted">Ingresos anuales</small><br>{{unaEmpresa.ingresos_anuales}}</td>
                             </tr>
-
                             <tr>
-                                <td>
-                                    <small class="text-muted">Zona horaria</small>
-                                    <br>{{unaEmpresa.zona_horaria}}
-                                </td>
+                                <td><small class="text-muted">Zona horaria</small><br>{{unaEmpresa.zona_horaria}}</td>
                             </tr>
-
-
                             <tr>
-                                <td>
-                                    <small class="text-muted">Descripción</small>
-                                    <br>{{unaEmpresa.descripcion}}
-                                </td>
+                                <td><small class="text-muted">Descripción</small><br>{{unaEmpresa.descripcion}}</td>
                             </tr>
-
                             <tr>
-                                <td>
-                                    <small class="text-muted">Página corporativa</small>
-                                    <br>{{unaEmpresa.pagina_corporativa}}
-                                </td>
+                                <td><small class="text-muted">Página corporativa</small><br>{{unaEmpresa.pagina_corporativa}}</td>
                             </tr>
-
-
                         </tbody>
                     </table>
-
                 </div>
             </div>
         </div>
@@ -702,10 +197,7 @@
         <!--Aqui termina la seccion de informacion de contacto-->
 
         <!--Aqui empieza la segunda sección
-        --------------------------------------------------------------------------------------------------
-    ------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------->
+        -------->
 
         <div class="col-lg-7 col-xl-6 scroll">
 
@@ -752,7 +244,7 @@
                                     </tr>
                                 </table>
 
-                                <footer class="blockquote-footer"> Se a creado el contacto con <cite title="Source Title">CRM de ClikSoft</cite></footer>
+                                <footer class="blockquote-footer"> Se ha creado el contacto con <cite title="Source Title">CRM de ClickSoft</cite></footer>
                             </blockquote>
                         </div>
                     </div>
@@ -761,7 +253,6 @@
             ------------------------------------------------------------------>
 
                 <div class="tab-pane fade  active" id="notas" role="tabpanel" aria-labelledby="notas-tab">
-
 
                     <div class="row mt-3" *ngIf="notasR.length == 0">
                         <div class="col-md-12">
@@ -774,7 +265,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="card mt-4 cardColorBorde" *ngFor="let notas of notasR">
                         <div class="card-header grisSecundario ">
@@ -794,7 +284,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <!---------------------------------Tab 3 --------------------------
             ------------------------------------------------------------------>
@@ -845,7 +334,6 @@
 
                 <!---------------------------------Tab 4 --------------------------
             ------------------------------------------------------------------>
-
                 <div class="tab-pane fade  active" id="llamadas" role="tabpanel" aria-labelledby="llamadas-tab">
 
                     <div class="row mt-3" *ngIf="llamadasR.length == 0">
@@ -872,7 +360,6 @@
                         </div>
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">
-
                                 <table class="table table-borderless">
                                     <tbody>
                                         <tr>
@@ -888,11 +375,9 @@
                                         </tr>
                                     </tbody>
                                 </table>
-
                             </blockquote>
                         </div>
                     </div>
-
                 </div>
 
 
@@ -943,15 +428,10 @@
                                         </tr>
                                     </tbody>
                                 </table>
-
                             </blockquote>
                         </div>
                     </div>
-
-
                 </div>
-
-
             </div>
 
             <!------------------------------------------------------------------------------------
@@ -973,7 +453,7 @@
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">
                                 <p>Nombre: {{unaEmpresa.nombre}}, pagina: {{unaEmpresa.pagina_corporativa}}</p>
-                                <footer class="blockquote-footer"> Se a creado la empresa con <cite title="Source Title">CRM de ClikSoft</cite></footer>
+                                <footer class="blockquote-footer"> Se ha creado la empresa con <cite title="Source Title">CRM de ClickSoft</cite></footer>
                             </blockquote>
                         </div>
                     </div>
@@ -996,7 +476,6 @@
                         </div>
                     </div>
 
-
                     <div class="card mt-4 cardColorBorde" *ngFor="let notasEmp of notasEmpresa">
                         <div class="card-header grisSecundario ">
                             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-stickies-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -1015,7 +494,6 @@
                         </div>
                     </div>
                 </div>
-
 
                 <!---------------------------------Tab 3 B--------------------------
             ------------------------------------------------------------------>
@@ -1110,17 +588,12 @@
                                         </tr>
                                     </tbody>
                                 </table>
-
                             </blockquote>
                         </div>
                     </div>
-
                 </div>
-
-
                 <!---------------------------------Tab 5 --------------------------
             ------------------------------------------------------------------>
-
                 <div class="tab-pane fade active" id="reuniones" role="tabpanel" aria-labelledby="reuniones-tab">
 
                     <div class="row mt-3" *ngIf="ReunionesEmpresa.length == 0">
@@ -1169,14 +642,8 @@
                             </blockquote>
                         </div>
                     </div>
-
-
                 </div>
-
-
             </div>
-
-
         </div>
 
         <!--Tercera sección
@@ -1192,96 +659,7 @@
                 </svg>
                 Agregar negocio
             </button>
-
             <hr />
-
-
-
-
-            <!--Inicio del formulario modal Negocio-->
-            <div class="modal fade" data-backdrop="static" data-keyboard="false" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header bgCorp">
-                            <h5 class="modal-title text-white" id="exampleModalLabel">
-                                Agregar negocio a este contacto
-                            </h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form (ngSubmit)="registrarNegocio(fNegocio)" #fNegocio="ngForm">
-
-
-
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Nombre del negocio</label>
-                                    <input type="text" class="form-control" id="nombre" name="nombreNegocio" required [(ngModel)]="negocio.nombre" />
-                                    <small class="text-danger" *ngIf="fNegocio.submitted && fNegocio.controls['nombreNegocio'].errors">Campo
-                                        obligatorio</small>
-
-                                </div>
-
-
-
-                                <div class="form-group">
-
-                                    <label for="recipient-name" class="col-form-label">Pipeline</label>
-                                    <input type="text" class="form-control" id="pipeline" name="pipelineNegocio" required [(ngModel)]="negocio.pipeline" />
-                                    <small class="text-danger" *ngIf="fNegocio.submitted && fNegocio.controls['pipelineNegocio'].errors">Campo
-                                        obligatorio</small>
-
-                                </div>
-
-
-
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Etapa del negocio</label>
-                                    <input type="text" class="form-control" id="etapa" name="etapaNegocio" required [(ngModel)]="negocio.etapa" />
-
-                                    <small class="text-danger" *ngIf="fNegocio.submitted && fNegocio.controls['etapaNegocio'].errors">Campo
-                                        obligatorio</small>
-
-                                </div>
-
-
-
-                                <div class="form-group">
-
-                                    <label for="recipient-name" class="col-form-label">Cantidad</label>
-                                    <input type="text" class="form-control" id="cantidad" name="cantidadNegocio" required [(ngModel)]="negocio.cantidad" />
-                                    <small class="text-danger" *ngIf="fNegocio.submitted && fNegocio.controls['cantidadNegocio'].errors">Campo
-                                        obligatorio</small>
-
-                                </div>
-
-
-                                <div class="modal-footer">
-                                    <button type="submit" class="btn estilosBotonesHover estilosBotones">
-                                        Crear
-                                    </button>
-                                    <button type="submit" class="btn estilosBotonesHover estilosBotones">
-                                        Crear y agregar otra
-                                    </button>
-                                    <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
-                                        Cancelar
-                                    </button>
-                                </div>
-
-
-
-                            </form>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!--fin del formulario modal-->
-
-
-
-
 
             <div class="card bg-light mb-3" style="max-width: 18rem; " *ngIf="ruta.tipo=='contacto'">
                 <div class="card-header font-weight-bold grisSecundario">Empresa relacionada</div>
@@ -1314,8 +692,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
@@ -1325,3 +701,4 @@
     <!-- Row -->
 </div>
 <!-- end page main wrapper -->
+

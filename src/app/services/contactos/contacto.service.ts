@@ -41,7 +41,7 @@ export class ContactoService {
           (resp: any) => {
             Swal.fire({
               title: 'Contacto eliminado',
-              text: 'Eliminado correctaente',
+              text: 'Eliminado correctamente',
               icon: 'success',
             });
 

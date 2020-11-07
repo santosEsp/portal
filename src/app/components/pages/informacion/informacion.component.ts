@@ -37,7 +37,6 @@ import { CorreosEmpresasService } from '../../../services/correosEmpresas/correo
 import { CorreosEmpresasModel } from 'src/app/models/correosEmpresas';
 
 
-
 @Component({
   selector: 'app-perfil',
   templateUrl: './informacion.component.html',
@@ -46,7 +45,7 @@ import { CorreosEmpresasModel } from 'src/app/models/correosEmpresas';
 export class InformacionComponent implements OnInit {
 
   // Variables, modelos y arrays para obtener info de contactos
-  nota = new NotaModel();
+  
   correo = new RegistrarCorreoModel();
   llamada = new RegistrarLlamadaModel();
   reunion = new RegistrarReunionModel();
@@ -63,8 +62,7 @@ export class InformacionComponent implements OnInit {
   nombrePropietario = new UsuarioModel();
   fkpropietarioContacto: number;
 
-  // variable para la fecha
-  fecha: Date = new Date();
+ 
 
   // variables para cargar info de empresas
   unaEmpresa = new EmpresaModel();
@@ -99,7 +97,7 @@ export class InformacionComponent implements OnInit {
       console.log(this.unaEmpresa);
     });
 
-    console.log(this.fecha);
+    
   }
 
   ngOnInit(): void {
@@ -289,48 +287,11 @@ export class InformacionComponent implements OnInit {
     this._correosEmpresas.cargarCorreos(this.idContacto).subscribe(listaCorreosEmpresas => {
       this.correosEmpresa = listaCorreosEmpresas;
       console.log('Correos empresa comp', this.correosEmpresa);
-
     });
   }
 
 
-  registrarNota(form: NgForm): any {
-    if (form.invalid) {
-      return 'Formulario no válido';
-    }
+ 
 
-    console.log(form);
-  }
-
-  registrarCorreo(form: NgForm): any {
-    if (form.invalid) {
-      return 'Formulario no válido';
-    }
-
-    console.log(form);
-  }
-
-  registrarLlamada(form: NgForm): any {
-    if (form.invalid) {
-      return 'Formulario no válido';
-    }
-
-    console.log(form);
-  }
-
-  registrarReunion(form: NgForm): any {
-    if (form.invalid) {
-      return 'Formulario no válido';
-    }
-
-    console.log(form);
-  }
-
-  registrarNegocio(form: NgForm): any {
-    if (form.invalid) {
-      return 'Formulario no válido';
-    }
-
-    console.log(form);
-  }
+  
 }

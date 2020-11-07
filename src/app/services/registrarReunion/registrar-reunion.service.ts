@@ -17,6 +17,7 @@ export class RegistrarReunionService {
   registrarReunion(reunion: RegistrarReunionModel): any {
     let url = URL_SERVICIOS + '/reuniones/';
     url += '?token=' + this.token;
+    console.log('Reunion a enviar service', reunion);
     return this.http.post(url, reunion).pipe(
       map(
         (resp: any) => {
@@ -28,7 +29,7 @@ export class RegistrarReunionService {
   }
 
 
-  eliminarCorreo(id: string): any {
+  eliminarReunion(id: string): any {
 
     let url = URL_SERVICIOS + '/reuniones/' + id;
     url += '?token=' + this.token;
@@ -88,4 +89,21 @@ export class RegistrarReunionService {
         )
       );
   }
+
+  
+  reporteReuniones(): any {
+    let url = URL_SERVICIOS + '/reuniones/reporte';
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log('reporte reuniones: ', resp.reporteReuniones);
+            return resp.reporteReuniones;
+          }
+        )
+      );
+  }
+
 }

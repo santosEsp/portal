@@ -4,6 +4,12 @@ import { ContactoModel } from '../../../models/contacto.model';
 import { ContactoService } from '../../../services/contactos/contacto.service';
 import { EmpresaService } from '../../../services/empresas/empresa.service';
 import Swal from 'sweetalert2';
+import { ExportarExcelService } from '../../../services/excelService/guardar-contactos.service';
+import { GuardarLlamadasService } from '../../../services/excelService/guardar-llamadas.service';
+import { LlamadasService } from '../../../services/llamadas/llamadas.service';
+import { RegistrarReunionService } from '../../../services/registrarReunion/registrar-reunion.service';
+import { GuardarReunionesService } from '../../../services/excelService/guardar-reuniones.service';
+
 
 @Component({
   selector: 'app-contactos',
@@ -20,9 +26,13 @@ export class ContactosComponent implements OnInit {
   miUsuario: string;
   miId: string;
   listaEmpresas: any = [];
+  llamadasRealizadas: any = [];
   listaMisContactos: ContactoModel[] = [];
+  reunionesRealizadas: any = [];
 
-  constructor(private _ContactoService: ContactoService, private _EmpresaService: EmpresaService) {
+  constructor(private _ContactoService: ContactoService, private _EmpresaService: EmpresaService,
+    private _excelService: ExportarExcelService, private _guardarLlamadasService: GuardarLlamadasService, private _llamadasService: LlamadasService,
+    private _registrarReunionService: RegistrarReunionService, private _guardarReunionesService: GuardarReunionesService) {
 
     this.tipo = 'contacto';
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
@@ -39,6 +49,8 @@ export class ContactosComponent implements OnInit {
     this.cargarContactos();
     this.cargarListaEmpresas();
     this.cargarMisContactos();
+    this.cargarLlamadasRealizadas();
+    this.cargarReunionesRealizadas();
   }
 
   onSubmit(form: NgForm): any {
@@ -146,4 +158,55 @@ export class ContactosComponent implements OnInit {
     console.log('Actualiza C', contacto);
   }
 
+
+  exportarContactos(): void {
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Se están exportando los contactos (.xlsx)',
+      showConfirmButton: false,
+      timer: 3000
+    });
+    this._excelService.contactosExcel(this.contactos, 'Contactos');
+  }
+
+  exportarMisContactos(): void {
+    Swal.fire({
+      icon: 'success',
+      title: 'Se están exportando mis contactos (.xlsx)',
+      showConfirmButton: false,
+      timer: 3000
+    });
+    this._excelService.MisContactosExcel(this.listaMisContactos, 'MisContactos');
+  }
+
+  cargarLlamadasRealizadas() {
+    this._llamadasService.reporteLlamadas().subscribe(lista => this.llamadasRealizadas = lista);
+    console.log('llamadas realizadas comp', this.llamadasRealizadas);
+  }
+
+  exportarLlamadasRealizadas() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Se están exportando las llamadas realizadas (.xlsx)',
+      showConfirmButton: false,
+      timer: 3000
+    });
+    this._guardarLlamadasService.llamadasExcel(this.llamadasRealizadas, 'LlamadasRealizadas');
+  }
+
+  cargarReunionesRealizadas() {
+    this._registrarReunionService.reporteReuniones().subscribe(lista => this.reunionesRealizadas = lista);
+    console.log('Reuniones realizadas', this.reunionesRealizadas);
+  }
+
+  exportarReunionesRealizadas() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Se están exportando las reuniones realizadas (Excel)',
+      showConfirmButton: false,
+      timer: 3000
+    });
+    this._guardarReunionesService.reunionesExcel(this.reunionesRealizadas, 'ReunionesRealizadas');
+  }
 }

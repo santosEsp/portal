@@ -31,4 +31,36 @@ export class LlamadasService {
         )
       );
   }
+
+  crearLlamada(llamada: RegistrarLlamadaModel): any {
+    let url = URL_SERVICIOS + '/llamadas/';
+    url += '?token=' + this.token;
+
+    console.log('Service crear llamada info:', llamada);
+    return this.http.post(url, llamada).pipe(
+      map(
+        (resp: any) => {
+          Swal.fire('Llamada', 'Llamada agregada correctamente', 'success');
+          return resp.llamada;
+        }
+      )
+    );
+  }
+
+  
+  reporteLlamadas(): any {
+    let url = URL_SERVICIOS + '/llamadas/reporte';
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log('reporte llamadas: ', resp.reporteLlamadas);
+            return resp.reporteLlamadas;
+          }
+        )
+      );
+  }
+
 }

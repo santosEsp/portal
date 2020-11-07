@@ -24,6 +24,7 @@ import { NegocioComponent } from './components/pages/negocios/negocios.component
 
 //servicios
 import { InformesService } from './services/informes/informes.service';
+import { ModalSharedComponent } from './components/modal-shared/modal-shared.component';
 
 
 
@@ -40,7 +41,8 @@ import { InformesService } from './services/informes/informes.service';
     InformesComponent,
     UsuariosComponent,
     ConfiguracionComponent,
-    NegocioComponent
+    NegocioComponent,
+    ModalSharedComponent
   ],
   imports: [
     BrowserModule,

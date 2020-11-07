@@ -20,7 +20,7 @@ export class RegistrarCorreoService {
     return this.http.post(url, correo).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Nota', 'Correo registrado', 'success');
+          Swal.fire('Correo', 'Correo registrado', 'success');
           return resp.correo;
         }
       )

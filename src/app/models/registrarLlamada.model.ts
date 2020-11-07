@@ -4,6 +4,7 @@ export class RegistrarLlamadaModel{
     fecha: string;
     hora: string;
     descripcion: string;
+    fkusuario?: string;
     createdAt?: string;
     updatedAt?: string;
 }

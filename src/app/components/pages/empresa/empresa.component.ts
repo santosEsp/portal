@@ -4,6 +4,7 @@ import { UsuarioModel } from 'src/app/models/usuarios.model';
 import { EmpresaService } from 'src/app/services/empresas/empresa.service';
 import { EmpresaModel } from '../../../models/empresa.model';
 import Swal from 'sweetalert2';
+import { ExcelEmpresasService } from '../../../services/excelService/guardar-empresas.service';
 
 @Component({
   selector: 'app-empresa',
@@ -26,7 +27,7 @@ export class EmpresaComponent implements OnInit {
   usuarioActual: UsuarioModel;
 
   constructor(
-    private _empresaService: EmpresaService) {
+    private _empresaService: EmpresaService, private _excelService: ExcelEmpresasService) {
     this.tipo = 'empresa';
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
     this.propietario.propietario_registro = this.miUsuario['nombre'];
@@ -137,4 +138,30 @@ export class EmpresaComponent implements OnInit {
     this._empresaService.actualizarEmpresa(empresa).subscribe();
     console.log('Actualiza E', empresa);
   }
+
+
+  guardarEmpresas(): void {
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Se están exportando todas las empresas (.xlsx)',
+      showConfirmButton: false,
+      timer: 2000
+    });
+    this._excelService.empresasExcel(this.empresas, 'Empresas');
+
+  }
+
+  guardarMisEmpresas(): void {
+
+    Swal.fire({
+      icon: 'success',
+      title: 'Se están exportando mis empresas (.xlsx)',
+      showConfirmButton: false,
+      timer: 2000
+    });
+    this._excelService.MisEmpresasExcel(this.listaMisEmpresas, 'MisEmpresas');
+  }
+
+
 }

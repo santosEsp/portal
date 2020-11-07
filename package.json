@@ -22,15 +22,18 @@
         "@popperjs/core": "^2.5.3",
         "bootstrap": "^4.5.2",
         "bootstrap-icons": "^1.0.0",
+        "chart.js": "^2.9.3",
         "datatables.net-responsive-bs4": "^2.2.6",
+        "file-saver": "^2.0.2",
         "jquery": "^3.5.1",
+        "ng2-charts": "^2.4.2",
+        "ngx-bootstrap": "^6.1.0",
         "popper.js": "^1.16.1",
         "rxjs": "~6.6.0",
         "sweetalert2": "^10.3.5",
         "tslib": "^2.0.2",
-        "zone.js": "~0.10.2",
-        "chart.js": "^2.9.3",
-        "ng2-charts": "^2.4.2"
+        "xlsx": "^0.16.8",
+        "zone.js": "~0.10.2"
     },
     "devDependencies": {
         "@angular-devkit/build-angular": "^0.1001.4",

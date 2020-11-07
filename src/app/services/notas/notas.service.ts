@@ -14,10 +14,11 @@ export class NotasService {
     this.token = localStorage.getItem('token');
   }
 
-  crearNota(nota: NotaModel): any {
+crearNota(nota: NotaModel): any {
     let url = URL_SERVICIOS + '/notas/';
     url += '?token=' + this.token;
 
+console.log('Service crear nota info:', nota);
     return this.http.post(url, nota).pipe(
       map(
         (resp: any) => {

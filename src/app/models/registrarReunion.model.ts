@@ -1,5 +1,5 @@
 export class RegistrarReunionModel {
-    id: string;
+    id?: string;
     fkcontacto: string;
     resultado: string;
     fecha: string;
@@ -7,7 +7,7 @@ export class RegistrarReunionModel {
     duracion: string;
     descripcion: string;
     fkusuario?: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 
 }
