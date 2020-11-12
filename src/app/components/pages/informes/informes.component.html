@@ -1,98 +1,49 @@
 <app-navbar>
 </app-navbar>
-<br>
 
 
-<div class="paddings">
-    <div class="btn-group">
-        <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Panel de ventas
-    </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+<div class="mt-5 container ">
 
-        </div>
+    <div class="col-sm table-responsive">
+        <h4> Total de contactos creados por dia </h4>
+        <br>
+
+
+        <form #f="ngForm">
+            <input class="float-right form-control" type="date" id="historico" name="historico" (change)="historicoSemana(f)" [(ngModel)]="historico.fechaI" max={{fechaMax}} min={{fechaMin}} style="width: min-content;">
+        </form>
+
+
+        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" width="390%" height="285%"></canvas>
+
+
+
     </div>
-</div>
 
-<br><br><br>
-
-<div class="container paddings2">
-    <div class="row">
-        <div class="col-sm">
-            <h4> Total de contactos creados por dia </h4>
-            <br><br>
-
-            <div class="container center-h">
-                <div>
-
-
-                    <div>
-                        <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" width="390%" height="285%"></canvas>
-                    </div>
-
-
-
-                </div>
-                <div class="menu">
-                    <div class="linea-1"></div>
-                    <div class="linea-2"></div>
-                    <div class="linea-3"></div>
-                </div>
-            </div>
-        </div>
-
-
-
-        <div class="col-sm"></div>
-        <div class="col-sm"></div>
-
-
-        <div class="col-sm-30">
-            <h4> Cantidad de contactos</h4>
-            <br><br>
-
-            <div class="container center-h">
-                <div class="table-responsive">
-
-                    <table class="table-light">
-                        <tr>
-                            <td>
-                                <h6>Total creado en el intervalo</h6> &nbsp; <br>
-                                <h3>13</h3>
-                            </td>
-                            <td>
-                                <h6> Promedio </h6><br>
-                                <h3>7</h3>
-                            </td>
-                        </tr>
-                        <tr>
-
-                            &nbsp;
-                        </tr>
-                        <tr>
-                            <td>
-                                <br><br><br>
-                                <h6>Mejor semana de intervalo al crear contactos</h6> <br>
-                                <h3>22</h3>
-                            </td>
-                            <td>
-
-                            </td>
-                        </tr>
-
-                    </table>
-
-
-
-                </div>
-                <div class="menu">
-                    <div class="linea-1"></div>
-                    <div class="linea-2"></div>
-                    <div class="linea-3"></div>
-                </div>
+    <div class="col-sm table-responsive">
+        <h4> Cantidad de contactos</h4>
+        <br>
+        <div class="card mt-5 text-center">
+            <div class="card-body">
+                <table class=" table-borderless ">
+                    <tr>
+                        <td>
+                            <h6 class="text-center">Total creado en el intervalo</h6> &nbsp; <br>
+                            <h4 class="text-center">{{numero}}</h4>
+                        </td>
+                        <td>
+                            <h6 class="text-center"> Promedio </h6><br>
+                            <h4 class="text-center">{{promedio}}</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h6 class="text-center justify-content-center">Mejor semana de intervalo al crear contactos <br> {{fechaI}} a {{fechaF}}</h6>
+                            <h4 class="text-center">{{mejor}}</h4>
+                        </td>
+                        <td></td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
