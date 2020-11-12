@@ -13,7 +13,6 @@ import { ChartsModule } from 'ng2-charts';
 import { LoginComponent } from './components/Login/login.component';
 import { EmpresaComponent } from './components/pages/empresa/empresa.component';
 import { ContactosComponent } from './components/pages/contactos/contactos.component';
-import { PipelineComponent } from './components/pages/pipeline/pipeline.component';
 import { NavbarComponent } from './components/pages/navbar/navbar.component';
 import { InformacionComponent } from './components/pages/informacion/informacion.component';
 import { InformesComponent } from './components/pages/informes/informes.component';
@@ -35,7 +34,6 @@ import { ModalSharedComponent } from './components/modal-shared/modal-shared.com
     LoginComponent,
     EmpresaComponent,
     ContactosComponent,
-    PipelineComponent,
     NavbarComponent,
     InformacionComponent,
     InformesComponent,

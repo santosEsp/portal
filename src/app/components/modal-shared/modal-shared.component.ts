@@ -9,12 +9,18 @@ import { RegistrarReunionModel } from '../../models/registrarReunion.model';
 import { NegocioModel } from '../../models/negocio.model';
 import { UsuarioModel } from 'src/app/models/usuarios.model';
 
-//servicios
+// servicios
 import { NotasService } from '../../services/notas/notas.service';
 import { ContactoService } from '../../services/contactos/contacto.service';
 import { RegistrarReunionService } from '../../services/registrarReunion/registrar-reunion.service';
 import { LlamadasService } from '../../services/llamadas/llamadas.service';
 import { RegistrarCorreoService } from '../../services/registrarCorreo/registrar-correo.service';
+import { EtapasNegociosService } from '../../services/etapasNegocios/etapas-negocios.service';
+import { NegociosContactosService } from '../../services/negociosContactos/negocios-contactos.service';
+
+// importando clase sw informacion.component.ts
+
+
 
 @Component({
   selector: 'app-modal-shared',
@@ -29,17 +35,22 @@ export class ModalSharedComponent implements OnInit {
   negocioContacto = new NegocioModel();
   miUsuario: string;
   miId: string;
+  datos: any [] = [];
+  
 
   nombrePropietario = new UsuarioModel();
 
   // variable para la fecha
   fecha: Date = new Date();
   idContacto: string;
+  etapas: any [] = [];
 
   constructor(private rutaActiva: ActivatedRoute, private _notasService: NotasService, private _contactoService: ContactoService, private _registrarReunion: RegistrarReunionService,
-    private _llamadaService: LlamadasService, private _correosService: RegistrarCorreoService) {
+    private _llamadaService: LlamadasService, private _correosService: RegistrarCorreoService, private _etapasService: EtapasNegociosService,
+    private _negocioService: NegociosContactosService) {
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
     this.miId = this.miUsuario['id_usuario'];
+
   }
 
   ngOnInit(): void {
@@ -52,6 +63,7 @@ export class ModalSharedComponent implements OnInit {
     );
 
     this.cargaNombreContacto();
+    this.cargarEtapas();
 
   }
 
@@ -72,6 +84,9 @@ export class ModalSharedComponent implements OnInit {
 
     });
   }
+
+
+
 
   cargaNombreContacto() {
     console.log('CargarNombrePropietario valor:', this.idContacto);
@@ -154,8 +169,28 @@ export class ModalSharedComponent implements OnInit {
     if (form.invalid) {
       return 'Formulario no válido';
     }
-
-    console.log(form);
+    this.negocioContacto = {
+      nombre_negocio: form.value.nombreNegocio,
+    pipeline: form.value.pipelineNegocio,
+    cantidad: form.value.cantidadNegocio,
+    fketapa: form.value.etapaNegocio,
+    fcierre: form.value.cierreNegocio,
+    fkcontacto: parseInt( this.idContacto),
+    fkusuario: parseInt(this.miId)
+    };
+    console.log('Esto mandaré al server:', this.negocioContacto);
+    this._negocioService.crearNegocio(this.negocioContacto).subscribe(() => {
+    });
   }
+
+  cargarEtapas(): any {
+    this._etapasService.cargarEtapas().subscribe(lista => {
+      this.etapas = lista;
+      console.log('N etapas', this.etapas);
+    });
+
+  }
+
+  
 
 }

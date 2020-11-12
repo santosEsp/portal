@@ -119,11 +119,13 @@
                                 <label for="recipient-name" class="col-form-label">Empresa</label>
                                 <div class="col-22">
                                     <select class="form-control" id="fkempresa" name="fkempresa" [(ngModel)]="contacto.fkempresa">
-                                        <option  *ngFor="let lista of listaEmpresas" [ngValue]="lista.id_empresa">{{lista.nombre}}</option>
+                                        <option  *ngFor="let lista of listaEmpresas" [ngValue]="lista.id_empresa">
+                                            {{lista.nombre}}
+                                        </option>
                                         
                                     </select>
 
-                                    <small *ngIf="f.submitted && f.controls['fkempresa'].errors" class="text-danger">
+                                    <small *ngIf="f.submitted && f.controls['fkempresa'].untouched" class="text-danger">
                                         Campo obligatorio
                                     </small>
                                 </div>

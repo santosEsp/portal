@@ -63,7 +63,7 @@ export class ContactoService {
           (resp: any) => {
             Swal.fire({
               title: 'Contacto actualizado',
-              text: 'Actualizado correctaente',
+              text: 'Actualizado correctamente',
               icon: 'success',
             });
 

@@ -1,20 +1,21 @@
 <app-navbar></app-navbar>
-<h1 class="m-5">Configuración</h1>
-
+<div class="container-fluid mt-1">
+    <span class="encabezado1">Configuración</span>
+</div>
 <hr>
 
-<div class="row m-5">
+<div class="row m-2">
     <div class="col-3">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <h5>Tus preferencias</h5>
-            <a class="nav-link active" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-profile" aria-selected="true">Información básica</a>
+            <h5 class="ml-3">Tus preferencias</h5>
+            <a class="nav-link active mt-3" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-profile" aria-selected="true">Información básica</a>
             <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-seguridad" role="tab" aria-controls="v-pills-settings" aria-selected="false">Seguridad</a>
             <a class="nav-link" id="v-pills-nego-tab" data-toggle="pill" href="#v-pills-nego" role="tab" aria-controls="v-pills-nego" aria-selected="false">Negocios</a> </div>
     </div>
     <div class="col-9">
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                <h1>En todas las cuentas</h1>
+                <h3>En todas las cuentas</h3>
                 <div class="card-body user-profile-card mb-3">
                     <table>
                         <tr>
@@ -65,7 +66,7 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="v-pills-seguridad" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                <h1>Seguridad</h1>
+                <h3>Seguridad</h3>
                 <br>
                 <h5>Dirección de correo</h5>
                 <input type="text" class="form-control" style="width : 400px;">
@@ -89,155 +90,133 @@
                 <h5>Restablecido por ultima vez el 1/10/2020</h5>
 
             </div>
+
+
             <div class="tab-pane fade" id="v-pills-nego" role="tabpanel" aria-labelledby="v-pills-messages-tab">
-                <h1>Seleciona un pipeline para modificarlo</h1>
-                <hr>
-                <h3>Configurar</h3>
-                <br>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Nombre de la etapa</th>
-                            <th scope="col">Probabilidad de ganar</th>
-                            <th scope="col">Actualizar propiedades de la etapa</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Generación de Lead</td>
-                            <td>10%</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Calificado para la compra</td>
-                            <td>5%</td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>Cita de presentacion</td>
-                            <td>15%</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <button style="width : 300px;" type="button" class="btn btn-outline-primary margenBoton" data-toggle="modal" data-target="#etapa" data-whatever="@mdo"><svg width="1.2em" height="1.2em"
-                    viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                </svg>Agregar etapa del negocio</button>
-            </div>
-        </div>
+                <h3>Configura el pipeline</h3>
+                <!---------------------------Tabla de pipeline--------------------->
 
-    </div>
-</div>
-<div class="modal fade" data-backdrop="static" data-keyboard="false" id="contra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h5 class="modal-title text-white" id="exampleModalLabel">Restablecer contraseña
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-            </div>
-            <div class="modal-body">
-                <form (ngSubmit)="onCon(c)" #c="ngForm">
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Ingresa tu contraseña actual</label>
-                        <input minlength="8" required type="password" class="form-control" id="con_actual" name="con_actual" [(ngModel)]="contrasena.con_actual">
-                        <span *ngIf="c.submitted && c.controls['con_actual'].errors" class="text-danger animated fadeIn"><small>Al menos 8 letras</small></span>
-                    </div>
+                <div class="table-responsive">
+                    <table class="table mt-3 display table-hover">
+                        <thead class="thead-light">
+                            <tr>
+                                <th scope="col">Núm.</th>
+                                <th scope="col">Nombre de la etapa</th>
+                                <th scope="col">Probabilidad de ganar</th>
+                                <th scope="col">Editar</th>
 
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Elige tu contraseña nueva</label>
-                        <input minlength="8" required type="password" class="form-control" id="con_nuevav1" name="con_nuevav1" [(ngModel)]="contrasena.con_nueva">
-                        <span *ngIf="c.submitted && c.controls['con_nuevav1'].errors" class="text-danger animated fadeIn"><small>Al menos 8 letras</small></span>
-                    </div>
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Confirma tu contraseña nueva</label>
-                        <input minlength="8" required type="password" class="form-control" id="con_nuevav2" name="con_nuevav2" [(ngModel)]="contrasena.con_nueva">
-                        <span *ngIf="c.submitted && c.controls['con_nuevav2'].errors" class="text-danger animated fadeIn"><small>Al menos 8 letras</small></span>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button " class="btn btn-outline-primary ">Restlabecer contraseña</button>
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let etapa of arrayEtapas; let i = index">
+                                <th scope="row">{{i+1}}</th>
+                                <td><input [(ngModel)]="etapa.nombre" type="text" name="nombre" class="form-control" placeholder="Nombre de la etapa"></td>
+                                <td>
+
+                                    <select class="form-control" id="etapasNegocio" name="etapasNegocio" [(ngModel)]="etapa.probabilidad" style=" width: fit-content; ">
+                                            <!-- <option disabled hidden>{{etapa.probabilidad}}</option> -->
+                                            <option >10%</option>
+                                            <option >20%</option>
+                                            <option >30%</option>
+                                            <option >40%</option>
+                                            <option >50%</option>
+                                            <option >60%</option>
+                                            <option >70%</option>
+                                            <option >80%</option>
+                                            <option >90%</option>
+                                            <option >Ganados</option>
+                                            <option >Perdidos</option>
+
+                                    </select>
+
+                                </td>
+                                <td>
+                                    <button (click)="editarEtapa(etapa) " class="btn estilosBotones estilosBotonesHover ">
+                                        <svg width="1em " height="1em " viewBox="0 0 16 16 " class="bi bi-pencil-square " fill="currentColor " xmlns="http://www.w3.org/2000/svg ">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z "/>
+                                            <path fill-rule="evenodd " d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z "/>
+                                        </svg>
+                                    </button>
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
         </div>
     </div>
 </div>
-
-<div class="modal fade" data-backdrop="static" data-keyboard="false" id="edicorreo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h5 class="modal-title text-white" id="exampleModalLabel">Editar dirección de correo
+<div class="modal fade " data-backdrop="static " data-keyboard="false " id="contra " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true ">
+    <div class="modal-dialog " role="document ">
+        <div class="modal-content ">
+            <div class="modal-header bg-primary ">
+                <h5 class="modal-title text-white " id="exampleModalLabel ">Restablecer contraseña
                 </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
+                <button type="button " class="close " data-dismiss="modal " aria-label="Close ">
+                                <span aria-hidden="true ">&times;</span>
                             </button>
             </div>
-            <div class="modal-body">
-                <form (ngSubmit)="onCorreo(f)" #f="ngForm">
-                    <div class="form-group">
-
-                        <label for="recipient-name" class="col-form-label">Ingresa tu correo actual</label>
-
-                        <input type="email" class="form-control" id="correo_actual" name="correo_actual" required email [(ngModel)]="correo.correo_actual">
-                        <span *ngIf="f.submitted && f.controls['correo_actual'].errors" class="text-danger animated fadeIn"><small>El correo es obligatorio</small></span>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Elige tu correo nuevo</label>
-
-                        <input type="text" class="form-control" id="correo" required email name="correo_nuevo" [(ngModel)]="correo.correo_nuevo">
-                        <span *ngIf="f.submitted && f.controls['correo_nuevo'].errors" class="text-danger  animated fadeIn"><small>El correo es obligatorio</small> </span>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button " class="btn btn-outline-primary ">Guardar correo</button>
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" data-backdrop="static" data-keyboard="false" id="etapa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header bg-primary">
-                <h5 class="modal-title text-white" id="exampleModalLabel">Agregar etapa del negocio
-                </h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-            </div>
-            <div class="modal-body">
-                <form (ngSubmit)="onSubmit(g)" #g="ngForm">
-                    <div class="form-group">
-                        <label for="recipient-name" class="col-form-label">Nombre de la etapa</label>
-                        <input minlength="2" required type="text" name="nombre_etapa" class=" form-control" id="nombre_etapa" [(ngModel)]="pipeline.nombre_etapa">
-                        <span *ngIf="g.submitted && g.controls['nombre_etapa'].errors" class="text-danger"><small>Campo obligatorio</small> </span>
+            <div class="modal-body ">
+                <form (ngSubmit)="onCon(c) " #c="ngForm">
+                    <div class="form-group ">
+                        <label for="recipient-name " class="col-form-label ">Ingresa tu contraseña actual</label>
+                        <input minlength="8 " required type="password " class="form-control " id="con_actual " name="con_actual " [(ngModel)]="contrasena.con_actual ">
+                        <span *ngIf="c.submitted && c.controls[ 'con_actual'].errors " class="text-danger animated fadeIn "><small>Al menos 8 letras</small></span>
                     </div>
 
                     <div class="form-group ">
-                        <label for="recipient-name " class="col-form-label ">Probabilidad de ganar</label>
-                        <input minlength="2" type="text " required class="form-control " name="ganar" id="ganar" [(ngModel)]="pipeline.probabilidad">
-                        <span *ngIf="g.submitted && g.controls['ganar'].errors" class="text-danger"><small>Campo obligatorio</small> </span>
+                        <label for="recipient-name " class="col-form-label ">Elige tu contraseña nueva</label>
+                        <input minlength="8 " required type="password " class="form-control " id="con_nuevav1 " name="con_nuevav1 " [(ngModel)]="contrasena.con_nueva ">
+                        <span *ngIf="c.submitted && c.controls[ 'con_nuevav1'].errors " class="text-danger animated fadeIn "><small>Al menos 8 letras</small></span>
                     </div>
-
                     <div class="form-group ">
-                        <label for="recipient-name " class="col-form-label ">Actualizar propiedades de la etapa</label>
-                        <input type="text " class="form-control " id="propiedades " name="propiedades" [(ngModel)]="pipeline.actualizar">
+                        <label for="recipient-name " class="col-form-label ">Confirma tu contraseña nueva</label>
+                        <input minlength="8 " required type="password " class="form-control " id="con_nuevav2 " name="con_nuevav2 " [(ngModel)]="contrasena.con_nueva ">
+                        <span *ngIf="c.submitted && c.controls[ 'con_nuevav2'].errors " class="text-danger animated fadeIn "><small>Al menos 8 letras</small></span>
                     </div>
                     <div class="modal-footer ">
-                        <button type="button " class="btn btn-outline-primary ">Agregar etapa</button>
-                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancelar</button>
+                        <button type="button " class="btn btn-outline-primary ">Restlabecer contraseña</button>
+                        <button type="button " class="btn btn-outline-primary " data-dismiss="modal ">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade " data-backdrop="static " data-keyboard="false " id="edicorreo " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true ">
+    <div class="modal-dialog " role="document ">
+        <div class="modal-content ">
+            <div class="modal-header bg-primary ">
+                <h5 class="modal-title text-white " id="exampleModalLabel ">Editar dirección de correo
+                </h5>
+                <button type="button " class="close " data-dismiss="modal " aria-label="Close ">
+                                <span aria-hidden="true ">&times;</span>
+                            </button>
+            </div>
+            <div class="modal-body ">
+                <form (ngSubmit)="onCorreo(f) " #f="ngForm">
+                    <div class="form-group ">
+
+                        <label for="recipient-name " class="col-form-label ">Ingresa tu correo actual</label>
+
+                        <input type="email " class="form-control " id="correo_actual " name="correo_actual " required email [(ngModel)]="correo.correo_actual ">
+                        <span *ngIf="f.submitted && f.controls[ 'correo_actual'].errors " class="text-danger animated fadeIn "><small>El correo es obligatorio</small></span>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="recipient-name " class="col-form-label ">Elige tu correo nuevo</label>
+
+                        <input type="text " class="form-control " id="correo " required email name="correo_nuevo " [(ngModel)]="correo.correo_nuevo ">
+                        <span *ngIf="f.submitted && f.controls[ 'correo_nuevo'].errors " class="text-danger animated fadeIn "><small>El correo es obligatorio</small> </span>
+                    </div>
+                    <div class="modal-footer ">
+                        <button type="button " class="btn btn-outline-primary ">Guardar correo</button>
+                        <button type="button " class="btn btn-outline-primary " data-dismiss="modal ">Cancelar</button>
                     </div>
                 </form>
             </div>

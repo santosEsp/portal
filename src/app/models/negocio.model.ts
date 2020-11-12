@@ -1,9 +1,12 @@
 export class NegocioModel{
-    nombre: string;
+    id_negocio?: string;
+    nombre_negocio: string;
     pipeline: string;
-    etapa: string;
     cantidad: number;
-    fkempresa: number;
-    fecha_cierre:Date;
-    fkrelaciones:number;
+    fketapa: number;
+    fkcontacto: number;
+    fkusuario: number;
+    fcierre: string;
+    createdAt?: string;
+    updatedAt?: string;
 }

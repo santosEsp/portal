@@ -8,7 +8,6 @@ import { InformesComponent } from './components/pages/informes/informes.componen
 import { UsuariosComponent } from './components/pages/usuarios/usuarios.component';
 import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
 import { AuthGuard } from './guards/auth.guard';
-import { PipelineComponent } from './components/pages/pipeline/pipeline.component';
 import { NegocioComponent } from './components/pages/negocios/negocios.component';
 
 const routes: Routes = [
@@ -18,7 +17,6 @@ const routes: Routes = [
   {path: 'informacion/:tipo/:id', component: InformacionComponent, canActivate: [AuthGuard]},
   {path: 'informes', component: InformesComponent, canActivate: [AuthGuard]},
   {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
-  {path: 'pipeline', component: PipelineComponent, canActivate: [AuthGuard]},
   {path: 'configuracion', component: ConfiguracionComponent, canActivate:[AuthGuard]},
   {path: 'negocios',component:NegocioComponent, canActivate: [AuthGuard]},
   {path: '**', pathMatch: 'full', redirectTo: 'login'}

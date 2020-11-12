@@ -437,7 +437,7 @@
             <!------------------------------------------------------------------------------------
             -------------------Segunda sección de tabs---------------------------------------->
 
-            <div class="tab-content con" id="myTabContent" *ngIf="ruta.tipo=='empresa'">
+            <div class="tab-content " id="myTabContent" *ngIf="ruta.tipo=='empresa'">
 
                 <div class="tab-pane fade show active" id="actividades" role="tabpanel" aria-labelledby="actividades-tab">
 
@@ -651,7 +651,89 @@
     --------------------------------------------------------------->
         <div class="col-lg-12 col-xl-3 scroll">
 
-            <button type="button" class="btn estilosBotonesHover estilosBotones margenBoton mt-4" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+
+            <div *ngIf="ruta.tipo=='contacto'">
+
+                <label class="ml-4 mt-3" style="font-weight: 500;">Empresa relacionada</label><br>
+
+                <div class="card block">
+                    <div class="card-body">
+                        <h5 class="card-title">{{nombreEmpresa.nombre}}</h5>
+                        <p class="card-text"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M12.166 8.94C12.696 7.867 13 6.862 13 6A5 5 0 0 0 3 6c0 .862.305 1.867.834 2.94.524 1.062 1.234 2.12 1.96 3.07A31.481 31.481 0 0 0 8 14.58l.208-.22a31.493 31.493 0 0 0 1.998-2.35c.726-.95 1.436-2.008 1.96-3.07zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+                        <path fill-rule="evenodd" d="M8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                      </svg>&nbsp;&nbsp;{{nombreEmpresa.estado_region}}
+                            <br><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.267.98a1.636 1.636 0 0 1 2.448.152l1.681 2.162c.309.396.418.913.296 1.4l-.513 2.053a.636.636 0 0 0 .167.604L8.65 9.654a.636.636 0 0 0 .604.167l2.052-.513a1.636 1.636 0 0 1 1.401.296l2.162 1.681c.777.604.849 1.753.153 2.448l-.97.97c-.693.693-1.73.998-2.697.658a17.47 17.47 0 0 1-6.571-4.144A17.47 17.47 0 0 1 .639 4.646c-.34-.967-.035-2.004.658-2.698l.97-.969z"/>
+                            </svg>&nbsp;&nbsp;{{nombreEmpresa.no_telefono}}
+                            <br><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-globe" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4H2.255a7.025 7.025 0 0 1 3.072-2.472 6.7 6.7 0 0 0-.597.933c-.247.464-.462.98-.64 1.539zm-.582 3.5h-2.49c.062-.89.291-1.733.656-2.5H3.82a13.652 13.652 0 0 0-.312 2.5zM4.847 5H7.5v2.5H4.51A12.5 12.5 0 0 1 4.846 5zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5H7.5V11H4.847a12.5 12.5 0 0 1-.338-2.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12H7.5v2.923c-.67-.204-1.335-.82-1.887-1.855A7.97 7.97 0 0 1 5.145 12zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11H1.674a6.958 6.958 0 0 1-.656-2.5h2.49c.03.877.138 1.718.312 2.5zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12h2.355a7.967 7.967 0 0 1-.468 1.068c-.552 1.035-1.218 1.65-1.887 1.855V12zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5h-2.49A13.65 13.65 0 0 0 12.18 5h2.146c.365.767.594 1.61.656 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4H8.5V1.077c.67.204 1.335.82 1.887 1.855.173.324.33.682.468 1.068z"/>
+                          </svg>&nbsp;&nbsp;{{nombreEmpresa.pagina_corporativa}}</p>
+                    </div>
+                </div>
+                <hr *ngIf="ruta.tipo=='contacto'">
+                <!--Negocios para contactos-->
+                <label class="ml-4" style="font-weight: 500;">Negocios</label>
+
+                <a href="#" class="margenLink " *ngIf="ruta.tipo=='contacto'" data-toggle="modal" data-target="#exampleModal">
+                    <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>Agregar negocio</a>
+
+                <!--Tarjetas de los negocios-->
+                <div class="card block mt-2" *ngFor="let negocio of negociosContacto">
+                    <div class="card-body">
+                        <h5 class="card-title">{{negocio.nombre_negocio}}</h5>
+                        <p class="card-text"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-repeat" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41zm-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9z"/>
+                            <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5.002 5.002 0 0 0 8 3zM3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9H3.1z"/>
+                          </svg>&nbsp;&nbsp;{{negocio.Etapa}}
+                            <br><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-bar-right" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M6 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L12.293 7.5H6.5A.5.5 0 0 0 6 8zm-2.5 7a.5.5 0 0 1-.5-.5v-13a.5.5 0 0 1 1 0v13a.5.5 0 0 1-.5.5z"/>
+                              </svg>&nbsp;&nbsp;{{negocio.pipeline}}
+
+                            <br><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-wallet2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M12.136.326A1.5 1.5 0 0 1 14 1.78V3h.5A1.5 1.5 0 0 1 16 4.5v9a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 0 13.5v-9a1.5 1.5 0 0 1 1.432-1.499L12.136.326zM5.562 3H13V1.78a.5.5 0 0 0-.621-.484L5.562 3zM1.5 4a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-13z"/>
+                              </svg>&nbsp;&nbsp;{{ negocio.cantidad | currency:'$' }}
+
+                            <br><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar2-check" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
+                                <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
+                                <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                              </svg>&nbsp;&nbsp; Concluye: {{negocio.fcierre}}
+                        </p>
+                        <div class="float-sm-right text-sm-right">
+                            <a href="#" (click)="eliminarNegocio(negocio)" data-toggle="modal" data-target="evitaRedirigir">Eliminar</a>&nbsp;&nbsp;
+                            <a href="#" (click)="cargarInfo(negocio)" data-toggle="modal" data-target="#modalEditarNegocio">Editar</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--EMPRESAS ----Contactos relacionados de empresas-->
+
+            <div *ngIf="ruta.tipo=='empresa'">
+                <label class="ml-4" style="font-weight: 500;">Contactos</label><br>
+
+                <div>
+                    <div class="card block mt-2" *ngFor="let contactos of listaContactosRelacionados">
+                        <div class="card-body">
+                            <h5 class="card-title">{{contactos.nombre}} {{contactos.apellido}}</h5>
+                            <p class="card-text"><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1H2zm13 2.383l-4.758 2.855L15 11.114v-5.73zm-.034 6.878L9.271 8.82 8 9.583 6.728 8.82l-5.694 3.44A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.739zM1 11.114l4.758-2.876L1 5.383v5.73z"/>
+                          </svg>&nbsp;&nbsp;{{contactos.email}}
+                                <br><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-telephone-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M2.267.98a1.636 1.636 0 0 1 2.448.152l1.681 2.162c.309.396.418.913.296 1.4l-.513 2.053a.636.636 0 0 0 .167.604L8.65 9.654a.636.636 0 0 0 .604.167l2.052-.513a1.636 1.636 0 0 1 1.401.296l2.162 1.681c.777.604.849 1.753.153 2.448l-.97.97c-.693.693-1.73.998-2.697.658a17.47 17.47 0 0 1-6.571-4.144A17.47 17.47 0 0 1 .639 4.646c-.34-.967-.035-2.004.658-2.698l.97-.969z"/>
+                            </svg>&nbsp;&nbsp;{{contactos.telefono}}
+                                <br><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-globe" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm7.5-6.923c-.67.204-1.335.82-1.887 1.855A7.97 7.97 0 0 0 5.145 4H7.5V1.077zM4.09 4H2.255a7.025 7.025 0 0 1 3.072-2.472 6.7 6.7 0 0 0-.597.933c-.247.464-.462.98-.64 1.539zm-.582 3.5h-2.49c.062-.89.291-1.733.656-2.5H3.82a13.652 13.652 0 0 0-.312 2.5zM4.847 5H7.5v2.5H4.51A12.5 12.5 0 0 1 4.846 5zM8.5 5v2.5h2.99a12.495 12.495 0 0 0-.337-2.5H8.5zM4.51 8.5H7.5V11H4.847a12.5 12.5 0 0 1-.338-2.5zm3.99 0V11h2.653c.187-.765.306-1.608.338-2.5H8.5zM5.145 12H7.5v2.923c-.67-.204-1.335-.82-1.887-1.855A7.97 7.97 0 0 1 5.145 12zm.182 2.472a6.696 6.696 0 0 1-.597-.933A9.268 9.268 0 0 1 4.09 12H2.255a7.024 7.024 0 0 0 3.072 2.472zM3.82 11H1.674a6.958 6.958 0 0 1-.656-2.5h2.49c.03.877.138 1.718.312 2.5zm6.853 3.472A7.024 7.024 0 0 0 13.745 12H11.91a9.27 9.27 0 0 1-.64 1.539 6.688 6.688 0 0 1-.597.933zM8.5 12h2.355a7.967 7.967 0 0 1-.468 1.068c-.552 1.035-1.218 1.65-1.887 1.855V12zm3.68-1h2.146c.365-.767.594-1.61.656-2.5h-2.49a13.65 13.65 0 0 1-.312 2.5zm2.802-3.5h-2.49A13.65 13.65 0 0 0 12.18 5h2.146c.365.767.594 1.61.656 2.5zM11.27 2.461c.247.464.462.98.64 1.539h1.835a7.024 7.024 0 0 0-3.072-2.472c.218.284.418.598.597.933zM10.855 4H8.5V1.077c.67.204 1.335.82 1.887 1.855.173.324.33.682.468 1.068z"/>
+                          </svg>&nbsp;&nbsp;{{contactos.departamento}}</p>
+                        </div>
+                    </div>
+                </div>
+                <!--NEGOCIOS DE EMPRESAS-->
+                <button type="button" class="btn estilosBotonesHover estilosBotones margenBoton mt-2 " data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
                 <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
@@ -659,46 +741,98 @@
                 </svg>
                 Agregar negocio
             </button>
-            <hr />
 
-            <div class="card bg-light mb-3" style="max-width: 18rem; " *ngIf="ruta.tipo=='contacto'">
-                <div class="card-header font-weight-bold grisSecundario">Empresa relacionada</div>
-                <div class="card-body">
-                    <div class="container">
-                        <ul class="list-group">
-                            <li>{{nombreEmpresa.nombre}}</li>
-                        </ul>
-
-                    </div>
-                </div>
             </div>
+        </div>
+        <!-- Row -->
+    </div>
+    <!-- end page main wrapper -->
 
-            <div class="card bg-light mb-3" style="max-width: 18rem; " *ngIf="ruta.tipo=='empresa'">
-                <div class="card-header font-weight-bold grisSecundario">Contactos relacionados</div>
-                <div class="card-body">
-                    <div class="container">
-                        <ul class="list-group">
-                            <li *ngFor="let contactos of listaContactosRelacionados">{{contactos.nombre}} {{contactos.apellido}}</li>
-                        </ul>
 
-                        <div class="row mt-3" *ngIf="listaContactosRelacionados.length == 0">
-                            <div class="col-md-12">
-                                <div class="alert alert-secondary" role="alert">
-                                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                        <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-                                        <circle cx="8" cy="4.5" r="1"/>
-                                      </svg> &nbsp;&nbsp; No hay contactos relacionados para esta empresa. Los contactos que registres y pertenezcan a esta empresa aparecerán aquí.
-                                </div>
-                            </div>
+
+
+
+    <!--Formulario modal-->
+    <!--Inicio del formulario modal Editar Negocio-->
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalEditarNegocio" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bgCorp">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">
+                        Editar negocio
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="actualizarNegocio(fNegocio)" #fNegocio="ngForm">
+
+
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="nombre" name="idNegocio" required [(ngModel)]="editarNegocio.id_negocio" />
                         </div>
-                    </div>
-                </div>
-            </div>
 
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nombre del negocio</label>
+                            <input type="text" class="form-control" id="nombre" name="nombreNegocio" required [(ngModel)]="editarNegocio.nombre_negocio" />
+                            <small class="text-danger" *ngIf="fNegocio.submitted && fNegocio.controls['nombreNegocio'].errors">Campo
+                                        obligatorio</small>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="recipient-name" class="col-form-label">Pipeline</label>
+                            <input type="text" class="form-control" id="pipeline" name="pipelineNegocio" required [(ngModel)]="editarNegocio.pipeline" />
+                            <small class="text-danger" *ngIf="fNegocio.submitted && fNegocio.controls['pipelineNegocio'].errors">Campo
+                                        obligatorio</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Etapa del negocio</label>
+                            <select class="form-control" id="etapa" name="etapaNegocio" [(ngModel)]="editarNegocio.fketapa">
+                                <option  *ngFor="let etapa of etapas" [ngValue]="etapa.id_etapa">{{etapa.nombre}}</option>
+                                
+                            </select>
+
+                            <small *ngIf="fNegocio.submitted && fNegocio.controls['etapaNegocio'].hasError()" class="text-danger">
+                                Campo obligatorio
+                            </small>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label for="recipient-name" class="col-form-label">Cantidad</label>
+                            <input type="text" class="form-control" id="cantidad" name="cantidadNegocio" required [(ngModel)]="editarNegocio.cantidad" />
+                            <small class="text-danger" *ngIf="fNegocio.submitted && fNegocio.controls['cantidadNegocio'].errors">Campo
+                                        obligatorio</small>
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Fecha de cierre</label>
+                            <input class="form-control" type="date" value="" id="example-date-input" name="cierreNegocio" required [(ngModel)]="editarNegocio.fcierre" />
+                            <small *ngIf="fNegocio.submitted && fNegocio.controls['cierreNegocio'].errors " class="text-danger">
+                                                    Campo obligatorio
+                                                </small>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn estilosBotonesHover estilosBotones">
+                                        Guardar
+                                    </button>
+
+                            <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
+                                        Cancelar
+                                    </button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
         </div>
     </div>
-    <!-- Row -->
-</div>
-<!-- end page main wrapper -->
-
+    <!--fin del formulario modal-->

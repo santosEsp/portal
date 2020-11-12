@@ -83,7 +83,6 @@ export class ContactosComponent implements OnInit {
   cargarListaEmpresas(): any {
     this._EmpresaService.cargarEmpresas().subscribe(lista => this.listaEmpresas = lista);
 
-
   }
 
   agregarContacto(forma: NgForm): any {

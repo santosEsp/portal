@@ -25,6 +25,8 @@ import { RegistrarReunionService } from '../../../services/registrarReunion/regi
 import { UsuarioService } from '../../../services/usuarios/usuario.service';
 import { UsuarioModel } from 'src/app/models/usuarios.model';
 import Swal from 'sweetalert2';
+import { NegociosContactosService } from '../../../services/negociosContactos/negocios-contactos.service';
+import { EtapasNegociosService } from '../../../services/etapasNegocios/etapas-negocios.service';
 
 // Importacion de modelos, servicios para empresas
 import { NotasEmpresasService } from '../../../services/notasEmpresas/notas-empresas.service';
@@ -32,7 +34,7 @@ import { NotasEmpresasModel } from 'src/app/models/notasEmpresas';
 import { ReunionesEmpresasService } from '../../../services/reunionesEmpresas/reuniones-empresas.service';
 import { ReunionesEmpresasModel } from 'src/app/models/reunionesEmpresas';
 import { LlamadasEmpresasModel } from '../../../models/llamadasEmpresas';
-import { LlamadasEmpresasService} from '../../../services/llamadasEmpresas/llamadas-empresas.service';
+import { LlamadasEmpresasService } from '../../../services/llamadasEmpresas/llamadas-empresas.service';
 import { CorreosEmpresasService } from '../../../services/correosEmpresas/correos-empresas.service';
 import { CorreosEmpresasModel } from 'src/app/models/correosEmpresas';
 
@@ -45,24 +47,26 @@ import { CorreosEmpresasModel } from 'src/app/models/correosEmpresas';
 export class InformacionComponent implements OnInit {
 
   // Variables, modelos y arrays para obtener info de contactos
-  
+
   correo = new RegistrarCorreoModel();
   llamada = new RegistrarLlamadaModel();
   reunion = new RegistrarReunionModel();
   negocio = new NegocioModel();
+  editarNegocio = new NegocioModel();
 
   unContacto = new ContactoModel();
   correosR: RegistrarCorreoModel[] = [];
   notasR: NotaModel[] = [];
   llamadasR: RegistrarLlamadaModel[] = [];
   reunionesR: RegistrarReunionModel[] = [];
+  negociosContacto: any[] = [];
   nombreEmpresa = new EmpresaModel();
   fkempresaContacto: number;
   idContacto: string;
   nombrePropietario = new UsuarioModel();
   fkpropietarioContacto: number;
 
- 
+
 
   // variables para cargar info de empresas
   unaEmpresa = new EmpresaModel();
@@ -74,21 +78,28 @@ export class InformacionComponent implements OnInit {
   ReunionesEmpresa: ReunionesEmpresasModel[] = [];
   llamadasEmpresa: LlamadasEmpresasModel[] = [];
   correosEmpresa: CorreosEmpresasModel[] = [];
-  
+  miUsuario: string;
+  miId: string;
 
   ruta: { tipo: string, id: string };
+  etapas: any [] = [];
 
   constructor(private rutaActiva: ActivatedRoute, private _contactoService: ContactoService, private _empresaService: EmpresaService,
     private _registrarCorreoService: RegistrarCorreoService, private _notasService: NotasService,
     private _llamadasService: LlamadasService, private _registrarReunionService: RegistrarReunionService,
     private _usuarioService: UsuarioService, private router: Router,
-    private _notasEmpresasService : NotasEmpresasService, private _reunionesEmpresas:ReunionesEmpresasService,
+    private _notasEmpresasService: NotasEmpresasService, private _reunionesEmpresas: ReunionesEmpresasService,
     private _llamadasEmpresa: LlamadasEmpresasService,
-    private _correosEmpresas: CorreosEmpresasService
-    ) {
+    private _correosEmpresas: CorreosEmpresasService, private _negociosContactoService: NegociosContactosService, 
+    private _etapasService: EtapasNegociosService
+  ) {
+
+    this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
+    this.miId = this.miUsuario['id_usuario'];
 
     this.rutaActiva.params.subscribe(params => {
       console.log('Se suscribió contacto');
+      
       console.log(this.unContacto);
     });
 
@@ -97,7 +108,7 @@ export class InformacionComponent implements OnInit {
       console.log(this.unaEmpresa);
     });
 
-    
+
   }
 
   ngOnInit(): void {
@@ -134,8 +145,9 @@ export class InformacionComponent implements OnInit {
       this.cargarNotas();
       this.cargarLlamadas();
       this.cargarReuniones();
-
+      this.cargarNegociosDeContacto();
       Swal.close();
+      this.cargarEtapas();
 
       console.log('Se cumple condicion contactos');
     }
@@ -260,7 +272,7 @@ export class InformacionComponent implements OnInit {
   }
 
   cargarNotasEmpresas(): any {
-    this._notasEmpresasService.cargarNotas( this.idEmpresa.toString()).subscribe(listaNotasEmpresas => {
+    this._notasEmpresasService.cargarNotas(this.idEmpresa.toString()).subscribe(listaNotasEmpresas => {
       this.notasEmpresa = listaNotasEmpresas;
       console.log('Notas de empresas comp', this.notasEmpresa);
 
@@ -291,7 +303,77 @@ export class InformacionComponent implements OnInit {
   }
 
 
- 
+  cargarNegociosDeContacto(): any {
+    this._negociosContactoService.cargarNegociosConContacto(this.idContacto).subscribe(listaNegocios => {
+      this.negociosContacto = listaNegocios;
+      console.log('Negocios de contacto', this.negociosContacto);
+    });
+  }
 
+  cargarInfo(datos: any){
+    console.log(datos);
+    this.editarNegocio.id_negocio = datos.id_negocio;
+    this.editarNegocio.nombre_negocio = datos.nombre_negocio;
+    this.editarNegocio.pipeline = datos.pipeline;
+    this.editarNegocio.cantidad = datos.cantidad;
+    this.editarNegocio.fcierre = datos.fcierre;
+    this.editarNegocio.fketapa = datos.id_etapa;
+    }
   
+    actualizarNegocio(form: NgForm){
+      this.negocio = {
+        id_negocio : form.value.idNegocio,
+        nombre_negocio : form.value.nombreNegocio,
+        pipeline : form.value.pipelineNegocio,
+        cantidad : form.value.cantidadNegocio,
+        fketapa : form.value.etapaNegocio,
+        fcierre : form.value.cierreNegocio,
+        fkcontacto : parseInt( this.idContacto),
+        fkusuario : parseInt(this.miId)
+      }
+
+      this._negociosContactoService.actualizarNegocio(this.negocio).subscribe();
+      
+    }
+
+    
+
+    eliminarNegocio(datos: any): any {
+
+      console.log(datos);
+      Swal.fire({
+        title: '¿Está seguro de esos cambios?',
+        text: 'Eliminar negocio: ' + datos.nombre_negocio,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar'
+  
+      })
+        .then((borrar) => {
+          if (borrar.isConfirmed) {
+  
+            this._negociosContactoService.eliminarNegocio(datos.id_negocio).subscribe(() => {
+              Swal.fire(
+                'Eliminado',
+                'Negocio eliminado',
+                'success'
+              );
+              this.cargarNegociosDeContacto();
+            });
+  
+          }
+        });
+    }
+
+    cargarEtapas(): any {
+      this._etapasService.cargarEtapas().subscribe(lista => {
+        this.etapas = lista;
+        console.log('N etapas', this.etapas);
+      });
+  
+    }
 }
+

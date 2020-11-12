@@ -273,6 +273,10 @@ body {
     margin-left: 95px;
 }
 
+.margenLink {
+    margin-left: 60px;
+}
+
 .btnRegresa {
     border: 1px solid #275995;
     background-color: #b4cbe946;
@@ -323,3 +327,8 @@ body {
     font-size: 20px;
     line-height: 1.33857;
 }
+
+
+/*
+A partir de aquí hacia abajo es CSS para la lista desplegable
+*/

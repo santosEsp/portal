@@ -1,7 +1,7 @@
 #div1 {
     overflow: auto;
-    margin-left: 50px;
-    margin-right: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 #div1 table {
@@ -38,4 +38,24 @@
         display: block;
         text-align: center;
     }
+}
+
+.margenBotonNego {
+    margin-right: 15px;
+}
+
+.encabezado {
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.encabezado1 {
+    color: black;
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+.boxSizing {
+    box-sizing: border-box;
+    -ms-grid-row-span: 50;
 }

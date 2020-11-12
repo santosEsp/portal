@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { PipelineModel } from '../../../models/Pipeline.model';
 import { ContraseñaModel } from '../../../models/contraseña.model';
 import { CorreoModel } from '../../../models/correo.model';
-import { from } from 'rxjs';
+import { EtapasNegocio } from '../../../models/etapasNegocio';
 import { NgForm } from '@angular/forms';
+
+import { EtapasNegociosService } from '../../../services/etapasNegocios/etapas-negocios.service';
 
 @Component({
   selector: 'app-configuracion',
@@ -12,17 +13,19 @@ import { NgForm } from '@angular/forms';
 })
 export class ConfiguracionComponent implements OnInit {
 
-  pipeline: PipelineModel;
+  etapasNegocio = new EtapasNegocio();
   contrasena: ContraseñaModel;
-  correo: CorreoModel;
+  correo = new CorreoModel();
 
-  constructor() { }
+  arrayEtapas: any[] = [];
+
+  constructor(private _etapasService: EtapasNegociosService) { }
 
   ngOnInit(): void {
-    this.pipeline = new PipelineModel();
+    this.cargarInfoEtapas();
+
     this.contrasena = new ContraseñaModel();
-    this.correo = new CorreoModel();
-    this.pipeline.nombre_etapa = 'Cierras Pagadas';
+
     this.contrasena.con_actual = 'Gilberto@1998';
     this.contrasena.con_nueva = 'Gilberto1998PL';
     this.correo.correo_actual = 'gilbertozte98@gmail.com';
@@ -36,7 +39,6 @@ export class ConfiguracionComponent implements OnInit {
       return;
     }
     console.log('Etapa nueva Agregada');
-    console.log(this.pipeline);
     console.log(form);
   }
   onCon(form: NgForm): any {
@@ -58,5 +60,25 @@ export class ConfiguracionComponent implements OnInit {
     console.log(form);
   }
 
+
+  cargarInfoEtapas() {
+    this._etapasService.cargarEtapas().subscribe(lista => {
+      this.arrayEtapas = lista;
+      console.log('EtapasRecibidas:', this.arrayEtapas);
+    });
+  }
+
+  editarEtapa(etapas: EtapasNegocio) {
+    
+    
+
+    this.etapasNegocio = {
+      id_etapa: etapas.id_etapa,
+      nombre: etapas.nombre,
+      probabilidad: etapas.probabilidad
+     }
+    console.log('Esto se enviará', this.etapasNegocio);
+    this._etapasService.actualizarEtapa(this.etapasNegocio).subscribe();
+  }
 
 }
