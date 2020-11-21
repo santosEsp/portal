@@ -5,14 +5,15 @@
 }
 
 #div1 table {
-    width: 400px;
+    width: 350px;
     background-color: 6D6D71;
 }
 
-#div2 {
+
+/* #div2 {
     overflow: auto;
-    height: 300px;
-}
+    height: 600px;
+} */
 
 @media screen and (max-width: 600px) {
     table {
@@ -58,4 +59,8 @@
 .boxSizing {
     box-sizing: border-box;
     -ms-grid-row-span: 50;
+}
+
+.fondo {
+    background: rgba(128, 128, 128, 0.123);
 }

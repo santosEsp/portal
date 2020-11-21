@@ -17,14 +17,21 @@ export class EmpresaComponent implements OnInit {
   empresas: EmpresaModel[] = [];
   listaMisEmpresas: EmpresaModel[] = [];
   contadorEmpresas = 0;
+  contadorMisEmpresas = 0;
   tipo: string;
   miId: string;
   arregloEmpresas: EmpresaModel[] = [];
-
   miUsuario: string;
+  empresasDesde: number;
+  misEmpresasDesde: number;
 
   // Para obtener el id_del usuario
   usuarioActual: UsuarioModel;
+  salvaContadorEmpresas: number;
+  salvaContadorMisEmpresas: number;
+
+  masPaginasE: boolean;
+  masPaginasME: boolean;
 
   constructor(
     private _empresaService: EmpresaService, private _excelService: ExcelEmpresasService) {
@@ -32,12 +39,15 @@ export class EmpresaComponent implements OnInit {
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
     this.propietario.propietario_registro = this.miUsuario['nombre'];
     this.miId = this.miUsuario['id_usuario'];
+    this.empresasDesde = 0;
+    this.misEmpresasDesde = 0;
   }
 
   ngOnInit(): void {
-
     this.cargarEmpresas();
     this.cargarMisEmpresas();
+    this.contadorEmpresasBD();
+    this.contadorMisEmpresasBD();
 
   }
   agregarEmpresa(form: NgForm): any {
@@ -87,16 +97,14 @@ export class EmpresaComponent implements OnInit {
 
 
   cargarEmpresas(): any {
-    this._empresaService.cargarEmpresas().subscribe(lista => {
+    this._empresaService.cargarEmpresas(this.empresasDesde).subscribe(lista => {
       this.empresas = lista;
-      this.contadorEmpresas = this.empresas.length;
-      console.log('n empresas:', this.contadorEmpresas);
     });
   }
 
 
   cargarMisEmpresas(): any {
-    this._empresaService.cargarMisEmpresas(this.miId).subscribe(listaMisEmpresas => {
+    this._empresaService.cargarMisEmpresas(parseInt(this.miId), this.misEmpresasDesde).subscribe(listaMisEmpresas => {
       this.listaMisEmpresas = listaMisEmpresas;
       console.log('Lista mis empresas component', listaMisEmpresas);
     });
@@ -111,10 +119,10 @@ export class EmpresaComponent implements OnInit {
       text: 'Eliminará a: ' + empresa.nombre,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar'
-
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#E5B53A',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
     })
       .then((borrar) => {
         if (borrar.isConfirmed) {
@@ -163,5 +171,80 @@ export class EmpresaComponent implements OnInit {
     this._excelService.MisEmpresasExcel(this.listaMisEmpresas, 'MisEmpresas');
   }
 
+
+  contadorEmpresasBD() {
+
+    this._empresaService.contadorEmpresasBD().subscribe(contador => {
+      this.contadorEmpresas = contador;
+      console.log('ContadorContactos COMP: ' + this.contadorEmpresas);
+
+      this.guardarContadorEmpresas(this.contadorEmpresas);
+
+    });
+  }
+
+  guardarContadorEmpresas(contador: number) {
+    this.salvaContadorEmpresas = contador;
+  }
+
+  contadorMisEmpresasBD() {
+
+    this._empresaService.contadorMisEmpresasBD(parseInt(this.miId)).subscribe(contador => {
+      this.contadorMisEmpresas = contador;
+      console.log('Contador ME: ' + this.contadorMisEmpresas);
+      this.guardarContadorMisEmpresas(this.contadorMisEmpresas);
+
+    });
+  }
+
+  guardarContadorMisEmpresas(contador: number) {
+    this.salvaContadorMisEmpresas = contador;
+    console.log('contador ME salvado', this.salvaContadorMisEmpresas);
+  }
+
+  sumaEmpresasHasta(valor: number) {
+    this.empresasDesde += valor;
+    if (this.salvaContadorEmpresas - this.empresasDesde <= 10) {
+      this.masPaginasE = false;
+      this.cargarEmpresas();
+      console.log('HAY MAS PAGINAS', this.masPaginasE);
+     }
+     else {
+      this.masPaginasE = true;
+      console.log('HAY MAS PAGINAS', this.masPaginasE);
+      this.cargarEmpresas();
+      this.masPaginasE = true;
+    }
+
+  }
+
+  restaEmpresasHasta(valor: number) {
+    this.empresasDesde -= valor;
+    this.cargarEmpresas();
+    this.masPaginasE = true;
+  }
+ 
+  sumaMisEmpresasHasta(valor: number) {
+
+    this.misEmpresasDesde += valor;
+    if (this.salvaContadorMisEmpresas - this.misEmpresasDesde <= 10) {
+      this.masPaginasME = false;
+      console.log('HAY MAS PAGINAS', this.masPaginasME);
+      this.cargarMisEmpresas();
+    }
+
+    else {
+      this.masPaginasME = true;
+      console.log('HAY MAS PAGINAS', this.masPaginasME);
+    }
+  }
+
+  restaMisEmpresasHasta(valor: number) {
+    this.misEmpresasDesde -= valor;
+    this.cargarMisEmpresas();
+    console.log('Despues de resta MCD', this.misEmpresasDesde);
+    this.masPaginasME = true;
+
+  }
 
 }

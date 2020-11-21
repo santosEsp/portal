@@ -253,9 +253,7 @@ body {
 }
 
 .scroll {
-    width: 100%;
-    max-width: 1120px;
-    height: 535px;
+    height: 89vh;
     overflow: auto;
     overflow-x: hidden;
 }

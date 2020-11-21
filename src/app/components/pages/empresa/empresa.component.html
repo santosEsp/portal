@@ -1,8 +1,9 @@
 <app-navbar></app-navbar>
 
-<div>
-    <div class="float-right">
-        <button type="button" class="btn mt-4 mr-4 estilosBotones
+<div style="height: 90vh;">
+    <div style="height: 91vh;">
+        <div class="float-right">
+            <button type="button" class="btn mt-4 mr-4 estilosBotones
             estilosBotonesHover" data-toggle="modal" data-target="#modalAgregarEmpresa" data-whatever="@mdo">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-building" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022zM6 8.694L1 10.36V15h5V8.694zM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15z"/>
@@ -11,7 +12,7 @@
             Agregar empresa
         </button>
 
-        <button class="btn estilosBotones estilosBotonesHover mt-4 mr-4 dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn estilosBotones estilosBotonesHover mt-4 mr-4 dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi
             bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1
@@ -25,67 +26,68 @@
             Exportar empresas
             </button>
 
-        <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <button (click)="guardarEmpresas()" class="dropdown-item estilosBotonesHover" type="button">Todas las empresas</button>
-            <button (click)="guardarMisEmpresas()" class="dropdown-item estilosBotonesHover" type="button">Mis empresas</button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                <button (click)="guardarEmpresas()" class="dropdown-item estilosBotonesHover" type="button">Todas las empresas</button>
+                <button (click)="guardarMisEmpresas()" class="dropdown-item estilosBotonesHover" type="button">Mis empresas</button>
+            </div>
+
         </div>
 
-    </div>
+        <div>
 
-    <div>
+            <div class="container-fluid">
+                <span class="encabezado">Empresas</span>
+                <br>
+                <br>
 
-        <div class="container-fluid mt-3">
-            <span class="encabezado">Empresas</span>
-            <br>
-            <small>{{contadorEmpresas}} Empresas</small>
-        </div>
+            </div>
 
-        <!--Inicio del formulario modal agregar empresa-->
-        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalAgregarEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bgCorp">
-                        <h5 class="modal-title text-white" id="exampleModalLabel">
-                            Agregar empresa
-                        </h5>
-                        <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
+            <!--Inicio del formulario modal agregar empresa-->
+            <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalAgregarEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bgCorp">
+                            <h5 class="modal-title text-white" id="exampleModalLabel">
+                                Agregar empresa
+                            </h5>
+                            <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
-                    </div>
-                    <div class="modal-body">
-                        <form (ngSubmit)="agregarEmpresa(f)" #f="ngForm">
+                        </div>
+                        <div class="modal-body">
+                            <form (ngSubmit)="agregarEmpresa(f)" #f="ngForm">
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Nombre de
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Nombre de
                                     la empresa </label>
-                                <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="empresa.nombre" required minlength="5" />
+                                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="empresa.nombre" required minlength="5" />
 
-                                <small *ngIf="f.submitted &&
+                                    <small *ngIf="f.submitted &&
                                                 f.controls['nombre'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
 
-                            </div>
+                                </div>
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Propietario de registro</label>
-                                <input type="text" class="form-control" id="pipeline" name="propietario" [(ngModel)]="propietario.propietario_registro" required disabled />
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Propietario de registro</label>
+                                    <input type="text" class="form-control" id="pipeline" name="propietario" [(ngModel)]="propietario.propietario_registro" required disabled />
 
-                                <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger">
+                                    <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
-                            </div>
+                                </div>
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Industria</label>
-                                <div class="col-22">
-                                    <select class="form-control" id="industria" name="industria" [(ngModel)]="empresa.industria" required>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Industria</label>
+                                    <div class="col-22">
+                                        <select class="form-control" id="industria" name="industria" [(ngModel)]="empresa.industria" required>
                                         ><label for="industria">--seleccione--</label>
                                         <option>Contabilidad</option>
                                         <option>Aviación</option>
@@ -96,33 +98,33 @@
                                         <option>Bienes y raices</option>
                                     </select>
 
-                                    <small *ngIf="f.submitted &&
+                                        <small *ngIf="f.submitted &&
                                                     f.controls['industria'].errors" class="text-danger">
                                         Campo obligatorio
                                     </small>
 
+                                    </div>
                                 </div>
-                            </div>
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Número de
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Número de
                                     teléfono</label>
-                                <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="empresa.no_telefono" required minlength="8" />
+                                    <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="empresa.no_telefono" required minlength="8" />
 
-                                <small *ngIf="f.submitted &&
+                                    <small *ngIf="f.submitted &&
                                                 f.controls['telefono'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
-                            </div>
+                                </div>
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Tipo</label>
-                                <div class="col-22">
-                                    <select class="form-control" id="tipo" name="tipo" [(ngModel)]="empresa.tipo_cliente" required>
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Tipo</label>
+                                    <div class="col-22">
+                                        <select class="form-control" id="tipo" name="tipo" [(ngModel)]="empresa.tipo_cliente" required>
 
                                         <option>Cliente potencial</option>
                                         <option>Socio</option>
@@ -131,283 +133,384 @@
                                         <option>Otra</option>
                                     </select>
 
-                                    <small *ngIf="f.submitted &&
+                                        <small *ngIf="f.submitted &&
                                                     f.controls['tipo'].errors" class="text-danger">
                                         Campo obligatorio
                                     </small>
+                                    </div>
                                 </div>
-                            </div>
 
 
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Ciudad</label>
-                                <input type="text" class="form-control" id="ciudad" name="ciudad" [(ngModel)]="empresa.ciudad" required />
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Ciudad</label>
+                                    <input type="text" class="form-control" id="ciudad" name="ciudad" [(ngModel)]="empresa.ciudad" required />
 
-                                <small *ngIf="f.submitted &&
+                                    <small *ngIf="f.submitted &&
                                                 f.controls['ciudad'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
-                            </div>
+                                </div>
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Estado o
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Estado o
                                     región</label>
-                                <input type="text" class="form-control" id="etapa" name="estado" [(ngModel)]="empresa.estado_region" required />
+                                    <input type="text" class="form-control" id="etapa" name="estado" [(ngModel)]="empresa.estado_region" required />
 
-                                <small *ngIf="f.submitted &&
+                                    <small *ngIf="f.submitted &&
                                                 f.controls['estado'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
-                            </div>
+                                </div>
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Código
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Código
                                     postal</label>
-                                <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="empresa.codigo_postal" required />
+                                    <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="empresa.codigo_postal" required />
 
-                                <small *ngIf="f.submitted &&
+                                    <small *ngIf="f.submitted &&
                                                 f.controls['codigo'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
-                            </div>
+                                </div>
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Número de
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Número de
                                     empleados</label>
-                                <input type="text" class="form-control" id="empleados" name="empleados" [(ngModel)]="empresa.no_empleados" required />
+                                    <input type="text" class="form-control" id="empleados" name="empleados" [(ngModel)]="empresa.no_empleados" required />
 
-                                <small *ngIf="f.submitted &&
+                                    <small *ngIf="f.submitted &&
                                                 f.controls['empleados'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
 
-                            </div>
+                                </div>
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Ingresos
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Ingresos
                                     anuales</label>
-                                <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="empresa.ingresos_anuales" required />
+                                    <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="empresa.ingresos_anuales" required />
 
-                                <small *ngIf="f.submitted &&
+                                    <small *ngIf="f.submitted &&
                                                 f.controls['ingresos'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
-                            </div>
+                                </div>
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Zona
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Zona
                                     horaria</label>
-                                <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="empresa.zona_horaria" required />
+                                    <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="empresa.zona_horaria" required />
 
-                                <small *ngIf="f.submitted &&
+                                    <small *ngIf="f.submitted &&
                                                 f.controls['zona'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
-                            </div>
+                                </div>
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Descripción</label>
-                                <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="empresa.descripcion" required />
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Descripción</label>
+                                    <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="empresa.descripcion" required />
 
 
-                                <small *ngIf="f.submitted &&
+                                    <small *ngIf="f.submitted &&
                                                 f.controls['descripcion'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
-                            </div>
+                                </div>
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Página
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Página
                                     corporativa</label>
-                                <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="empresa.pagina_corporativa" required />
+                                    <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="empresa.pagina_corporativa" required />
 
-                                <small *ngIf="f.submitted &&
+                                    <small *ngIf="f.submitted &&
                                                 f.controls['pagina'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
-                            </div>
+                                </div>
 
-                            <div class="modal-footer">
-                                <button type="submit" class="btn
+                                <div class="modal-footer">
+                                    <button type="submit" class="btn
                                                 estilosBotonesHover
                                                 estilosBotones">
                                     Crear
                                 </button>
-                                <button type="submit" class="btn
+                                    <button type="submit" class="btn
                                                 estilosBotonesHover
                                                 estilosBotones">
                                     Crear y agregar otra
                                 </button>
-                                <button (click)="vaciarFormulario()" class="btn
+                                    <button (click)="vaciarFormulario()" class="btn
                                                 estilosBotonesHover
                                                 estilosBotones" data-dismiss="modal">
                                     Cancelar
                                 </button>
-                            </div>
+                                </div>
 
-                        </form>
+                            </form>
+                        </div>
+
                     </div>
-
                 </div>
             </div>
+
         </div>
+        <!--Fin formulario crear contacto-->
 
-    </div>
-    <!--Fin formulario crear contacto-->
+        <!--Tabs-->
+        <div class="container-fluid pt-3">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#todosLosContactos" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-building"></i> Todas las empresas ({{contadorEmpresas}})</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#misContactos" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-building"></i> Mis empresas ({{contadorMisEmpresas}})</a>
+                </li>
 
-    <!--Tabs-->
-    <div class="container-fluid pt-3">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#todosLosContactos" role="tab" aria-controls="home" aria-selected="true">Todas las empresas</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#misContactos" role="tab" aria-controls="profile" aria-selected="false">Mis empresas</a>
-            </li>
+            </ul>
 
-        </ul>
-
-        <!--Contenido de los tabs
+            <!--Contenido de los tabs
     ---------------------------->
-        <div class="tab-content con" id="myTabContent">
-            <!--Contenido tab 1-->
-            <div class="tab-pane fade show active" id="todosLosContactos" role="tabpanel" aria-labelledby="home-tab">
+            <div class="tab-content con" id="myTabContent" style="height: 70vh;">
+                <!--Contenido tab 1-->
+                <div class="tab-pane fade show active" id="todosLosContactos" role="tabpanel" aria-labelledby="home-tab">
 
-                <div class="table-responsive">
-                    <table class="table mt-3">
-                        <thead class="grisSecundario">
-                            <tr>
-                                <th scope="col">Núm.</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Propietario</th>
-                                <th scope="col">Industria</th>
-                                <th scope="col">Teléfono</th>
-                                <th scope="col">Tipo</th>
-                                <th scope="col">Ciudad</th>
-                                <th scope="col">Estado/Región</th>
-                                <th scope="col">Código Postal</th>
-                                <th scope="col">No. Empleados</th>
-                                <th scope="col">Ingresos Anuales</th>
-                                <th scope="col">Zona Horaria</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Página corporativa</th>
-                                <th scope="col">Editar</th>
-                                <th scope="col">Eliminar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <div class="table-responsive" style="height: 57vh;">
+                        <table class="table mt-3 table-hover">
+                            <thead class="grisSecundario">
+                                <tr>
+                                    <th scope="col">Núm.</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Propietario</th>
+                                    <th scope="col">Industria</th>
+                                    <th scope="col">Teléfono</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Ciudad</th>
+                                    <th scope="col">Estado/Región</th>
+                                    <th scope="col">Código Postal</th>
+                                    <th scope="col">No. Empleados</th>
+                                    <th scope="col">Ingresos Anuales</th>
+                                    <th scope="col">Zona Horaria</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Página corporativa</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
-                            <tr *ngFor="let empresa of empresas; let i= index">
-                                <th scope="row">{{i+1}}</th>
+                                <tr *ngFor="let empresa of empresas; let i= index">
+                                    <th scope="row">{{empresasDesde+( i+1)}}</th>
 
-                                <td><a [routerLink]="['/informacion',tipo, empresa.id_empresa]">{{empresa.nombre}}</a></td>
-                                <td><input [(ngModel)]="empresa.propietario" type="text" name="nombre" class="form-control" placeholder="Propietario" style="width: fit-content;" disabled></td>
-                                <td>{{empresa.industria}}</td>
-                                <td><input [(ngModel)]="empresa.no_telefono" type="text" name="nombre" class="form-control" placeholder="Teléfono" style="width: fit-content;" minlength="8" maxlength="15" required></td>
-                                <td>{{empresa.tipo_cliente}}</td>
-                                <td><input [(ngModel)]="empresa.ciudad" type="text" name="nombre" class="form-control" placeholder="Ciudad" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="empresa.estado_region" type="text" name="nombre" class="form-control" placeholder="Estado / Región" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="empresa.codigo_postal" type="text" name="nombre" class="form-control" placeholder="Código postal" style="width: fit-content;" required></td>
-                                <td><input [(ngModel)]="empresa.no_empleados" type="text" name="nombre" class="form-control" placeholder="Número de empleados" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="empresa.ingresos_anuales" type="text" name="nombre" class="form-control" placeholder="Ingresos anuales" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="empresa.zona_horaria" type="text" name="nombre" class="form-control" placeholder="Zona horaria" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="empresa.descripcion" type="text" name="nombre" class="form-control" placeholder="Descripción" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="empresa.pagina_corporativa" type="text" name="nombre" class="form-control" placeholder="Página corporativa" style="width: fit-content;"></td>
-                                <td>
-                                    <button (click)="actualizarEmpresa(empresa)" class="btn btn-primary m-r-10">
-                                        <i class='fa fa-save'></i>
+                                    <td>
+                                        <a [routerLink]="['/informacion',tipo, empresa.id_empresa]">
+                                            <div style="width: 15rem;"></div>{{empresa.nombre}}</a>
+                                    </td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{empresa.propietario}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{empresa.industria}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{empresa.no_telefono}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{empresa.tipo_cliente}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{empresa.ciudad}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{empresa.estado_region}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{empresa.codigo_postal}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{empresa.no_empleados}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div> {{ empresa.ingresos_anuales | currency:'$' }}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{empresa.zona_horaria}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{empresa.descripcion}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{empresa.pagina_corporativa}}</td>
+                                    <td>
+
+                                        <button (click)="actualizarEmpresa(empresa)" class="btn estilosBotones estilosBotonesHover">
+                                        <svg width="1em " height="1em " viewBox="0 0 16 16 " class="bi bi-pencil-square " fill="currentColor " xmlns="http://www.w3.org/2000/svg ">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z "/>
+                                            <path fill-rule="evenodd " d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z "/>
+                                        </svg>
                                     </button>
-                                </td>
-                                <td>
-                                    <button (click)="eliminarEmpresa(empresa)" class="btn btn-danger">
-                                        <i class='fas fa-trash-alt'></i>
+                                    </td>
+                                    <td>
+                                        <button (click)="eliminarEmpresa(empresa)" class="btn estilosBotonesEliminarHover estilosBotones">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                          </svg>
                                     </button>
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
 
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+
+                        <div class="row" *ngIf="empresas.length == 0">
+                            <div class="col-md-12">
+                                <div class="alert alert-info" role="alert">
+                                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                                    <circle cx="8" cy="4.5" r="1"/>
+                                  </svg> &nbsp;&nbsp; Aún no tienes contactos registrados, empieza a crearlos y aparecerán aquí
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div *ngIf="contadorEmpresas > 0" class="d-flex justify-content-center mt-2">
+
+                        <label class="m-2">Del <strong>{{empresasDesde +1}}</strong> al <strong>{{empresasDesde + 10}}</strong> de <strong>{{contadorEmpresas}}</strong></label>
+
+                        <label class="m-2">Anterior</label>
+                        <button [disabled]="empresasDesde===0" (click)="restaEmpresasHasta(10)" class="btn estilosBotones estilosBotonesHover mr-2">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-left-fill" style="padding: 0;" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                      </svg>
+               </button>
+                        <button [disabled]="masPaginasE===false" (click)="sumaEmpresasHasta(10)" class="btn estilosBotones estilosBotonesHover ml-2">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                      </svg>
+               </button>
+                        <label class="m-2">Siguiente</label>
+
+                    </div>
+                    <br>
+
+                </div>
+                <!--Contenido tab 2-->
+                <div class="tab-pane fade" id="misContactos" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="table-responsive" style="height: 57vh;">
+                        <table class="table mt-3 table-hover">
+                            <thead class="grisSecundario">
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Propietario</th>
+                                    <th scope="col">Industria</th>
+                                    <th scope="col">Teléfono</th>
+                                    <th scope="col">Tipo</th>
+                                    <th scope="col">Ciudad</th>
+                                    <th scope="col">Estado/Región</th>
+                                    <th scope="col">Código Postal</th>
+                                    <th scope="col">No. Empleados</th>
+                                    <th scope="col">Ingresos Anuales</th>
+                                    <th scope="col">Zona Horaria</th>
+                                    <th scope="col">Descripción</th>
+                                    <th scope="col">Página corporativa</th>
+                                    <th scope="col">Editar</th>
+                                    <th scope="col">Eliminar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let misEmpresas of listaMisEmpresas; let i= index">
+                                    <th scope="row">{{misEmpresasDesde+(i+1)}}</th>
+                                    <td>
+                                        <div style="width: 15rem;"></div><a [routerLink]="['/informacion',tipo, misEmpresas.id_empresa]">{{misEmpresas.nombre}}</a></td>
+                                    <td>
+                                        <div style="width: 15rem;"></div>{{misEmpresas.propietario}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{misEmpresas.industria}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{misEmpresas.no_telefono}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{misEmpresas.tipo_cliente}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{misEmpresas.ciudad}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{misEmpresas.estado_region}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{misEmpresas.codigo_postal}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{misEmpresas.no_empleados}}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{ misEmpresas.ingresos_anuales | currency:'$' }}</td>
+                                    <td>
+                                        <div style="width: 10rem;"></div>{{misEmpresas.zona_horaria}}</td>
+                                    <td>
+                                        <div style="width: 15rem;"></div>{{misEmpresas.descripcion}}</td>
+                                    <td>
+                                        <div style="width: 15rem;"></div>{{misEmpresas.pagina_corporativa}}</td>
+                                    <td>
+                                        <button (click)="actualizarEmpresa(misEmpresas)" class="btn estilosBotones estilosBotonesHover">
+                                        <svg width="1em " height="1em " viewBox="0 0 16 16 " class="bi bi-pencil-square " fill="currentColor " xmlns="http://www.w3.org/2000/svg ">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z "/>
+                                            <path fill-rule="evenodd " d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z "/>
+                                        </svg>
+                                    </button>
+                                    </td>
+                                    <td>
+                                        <button (click)="eliminarEmpresa(misEmpresas)" class="btn estilosBotones estilosBotonesEliminarHover">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                          </svg>
+                                    </button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <div class="row" *ngIf="listaMisEmpresas.length == 0">
+                            <div class="col-md-12">
+                                <div class="alert alert-info" role="alert">
+                                    <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                                    <circle cx="8" cy="4.5" r="1"/>
+                                  </svg> &nbsp;&nbsp; Aún no tienes contactos registrados, empieza a crearlos y aparecerán aquí
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div *ngIf="contadorMisEmpresas > 0" class="d-flex justify-content-center mt-2">
+
+                        <label class="m-2">Del <strong>{{misEmpresasDesde +1}}</strong> al <strong>{{misEmpresasDesde + 10}}</strong> de <strong>{{contadorMisEmpresas}}</strong></label>
+                        <label class="m-2">Anterior</label>
+                        <button [disabled]="misEmpresasDesde===0" (click)="restaMisEmpresasHasta(10)" class="btn estilosBotones estilosBotonesHover mr-2">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-left-fill" style="padding: 0;" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                      </svg>
+               </button>
+                        <button [disabled]="masPaginasME===false" (click)="sumaMisEmpresasHasta(10)" class="btn estilosBotones estilosBotonesHover ml-2">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                      </svg>
+               </button>
+                        <label class="m-2">Siguiente</label>
+
+                    </div>
+                    <br>
                 </div>
 
-
-
             </div>
-            <!--Contenido tab 2-->
-            <div class="tab-pane fade" id="misContactos" role="tabpanel" aria-labelledby="profile-tab">
-                <div class="table-responsive">
-                    <table class="table mt-3">
-                        <thead class="grisSecundario">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Propietario</th>
-                                <th scope="col">Industria</th>
-                                <th scope="col">Teléfono</th>
-                                <th scope="col">Tipo</th>
-                                <th scope="col">Ciudad</th>
-                                <th scope="col">Estado/Región</th>
-                                <th scope="col">Código Postal</th>
-                                <th scope="col">No. Empleados</th>
-                                <th scope="col">Ingresos Anuales</th>
-                                <th scope="col">Zona Horaria</th>
-                                <th scope="col">Descripción</th>
-                                <th scope="col">Página corporativa</th>
-                                <th scope="col">Editar</th>
-                                <th scope="col">Eliminar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let misEmpresas of listaMisEmpresas; let i= index">
-                                <th scope="row">{{i+1}}</th>
-                                <td><a [routerLink]="['/informacion',tipo, misEmpresas.id_empresa]">{{misEmpresas.nombre}}</a></td>
-                                <td><input [(ngModel)]="misEmpresas.propietario" type="text" name="nombre" class="form-control" placeholder="Propietario" style="width: fit-content;" disabled></td>
-                                <td><input [(ngModel)]="misEmpresas.industria" type="text" name="nombre" class="form-control" placeholder="Industria" style="width: fit-content;" disabled></td>
-                                <td><input [(ngModel)]="misEmpresas.no_telefono" type="text" name="nombre" class="form-control" placeholder="Teléfono" style="width: fit-content;" minlength="8" maxlength="15" required></td>
-                                <td>{{misEmpresas.tipo_cliente}}</td>
-                                <td><input [(ngModel)]="misEmpresas.ciudad" type="text" name="nombre" class="form-control" placeholder="Ciudad" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="misEmpresas.estado_region" type="text" name="nombre" class="form-control" placeholder="Estado / Región" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="misEmpresas.codigo_postal" type="text" name="nombre" class="form-control" placeholder="Código postal" style="width: fit-content;" required></td>
-                                <td><input [(ngModel)]="misEmpresas.no_empleados" type="text" name="nombre" class="form-control" placeholder="Número de empleados" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="misEmpresas.ingresos_anuales" type="text" name="nombre" class="form-control" placeholder="Ingresos anuales" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="misEmpresas.zona_horaria" type="text" name="nombre" class="form-control" placeholder="Zona horaria" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="misEmpresas.descripcion" type="text" name="nombre" class="form-control" placeholder="Descripción" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="misEmpresas.pagina_corporativa" type="text" name="nombre" class="form-control" placeholder="Página corporativa" style="width: fit-content;"></td>
-                                <td>
-                                    <button (click)="actualizarEmpresa(misEmpresas)" class="btn btn-primary m-r-10">
-                                        <i class='fa fa-save'></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button (click)="eliminarEmpresa(misEmpresas)" class="btn btn-danger">
-                                        <i class='fas fa-trash-alt'></i>
-                                    </button>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
-
         </div>
+
     </div>
-
-
 </div>

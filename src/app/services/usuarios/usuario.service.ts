@@ -49,6 +49,7 @@ export class UsuarioService {
 
   actualizarUsuario(usuario: UsuarioModel): any {
 
+    console.log('Service Act Usuario', usuario);
     let url = URL_SERVICIOS + '/usuarios/' + usuario.id_usuario;
     url += '?token=' + this.token;
     return this.http.put(url, usuario).pipe(
@@ -61,8 +62,8 @@ export class UsuarioService {
     );
   }
 
-  cargarUsuarios(): any {
-    let url = URL_SERVICIOS + '/usuarios/';
+  cargarUsuarios(desde: number): any {
+    let url = URL_SERVICIOS + '/usuarios/paginacionUsuarios/' + desde;
     url += '?token=' + this.token;
     return this.http.get(url)
       .pipe(
@@ -87,6 +88,21 @@ export class UsuarioService {
           (resp: any) => {
             console.log('cargarUnUsuario service: ', resp.unUsuario);
             return resp.unUsuario;
+          }
+        )
+      );
+  }
+
+  contadorUsuariosBD(): any {
+    let url = URL_SERVICIOS + '/usuarios/contadorUsuarios';
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log('ContadorUsuarios: ', resp.contador);
+            return resp.contador[0].contador;
           }
         )
       );

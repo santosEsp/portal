@@ -3,6 +3,6 @@ export class NotaModel {
     comentario: string;
     fkusuario: string;
     fkcontacto: string;
-    createdAt?: string;
-    updateAt?: string;
+    createdAt?: any;
+    updateAt?: any;
 }

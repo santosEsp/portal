@@ -34,8 +34,22 @@ export class EmpresaService {
       );
   }
 
-  cargarEmpresas(): any {
-    let url = URL_SERVICIOS + '/empresas/';
+  cargarEmpresas(inicio: number): any {
+    let url = URL_SERVICIOS + '/empresas/paginacionEmpresas/' + inicio;
+    url += '?token=' + this.token;
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log('Lista empresas, empresa service', resp.empresas);
+            return resp.empresas;
+          }
+        )
+      );
+  }
+
+  cargarListaEmpresas(): any {
+    let url = URL_SERVICIOS + '/empresas/listaEmpresas/';
     url += '?token=' + this.token;
     return this.http.get(url)
       .pipe(
@@ -93,10 +107,10 @@ export class EmpresaService {
   }
 
 
-  cargarMisEmpresas(miId: string): any {
+  cargarMisEmpresas(miId: number, desde: number): any {
 
     console.log('service miId', miId);
-    let url = URL_SERVICIOS + '/empresas/misempresas/' + miId;
+    let url = URL_SERVICIOS + '/empresas/paginacionMisEmpresas/' + miId + '/' + desde ;
     url += '?token=' + this.token;
 
     console.log('url consulta', url);
@@ -128,4 +142,36 @@ export class EmpresaService {
         )
       );
   }
+
+  contadorEmpresasBD(): any {
+    let url = URL_SERVICIOS + '/empresas/contadorEmpresas/';
+    url += '?token=' + this.token;
+ console.log('contador E, desde');
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log('ContadorEmpresas: ', resp.contador);
+            return resp.contador[0].contador;
+          }
+        )
+      );
+  }
+
+
+  contadorMisEmpresasBD(miId: number): any {
+    let url = URL_SERVICIOS + '/empresas/contadorMisEmpresas/' + miId;
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log('ContadorMisEmpresas: ', resp.contador);
+            return resp.contador[0].contador;
+          }
+        )
+      );
+  }
+
 }

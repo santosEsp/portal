@@ -1,25 +1,45 @@
 /* You can add global styles to this file, and also import other style files */
 
 .estilosBotones {
-    border-color: #275995;
-    color: #275995;
+    border-color: #000000;
+    color: black;
 }
 
 .estilosBotonesHover:hover {
-    background-color: #275995;
+    background-color: #E5B53A;
     color: white;
+    border-color: #E5B53A;
+}
+
+.estilosBotonesEliminarHover:hover {
+    background-color: red;
+    color: white;
+    border-color: red;
 }
 
 .estiloBotonLogin {
-    background-color: #6D6D71;
+    border-color: #000000;
+    color: black;
+}
+
+.estilosBotonesLoginHover:hover {
+    background-color: #000000;
     color: white;
 }
 
 .bgCorp {
-    background-color: #275995;
+    background-color: #000000;
 }
 
 .grisSecundario {
-    background-color: #6D6D71;
+    background-color: #6C6B6D;
     color: white;
+}
+
+html {
+    overflow-x: hidden
+}
+
+.element {
+    overflow: hidden;
 }

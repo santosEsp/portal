@@ -1,131 +1,177 @@
 <app-navbar></app-navbar>
-<button type="button" class="btn estilosBotonesHover estilosBotones margenBoton float-right mt-5 mr-5" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"><svg width="1.2em" height="1.2em"
-    viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
-    xmlns="http://www.w3.org/2000/svg">
-    <path fill-rule="evenodd"
-        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-</svg> Crear Usuario</button>
+<div style="height: 90vh;">
+    <button type="button" class="btn estilosBotonesHover estilosBotones margenBoton float-right mt-5 mr-5" data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+          </svg>
+        Crear Usuario</button>
 
-<div class="container-fluid mt-3">
-    <span class="encabezado">Usuarios</span>
-    <br />
-    <small>{{ contadorUsuarios }} usuarios</small>
-</div>
-
-
-
-<div class=" m-4 align-items-center">
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link active" href="#">Todos los Usuarios</a>
-        </li>
-
-    </ul>
+    <div class="container-fluid ">
+        <span class="encabezado">Usuarios</span>
+        <br />
+    </div>
 
 
 
-    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header bgCorp">
-                    <h5 class="modal-title text-white" id="exampleModalLabel">Crear Usuario
-                    </h5>
-                    <button (click)="vaciarForm()" class="close" data-dismiss="modal" aria-label="Close">
+    <div class=" m-4 align-items-center">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" href="#"><i class="fas fa-user-friends"></i> Todos los Usuarios ({{ contadorUsuarios }})</a>
+            </li>
+
+        </ul>
+
+
+
+        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bgCorp">
+                        <h5 class="modal-title text-white" id="exampleModalLabel">
+                            <svg width="1.4em" height="1.4em" viewBox="0 0 16 16" class="bi bi-person-plus mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                          </svg><span style="border-left: thin solid white; margin-left: 10px;"></span>&nbsp; Crear usuario
+                        </h5>
+                        <button (click)="vaciarForm()" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
-                </div>
-                <div class="modal-body">
-                    <form (ngSubmit)="agregarUsuario(f)" #f="ngForm">
+                    </div>
+                    <div class="modal-body">
+                        <form (ngSubmit)="agregarUsuario(f)" #f="ngForm">
 
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Nombre del usuario</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" required [(ngModel)]="usuario.nombre" />
-                            <small class="text-danger" *ngIf="f.submitted && f.controls['nombre'].errors">Campo obligatorio</small>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Nombre del usuario</label>
+                                <input type="text" class="form-control" id="nombre" name="nombre" required [(ngModel)]="usuario.nombre" />
+                                <small class="text-danger" *ngIf="f.submitted && f.controls['nombre'].errors">Campo obligatorio</small>
 
-                        </div>
+                            </div>
 
 
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Dirección de correo</label>
-                            <input type="text" class="form-control" id="correo" name="correo" required [(ngModel)]="usuario.email" />
-                            <small class="text-danger" *ngIf="f.submitted && f.controls['correo'].errors">Campo obligatorio</small>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Dirección de correo</label>
+                                <input type="text" class="form-control" id="correo" name="correo" required [(ngModel)]="usuario.email" />
+                                <small class="text-danger" *ngIf="f.submitted && f.controls['correo'].errors">Campo obligatorio</small>
 
-                        </div>
+                            </div>
 
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Rol de usuario</label>
-                            <br>
-                            <select class="form-control" name="rol" id="rol" required [(ngModel)]=usuario.rol>
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Rol de usuario</label>
+                                <br>
+                                <select class="form-control" name="rol" id="rol" required [(ngModel)]=usuario.rol>
                                
                                 <option value="ADMIN">Administrador</option> 
                                 <option value="USER">Usuario</option> 
 
                             </select>
 
-                            <small class="text-danger" *ngIf="f.submitted && f.controls['rol'].errors">Campo obligatorio</small>
+                                <small class="text-danger" *ngIf="f.submitted && f.controls['rol'].errors">Campo obligatorio</small>
 
-                        </div>
-
-
-                        <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Contraseña</label>
-                            <input type="text" class="form-control" id="password" name="password" required [(ngModel)]="usuario.password" />
-                            <small class="text-danger" *ngIf="f.submitted && f.controls['password'].errors">Campo obligatorio</small>
-
-                        </div>
+                            </div>
 
 
+                            <div class="form-group">
+                                <label for="recipient-name" class="col-form-label">Contraseña</label>
+                                <input type="text" class="form-control" id="password" name="password" required [(ngModel)]="usuario.password" />
+                                <small class="text-danger" *ngIf="f.submitted && f.controls['password'].errors">Campo obligatorio</small>
 
-                        <div class="modal-footer">
-                            <button type="submit" class="btn estilosBotonesHover estilosBotones">Crear</button>
+                            </div>
 
-                            <button type="submit" class="btn estilosBotonesHover estilosBotones">Crear y agregar otro</button>
-                            <button (click)="vaciarForm()" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">Cancelar</button>
-                        </div>
 
-                    </form>
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn estilosBotonesHover estilosBotones">Crear</button>
+
+                                <button type="submit" class="btn estilosBotonesHover estilosBotones">Crear y agregar otro</button>
+                                <button (click)="vaciarForm()" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">Cancelar</button>
+                            </div>
+
+                        </form>
+                    </div>
+
                 </div>
-
             </div>
         </div>
-    </div>
 
-    <div class="table-responsive">
-        <table class="table mt-3">
-            <thead class="grisSecundario">
-                <tr>
-                    <th scope="col">Núm. </th>
-                    <th scope="col">Nombre</th>
-                    <th scope="col">Correo</th>
-                    <th scope="col">Rol</th>
-                    <th scope="col">Editar</th>
-                    <th scope="col">Eliminar</th>
-                </tr>
-            </thead>
+        <div class="table-responsive" style="height: 60vh;">
+            <table class="table mt-3 table-hover">
+                <thead class="grisSecundario">
+                    <tr>
+                        <th scope="col">Núm. </th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Rol</th>
+                        <th scope="col">Guardar</th>
+                        <th scope="col">Eliminar</th>
+                    </tr>
+                </thead>
 
-            <tbody>
-                <tr *ngFor="let usuario of usuarios; let i = index">
+                <tbody>
+                    <tr *ngFor="let usuario of usuarios; let i = index">
 
-                    <th scope="row">
-                        {{ i + 1 }}
-                    </th>
-                    <td> <input [(ngModel)]="usuario.nombre" type="text" name="nombre" class="form-control" placeholder="nombre"></td>
-                    <td> <input [(ngModel)]="usuario.email" type="text" name="email" class="form-control" placeholder="email"> </td>
-                    <td>{{usuario.rol}}</td>
-                    <td>
-                        <button (click)="actualizarUsuario(usuario)" class="btn btn-primary m-r-10">
-                        <i class='fa fa-save'></i>
+                        <th scope="row">
+                            {{ i + 1 }}
+                        </th>
+                        <td> <input [(ngModel)]="usuario.nombre" type="text" name="nombre" class="form-control" placeholder="nombre"></td>
+                        <td> <input [(ngModel)]="usuario.email" type="text" name="email" class="form-control" placeholder="email"> </td>
+                        <td> <select class="form-control" id="rolUsuario" name="rol" [(ngModel)]="usuario.rol" style=" width: fit-content; ">
+                            <!-- <option disabled hidden>{{etapa.probabilidad}}</option> -->
+                            <option >USER</option>
+                            <option >ADMIN</option>
+                            
+
+                    </select></td>
+                        <td>
+                            <button (click)="actualizarUsuario(usuario)" class="btn estilosBotones estilosBotonesHover">
+                            <svg width="1em " height="1em " viewBox="0 0 16 16 " class="bi bi-pencil-square " fill="currentColor " xmlns="http://www.w3.org/2000/svg ">
+                                <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z "/>
+                                <path fill-rule="evenodd " d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z "/>
+                            </svg>
                     </button>
-                    </td>
-                    <td>
-                        <button (click)="eliminarUsuario(usuario)" class="btn btn-danger">
-                        <i class='fas fa-trash-alt'></i>
+                        </td>
+                        <td>
+                            <button (click)="eliminarUsuario(usuario)" class="btn estilosBotones estilosBotonesEliminarHover">
+                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                            </svg>
                     </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <div class="row" *ngIf="contadorUsuarios == 0">
+                    <div class="col-md-12">
+                        <div class="alert alert-info" role="alert">
+                            <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                            <circle cx="8" cy="4.5" r="1"/>
+                          </svg> &nbsp;&nbsp; Aún no tienes usuarios registrados, empieza a crearlos y aparecerán aquí
+                        </div>
+                    </div>
+                </div>
+            </table>
+        </div>
+        <hr>
+        <div *ngIf="contadorUsuarios > 0" class="d-flex justify-content-center mt-2">
+
+            <label class="m-2">Del <strong>{{usuariosDesde +1}}</strong> al <strong>{{usuariosDesde + 10}}</strong> de <strong>{{contadorUsuarios}}</strong></label>
+
+            <label class="m-2">Anterior</label>
+            <button [disabled]="usuariosDesde===0" (click)="restaUsuariosHasta(10)" class="btn estilosBotones estilosBotonesHover mr-2">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-left-fill" style="padding: 0;" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+          </svg>
+   </button>
+            <button [disabled]="masPaginasU===false" (click)="sumaUsuariosHasta(10)" class="btn estilosBotones estilosBotonesHover ml-2">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+          </svg>
+   </button>
+            <label class="m-2">Siguiente</label>
+
+        </div>
     </div>
 </div>

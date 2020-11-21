@@ -17,6 +17,12 @@ export class NegocioComponent implements OnInit {
   suma1 = 0; suma2 = 0; suma3 = 0; suma4 = 0; suma5 = 0;
   suma6 = 0; suma7 = 0; suma8 = 0; suma9 = 0; suma10 = 0;
 
+  anchuraPantalla = window.screen.width;
+  alturaPantalla = window.screen.height;
+  alturaDiv = 0;
+  pixel = 'px';
+  junto: any;
+
   constructor(private _negociosContactoService: NegociosContactosService) { }
 
   ngOnInit(): void {
@@ -26,6 +32,19 @@ export class NegocioComponent implements OnInit {
     this.negocio.cantidad = 1;
 
     this.cargarNegocios();
+
+    console.log('anchura de la pantalla px: ', this.anchuraPantalla);
+
+    console.log('altura de la pantalla px: ', this.alturaPantalla);
+
+    console.log('medida que puede usar la altura tabla', (this.alturaPantalla * 50) / 100);
+
+    this.alturaDiv = Math.round((this.alturaPantalla * 55) / 100 );
+
+    this.junto = this.alturaDiv+this.pixel;
+    console.log('Junto: ', this.junto);
+
+    console.log('anchura de screen', this.anchuraPantalla);
 
   }
 
@@ -38,6 +57,7 @@ export class NegocioComponent implements OnInit {
     }
     console.log("Negocio agregado ..:)");
     console.log(form);
+
   }
 
   cargarNegocios() {

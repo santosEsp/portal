@@ -17,7 +17,7 @@
 
 .icon-size {
     font-size: 65px;
-    color: #275995;
+    color: #000000;
 }
 
 .navbarContacto {
@@ -27,7 +27,7 @@
 }
 
 .subligas:hover {
-    background-color: rgb(41, 61, 83);
+    background-color: #E5B53A;
     color: white;
 }
 
@@ -36,7 +36,7 @@
 }
 
 .colorCorporativo {
-    background-color: #275995;
+    background-color: #000000;
 }
 
 .colorSection {
@@ -86,7 +86,7 @@ li {
 /* Change the link color to #111 (black) on hover */
 
 .ligaHover:hover {
-    background-color: rgb(31, 65, 107);
+    background-color: #E5B53A;
 }
 
 .contenedor {

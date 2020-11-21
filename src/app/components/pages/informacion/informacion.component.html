@@ -177,7 +177,7 @@
                                 <td><small class="text-muted">Número de empleados</small><br>{{unaEmpresa.no_empleados}}</td>
                             </tr>
                             <tr>
-                                <td><small class="text-muted">Ingresos anuales</small><br>{{unaEmpresa.ingresos_anuales}}</td>
+                                <td><small class="text-muted">Ingresos anuales</small><br>{{unaEmpresa.ingresos_anuales |currency}}</td>
                             </tr>
                             <tr>
                                 <td><small class="text-muted">Zona horaria</small><br>{{unaEmpresa.zona_horaria}}</td>
@@ -274,7 +274,7 @@
                               </svg>&nbsp; Nota registrada
 
                             <div class="float-right">
-                                {{notas.createdAt}}
+                                {{ notas.createdAt | date }}
                             </div>
                         </div>
                         <div class="card-body">
@@ -310,7 +310,7 @@
                             </svg>&nbsp; Correo registrado
 
                             <div class="float-right">
-                                {{correos.fecha}}
+                                {{ correos.createdAt | date }}
                             </div>
                         </div>
                         <div class="card-body">
@@ -320,6 +320,7 @@
                                     <tbody>
                                         <tr>
                                             <td><small class="text-muted">Contactado: </small><br>{{unContacto.nombre}} {{unContacto.apellido}}</td>
+                                            <td><small class="text-muted">Fecha: </small><br>{{ correos.fecha | date }}</td>
                                             <td><small class="text-muted">Hora: </small><br>{{correos.hora}}</td>
                                         </tr>
                                         <tr>
@@ -355,7 +356,7 @@
                             </svg>&nbsp; Llamada registrada
 
                             <div class="float-right">
-                                {{llamadas.createdAt}}
+                                {{ llamadas.createdAt | date }}
                             </div>
                         </div>
                         <div class="card-body">
@@ -367,7 +368,7 @@
                                             <td><small class="text-muted">Resultado de la llamada: </small><br>{{llamadas.resultado_llamada}}</td>
                                         </tr>
                                         <tr>
-                                            <td><small class="text-muted ">Fecha: </small><br>{{llamadas.fecha}}</td>
+                                            <td><small class="text-muted ">Fecha: </small><br>{{ llamadas.fecha | date }}</td>
                                             <td><small class="text-muted ">Hora: </small><br>{{llamadas.hora}}</td>
                                         </tr>
                                         <tr>
@@ -405,7 +406,7 @@
                             </svg>&nbsp; Reunión registrado
 
                             <div class="float-right">
-                                {{reuniones.createdAt}}
+                                {{reuniones.createdAt | date}}
                             </div>
                         </div>
                         <div class="card-body">
@@ -416,7 +417,7 @@
                                         <tr>
                                             <td><small class="text-muted">Asistente: </small><br>{{unContacto.nombre}} {{unContacto.apellido}} </td>
                                             <td><small class="text-muted">Resultado: </small><br>{{reuniones.resultado}}</td>
-                                            <td><small class="text-muted">Fecha: </small><br>{{reuniones.fecha}}</td>
+                                            <td><small class="text-muted">Fecha: </small><br>{{reuniones.fecha | date}}</td>
 
                                         </tr>
                                         <tr>
@@ -531,7 +532,7 @@
                                     <tbody>
                                         <tr>
                                             <td><small class="text-muted">Contactado: </small><br>{{unaEmpresa.nombre}} </td>
-                                            <td><small class="text-muted">Hora: </small><br>{{correos.hora}}</td>
+                                            <td><small class="text-muted">Hora: </small><br>{{correos.hora !!}}</td>
                                         </tr>
                                         <tr>
                                             <td><small class="text-muted ">Descripción: </small><br>{{correos.descripcion}}</td>
@@ -673,14 +674,15 @@
                 </div>
                 <hr *ngIf="ruta.tipo=='contacto'">
                 <!--Negocios para contactos-->
-                <label class="ml-4" style="font-weight: 500;">Negocios</label>
+                <div class="d-flex justify-content-between">
+                    <label class="ml-4 " style="font-weight: 500;">Negocios</label>
 
-                <a href="#" class="margenLink " *ngIf="ruta.tipo=='contacto'" data-toggle="modal" data-target="#exampleModal">
-                    <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <a href="#" class="margenLink mr-1" *ngIf="ruta.tipo=='contacto'" data-toggle="modal" data-target="#exampleModal">
+                        <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                         d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
                 </svg>Agregar negocio</a>
-
+                </div>
                 <!--Tarjetas de los negocios-->
                 <div class="card block mt-2" *ngFor="let negocio of negociosContacto">
                     <div class="card-body">
@@ -701,11 +703,11 @@
                                 <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
                                 <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
                                 <path fill-rule="evenodd" d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
-                              </svg>&nbsp;&nbsp; Concluye: {{negocio.fcierre}}
+                              </svg>&nbsp;&nbsp; Concluye: {{ negocio.fcierre | date }}
                         </p>
                         <div class="float-sm-right text-sm-right">
                             <a href="#" (click)="eliminarNegocio(negocio)" data-toggle="modal" data-target="evitaRedirigir">Eliminar</a>&nbsp;&nbsp;
-                            <a href="#" (click)="cargarInfo(negocio)" data-toggle="modal" data-target="#modalEditarNegocio">Editar</a>
+                            <a href="#" (click)="cargarInfoAlForm(negocio)" data-toggle="modal" data-target="#modalEditarNegocio">Editar</a>
                         </div>
                     </div>
                 </div>

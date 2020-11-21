@@ -84,6 +84,9 @@ export class InformacionComponent implements OnInit {
   ruta: { tipo: string, id: string };
   etapas: any [] = [];
 
+  alturaPantalla = window.screen.height;
+  alturaScroll: any;
+
   constructor(private rutaActiva: ActivatedRoute, private _contactoService: ContactoService, private _empresaService: EmpresaService,
     private _registrarCorreoService: RegistrarCorreoService, private _notasService: NotasService,
     private _llamadasService: LlamadasService, private _registrarReunionService: RegistrarReunionService,
@@ -93,6 +96,10 @@ export class InformacionComponent implements OnInit {
     private _correosEmpresas: CorreosEmpresasService, private _negociosContactoService: NegociosContactosService, 
     private _etapasService: EtapasNegociosService
   ) {
+    
+    
+    this.alturaScroll = ((this.alturaPantalla * 77)/100)+'px';
+    console.log('alturaScroll*******************************', this.alturaScroll);
 
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
     this.miId = this.miUsuario['id_usuario'];
@@ -310,7 +317,7 @@ export class InformacionComponent implements OnInit {
     });
   }
 
-  cargarInfo(datos: any){
+  cargarInfoAlForm(datos: any){
     console.log(datos);
     this.editarNegocio.id_negocio = datos.id_negocio;
     this.editarNegocio.nombre_negocio = datos.nombre_negocio;
@@ -347,7 +354,7 @@ export class InformacionComponent implements OnInit {
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
-        cancelButtonColor: '#3085d6',
+        cancelButtonColor: '#E5B53A',
         confirmButtonText: 'Eliminar',
         cancelButtonText: 'Cancelar'
   

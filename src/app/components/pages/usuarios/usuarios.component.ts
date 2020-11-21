@@ -12,13 +12,20 @@ import { UsuarioModel } from '../../../models/usuarios.model';
 export class UsuariosComponent implements OnInit {
   usuario: UsuarioModel;
   usuarios: UsuarioModel[] = [];
-  contadorUsuarios = 0;
+  contadorUsuarios: number;
+  usuariosDesde: number;
+  masPaginasU: boolean;
+  salvaContadorUsuarios: number; 
 
-  constructor(private _usuarioService: UsuarioService) { }
+  constructor(private _usuarioService: UsuarioService) {
+    
+    this.usuariosDesde = 0;
+   }
 
   ngOnInit(): void {
     this.usuario = new UsuarioModel();
     this.cargarUsuarios();
+    this.contadorUsuariosBD();
   }
 
   agregarUsuario(forma: NgForm): any {
@@ -66,10 +73,8 @@ export class UsuariosComponent implements OnInit {
 
 
   cargarUsuarios(): any {
-    this._usuarioService.cargarUsuarios().subscribe(lista => {
+    this._usuarioService.cargarUsuarios(this.usuariosDesde).subscribe(lista => {
       this.usuarios = lista;
-      this.contadorUsuarios = this.usuarios.length;
-      console.log('N usuarios', this.contadorUsuarios);
     });
   }
 
@@ -88,9 +93,10 @@ export class UsuariosComponent implements OnInit {
       text: 'Eliminará a: ' + usuario.nombre,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Eliminar'
+      confirmButtonColor: 'red',
+      cancelButtonColor: '#E5B53A',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
 
     })
       .then((borrar) => {
@@ -110,6 +116,48 @@ export class UsuariosComponent implements OnInit {
   }
 
   actualizarUsuario(usuario: UsuarioModel): any {
+    console.log('Actualizar usuario', usuario);
     this._usuarioService.actualizarUsuario(usuario).subscribe();
   }
+
+
+  contadorUsuariosBD() {
+    this._usuarioService.contadorUsuariosBD().subscribe(contador => {
+      this.contadorUsuarios = contador;
+      console.log('ContadorUsuarios COMP: ' + this.contadorUsuarios);
+      this.guardarContadorUsuarios(this.contadorUsuarios);
+
+    });
+  }
+
+  guardarContadorUsuarios(contador: number) {
+    this.salvaContadorUsuarios = contador;
+    console.log('Contador U ', this.salvaContadorUsuarios);
+  }
+  
+
+
+
+  sumaUsuariosHasta(valor: number) {
+    this.usuariosDesde += valor;
+    if (this.salvaContadorUsuarios - this.usuariosDesde <= 10) {
+      this.masPaginasU = false;
+      console.log('HAY MAS PAGINAS', this.masPaginasU);
+      this.cargarUsuarios();
+    }
+
+    else {
+      this.masPaginasU = true;
+      console.log('HAY MAS PAGINAS', this.masPaginasU);
+    }
+  }
+
+  restaUsuariosHasta(valor: number) {
+    this.usuariosDesde -= valor;
+    this.cargarUsuarios();
+    console.log('Despues de resta MCD', this.usuariosDesde);
+    this.masPaginasU = true;
+  }
+
+
 }

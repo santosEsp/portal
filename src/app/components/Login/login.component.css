@@ -1,9 +1,38 @@
-.paddings {
-    padding-left: 30%;
-    padding-right: 30%;
-    padding-top: 7%;
+.divAltura {
+    height: 100vh;
+    /* Ruta relativa o completa a la imagen */
+    background-image: url('../../../assets/image/fondodown.png');
+    /* Centramos el fondo horizontal y verticalmente */
+    background-position: center 15vh;
+    /* El fonde no se repite */
+    background-repeat: no-repeat;
+    /* Fijamos la imagen a la ventana para que no supere el alto de la ventana */
+    /* background-attachment: fixed; */
+    /* El fonde se re-escala automáticamente */
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    /* Color de fondo si la imagen no se encuentra o mientras se está cargando */
+    /* background-color: rgb(56, 211, 185); */
+    /* Fuente para el texto */
+    /* text-align: center;
+    color: #000;
+    font-family: "Times New Roman", Times, serif; */
 }
 
-.image-fondo {
-    background-image: url("src\assets\image\Fondo.png");
+.divFondo {
+    background-size: 100vw 100vh;
+    background-image: url("../../../assets/image/fondodown.png");
+    background-repeat: no-repeat;
+    background-position: 0px 160px;
+}
+
+.colorFondo {
+    background-color: rgba(201, 198, 198, 0.068);
+}
+
+.topDivForm {
+    margin-top: -10%;
 }

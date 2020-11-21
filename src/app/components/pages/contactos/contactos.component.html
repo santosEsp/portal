@@ -1,19 +1,19 @@
 <app-navbar></app-navbar>
+<div style="height: 90vh;">
+    <div style="height: 93vh;">
+        <div class="float-right">
+            <div class="btn-group">
 
-<div>
-    <div class="float-right">
-        <div class="btn-group">
 
-
-            <button type="button" class="btn estilosBotones estilosBotonesHover mt-4 mr-4" data-toggle="modal" data-target="#modalCrearContacto" data-whatever="@mdo">
+                <button type="button" class="btn estilosBotones estilosBotonesHover mt-4 mr-4" data-toggle="modal" data-target="#modalCrearContacto" data-whatever="@mdo">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
               </svg>
             Agregar contacto
         </button>
-        </div>
-        <div class="btn-group">
-            <button class="btn estilosBotones estilosBotonesHover mt-4 mr-4 dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </div>
+            <div class="btn-group">
+                <button class="btn estilosBotones estilosBotonesHover mt-4 mr-4 dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi
             bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1
@@ -27,14 +27,14 @@
             Exportar contactos
             </button>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button (click)="exportarContactos()" class="dropdown-item estilosBotonesHover" type="button">Todos los contactos</button>
-                <button (click)="exportarMisContactos()" class="dropdown-item estilosBotonesHover" type="button">Mis contactos</button>
-            </div>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button (click)="exportarContactos()" class="dropdown-item estilosBotonesHover" type="button">Todos los contactos</button>
+                    <button (click)="exportarMisContactos()" class="dropdown-item estilosBotonesHover" type="button">Mis contactos</button>
+                </div>
 
-        </div>
-        <div class="btn-group">
-            <button class="btn estilosBotones estilosBotonesHover mt-4 mr-4 dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            </div>
+            <div class="btn-group">
+                <button class="btn estilosBotones estilosBotonesHover mt-4 mr-4 dropdown-toggle" type="button" id="dropdownMenu3" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi
             bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1
@@ -48,260 +48,439 @@
             Exportar acciones
             </button>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
-                <button (click)="exportarLlamadasRealizadas()" class="dropdown-item estilosBotonesHover" type="button">Llamadas realizadas</button>
-                <button class="dropdown-item estilosBotonesHover" type="button">Correos enviados</button>
-                <button (click)="exportarReunionesRealizadas()" class="dropdown-item estilosBotonesHover" type="button">Reuniones realizadas</button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
+                    <button (click)="exportarLlamadasRealizadas()" class="dropdown-item estilosBotonesHover" type="button">Llamadas realizadas</button>
+                    <button class="dropdown-item estilosBotonesHover" type="button">Correos enviados</button>
+                    <button (click)="exportarReunionesRealizadas()" class="dropdown-item estilosBotonesHover" type="button">Reuniones realizadas</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div>
-        <div class="container-fluid mt-3">
-            <span class="encabezado">Contactos</span>
-            <br />
-            <small>{{ contadorContactos }} contactos</small>
-        </div>
+        <div>
+            <div class="container-fluid ">
 
-        <!--Inicio del formulario modal Crear contacto-->
-        <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalCrearContacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header bgCorp">
-                        <h5 class="modal-title text-white" id="exampleModalLabel">
-                            Agregar contacto
-                        </h5>
-                        <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <form (ngSubmit)="agregarContacto(f)" #f="ngForm">
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Correo</label>
-                                <input type="text" class="form-control" id="email" name="email" [(ngModel)]="contacto.email" required email />
-
-                                <small *ngIf="f.submitted && f.controls['email'].errors" class="text-danger">
-                                    Campo obligatorio
-                                </small>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Nombre</label>
-                                <input type="text" class="form-control" id="pipeline" name="nombre" [(ngModel)]="contacto.nombre" required minlength="3" />
-
-                                <small *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger">
-                                    Campo obligatorio
-                                </small>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Apellido</label>
-                                <input type="text" class="form-control" id="etapa" name="apellido" [(ngModel)]="contacto.apellido" required minlength="3" />
-
-                                <small *ngIf="f.submitted && f.controls['apellido'].errors" class="text-danger">
-                                    Campo obligatorio
-                                </small>
-                            </div>
+                <span class="encabezado">Contactos</span>
+                <br>
+                <br>
+            </div>
 
 
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Propietario de registro</label>
-                                <input type="text" class="form-control" id="pipeline" name="propietario" [(ngModel)]="propietario.propietario_registro" required disabled />
+            <div class="container-fluid pt-3">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#todosLosContactos" role="tab" aria-controls="home" aria-selected="true"><i class="fas fa-users"></i> Todos los contactos ({{contadorContactos}})</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#misContactos" role="tab" aria-controls="profile" aria-selected="false"><i class="fas fa-users"></i> Mis contactos ({{contadorMisContactos}})</a>
+                    </li>
+                </ul>
 
-                                <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger">
-                                    Campo obligatorio
-                                </small>
-                            </div>
+                <!--Contenido de los tabs
+    ---------------------------->
+                <div class="tab-content" id="myTabContent" style="height: 70vh;">
+                    <!--Contenido tab 1-->
+                    <div class="tab-pane fade show active" id="todosLosContactos" role="tabpanel" aria-labelledby="home-tab">
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Empresa</label>
-                                <div class="col-22">
-                                    <select class="form-control" id="fkempresa" name="fkempresa" [(ngModel)]="contacto.fkempresa">
-                                        <option  *ngFor="let lista of listaEmpresas" [ngValue]="lista.id_empresa">
-                                            {{lista.nombre}}
-                                        </option>
-                                        
-                                    </select>
 
-                                    <small *ngIf="f.submitted && f.controls['fkempresa'].untouched" class="text-danger">
-                                        Campo obligatorio
-                                    </small>
+
+                        <div class="table-responsive" style="height: 57vh;">
+                            <table class="table mt-3 table-hover">
+                                <thead class="grisSecundario">
+                                    <tr>
+                                        <th scope="col">Núm.</th>
+                                        <th scope="col">Correo</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido</th>
+                                        <th scope="col">Propietario</th>
+                                        <th scope="col">Departamento</th>
+                                        <th scope="col">Teléfono</th>
+                                        <th scope="col">Empresa</th>
+                                        <th scope="col">Editar</th>
+                                        <th scope="col">Eliminar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let contacto of contactos; let i = index;">
+                                        <th scope="row">{{ desde + (i+1) }}</th>
+                                        <td>
+                                            <a [routerLink]="['/informacion',tipo, contacto.id_contacto]">{{contacto.email }}</a>
+                                        </td>
+                                        <td>
+                                            <div style="width: 10rem;"></div>{{contacto.nombre}}</td>
+                                        <td>
+                                            <div style="width: 10rem;"></div>{{contacto.apellido}}</td>
+                                        <td>
+                                            <div style="width: 15rem;"></div>{{contacto.propietario}}</td>
+                                        <td>
+                                            <div style="width: 10rem;"></div>{{contacto.departamento}}</td>
+                                        <td>
+                                            <div style="width: 10rem;"></div>{{contacto.telefono}}</td>
+                                        <td>
+                                            <div style="width: 15rem;"></div>{{contacto.empresa}}</td>
+                                        <td>
+                                            <button (click)="cargarInfoAlForm(contacto)" class="btn estilosBotones estilosBotonesHover " data-toggle="modal" data-target="#modalEditarContacto">
+                                        <svg width="1em " height="1em " viewBox="0 0 16 16 " class="bi bi-pencil-square " fill="currentColor " xmlns="http://www.w3.org/2000/svg ">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z "/>
+                                            <path fill-rule="evenodd " d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z "/>
+                                        </svg>
+                                    </button>
+                                        </td>
+                                        <td>
+                                            <button (click)="eliminarContacto(contacto)" class="btn estilosBotones estilosBotonesEliminarHover">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                          </svg>
+                                    </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+
+                            <div class="row mt-2" *ngIf="contactos.length == 0">
+
+                                <div class="col-md-12">
+                                    <div class="alert alert-info" role="alert">
+                                        <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                                    <circle cx="8" cy="4.5" r="1"/>
+                                  </svg> &nbsp;&nbsp; Aún no tienes contactos registrados, empieza a crearlos y aparecerán aquí
+                                    </div>
                                 </div>
                             </div>
+                        </div>
+                        <hr>
+                        <div *ngIf="contadorContactos > 0" class="d-flex justify-content-center mt-2">
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Departamento</label>
-                                <input type="text" class="form-control" id="pipeline" name="departamento" [(ngModel)]="contacto.departamento" required />
+                            <label class="m-2">Del <strong>{{desde +1}}</strong> al <strong>{{desde + 10}}</strong> de <strong>{{contadorContactos}}</strong></label>
 
-                                <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger">
-                                    Campo obligatorio
-                                </small>
-                            </div>
+                            <label class="m-2">Anterior</label>
+                            <button [disabled]="desde===0" (click)="restaContactosHasta(10)" class="btn estilosBotones estilosBotonesHover mr-2">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-left-fill" style="padding: 0;" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                      </svg>
+               </button>
+                            <button [disabled]="masPaginasC===false" (click)="sumaContactosHasta(10)" class="btn estilosBotones estilosBotonesHover ml-2">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                      </svg>
+               </button>
+                            <label class="m-2">Siguiente</label>
+                        </div>
+                        <br>
 
-                            <div class="form-group">
-                                <label for="recipient-name" class="col-form-label">Número de teléfono</label>
-                                <input type="text" class="form-control" id="etapa" name="telefono" [(ngModel)]="contacto.telefono" required minlength="8" />
-
-                                <small *ngIf="f.submitted && f.controls['telefono'].errors" class="text-danger">
-                                    Campo obligatorio
-                                </small>
-                            </div>
-
-                            <div class="modal-footer">
-                                <button type="submit" class="btn estilosBotonesHover estilosBotones">Crear</button>
-
-                                <button type="submit" class="btn estilosBotonesHover estilosBotones">Crear y agregar otro</button>
-                                <button (click)="vaciarFormulario()" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">Cancelar</button>
-                            </div>
-                        </form>
                     </div>
+                    <!--Contenido tab 2-->
+                    <div class="tab-pane fade" id="misContactos" role="tabpanel" aria-labelledby="profile-tab">
+
+
+                        <div class="table-responsive" style="height: 57vh;">
+                            <table id="tablaContactos" class="table mt-3 display table-hover">
+                                <thead class="grisSecundario">
+                                    <tr>
+                                        <th scope="col">Núm.</th>
+                                        <th scope="col">Correo</th>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Apellido</th>
+                                        <th scope="col">Propietario</th>
+                                        <th scope="col">Departamento</th>
+                                        <th scope="col">Teléfono</th>
+                                        <th scope="col">Empresa</th>
+                                        <th scope="col">Editar</th>
+                                        <th scope="col">Eliminar</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <tr *ngFor="let misContactos of listaMisContactos; let i = index">
+                                        <th scope="row">{{misContactosDesde+ ( i + 1 )}}</th>
+                                        <td>
+                                            <a [routerLink]="['/informacion',tipo, misContactos.id_contacto]">{{misContactos.email}}</a>
+                                        </td>
+                                        <td>
+                                            <div style="width: 10rem;"></div>{{misContactos.nombre}}</td>
+                                        <td>
+                                            <div style="width: 10rem;"></div>{{misContactos.apellido}}</td>
+                                        <td>
+                                            <div style="width: 15rem;"></div>{{misContactos.propietario}}</td>
+                                        <td>
+                                            <div style="width: 10rem;"></div>{{misContactos.departamento}}</td>
+                                        <td>
+                                            <div style="width: 10rem;"></div>{{misContactos.telefono}}</td>
+                                        <td>
+                                            <div style="width: 15rem;"></div>{{misContactos.empresa}}</td>
+                                        <td>
+                                            <button (click)="actualizarContacto(misContactos)" class="btn estilosBotones estilosBotonesHover">
+                                        <svg width="1em " height="1em " viewBox="0 0 16 16 " class="bi bi-pencil-square " fill="currentColor " xmlns="http://www.w3.org/2000/svg ">
+                                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z "/>
+                                            <path fill-rule="evenodd " d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z "/>
+                                        </svg>
+                                    </button>
+                                        </td>
+                                        <td>
+                                            <button (click)="eliminarContacto(misContactos)" class="btn estilosBotones estilosBotonesEliminarHover">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                          </svg>
+                                    </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="row" *ngIf="listaMisContactos.length == 0">
+                                <div class="col-md-12">
+                                    <div class="alert alert-info" role="alert">
+                                        <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                                    <circle cx="8" cy="4.5" r="1"/>
+                                  </svg> &nbsp;&nbsp; Aún no tienes contactos registrados, empieza a crearlos y aparecerán aquí
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div *ngIf="contadorMisContactos > 0" class="d-flex justify-content-center mt-2">
+
+                            <label class="m-2">Del <strong>{{misContactosDesde +1}}</strong> al <strong>{{misContactosDesde + 10}}</strong> de <strong>{{contadorMisContactos}}</strong></label>
+
+                            <label class="m-2">Anterior</label>
+                            <button [disabled]="misContactosDesde===0" (click)="restaMisContactosHasta(10)" class="btn estilosBotones estilosBotonesHover mr-2">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-left-fill" style="padding: 0;" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3.86 8.753l5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z"/>
+                      </svg>
+               </button>
+                            <button [disabled]="masPaginasMC===false" (click)="sumaMisContactosHasta(10)" class="btn estilosBotones estilosBotonesHover ml-2">
+                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-caret-right-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12.14 8.753l-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z"/>
+                      </svg>
+               </button>
+                            <label class="m-2">Siguiente</label>
+
+                        </div>
+
+
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
-    <!--Fin formulario crear contacto-->
 
-    <div class="container-fluid pt-3">
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#todosLosContactos" role="tab" aria-controls="home" aria-selected="true">Todos los contactos</a>
-            </li>
-            <li class="nav-item" role="presentation">
-                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#misContactos" role="tab" aria-controls="profile" aria-selected="false">Mis contactos</a>
-            </li>
-        </ul>
-
-        <!--Contenido de los tabs
-    ---------------------------->
-        <div class="tab-content con" id="myTabContent">
-            <!--Contenido tab 1-->
-            <div class="tab-pane fade show active" id="todosLosContactos" role="tabpanel" aria-labelledby="home-tab">
-                <div class="table-responsive">
-                    <table class="table mt-3">
-                        <thead class="grisSecundario">
-                            <tr>
-                                <th scope="col">Núm.</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Propietario</th>
-                                <th scope="col">Departamento</th>
-                                <th scope="col">Teléfono</th>
-                                <th scope="col">Empresa</th>
-                                <th scope="col">Editar</th>
-                                <th scope="col">Eliminar</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let contacto of contactos; let i = index;">
-                                <th scope="row">{{ i + 1 }}</th>
-                                <td>
-                                    <a [routerLink]="['/informacion',tipo, contacto.id_contacto]">{{contacto.email }}</a>
-                                </td>
-                                <td><input [(ngModel)]="contacto.nombre" type="text" name="nombre" class="form-control" placeholder="Nombre" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="contacto.apellido" type="text" name="apellido" class="form-control" placeholder="Apellido" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="contacto.propietario" type="text" name="propietario" class="form-control" placeholder="Apellido" style="width: fit-content;" disabled></td>
-                                <td><input [(ngModel)]="contacto.departamento" type="text" name="departamento" class="form-control" placeholder="Departamento" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="contacto.telefono" type="text" name="telefono" class="form-control" placeholder="Teléfono" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="contacto.empresa" type="text" name="empresa" class="form-control" placeholder="Empresa" style="width: fit-content;" disabled></td>
-                                <td>
-                                    <button (click)="actualizarContacto(contacto)" class="btn btn-primary m-r-10">
-                                        <i class='fa fa-save'></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button (click)="eliminarContacto(contacto)" class="btn btn-danger">
-                                        <i class='fas fa-trash-alt'></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+    <!--Inicio del formulario modal Crear contacto-->
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalCrearContacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bgCorp">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">
+                        Agregar contacto
+                    </h5>
+                    <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
                 </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="agregarContacto(f)" #f="ngForm">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Correo</label>
+                            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="contacto.email" required email />
 
-                <div class="row" *ngIf="contactos.length == 0">
-                    <div class="col-md-12">
-                        <div class="alert alert-info" role="alert">
-                            <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-                                <circle cx="8" cy="4.5" r="1"/>
-                              </svg> &nbsp;&nbsp; Aún no tienes contactos registrados, empieza a crearlos y aparecerán aquí
+                            <small *ngIf="f.submitted && f.controls['email'].errors" class="text-danger">
+                        Campo obligatorio
+                    </small>
                         </div>
-                    </div>
-                </div>
 
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nombre</label>
+                            <input type="text" class="form-control" id="pipeline" name="nombre" [(ngModel)]="contacto.nombre" required minlength="3" />
 
-            </div>
-            <!--Contenido tab 2-->
-            <div class="tab-pane fade" id="misContactos" role="tabpanel" aria-labelledby="profile-tab">
-
-
-
-
-
-                <div class="table-responsive">
-                    <table id="tablaContactos" class="table mt-3 display">
-                        <thead class="grisSecundario">
-                            <tr>
-                                <th scope="col">Núm.</th>
-                                <th scope="col">Correo</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Apellido</th>
-                                <th scope="col">Propietario</th>
-                                <th scope="col">Departamento</th>
-                                <th scope="col">Teléfono</th>
-                                <th scope="col">Empresa</th>
-                                <th scope="col">Editar</th>
-                                <th scope="col">Eliminar</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr *ngFor="let misContactos of listaMisContactos; let i = index">
-                                <th scope="row">{{ i + 1 }}</th>
-                                <td>
-                                    <a [routerLink]="['/informacion',tipo, misContactos.id_contacto]">{{misContactos.email}}</a>
-                                </td>
-                                <td><input [(ngModel)]="misContactos.nombre" type="text" name="nombre" class="form-control" placeholder="Nombre" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="misContactos.apellido" type="text" name="nombre" class="form-control" placeholder="Apellido" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="misContactos.propietario" type="text" name="nombre" class="form-control" placeholder="Propietario" style="width: fit-content;" disabled></td>
-                                <td><input [(ngModel)]="misContactos.departamento" type="text" name="nombre" class="form-control" placeholder="Departamento" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="misContactos.telefono" type="text" name="nombre" class="form-control" placeholder="Telefono" style="width: fit-content;"></td>
-                                <td><input [(ngModel)]="misContactos.empresa" type="text" name="nombre" class="form-control" placeholder="Empresa" style="width: fit-content;" disabled></td>
-                                <td>
-                                    <button (click)="actualizarContacto(misContactos)" class="btn btn-primary m-r-10">
-                                        <i class='fa fa-save'></i>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button (click)="eliminarContacto(misContactos)" class="btn btn-danger">
-                                        <i class='fas fa-trash-alt'></i>
-                                    </button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="row" *ngIf="listaMisContactos.length == 0">
-                    <div class="col-md-12">
-                        <div class="alert alert-info" role="alert">
-                            <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-                                <circle cx="8" cy="4.5" r="1"/>
-                              </svg> &nbsp;&nbsp; Aún no tienes contactos registrados, empieza a crearlos y aparecerán aquí
+                            <small *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger">
+                        Campo obligatorio
+                    </small>
                         </div>
-                    </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Apellido</label>
+                            <input type="text" class="form-control" id="etapa" name="apellido" [(ngModel)]="contacto.apellido" required minlength="3" />
+
+                            <small *ngIf="f.submitted && f.controls['apellido'].errors" class="text-danger">
+                        Campo obligatorio
+                    </small>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Propietario de registro</label>
+                            <input type="text" class="form-control" id="pipeline" name="propietario" [(ngModel)]="propietario.propietario_registro" required disabled />
+
+                            <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger">
+                        Campo obligatorio
+                    </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Empresa</label>
+                            <div class="col-22">
+                                <select class="form-control" id="fkempresa" name="fkempresa" [(ngModel)]="contacto.fkempresa">
+                            <option  *ngFor="let lista of listaEmpresas" [ngValue]="lista.id_empresa">
+                                {{lista.nombre}}
+                            </option>
+                            
+                        </select>
+
+                                <small *ngIf="f.submitted && f.controls['fkempresa'].untouched" class="text-danger">
+                            Campo obligatorio
+                        </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Departamento</label>
+                            <input type="text" class="form-control" id="pipeline" name="departamento" [(ngModel)]="contacto.departamento" required />
+
+                            <small *ngIf="f.submitted && f.controls['departamento'].errors" class="text-danger">
+                        Campo obligatorio
+                    </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Número de teléfono</label>
+                            <input type="text" class="form-control" id="etapa" name="telefono" [(ngModel)]="contacto.telefono" required minlength="8" />
+
+                            <small *ngIf="f.submitted && f.controls['telefono'].errors" class="text-danger">
+                        Campo obligatorio
+                    </small>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn estilosBotonesHover estilosBotones">Crear</button>
+
+                            <button type="submit" class="btn estilosBotonesHover estilosBotones">Crear y agregar otro</button>
+                            <button (click)="vaciarFormulario()" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
                 </div>
             </div>
-
-
-
-
         </div>
     </div>
+
+
+    <!--Inicio del formulario modal Editar contacto-->
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalEditarContacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bgCorp">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">
+                        Editar contacto
+                    </h5>
+                    <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="actualizarContacto(fEditarContacto)" #fEditarContacto="ngForm">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Correo</label>
+                            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="editarContacto.email" required email />
+
+                            <small *ngIf="fEditarContacto.submitted && fEditarContacto.controls['email'].errors" class="text-danger">
+                    Campo obligatorio
+                </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="editarContacto.nombre" required minlength="3" />
+
+                            <small *ngIf="fEditarContacto.submitted && fEditarContacto.controls['nombre'].errors" class="text-danger">
+                    Campo obligatorio
+                </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Apellido</label>
+                            <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="editarContacto.apellido" required minlength="3" />
+
+                            <small *ngIf="fEditarContacto.submitted && fEditarContacto.controls['apellido'].errors" class="text-danger">
+                    Campo obligatorio
+                </small>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Propietario de registro</label>
+                            <input type="text" class="form-control" id="propietario" name="propietario" [(ngModel)]="editarContacto.propietario_registro" required disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Empresa</label>
+                            <div class="col-22">
+                                <select class="form-control" id="fkempresa" name="fkempresa" [(ngModel)]="editarContacto.fkempresa">
+                        <option  *ngFor="let lista of listaEmpresas" [ngValue]="lista.id_empresa">
+                            {{lista.nombre}}
+                        </option>
+                        
+                    </select>
+
+                                <small *ngIf="fEditarContacto.submitted && fEditarContacto.controls['fkempresa'].errors" class="text-danger">
+                        Campo obligatorio
+                    </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Departamento</label>
+                            <input type="text" class="form-control" id="departamento" name="departamento" [(ngModel)]="editarContacto.departamento" required />
+
+                            <small *ngIf="fEditarContacto.submitted && fEditarContacto.controls['departamento'].errors" class="text-danger">
+                    Campo obligatorio
+                </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Número de teléfono</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="editarContacto.telefono" required minlength="8" />
+
+                            <small *ngIf="fEditarContacto.submitted && fEditarContacto.controls['telefono'].errors" class="text-danger">
+                    Campo obligatorio
+                </small>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="nombre" name="idContacto" required [(ngModel)]="editarContacto.id_contacto" />
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn estilosBotonesHover estilosBotones">Actualizar</button>
+                            <button class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
+<!--Fin formulario crear contacto-->

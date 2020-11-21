@@ -30,3 +30,14 @@ div.scrollmenu a:hover {
     font-size: 30px;
     margin-top: 10px;
 }
+
+
+/* div Adaptativo para que modifique el tamaño de la tabla al tamaño adecuado */
+
+html {
+    overflow-x: hidden
+}
+
+.element {
+    overflow: hidden;
+}

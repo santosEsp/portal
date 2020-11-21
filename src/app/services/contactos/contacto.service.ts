@@ -22,7 +22,7 @@ export class ContactoService {
     return this.http.post(url, contacto).pipe(
       map(
         (resp: any) => {
-          Swal.fire(contacto.nombre, 'Contactos agregado correctamente', 'success');
+          Swal.fire(contacto.nombre, 'Contacto agregado correctamente', 'success');
           return resp.contacto;
         }
       )
@@ -54,6 +54,7 @@ export class ContactoService {
 
   actualizarContacto(contacto: ContactoModel): any {
 
+    console.log('Contactos a editar Service', contacto)
     let url = URL_SERVICIOS + '/contactos/' + contacto.id_contacto;
     url += '?token=' + this.token;
 
@@ -95,8 +96,8 @@ export class ContactoService {
       );
   }
 
-  cargarContactos(): any {
-    let url = URL_SERVICIOS + '/contactos/';
+  cargarContactos(inicio: number): any {
+    let url = URL_SERVICIOS + '/contactos/paginacionContactos/' + inicio;
     url += '?token=' + this.token;
 
     return this.http.get(url)
@@ -110,12 +111,43 @@ export class ContactoService {
       );
   }
 
-  cargarMisContactos(miId: string): any {
+
+  contadorContactosBD(): any {
+    let url = URL_SERVICIOS + '/contactos/contadorContactos';
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log('ContadorContactos: ', resp.contador);
+            return resp.contador[0].contador;
+          }
+        )
+      );
+  }
+
+  contadorMisContactosBD(miId: number): any {
+    let url = URL_SERVICIOS + '/contactos/contadorMisContactos/'+ miId;
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log('ContadorMisContactos: ', resp.contador);
+            return resp.contador[0].contador;
+          }
+        )
+      );
+  }
+
+  cargarMisContactos(miId: number, desde: number): any {
 
     console.log('service miId', miId);
-    let url = URL_SERVICIOS + '/contactos/miscontactos/' + miId;
+    let url = URL_SERVICIOS + '/contactos/misContactos/' + miId + '/' + desde;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
+    console.log('url miscontactos id, desde', url);
     return this.http.get(url)
       .pipe(
         map(
@@ -148,7 +180,7 @@ export class ContactoService {
   cargarUnContacto(idContacto: string): any {
 
     console.log('service idContacto', idContacto);
-    let url = URL_SERVICIOS + '/contactos/' + idContacto;
+    let url = URL_SERVICIOS + '/contactos/consultaContacto/' + idContacto;
     url += '?token=' + this.token;
     console.log('url consulta', url);
     return this.http.get(url)

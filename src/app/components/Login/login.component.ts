@@ -18,9 +18,33 @@ export class LoginComponent implements OnInit {
 
   recordarme = false;
   email: string;
+  alturaPantalla = window.screen.height;
+  anchuraPantalla = window.screen.width;
+  alturaDiv = 0;
+  alturapx: any;
+  anchuraForm: any;
+  alturaForm: any;
 
   constructor(private router: Router,
-    private _loginService: LoginService) { }
+    private _loginService: LoginService) {
+
+      console.log('altura de la pantalla px: ', this.alturaPantalla);
+  
+      
+  
+      this.alturaDiv = Math.round((this.alturaPantalla * 81) / 100 );
+      console.log('medida que puede usar la altura tabla', this.alturaDiv);
+  
+      this.alturapx = this.alturaDiv + 'px';
+      console.log('Junto: ', this.alturapx);
+
+      this.anchuraForm = ((this.anchuraPantalla * 34) / 100) + 'px';
+      console.log('anchura form',this.anchuraForm);
+  
+      this.alturaForm = ((this.alturaPantalla * 40) / 100) + 'px';
+      console.log('altura form',this.alturaForm);
+
+     }
 
   ngOnInit(): void {
     // LocalStrogare del recordatorio del correo
@@ -46,7 +70,7 @@ export class LoginComponent implements OnInit {
     this._loginService.login(this.loginUser, this.recordarme).subscribe(
       (resp: any) => {
         Swal.close();
-        this.router.navigateByUrl('/contactos');
+        this.router.navigateByUrl('/negocios');
       },
       (err) => {
         Swal.fire({
