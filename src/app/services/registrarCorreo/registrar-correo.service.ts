@@ -29,7 +29,6 @@ export class RegistrarCorreoService {
 
 
   eliminarCorreo(idNota: string): any {
-
     let url = URL_SERVICIOS + '/rcorreos/' + idNota;
     url += '?token=' + this.token;
 
@@ -42,7 +41,6 @@ export class RegistrarCorreoService {
               text: 'Eliminado correctamente',
               icon: 'success',
             });
-
             return true;
           }
         )
@@ -51,7 +49,6 @@ export class RegistrarCorreoService {
 
 
   actualizarCorreo(correo: RegistrarCorreoModel): any {
-
     let url = URL_SERVICIOS + '/rcorreos/' + correo.id;
     url += '?token=' + this.token;
 
@@ -71,23 +68,16 @@ export class RegistrarCorreoService {
       );
   }
 
-
   cargarCorreos(idContacto: string): any {
-
-    console.log('R correo service miId', idContacto);
     let url = URL_SERVICIOS + '/rcorreos/' + idContacto;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('Correos service: ', resp.correos);
             return resp.correos;
           }
         )
       );
   }
-
-
 }

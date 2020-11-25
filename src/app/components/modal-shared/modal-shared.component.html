@@ -68,7 +68,7 @@
                                     </td>
                                     <td>
                                         <label class="col-form-label">Fecha</label>
-                                        <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="example-date-input" name="fechaCorreo" [(ngModel)]="correoContacto.fecha" required />
+                                        <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="fechaCorreo" name="fechaCorreo" [(ngModel)]="correoContacto.fecha" required />
 
                                         <small *ngIf="fCorreo.submitted && fCorreo.controls['fechaCorreo'].errors" class="text-danger">
                                                     Campo obligatorio
@@ -77,7 +77,7 @@
                                     <td>
 
                                         <label class="col-form-label">Hora</label>
-                                        <input class="form-control" type="time" value="00:00:00" id="example-time-input" name="horaCorreo" [(ngModel)]="correoContacto.hora" required />
+                                        <input class="form-control" type="time" value="00:00:00" id="horaCorreo" name="horaCorreo" [(ngModel)]="correoContacto.hora" required />
 
                                         <small *ngIf="fCorreo.submitted && fCorreo.controls['horaCorreo'].errors " class="text-danger">
                                                     Campo obligatorio
@@ -166,7 +166,7 @@
 
 
 
-                                        <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="example-date-input" name="fechaLlamada" required [(ngModel)]="llamadaContacto.fecha" />
+                                        <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="fechaLlamada" name="fechaLlamada" required [(ngModel)]="llamadaContacto.fecha" />
 
                                         <small *ngIf="fLlamada.submitted && fLlamada.controls['fechaLlamada'].errors " class="text-danger">
                                                     Campo obligatorio
@@ -177,7 +177,7 @@
                                         <label class="col-form-label">Hora</label>
 
 
-                                        <input class="form-control" type="time" value="00:00:00" id="example-time-input" name="horaLlamada" required [(ngModel)]="llamadaContacto.hora" />
+                                        <input class="form-control" type="time" value="00:00:00" id="horaLlamada" name="horaLlamada" required [(ngModel)]="llamadaContacto.hora" />
 
                                         <small *ngIf="fLlamada.submitted && fLlamada.controls['horaLlamada'].errors " class="text-danger">
                                                     Campo obligatorio
@@ -194,7 +194,7 @@
                                 Campo obligatorio
                             </small>
 
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" cols="20" placeholder="Descripción de la llamada" name="descripcionLlamada" required [(ngModel)]="llamadaContacto.descripcion"></textarea>
+                            <textarea class="form-control" id="descripcionLlamada" rows="5" cols="20" placeholder="Descripción de la llamada" name="descripcionLlamada" required [(ngModel)]="llamadaContacto.descripcion"></textarea>
                         </div>
 
                         <div class="modal-footer">
@@ -241,7 +241,7 @@
                                     <td>
                                         <label>Resultado</label>
 
-                                        <select class="form-control" id="sel4" name="resultadoReunion" required [(ngModel)]="reunionContacto.resultado">
+                                        <select class="form-control" id="resultadoReunion" name="resultadoReunion" required [(ngModel)]="reunionContacto.resultado">
                                                     <option>--Seleccione--</option>
                                                     <option>Programadas</option>
                                                     <option>Completadas</option>
@@ -259,7 +259,7 @@
 
                                         <label>Fecha</label>
 
-                                        <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="example-date-input" name="fechaReunion" required [(ngModel)]="reunionContacto.fecha" />
+                                        <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="fechaReunion" name="fechaReunion" required [(ngModel)]="reunionContacto.fecha" />
 
                                         <small *ngIf="fReunion.submitted && fReunion.controls['fechaReunion'].errors" class="text-danger">
                                                     Campo obligatorio
@@ -271,7 +271,7 @@
                                     <td>
                                         <label>Hora</label>
 
-                                        <input class="form-control" type="time" value="00:00:00" id="example-time-input" name="horaReunion" required [(ngModel)]="reunionContacto.hora" />
+                                        <input class="form-control" type="time" value="00:00:00" id="horaReunion" name="horaReunion" required [(ngModel)]="reunionContacto.hora" />
 
                                         <small *ngIf="fReunion.submitted && fReunion.controls['horaReunion'].errors" class="text-danger">
                                                     Campo obligatorio
@@ -305,7 +305,7 @@
                         </small>
                         <div class="form-group">
 
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Descripción de la reunión" name="descripcionReunion" required [(ngModel)]="reunionContacto.descripcion"></textarea>
+                            <textarea class="form-control" id="descripcionReunion" rows="5" placeholder="Descripción de la reunión" name="descripcionReunion" required [(ngModel)]="reunionContacto.descripcion"></textarea>
                         </div>
 
                         <div class="modal-footer">
@@ -345,7 +345,7 @@
 
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Nombre del negocio</label>
-                        <input type="text" class="form-control" id="nombre" name="nombreNegocio" required [(ngModel)]="negocioContacto.nombre_negocio" />
+                        <input type="text" class="form-control" id="nombreNegocio" name="nombreNegocio" required [(ngModel)]="negocioContacto.nombre_negocio" />
                         <small class="text-danger" *ngIf="fNegocio.submitted && fNegocio.controls['nombreNegocio'].errors">Campo
                                         obligatorio</small>
 
@@ -383,7 +383,7 @@
 
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Fecha de cierre</label>
-                        <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="example-date-input" name="cierreNegocio" required [(ngModel)]="negocioContacto.fcierre" />
+                        <input class="form-control" type="date" value="{{ fecha | date: 'yyyy-MM-dd' }}" id="fechaCierreNegocio" name="cierreNegocio" required [(ngModel)]="negocioContacto.fcierre" />
                         <small *ngIf="fNegocio.submitted && fNegocio.controls['cierreNegocio'].errors " class="text-danger">
                                                     Campo obligatorio
                                                 </small>

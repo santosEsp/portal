@@ -13,11 +13,9 @@ export class RegistrarReunionService {
     this.token = localStorage.getItem('token');
   }
 
-
   registrarReunion(reunion: RegistrarReunionModel): any {
     let url = URL_SERVICIOS + '/reuniones/';
     url += '?token=' + this.token;
-    console.log('Reunion a enviar service', reunion);
     return this.http.post(url, reunion).pipe(
       map(
         (resp: any) => {
@@ -30,7 +28,6 @@ export class RegistrarReunionService {
 
 
   eliminarReunion(id: string): any {
-
     let url = URL_SERVICIOS + '/reuniones/' + id;
     url += '?token=' + this.token;
 
@@ -43,7 +40,6 @@ export class RegistrarReunionService {
               text: 'Eliminado correctamente',
               icon: 'success',
             });
-
             return true;
           }
         )
@@ -52,7 +48,6 @@ export class RegistrarReunionService {
 
 
   actualizarReunion(reunion: RegistrarReunionModel): any {
-
     let url = URL_SERVICIOS + '/reuniones/' + reunion.id;
     url += '?token=' + this.token;
 
@@ -65,32 +60,25 @@ export class RegistrarReunionService {
               text: 'Actualizado correctaente',
               icon: 'success',
             });
-
             return resp.reunion;
           }
         )
       );
   }
 
-
   cargarReuniones(id: string): any {
-
-    console.log('Reuniones service ID', id);
     let url = URL_SERVICIOS + '/reuniones/' + id;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('Reuniones service: ', resp.reuniones);
             return resp.reuniones;
           }
         )
       );
   }
 
-  
   reporteReuniones(): any {
     let url = URL_SERVICIOS + '/reuniones/reporte';
     url += '?token=' + this.token;
@@ -99,11 +87,9 @@ export class RegistrarReunionService {
       .pipe(
         map(
           (resp: any) => {
-            console.log('reporte reuniones: ', resp.reporteReuniones);
             return resp.reporteReuniones;
           }
         )
       );
   }
-
 }

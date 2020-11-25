@@ -13,4 +13,5 @@ export class EmpresaModel{
     zona_horaria: string;
     descripcion: string;
     pagina_corporativa: string;
+    createdAt?: string;
 }

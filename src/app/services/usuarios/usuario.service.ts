@@ -14,7 +14,6 @@ export class UsuarioService {
     this.token = localStorage.getItem('token');
   }
 
-
   crearUsuario(usuario: UsuarioModel): any {
 
     let url = URL_SERVICIOS + '/usuarios/';
@@ -35,7 +34,6 @@ export class UsuarioService {
     // AGREGAR LA VERIFIACION DEL TOKEN
     let url = URL_SERVICIOS + '/usuarios/' + id;
     url += '?token=' + this.token;
-    console.log(url);
     return this.http.delete(url).pipe(
       map(
         (resp: any) => {
@@ -48,8 +46,6 @@ export class UsuarioService {
   }
 
   actualizarUsuario(usuario: UsuarioModel): any {
-
-    console.log('Service Act Usuario', usuario);
     let url = URL_SERVICIOS + '/usuarios/' + usuario.id_usuario;
     url += '?token=' + this.token;
     return this.http.put(url, usuario).pipe(
@@ -77,16 +73,12 @@ export class UsuarioService {
 
 
   cargarUnUsuario(id: number): any {
-
-    console.log('service id Un usuario', id);
     let url = URL_SERVICIOS + '/usuarios/unusuario/' + id;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('cargarUnUsuario service: ', resp.unUsuario);
             return resp.unUsuario;
           }
         )
@@ -101,7 +93,6 @@ export class UsuarioService {
       .pipe(
         map(
           (resp: any) => {
-            console.log('ContadorUsuarios: ', resp.contador);
             return resp.contador[0].contador;
           }
         )

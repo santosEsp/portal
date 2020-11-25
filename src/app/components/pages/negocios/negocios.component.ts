@@ -3,7 +3,7 @@ import { NegocioModel } from '../../../models/negocio.model';
 import { NgForm } from '@angular/forms';
 import { EmpresaModel } from '../../../models/empresa.model';
 import { NegociosContactosService } from '../../../services/negociosContactos/negocios-contactos.service';
-
+import { NegociosEmpresasService } from '../../../services/negocioEmpresas/negocios-empresas.service';
 @Component({
   selector: 'app-negocio',
   templateUrl: './negocios.component.html',
@@ -12,40 +12,22 @@ import { NegociosContactosService } from '../../../services/negociosContactos/ne
 export class NegocioComponent implements OnInit {
   negocio: NegocioModel;
   listaNegocios: any = [];
+  listaNegociosEmpresas: any = [];
   contadorNegocios: number;
   arraySuma: any = [];
   suma1 = 0; suma2 = 0; suma3 = 0; suma4 = 0; suma5 = 0;
   suma6 = 0; suma7 = 0; suma8 = 0; suma9 = 0; suma10 = 0;
 
-  anchuraPantalla = window.screen.width;
-  alturaPantalla = window.screen.height;
-  alturaDiv = 0;
-  pixel = 'px';
-  junto: any;
-
-  constructor(private _negociosContactoService: NegociosContactosService) { }
+  constructor(private _negociosContactoService: NegociosContactosService,
+    private _negociosEmpresaService: NegociosEmpresasService) { }
 
   ngOnInit(): void {
     this.negocio = new NegocioModel();
     this.negocio.nombre_negocio = "Sistema CRM ClickSoft";
     this.negocio.pipeline = "Sales de Pipeline";
     this.negocio.cantidad = 1;
-
-    this.cargarNegocios();
-
-    console.log('anchura de la pantalla px: ', this.anchuraPantalla);
-
-    console.log('altura de la pantalla px: ', this.alturaPantalla);
-
-    console.log('medida que puede usar la altura tabla', (this.alturaPantalla * 50) / 100);
-
-    this.alturaDiv = Math.round((this.alturaPantalla * 55) / 100 );
-
-    this.junto = this.alturaDiv+this.pixel;
-    console.log('Junto: ', this.junto);
-
-    console.log('anchura de screen', this.anchuraPantalla);
-
+    this.cargarNegociosConContactos();
+    this.cargarNegociosConEmpresas();
   }
 
   onSubmit(form: NgForm) {
@@ -57,16 +39,14 @@ export class NegocioComponent implements OnInit {
     }
     console.log("Negocio agregado ..:)");
     console.log(form);
-
   }
 
-  cargarNegocios() {
+  cargarNegociosConContactos() {
     this._negociosContactoService.cargarNegocios().subscribe(
       lista => {
         this.listaNegocios = lista;
         this.contadorNegocios = this.listaNegocios.length;
-
-
+        console.log('Negocios contactos: ', this.listaNegocios);
         for (let i = 0; i < this.listaNegocios.length; i++) {
 
           if (this.listaNegocios[i].fketapa === 1) {
@@ -113,5 +93,59 @@ export class NegocioComponent implements OnInit {
     );
   }
 
+  cargarNegociosConEmpresas() {
+    this._negociosEmpresaService.cargarNegocios().subscribe(
+      lista => {
+        this.listaNegociosEmpresas = lista,
+          console.log('Negocios con empresas:', this.listaNegociosEmpresas);
+
+        for (let i = 0; i < this.listaNegociosEmpresas.length; i++) {
+
+          if (this.listaNegociosEmpresas[i].fketapa === 1) {
+            this.suma1 += this.listaNegociosEmpresas[i].cantidad;
+          }
+
+          if (this.listaNegociosEmpresas[i].fketapa === 2) {
+            this.suma2 += this.listaNegociosEmpresas[i].cantidad;
+          }
+
+          if (this.listaNegociosEmpresas[i].fketapa === 3) {
+            this.suma3 += this.listaNegociosEmpresas[i].cantidad;
+          }
+
+          if (this.listaNegociosEmpresas[i].fketapa === 4) {
+            this.suma4 += this.listaNegociosEmpresas[i].cantidad;
+          }
+
+          if (this.listaNegociosEmpresas[i].fketapa === 5) {
+            this.suma5 += this.listaNegociosEmpresas[i].cantidad;
+          }
+
+          if (this.listaNegociosEmpresas[i].fketapa === 6) {
+            this.suma6 += this.listaNegociosEmpresas[i].cantidad;
+          }
+
+          if (this.listaNegociosEmpresas[i].fketapa === 7) {
+            this.suma7 += this.listaNegociosEmpresas[i].cantidad;
+          }
+
+          if (this.listaNegociosEmpresas[i].fketapa === 8) {
+            this.suma8 += this.listaNegociosEmpresas[i].cantidad;
+          }
+
+          if (this.listaNegociosEmpresas[i].fketapa === 9) {
+            this.suma9 += this.listaNegociosEmpresas[i].cantidad;
+          }
+
+          if (this.listaNegociosEmpresas[i].fketapa === 10) {
+            this.suma10 += this.listaNegociosEmpresas[i].cantidad;
+          }
+        }
+      }
+    );
+  }
+
+
+  // intentaré unir los arrays
 
 }

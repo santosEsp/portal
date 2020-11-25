@@ -14,7 +14,6 @@ export class ContactoService {
     this.token = localStorage.getItem('token');
   }
 
-
   crearContacto(contacto: ContactoModel): any {
     let url = URL_SERVICIOS + '/contactos/';
     url += '?token=' + this.token;
@@ -29,9 +28,7 @@ export class ContactoService {
     );
   }
 
-
   eliminarContacto(id: string): any {
-
     let url = URL_SERVICIOS + '/contactos/' + id;
     url += '?token=' + this.token;
 
@@ -51,10 +48,7 @@ export class ContactoService {
       );
   }
 
-
   actualizarContacto(contacto: ContactoModel): any {
-
-    console.log('Contactos a editar Service', contacto)
     let url = URL_SERVICIOS + '/contactos/' + contacto.id_contacto;
     url += '?token=' + this.token;
 
@@ -67,16 +61,13 @@ export class ContactoService {
               text: 'Actualizado correctamente',
               icon: 'success',
             });
-
             return resp.contacto;
           }
         )
       );
   }
 
-
   actualizarMiContacto(contacto: ContactoModel): any {
-
     let url = URL_SERVICIOS + '/contactos/' + contacto.id_contacto;
     url += '?token=' + this.token;
 
@@ -89,7 +80,6 @@ export class ContactoService {
               text: 'Actualizado correctaente',
               icon: 'success',
             });
-
             return resp.contacto;
           }
         )
@@ -104,7 +94,6 @@ export class ContactoService {
       .pipe(
         map(
           (resp: any) => {
-            console.log('todos contactos: ', resp.contactos);
             return resp.contactos;
           }
         )
@@ -120,7 +109,6 @@ export class ContactoService {
       .pipe(
         map(
           (resp: any) => {
-            console.log('ContadorContactos: ', resp.contador);
             return resp.contador[0].contador;
           }
         )
@@ -135,7 +123,6 @@ export class ContactoService {
       .pipe(
         map(
           (resp: any) => {
-            console.log('ContadorMisContactos: ', resp.contador);
             return resp.contador[0].contador;
           }
         )
@@ -144,15 +131,12 @@ export class ContactoService {
 
   cargarMisContactos(miId: number, desde: number): any {
 
-    console.log('service miId', miId);
     let url = URL_SERVICIOS + '/contactos/misContactos/' + miId + '/' + desde;
     url += '?token=' + this.token;
-    console.log('url miscontactos id, desde', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('misContactos service: ', resp.misContactos);
             return resp.misContactos;
           }
         )
@@ -162,15 +146,12 @@ export class ContactoService {
 
   cargarContactosRelacionados(miId: string): any {
 
-    console.log('service miId', miId);
     let url = URL_SERVICIOS + '/contactos/relacionados/' + miId;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('contactos relacionados service: ', resp.contactos);
             return resp.contactos;
           }
         )
@@ -179,20 +160,46 @@ export class ContactoService {
 
   cargarUnContacto(idContacto: string): any {
 
-    console.log('service idContacto', idContacto);
     let url = URL_SERVICIOS + '/contactos/consultaContacto/' + idContacto;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('cargarUnContacto service: ', resp.unContacto);
             return resp.unContacto;
           }
         )
       );
   }
 
+  
+  cargarTodosLosContactos(): any {
+    let url = URL_SERVICIOS + '/contactos/';
+    url += '?token=' + this.token;
 
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log(resp.contactos);
+            return resp.contactos;
+          }
+        )
+      );
+  }
+
+  cargarTodosMisContactos(id: number): any {
+    let url = URL_SERVICIOS + '/contactos/todosMisContactos/' + id;
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log(resp.contactos);
+            return resp.contactos;
+          }
+        )
+      );
+  }
 }

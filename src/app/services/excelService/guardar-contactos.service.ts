@@ -18,7 +18,6 @@ export class ExportarExcelService {
   constructor() { }
 
   public contactosExcel(jsonDatos: any[], excelFileName: string): void {
-    console.log('service guardar Excel', jsonDatos);
     this.contadorExcel += 1;
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonDatos);
     const workbook: XLSX.WorkBook = { Sheets: { 'contactos': worksheet }, SheetNames: ['contactos'] };
@@ -31,7 +30,6 @@ export class ExportarExcelService {
   }
 
   // public contactosCsv(jsonDatos: any[], excelFileName: string): void {
-  //   console.log('service guardar CSV', jsonDatos);
   //   this.contadorCsv += 1;
   //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonDatos);
   //   const workbook: XLSX.WorkBook = { Sheets: { 'contactos': worksheet }, SheetNames: ['contactos'] };
@@ -46,7 +44,6 @@ export class ExportarExcelService {
 // Guardar mis contactos, services
   public MisContactosExcel(jsonDatos: any[], excelFileName: string): void {
     this.contadorExcelMisContactos += 1;
-    console.log('service guardar Excel', jsonDatos);
     this.contadorExcel += 1;
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonDatos);
     const workbook: XLSX.WorkBook = { Sheets: { 'MisContactos': worksheet }, SheetNames: ['MisContactos'] };

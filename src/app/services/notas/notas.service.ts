@@ -17,8 +17,6 @@ export class NotasService {
 crearNota(nota: NotaModel): any {
     let url = URL_SERVICIOS + '/notas/';
     url += '?token=' + this.token;
-
-console.log('Service crear nota info:', nota);
     return this.http.post(url, nota).pipe(
       map(
         (resp: any) => {
@@ -29,9 +27,7 @@ console.log('Service crear nota info:', nota);
     );
   }
 
-
   eliminarNota(id: string): any {
-
     let url = URL_SERVICIOS + '/notas/' + id;
     url += '?token=' + this.token;
 
@@ -51,9 +47,7 @@ console.log('Service crear nota info:', nota);
       );
   }
 
-
   actualizarNota(nota: NotaModel): any {
-
     let url = URL_SERVICIOS + '/notas/' + nota.id;
     url += '?token=' + this.token;
 
@@ -73,18 +67,14 @@ console.log('Service crear nota info:', nota);
       );
   }
 
-
   cargarNotas(id: string): any {
 
-    console.log('Nota service miId', id);
     let url = URL_SERVICIOS + '/notas/' + id;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('Notas service: ', resp.notas);
             return resp.notas;
           }
         )

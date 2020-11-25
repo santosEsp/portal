@@ -17,7 +17,6 @@ export class GuardarLlamadasService {
   constructor() { }
 
   public llamadasExcel(jsonDatos: any[], excelFileName: string): void {
-    console.log('service guardar Excel', jsonDatos);
     this.contadorExcel += 1;
     const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonDatos);
     const workbook: XLSX.WorkBook = { Sheets: { 'LlamadasRealizadas': worksheet }, SheetNames: ['LlamadasRealizadas'] };

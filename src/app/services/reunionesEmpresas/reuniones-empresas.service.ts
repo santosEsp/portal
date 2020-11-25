@@ -14,8 +14,6 @@ export class ReunionesEmpresasService {
     this.token = localStorage.getItem('token');
    }
 
-
-
    registrarReunion(reunion: ReunionesEmpresasModel): any {
     let url = URL_SERVICIOS + '/reunionesempresas/';
     url += '?token=' + this.token;
@@ -29,9 +27,7 @@ export class ReunionesEmpresasService {
     );
   }
 
-
   eliminarCorreo(id: string): any {
-
     let url = URL_SERVICIOS + '/reunionesempresas/' + id;
     url += '?token=' + this.token;
 
@@ -44,16 +40,13 @@ export class ReunionesEmpresasService {
               text: 'Eliminado correctamente',
               icon: 'success',
             });
-
             return true;
           }
         )
       );
   }
 
-
   actualizarReunion(reunion: ReunionesEmpresasModel): any {
-
     let url = URL_SERVICIOS + '/reunionesempresas/' + reunion.id;
     url += '?token=' + this.token;
 
@@ -66,25 +59,19 @@ export class ReunionesEmpresasService {
               text: 'Actualizado correctaente',
               icon: 'success',
             });
-
             return resp.reunion;
           }
         )
       );
   }
 
-
   cargarReuniones(id: string): any {
-
-    console.log('Reuniones Empresa service ID', id);
     let url = URL_SERVICIOS + '/reunionesempresas/' + id;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('Reuniones service: ', resp.reuniones);
             return resp.reuniones;
           }
         )

@@ -73,7 +73,7 @@
 
                             <div class="form-group">
                                 <label for="recipient-name" class="col-form-label">Contraseña</label>
-                                <input type="text" class="form-control" id="password" name="password" required [(ngModel)]="usuario.password" />
+                                <input type="password" class="form-control" id="password" name="password" required [(ngModel)]="usuario.password" />
                                 <small class="text-danger" *ngIf="f.submitted && f.controls['password'].errors">Campo obligatorio</small>
 
                             </div>

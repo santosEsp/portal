@@ -227,7 +227,7 @@
                                         <td>
                                             <div style="width: 15rem;"></div>{{misContactos.empresa}}</td>
                                         <td>
-                                            <button (click)="actualizarContacto(misContactos)" class="btn estilosBotones estilosBotonesHover">
+                                            <button (click)="cargarInfoAlFormMC(misContactos)" class="btn estilosBotones estilosBotonesHover" data-toggle="modal" data-target="#modalEditarMiContacto">
                                         <svg width="1em " height="1em " viewBox="0 0 16 16 " class="bi bi-pencil-square " fill="currentColor " xmlns="http://www.w3.org/2000/svg ">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z "/>
                                             <path fill-rule="evenodd " d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z "/>
@@ -481,6 +481,102 @@
     </div>
 
 
+
+    <!--Inicio del formulario modal Editar Mi contacto-->
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalEditarMiContacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bgCorp">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">
+                        Editar contacto
+                    </h5>
+                    <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="actualizarContacto(fEditarMiContacto)" #fEditarMiContacto="ngForm">
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Correo</label>
+                            <input type="text" class="form-control" id="email" name="email" [(ngModel)]="editarContacto.email" required email />
+
+                            <small *ngIf="fEditarMiContacto.submitted && fEditarMiContacto.controls['email'].errors" class="text-danger">
+                    Campo obligatorio
+                </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="editarContacto.nombre" required minlength="3" />
+
+                            <small *ngIf="fEditarMiContacto.submitted && fEditarMiContacto.controls['nombre'].errors" class="text-danger">
+                    Campo obligatorio
+                </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Apellido</label>
+                            <input type="text" class="form-control" id="apellido" name="apellido" [(ngModel)]="editarContacto.apellido" required minlength="3" />
+
+                            <small *ngIf="fEditarMiContacto.submitted && fEditarMiContacto.controls['apellido'].errors" class="text-danger">
+                    Campo obligatorio
+                </small>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Propietario de registro</label>
+                            <input type="text" class="form-control" id="propietario" name="propietario" [(ngModel)]="editarContacto.propietario_registro" required disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Empresa</label>
+                            <div class="col-22">
+                                <select class="form-control" id="fkempresa" name="fkempresa" [(ngModel)]="editarContacto.fkempresa">
+                        <option  *ngFor="let lista of listaEmpresas" [ngValue]="lista.id_empresa">
+                            {{lista.nombre}}
+                        </option>
+                        
+                    </select>
+
+                                <small *ngIf="fEditarMiContacto.submitted && fEditarMiContacto.controls['fkempresa'].errors" class="text-danger">
+                        Campo obligatorio
+                    </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Departamento</label>
+                            <input type="text" class="form-control" id="departamento" name="departamento" [(ngModel)]="editarContacto.departamento" required />
+
+                            <small *ngIf="fEditarMiContacto.submitted && fEditarMiContacto.controls['departamento'].errors" class="text-danger">
+                    Campo obligatorio
+                </small>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Número de teléfono</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="editarContacto.telefono" required minlength="8" />
+
+                            <small *ngIf="fEditarMiContacto.submitted && fEditarMiContacto.controls['telefono'].errors" class="text-danger">
+                    Campo obligatorio
+                </small>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="nombre" name="idContacto" required [(ngModel)]="editarContacto.id_contacto" />
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn estilosBotonesHover estilosBotones">Actualizar</button>
+                            <button class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 <!--Fin formulario crear contacto-->

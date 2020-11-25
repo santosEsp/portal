@@ -9,6 +9,7 @@ import { UsuariosComponent } from './components/pages/usuarios/usuarios.componen
 import { ConfiguracionComponent } from './components/pages/configuracion/configuracion.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NegocioComponent } from './components/pages/negocios/negocios.component';
+import { InformacionEmpresaComponent } from './components/pages/informacion-empresa/informacion-empresa.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -17,8 +18,9 @@ const routes: Routes = [
   {path: 'informacion/:tipo/:id', component: InformacionComponent, canActivate: [AuthGuard]},
   {path: 'informes', component: InformesComponent, canActivate: [AuthGuard]},
   {path: 'usuarios', component: UsuariosComponent, canActivate: [AuthGuard]},
-  {path: 'configuracion', component: ConfiguracionComponent, canActivate:[AuthGuard]},
+  {path: 'configuracion', component: ConfiguracionComponent, canActivate: [AuthGuard]},
   {path: 'negocios',component:NegocioComponent, canActivate: [AuthGuard]},
+  {path: 'informacion-empresa/:tipo/:id', component: InformacionEmpresaComponent, canActivate:[AuthGuard]},
   {path: '**', pathMatch: 'full', redirectTo: 'login'}
 
 ];

@@ -12,6 +12,7 @@ export class NotasEmpresasService {
   constructor(private http: HttpClient) { this.token = localStorage.getItem('token'); }
 
   crearNota(nota: NotasEmpresasModel): any {
+    console.log('nota de empresa service', nota);
     let url = URL_SERVICIOS + '/notasempresas/';
     url += '?token=' + this.token;
 
@@ -26,7 +27,6 @@ export class NotasEmpresasService {
   }
 
   eliminarNota(id: string): any {
-
     let url = URL_SERVICIOS + '/notasempresas/' + id;
     url += '?token=' + this.token;
 
@@ -39,7 +39,6 @@ export class NotasEmpresasService {
               text: 'Eliminada correctamente',
               icon: 'success',
             });
-
             return true;
           }
         )
@@ -47,7 +46,6 @@ export class NotasEmpresasService {
   }
 
   actualizarNota(nota: NotasEmpresasModel): any {
-
     let url = URL_SERVICIOS + '/notasempresas/' + nota.id;
     url += '?token=' + this.token;
 
@@ -68,16 +66,12 @@ export class NotasEmpresasService {
   }
 
   cargarNotas(id: string): any {
-
-    console.log('Notas Empre ID recibido', id);
     let url = URL_SERVICIOS + '/notasempresas/' + id;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('Notas service: ', resp.notas);
             return resp.notas;
           }
         )

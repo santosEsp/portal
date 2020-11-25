@@ -15,12 +15,12 @@ export class UsuariosComponent implements OnInit {
   contadorUsuarios: number;
   usuariosDesde: number;
   masPaginasU: boolean;
-  salvaContadorUsuarios: number; 
+  salvaContadorUsuarios: number;
 
   constructor(private _usuarioService: UsuarioService) {
-    
+
     this.usuariosDesde = 0;
-   }
+  }
 
   ngOnInit(): void {
     this.usuario = new UsuarioModel();
@@ -40,16 +40,11 @@ export class UsuariosComponent implements OnInit {
       rol: forma.value.rol
     };
 
-
     this._usuarioService.crearUsuario(this.usuario).subscribe(
       (resp: any) => {
         Swal.fire(this.usuario.nombre, 'Usuario creado correctamente', 'success');
-
       },
       (error): any => {
-
-        console.log(error);
-
         if (error.error.errors.name === 'SequelizeUniqueConstraintError') {
           Swal.fire({
             title: 'El correo debe ser único para cada usuario',
@@ -71,7 +66,6 @@ export class UsuariosComponent implements OnInit {
     };
   }
 
-
   cargarUsuarios(): any {
     this._usuarioService.cargarUsuarios(this.usuariosDesde).subscribe(lista => {
       this.usuarios = lista;
@@ -87,7 +81,6 @@ export class UsuariosComponent implements OnInit {
         'No se puede eliminar a sí mismo', 'error');
       return;
     }
-
     Swal.fire({
       title: '¿Está seguro de esos cambios?',
       text: 'Eliminará a: ' + usuario.nombre,
@@ -97,11 +90,9 @@ export class UsuariosComponent implements OnInit {
       cancelButtonColor: '#E5B53A',
       confirmButtonText: 'Eliminar',
       cancelButtonText: 'Cancelar'
-
     })
       .then((borrar) => {
         if (borrar.isConfirmed) {
-
           this._usuarioService.eliminarUsuario(usuario.id_usuario).subscribe(() => {
             Swal.fire(
               'Eliminado',
@@ -110,54 +101,39 @@ export class UsuariosComponent implements OnInit {
             );
             this.cargarUsuarios();
           });
-
         }
       });
   }
 
   actualizarUsuario(usuario: UsuarioModel): any {
-    console.log('Actualizar usuario', usuario);
     this._usuarioService.actualizarUsuario(usuario).subscribe();
   }
-
 
   contadorUsuariosBD() {
     this._usuarioService.contadorUsuariosBD().subscribe(contador => {
       this.contadorUsuarios = contador;
-      console.log('ContadorUsuarios COMP: ' + this.contadorUsuarios);
       this.guardarContadorUsuarios(this.contadorUsuarios);
-
     });
   }
 
   guardarContadorUsuarios(contador: number) {
     this.salvaContadorUsuarios = contador;
-    console.log('Contador U ', this.salvaContadorUsuarios);
   }
-  
-
-
 
   sumaUsuariosHasta(valor: number) {
     this.usuariosDesde += valor;
     if (this.salvaContadorUsuarios - this.usuariosDesde <= 10) {
       this.masPaginasU = false;
-      console.log('HAY MAS PAGINAS', this.masPaginasU);
       this.cargarUsuarios();
     }
-
     else {
       this.masPaginasU = true;
-      console.log('HAY MAS PAGINAS', this.masPaginasU);
     }
   }
 
   restaUsuariosHasta(valor: number) {
     this.usuariosDesde -= valor;
     this.cargarUsuarios();
-    console.log('Despues de resta MCD', this.usuariosDesde);
     this.masPaginasU = true;
   }
-
-
 }

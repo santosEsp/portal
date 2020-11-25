@@ -16,6 +16,7 @@ export class CorreosEmpresasService {
 
 
   registrarCorreo(correo: CorreosEmpresasModel): any {
+    console.log('Registrar correoService', correo);
     let url = URL_SERVICIOS + '/correosempresas/';
     url += '?token=' + this.token;
     return this.http.post(url, correo).pipe(

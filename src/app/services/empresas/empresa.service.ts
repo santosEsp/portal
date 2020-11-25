@@ -16,11 +16,9 @@ export class EmpresaService {
     this.token = localStorage.getItem('token');
   }
 
-
   crearEmpresa(empresa: EmpresaModel): any {
     let url = URL_SERVICIOS + '/empresas/';
     url += '?token=' + this.token;
-
 
     return this.http.post(url, empresa)
       .pipe(
@@ -41,12 +39,25 @@ export class EmpresaService {
       .pipe(
         map(
           (resp: any) => {
-            console.log('Lista empresas, empresa service', resp.empresas);
             return resp.empresas;
           }
         )
       );
   }
+
+  cargarTodasLasEmpresas(): any {
+    let url = URL_SERVICIOS + '/empresas/todasLasEmpresas/lista';
+    url += '?token=' + this.token;
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            return resp.empresas;
+          }
+        )
+      );
+  }
+
 
   cargarListaEmpresas(): any {
     let url = URL_SERVICIOS + '/empresas/listaEmpresas/';
@@ -55,17 +66,13 @@ export class EmpresaService {
       .pipe(
         map(
           (resp: any) => {
-            console.log('Lista empresas, empresa service', resp.empresas);
             return resp.empresas;
           }
         )
       );
   }
 
-
-
   eliminarEmpresa(id: string): any {
-
     let url = URL_SERVICIOS + '/empresas/' + id;
     url += '?token=' + this.token;
 
@@ -78,7 +85,6 @@ export class EmpresaService {
               text: 'Eliminado correctamente',
               icon: 'success',
             });
-
             return true;
           }
         )
@@ -86,7 +92,6 @@ export class EmpresaService {
   }
 
   actualizarEmpresa(empresa: EmpresaModel): any {
-
     let url = URL_SERVICIOS + '/empresas/' + empresa.id_empresa;
     url += '?token=' + this.token;
 
@@ -99,7 +104,6 @@ export class EmpresaService {
               text: 'Actualizada correctamente',
               icon: 'success',
             });
-
             return resp.empresa;
           }
         )
@@ -108,18 +112,28 @@ export class EmpresaService {
 
 
   cargarMisEmpresas(miId: number, desde: number): any {
-
-    console.log('service miId', miId);
-    let url = URL_SERVICIOS + '/empresas/paginacionMisEmpresas/' + miId + '/' + desde ;
+    let url = URL_SERVICIOS + '/empresas/paginacionMisEmpresas/' + miId + '/' + desde;
     url += '?token=' + this.token;
 
-    console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('mis empresas service: ', resp.misEmpresas);
             return resp.misEmpresas;
+          }
+        )
+      );
+  }
+
+  cargarTodasMisEmpresas(miId: number): any {
+    let url = URL_SERVICIOS + '/empresas/todasMisEmpresas/lista/' + miId;
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            return resp.empresas;
           }
         )
       );
@@ -127,16 +141,12 @@ export class EmpresaService {
 
 
   cargarUnaEmpresa(idEmpresa: number): any {
-
-    console.log('service idEmpresa', idEmpresa);
     let url = URL_SERVICIOS + '/empresas/' + idEmpresa;
     url += '?token=' + this.token;
-    console.log('url consulta una empresa', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('cargarUnaEmpresa service: ', resp.unaEmpresa);
             return resp.unaEmpresa;
           }
         )
@@ -146,18 +156,15 @@ export class EmpresaService {
   contadorEmpresasBD(): any {
     let url = URL_SERVICIOS + '/empresas/contadorEmpresas/';
     url += '?token=' + this.token;
- console.log('contador E, desde');
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('ContadorEmpresas: ', resp.contador);
             return resp.contador[0].contador;
           }
         )
       );
   }
-
 
   contadorMisEmpresasBD(miId: number): any {
     let url = URL_SERVICIOS + '/empresas/contadorMisEmpresas/' + miId;
@@ -167,11 +174,9 @@ export class EmpresaService {
       .pipe(
         map(
           (resp: any) => {
-            console.log('ContadorMisEmpresas: ', resp.contador);
             return resp.contador[0].contador;
           }
         )
       );
   }
-
 }

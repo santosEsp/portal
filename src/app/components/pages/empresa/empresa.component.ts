@@ -13,9 +13,13 @@ import { ExcelEmpresasService } from '../../../services/excelService/guardar-emp
 })
 export class EmpresaComponent implements OnInit {
   empresa = new EmpresaModel();
+  editarEmpresa = new EmpresaModel();
   propietario = new EmpresaModel();
   empresas: EmpresaModel[] = [];
+  
+  todasLasEmpresas: EmpresaModel[] = [];
   listaMisEmpresas: EmpresaModel[] = [];
+  listaTodasMisEmpresas: EmpresaModel[] = [];
   contadorEmpresas = 0;
   contadorMisEmpresas = 0;
   tipo: string;
@@ -29,7 +33,6 @@ export class EmpresaComponent implements OnInit {
   usuarioActual: UsuarioModel;
   salvaContadorEmpresas: number;
   salvaContadorMisEmpresas: number;
-
   masPaginasE: boolean;
   masPaginasME: boolean;
 
@@ -48,6 +51,8 @@ export class EmpresaComponent implements OnInit {
     this.cargarMisEmpresas();
     this.contadorEmpresasBD();
     this.contadorMisEmpresasBD();
+    this.cargarTodasLasEmpresas();
+    this.cargarTodasMisEmpresas();
 
   }
   agregarEmpresa(form: NgForm): any {
@@ -71,7 +76,6 @@ export class EmpresaComponent implements OnInit {
       zona_horaria: form.value.zona,
       descripcion: form.value.descripcion,
       pagina_corporativa: form.value.pagina
-
     };
     this._empresaService.crearEmpresa(this.empresa).subscribe();
     this.cargarEmpresas();
@@ -95,22 +99,30 @@ export class EmpresaComponent implements OnInit {
     };
   }
 
-
   cargarEmpresas(): any {
     this._empresaService.cargarEmpresas(this.empresasDesde).subscribe(lista => {
       this.empresas = lista;
     });
   }
 
+  cargarTodasLasEmpresas(): any {
+    this._empresaService.cargarTodasLasEmpresas().subscribe(lista => {
+      this.todasLasEmpresas = lista;
+    });
+  }
 
   cargarMisEmpresas(): any {
     this._empresaService.cargarMisEmpresas(parseInt(this.miId), this.misEmpresasDesde).subscribe(listaMisEmpresas => {
       this.listaMisEmpresas = listaMisEmpresas;
-      console.log('Lista mis empresas component', listaMisEmpresas);
     });
 
   }
-
+  
+  cargarTodasMisEmpresas(): any {
+    this._empresaService.cargarTodasMisEmpresas(parseInt(this.miId)).subscribe(listaMisEmpresas => {
+      this.listaTodasMisEmpresas = listaMisEmpresas;
+    });
+  }
 
   eliminarEmpresa(empresa: EmpresaModel): any {
 
@@ -126,7 +138,6 @@ export class EmpresaComponent implements OnInit {
     })
       .then((borrar) => {
         if (borrar.isConfirmed) {
-
           this._empresaService.eliminarEmpresa(empresa.id_empresa).subscribe(() => {
             Swal.fire(
               'Eliminado',
@@ -140,46 +151,30 @@ export class EmpresaComponent implements OnInit {
       });
   }
 
-
-
-  actualizarEmpresa(empresa: EmpresaModel): any {
-    this._empresaService.actualizarEmpresa(empresa).subscribe();
-    console.log('Actualiza E', empresa);
-  }
-
-
-  guardarEmpresas(): void {
-
+  exportarEmpresas(): void {
     Swal.fire({
       icon: 'success',
       title: 'Se están exportando todas las empresas (.xlsx)',
       showConfirmButton: false,
       timer: 2000
     });
-    this._excelService.empresasExcel(this.empresas, 'Empresas');
-
+    this._excelService.empresasExcel(this.todasLasEmpresas, 'Empresas');
   }
 
-  guardarMisEmpresas(): void {
-
+  ExportarTodasMisEmpresas(): void {
     Swal.fire({
       icon: 'success',
       title: 'Se están exportando mis empresas (.xlsx)',
       showConfirmButton: false,
       timer: 2000
     });
-    this._excelService.MisEmpresasExcel(this.listaMisEmpresas, 'MisEmpresas');
+    this._excelService.MisEmpresasExcel(this.listaTodasMisEmpresas, 'MisEmpresas');
   }
 
-
   contadorEmpresasBD() {
-
     this._empresaService.contadorEmpresasBD().subscribe(contador => {
       this.contadorEmpresas = contador;
-      console.log('ContadorContactos COMP: ' + this.contadorEmpresas);
-
       this.guardarContadorEmpresas(this.contadorEmpresas);
-
     });
   }
 
@@ -191,7 +186,6 @@ export class EmpresaComponent implements OnInit {
 
     this._empresaService.contadorMisEmpresasBD(parseInt(this.miId)).subscribe(contador => {
       this.contadorMisEmpresas = contador;
-      console.log('Contador ME: ' + this.contadorMisEmpresas);
       this.guardarContadorMisEmpresas(this.contadorMisEmpresas);
 
     });
@@ -199,7 +193,6 @@ export class EmpresaComponent implements OnInit {
 
   guardarContadorMisEmpresas(contador: number) {
     this.salvaContadorMisEmpresas = contador;
-    console.log('contador ME salvado', this.salvaContadorMisEmpresas);
   }
 
   sumaEmpresasHasta(valor: number) {
@@ -207,15 +200,12 @@ export class EmpresaComponent implements OnInit {
     if (this.salvaContadorEmpresas - this.empresasDesde <= 10) {
       this.masPaginasE = false;
       this.cargarEmpresas();
-      console.log('HAY MAS PAGINAS', this.masPaginasE);
-     }
-     else {
+    }
+    else {
       this.masPaginasE = true;
-      console.log('HAY MAS PAGINAS', this.masPaginasE);
       this.cargarEmpresas();
       this.masPaginasE = true;
     }
-
   }
 
   restaEmpresasHasta(valor: number) {
@@ -223,28 +213,65 @@ export class EmpresaComponent implements OnInit {
     this.cargarEmpresas();
     this.masPaginasE = true;
   }
- 
+
   sumaMisEmpresasHasta(valor: number) {
 
     this.misEmpresasDesde += valor;
     if (this.salvaContadorMisEmpresas - this.misEmpresasDesde <= 10) {
       this.masPaginasME = false;
-      console.log('HAY MAS PAGINAS', this.masPaginasME);
       this.cargarMisEmpresas();
     }
-
     else {
       this.masPaginasME = true;
-      console.log('HAY MAS PAGINAS', this.masPaginasME);
     }
   }
 
   restaMisEmpresasHasta(valor: number) {
     this.misEmpresasDesde -= valor;
     this.cargarMisEmpresas();
-    console.log('Despues de resta MCD', this.misEmpresasDesde);
     this.masPaginasME = true;
-
   }
 
+  cargarInfoAlForm(datos: any) {
+    this.editarEmpresa = {
+      id_empresa: datos.id_empresa,
+      nombre: datos.nombre,
+      propietario_registro: datos.propietario,
+      industria: datos.industria,
+      no_telefono: datos.no_telefono,
+      tipo_cliente: datos.tipo_cliente,
+      ciudad: datos.ciudad,
+      estado_region: datos.estado_region,
+      codigo_postal: datos.codigo_postal,
+      no_empleados: datos.no_empleados,
+      ingresos_anuales: datos.ingresos_anuales,
+      zona_horaria: datos.zona_horaria,
+      descripcion: datos.descripcion,
+      pagina_corporativa: datos.pagina_corporativa
+    };
+  }
+
+  actualizarEmpresa(form: NgForm): any {
+
+    if (form.invalid) {
+      return;
+    }
+    this.editarEmpresa = {
+      id_empresa: form.value.idEmpresa,
+      nombre: form.value.nombre,
+      propietario_registro: form.value.propietario,
+      industria: form.value.industria,
+      no_telefono: form.value.telefono,
+      tipo_cliente: form.value.tipo,
+      ciudad: form.value.ciudad,
+      estado_region: form.value.estado,
+      codigo_postal: form.value.codigo,
+      no_empleados: form.value.empleados,
+      ingresos_anuales: form.value.ingresos,
+      zona_horaria: form.value.zona,
+      descripcion: form.value.descripcion,
+      pagina_corporativa: form.value.pagina
+    }
+    this._empresaService.actualizarEmpresa(this.editarEmpresa).subscribe();
+  }
 }

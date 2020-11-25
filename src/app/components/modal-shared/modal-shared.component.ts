@@ -35,15 +35,15 @@ export class ModalSharedComponent implements OnInit {
   negocioContacto = new NegocioModel();
   miUsuario: string;
   miId: string;
-  datos: any [] = [];
-  
+  datos: any[] = [];
+
 
   nombrePropietario = new UsuarioModel();
 
   // variable para la fecha
   fecha: Date = new Date();
   idContacto: string;
-  etapas: any [] = [];
+  etapas: any[] = [];
 
   constructor(private rutaActiva: ActivatedRoute, private _notasService: NotasService, private _contactoService: ContactoService, private _registrarReunion: RegistrarReunionService,
     private _llamadaService: LlamadasService, private _correosService: RegistrarCorreoService, private _etapasService: EtapasNegociosService,
@@ -61,38 +61,26 @@ export class ModalSharedComponent implements OnInit {
         this.idContacto = params.id;
       }
     );
-
     this.cargaNombreContacto();
     this.cargarEtapas();
-
   }
 
   registrarNota(form: NgForm): any {
     if (form.invalid) {
       return 'Formulario no válido';
     }
-    console.log('Id de contacto para nota', this.idContacto);
-    console.log('Id usuario', this.miId);
     this.notaContacto = {
       comentario: form.value.descripcion,
       fkusuario: this.miId,
       fkcontacto: this.idContacto
-    }
-    console.log('esto mandare al server: ', form);
-
+    };
     this._notasService.crearNota(this.notaContacto).subscribe(() => {
-
     });
   }
 
-
-
-
   cargaNombreContacto() {
-    console.log('CargarNombrePropietario valor:', this.idContacto);
     this._contactoService.cargarUnContacto(this.idContacto).subscribe(nombreContacto => {
       this.nombrePropietario = nombreContacto;
-      console.log('Nombre propietario comp: ', this.nombrePropietario);
     });
   }
 
@@ -100,9 +88,6 @@ export class ModalSharedComponent implements OnInit {
     if (form.invalid) {
       return 'Formulario no válido';
     }
-
-    console.log('reunion antes de asignarle valores', this.reunionContacto);
-
     this.reunionContacto = {
       fkcontacto: this.idContacto,
       resultado: form.value.resultadoReunion,
@@ -112,23 +97,14 @@ export class ModalSharedComponent implements OnInit {
       descripcion: form.value.descripcionReunion,
       fkusuario: this.miId
     };
-    console.log('Esto mandaré al server:', this.reunionContacto);
-
     this._registrarReunion.registrarReunion(this.reunionContacto).subscribe(() => {
-
     });
   }
-
-
 
   registrarLlamada(form: NgForm): any {
     if (form.invalid) {
       return 'Formulario no válido';
     }
-    console.log('Datos en el formulario: ');
-    console.log(form);
-
-
     this.llamadaContacto = {
       fkcontacto: this.idContacto,
       resultado_llamada: form.value.resultadoLlamada,
@@ -137,19 +113,14 @@ export class ModalSharedComponent implements OnInit {
       descripcion: form.value.descripcionLlamada,
       fkusuario: this.miId
     };
-    console.log('Esto mandaré al server:', this.llamadaContacto);
-
     this._llamadaService.crearLlamada(this.llamadaContacto).subscribe(() => {
     });
-
   }
-
 
   registrarCorreo(form: NgForm): any {
     if (form.invalid) {
       return 'Formulario no válido';
     }
-
     this.correoContacto = {
       fkcontacto: this.idContacto,
       fkusuario: this.miId,
@@ -158,12 +129,9 @@ export class ModalSharedComponent implements OnInit {
       descripcion: form.value.descripcionCorreo,
 
     };
-    console.log('Esto mandaré al server:', this.correoContacto);
-
     this._correosService.registrarCorreo(this.correoContacto).subscribe(() => {
     });
   }
-
 
   registrarNegocio(form: NgForm): any {
     if (form.invalid) {
@@ -171,14 +139,13 @@ export class ModalSharedComponent implements OnInit {
     }
     this.negocioContacto = {
       nombre_negocio: form.value.nombreNegocio,
-    pipeline: form.value.pipelineNegocio,
-    cantidad: form.value.cantidadNegocio,
-    fketapa: form.value.etapaNegocio,
-    fcierre: form.value.cierreNegocio,
-    fkcontacto: parseInt( this.idContacto),
-    fkusuario: parseInt(this.miId)
+      pipeline: form.value.pipelineNegocio,
+      cantidad: form.value.cantidadNegocio,
+      fketapa: form.value.etapaNegocio,
+      fcierre: form.value.cierreNegocio,
+      fkcontacto: parseInt(this.idContacto),
+      fkusuario: parseInt(this.miId)
     };
-    console.log('Esto mandaré al server:', this.negocioContacto);
     this._negocioService.crearNegocio(this.negocioContacto).subscribe(() => {
     });
   }
@@ -186,11 +153,6 @@ export class ModalSharedComponent implements OnInit {
   cargarEtapas(): any {
     this._etapasService.cargarEtapas().subscribe(lista => {
       this.etapas = lista;
-      console.log('N etapas', this.etapas);
     });
-
-  }
-
-  
-
+  };
 }

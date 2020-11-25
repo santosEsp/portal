@@ -17,15 +17,12 @@ export class LlamadasService {
 
   cargarLlamadas(id: string): any {
 
-    console.log('Cargar llamadas service', id);
     let url = URL_SERVICIOS + '/llamadas/' + id;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('Llamadas service: ', resp.llamadas);
             return resp.llamadas;
           }
         )
@@ -36,7 +33,6 @@ export class LlamadasService {
     let url = URL_SERVICIOS + '/llamadas/';
     url += '?token=' + this.token;
 
-    console.log('Service crear llamada info:', llamada);
     return this.http.post(url, llamada).pipe(
       map(
         (resp: any) => {
@@ -56,7 +52,6 @@ export class LlamadasService {
       .pipe(
         map(
           (resp: any) => {
-            console.log('reporte llamadas: ', resp.reporteLlamadas);
             return resp.reporteLlamadas;
           }
         )

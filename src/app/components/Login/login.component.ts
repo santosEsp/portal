@@ -18,31 +18,9 @@ export class LoginComponent implements OnInit {
 
   recordarme = false;
   email: string;
-  alturaPantalla = window.screen.height;
-  anchuraPantalla = window.screen.width;
-  alturaDiv = 0;
-  alturapx: any;
-  anchuraForm: any;
-  alturaForm: any;
 
   constructor(private router: Router,
     private _loginService: LoginService) {
-
-      console.log('altura de la pantalla px: ', this.alturaPantalla);
-  
-      
-  
-      this.alturaDiv = Math.round((this.alturaPantalla * 81) / 100 );
-      console.log('medida que puede usar la altura tabla', this.alturaDiv);
-  
-      this.alturapx = this.alturaDiv + 'px';
-      console.log('Junto: ', this.alturapx);
-
-      this.anchuraForm = ((this.anchuraPantalla * 34) / 100) + 'px';
-      console.log('anchura form',this.anchuraForm);
-  
-      this.alturaForm = ((this.alturaPantalla * 40) / 100) + 'px';
-      console.log('altura form',this.alturaForm);
 
      }
 
@@ -56,7 +34,6 @@ export class LoginComponent implements OnInit {
 
   login(form: NgForm): any {
 
-    console.log('form', form);
     if (form.invalid) {
       return;
     }

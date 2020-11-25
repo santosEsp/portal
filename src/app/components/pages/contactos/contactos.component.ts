@@ -21,6 +21,8 @@ export class ContactosComponent implements OnInit {
   contacto = new ContactoModel();
   propietario = new ContactoModel();
   contactos: ContactoModel[] = [];
+  todosLosContactos: ContactoModel[] = [];
+  todosMisContactos: ContactoModel[] = [];
   contadorContactos: number;
   contadorMisContactos: number;
   tipo: string;
@@ -31,22 +33,15 @@ export class ContactosComponent implements OnInit {
   listaMisContactos: ContactoModel[] = [];
   reunionesRealizadas: any = [];
 
-
   desde: number;
-
   divi;
   limiteC;
-
   misContactosDesde: number;
   masPaginasMC: boolean;
   masPaginasC: boolean;
   salvaContadorMisContactos: number;
   salvaContadorContactos: number;
-
   salvaIdUsuario: any;
-
-
-
   editarContacto = new ContactoModel();
 
   constructor(private _ContactoService: ContactoService, private _EmpresaService: EmpresaService,
@@ -57,16 +52,12 @@ export class ContactosComponent implements OnInit {
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
     this.propietario.propietario_registro = this.miUsuario['nombre'];
     this.miId = this.miUsuario['id_usuario'];
-    // this.Contactos = this.consultas.getContactos();
-    // console.log(this.contadorContactos);
-    // console.log(this.arregloContactos);
+
     this.desde = 0;
     this.misContactosDesde = 0;
-
   }
 
   ngOnInit(): any {
-
     this.contadorContactosBD();
     this.cargarContactos();
     this.cargarListaEmpresas();
@@ -74,25 +65,20 @@ export class ContactosComponent implements OnInit {
     this.cargarMisContactos();
     this.cargarLlamadasRealizadas();
     this.cargarReunionesRealizadas();
-
+    this.cargarTodosLosContactos();
+    this.cargarTodosMisContactos();
   }
 
   onSubmit(form: NgForm): any {
     if (form.invalid) {
       return 'Formulario inválido';
     }
-
-    console.log(form);
   }
 
   contadorContactosBD() {
-
     this._ContactoService.contadorContactosBD().subscribe(contador => {
       this.contadorContactos = contador;
-      console.log('ContadorContactos COMP: ' + this.contadorContactos);
-
       this.guardarContadorContactos(this.contadorContactos);
-
     });
   }
 
@@ -100,7 +86,6 @@ export class ContactosComponent implements OnInit {
 
     this._ContactoService.contadorMisContactosBD(this.miId).subscribe(contador => {
       this.contadorMisContactos = contador;
-      console.log('ContadorMisContactos COMP: ' + this.contadorMisContactos);
       this.guardarContadorMisContactos(this.contadorMisContactos);
     });
   }
@@ -114,15 +99,12 @@ export class ContactosComponent implements OnInit {
     if (this.salvaContadorContactos - this.desde <= 10) {
       this.masPaginasC = false;
       this.cargarContactos();
-      console.log('HAY MAS PAGINAS', this.masPaginasC);
     }
     else {
       this.masPaginasC = true;
-      console.log('HAY MAS PAGINAS', this.masPaginasC);
       this.cargarContactos();
       this.masPaginasC = true;
     }
-
   }
 
   restaContactosHasta(valor: number) {
@@ -131,12 +113,8 @@ export class ContactosComponent implements OnInit {
     this.masPaginasC = true;
   }
 
-
-
-
   guardarContadorMisContactos(contador: number) {
     this.salvaContadorMisContactos = contador;
-    console.log('Contador MC ', this.salvaContadorMisContactos);
   }
 
   sumaMisContactosHasta(valor: number) {
@@ -144,32 +122,27 @@ export class ContactosComponent implements OnInit {
     this.misContactosDesde += valor;
     if (this.salvaContadorMisContactos - this.misContactosDesde <= 10) {
       this.masPaginasMC = false;
-      console.log('HAY MAS PAGINAS', this.masPaginasMC);
       this.cargarMisContactos();
     }
-
     else {
       this.masPaginasMC = true;
-      console.log('HAY MAS PAGINAS', this.masPaginasMC);
     }
   }
-
   restaMisContactosHasta(valor: number) {
     this.misContactosDesde -= valor;
     this.cargarMisContactos();
-    console.log('Despues de resta MCD', this.misContactosDesde);
     this.masPaginasMC = true;
-
   }
-
-
-
-
-
 
   cargarContactos(): any {
     this._ContactoService.cargarContactos(this.desde).subscribe(lista => {
       this.contactos = lista;
+    });
+  }
+
+  cargarTodosLosContactos(): any {
+    this._ContactoService.cargarTodosLosContactos().subscribe(lista => {
+      this.todosLosContactos = lista;
     });
   }
 
@@ -178,20 +151,23 @@ export class ContactosComponent implements OnInit {
     this._ContactoService.cargarMisContactos(this.miId, this.misContactosDesde).subscribe(listaMisContactos => {
       this.listaMisContactos = listaMisContactos;
     });
-
   }
 
+
+  cargarTodosMisContactos(): any {
+
+    this._ContactoService.cargarTodosMisContactos(this.miId).subscribe(listaMisContactos => {
+      this.todosMisContactos = listaMisContactos;
+    });
+  }
   cargarListaEmpresas(): any {
     this._EmpresaService.cargarListaEmpresas().subscribe(lista => this.listaEmpresas = lista);
-
   }
 
   agregarContacto(forma: NgForm): any {
     if (forma.invalid) {
       return 'Formulario no válido';
     }
-
-    console.log('Sí entró al método agregar C');
     this.contacto = {
       email: forma.value.email,
       nombre: forma.value.nombre,
@@ -202,12 +178,9 @@ export class ContactosComponent implements OnInit {
       fkempresa: forma.value.fkempresa
     };
 
-    console.log('Contacto', this.contacto);
     this._ContactoService.crearContacto(this.contacto).subscribe(() => {
       this.cargarContactos();
     });
-
-
   }
 
   vaciarFormulario(): any {
@@ -234,7 +207,6 @@ export class ContactosComponent implements OnInit {
       cancelButtonColor: '#E5B53A',
       confirmButtonText: 'Eliminar',
       cancelButtonText: 'Cancelar'
-
     })
       .then((borrar) => {
         if (borrar.isConfirmed) {
@@ -252,19 +224,14 @@ export class ContactosComponent implements OnInit {
       });
   }
 
-
-
-
-
   exportarContactos(): void {
-
     Swal.fire({
       icon: 'success',
       title: 'Se están exportando los contactos (.xlsx)',
       showConfirmButton: false,
       timer: 3000
     });
-    this._excelService.contactosExcel(this.contactos, 'Contactos');
+    this._excelService.contactosExcel(this.todosLosContactos, 'Contactos');
   }
 
   exportarMisContactos(): void {
@@ -274,12 +241,11 @@ export class ContactosComponent implements OnInit {
       showConfirmButton: false,
       timer: 3000
     });
-    this._excelService.MisContactosExcel(this.listaMisContactos, 'MisContactos');
+    this._excelService.MisContactosExcel(this.todosMisContactos, 'MisContactos');
   }
 
   cargarLlamadasRealizadas() {
     this._llamadasService.reporteLlamadas().subscribe(lista => this.llamadasRealizadas = lista);
-    console.log('llamadas realizadas comp', this.llamadasRealizadas);
   }
 
   exportarLlamadasRealizadas() {
@@ -294,7 +260,6 @@ export class ContactosComponent implements OnInit {
 
   cargarReunionesRealizadas() {
     this._registrarReunionService.reporteReuniones().subscribe(lista => this.reunionesRealizadas = lista);
-    console.log('Reuniones realizadas', this.reunionesRealizadas);
   }
 
   exportarReunionesRealizadas() {
@@ -307,10 +272,7 @@ export class ContactosComponent implements OnInit {
     this._guardarReunionesService.reunionesExcel(this.reunionesRealizadas, 'ReunionesRealizadas');
   }
 
-
   cargarInfoAlForm(datos: any) {
-    console.log('Data para cargar al form Contactos', datos);
-
     this.editarContacto.id_contacto = datos.id_contacto;
     this.editarContacto.email = datos.email;
     this.editarContacto.nombre = datos.nombre;
@@ -319,14 +281,37 @@ export class ContactosComponent implements OnInit {
     this.editarContacto.departamento = datos.departamento;
     this.editarContacto.telefono = datos.telefono;
     this.editarContacto.fkempresa = datos.id_empresa;
-
     this.salvaIdUsuario = datos.id_usuario;
+  }
 
+  actualizarContacto(form: NgForm): any {
+    this.editarContacto = {
+      id_contacto: form.value.idContacto,
+      email: form.value.email,
+      nombre: form.value.nombre,
+      apellido: form.value.apellido,
+      propietario_registro: this.salvaIdUsuario,
+      departamento: form.value.departamento,
+      telefono: form.value.telefono,
+      fkempresa: form.value.fkempresa
+    };
+    this._ContactoService.actualizarContacto(this.editarContacto).subscribe();
   }
 
 
-  actualizarContacto(form: NgForm): any {
+  cargarInfoAlFormMC(datos: any) {
+    this.editarContacto.id_contacto = datos.id_contacto;
+    this.editarContacto.email = datos.email;
+    this.editarContacto.nombre = datos.nombre;
+    this.editarContacto.apellido = datos.apellido;
+    this.editarContacto.propietario_registro = datos.propietario;
+    this.editarContacto.departamento = datos.departamento;
+    this.editarContacto.telefono = datos.telefono;
+    this.editarContacto.fkempresa = datos.id_empresa;
+    this.salvaIdUsuario = datos.id_usuario;
+  }
 
+  actualizarMiContacto(form: NgForm): any {
     this.contacto = {
       id_contacto: form.value.idContacto,
       email: form.value.email,
@@ -337,8 +322,6 @@ export class ContactosComponent implements OnInit {
       telefono: form.value.telefono,
       fkempresa: form.value.fkempresa
     }
-
-    console.log('Actualiza Contactos info a enviar', this.contacto);
     this._ContactoService.actualizarContacto(this.contacto).subscribe();
   }
 

@@ -27,8 +27,8 @@
             </button>
 
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                <button (click)="guardarEmpresas()" class="dropdown-item estilosBotonesHover" type="button">Todas las empresas</button>
-                <button (click)="guardarMisEmpresas()" class="dropdown-item estilosBotonesHover" type="button">Mis empresas</button>
+                <button (click)="exportarEmpresas()" class="dropdown-item estilosBotonesHover" type="button">Todas las empresas</button>
+                <button (click)="ExportarTodasMisEmpresas()" class="dropdown-item estilosBotonesHover" type="button">Mis empresas</button>
             </div>
 
         </div>
@@ -319,7 +319,7 @@
                                     <th scope="row">{{empresasDesde+( i+1)}}</th>
 
                                     <td>
-                                        <a [routerLink]="['/informacion',tipo, empresa.id_empresa]">
+                                        <a [routerLink]="['/informacion-empresa',tipo, empresa.id_empresa]">
                                             <div style="width: 15rem;"></div>{{empresa.nombre}}</a>
                                     </td>
                                     <td>
@@ -348,7 +348,7 @@
                                         <div style="width: 10rem;"></div>{{empresa.pagina_corporativa}}</td>
                                     <td>
 
-                                        <button (click)="actualizarEmpresa(empresa)" class="btn estilosBotones estilosBotonesHover">
+                                        <button (click)="cargarInfoAlForm(empresa)" class="btn estilosBotones estilosBotonesHover" data-toggle="modal" data-target="#modalEditarEmpresa">
                                         <svg width="1em " height="1em " viewBox="0 0 16 16 " class="bi bi-pencil-square " fill="currentColor " xmlns="http://www.w3.org/2000/svg ">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z "/>
                                             <path fill-rule="evenodd " d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z "/>
@@ -430,7 +430,7 @@
                                 <tr *ngFor="let misEmpresas of listaMisEmpresas; let i= index">
                                     <th scope="row">{{misEmpresasDesde+(i+1)}}</th>
                                     <td>
-                                        <div style="width: 15rem;"></div><a [routerLink]="['/informacion',tipo, misEmpresas.id_empresa]">{{misEmpresas.nombre}}</a></td>
+                                        <div style="width: 15rem;"></div><a [routerLink]="['/informacion-empresa',tipo, misEmpresas.id_empresa]">{{misEmpresas.nombre}}</a></td>
                                     <td>
                                         <div style="width: 15rem;"></div>{{misEmpresas.propietario}}</td>
                                     <td>
@@ -456,7 +456,7 @@
                                     <td>
                                         <div style="width: 15rem;"></div>{{misEmpresas.pagina_corporativa}}</td>
                                     <td>
-                                        <button (click)="actualizarEmpresa(misEmpresas)" class="btn estilosBotones estilosBotonesHover">
+                                        <button (click)="cargarInfoAlForm(misEmpresas)" class="btn estilosBotones estilosBotonesHover" data-toggle="modal" data-target="#modalEditarEmpresa">
                                         <svg width="1em " height="1em " viewBox="0 0 16 16 " class="bi bi-pencil-square " fill="currentColor " xmlns="http://www.w3.org/2000/svg ">
                                             <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456l-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z "/>
                                             <path fill-rule="evenodd " d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z "/>
@@ -513,4 +513,237 @@
         </div>
 
     </div>
+
+
+    <!--Inicio del formulario modal Editar empresa-->
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalEditarEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header bgCorp">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">
+                        Editar empresa
+                    </h5>
+                    <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="actualizarEmpresa(fEditarEmpresa)" #fEditarEmpresa="ngForm">
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Nombre de
+                                    la empresa </label>
+                            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="editarEmpresa.nombre" required minlength="4" />
+
+                            <small *ngIf="fEditarEmpresa.submitted &&
+                                                fEditarEmpresa.controls['nombre'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Propietario de registro</label>
+                            <input type="text" class="form-control" id="propietario" name="propietarioVista" [(ngModel)]="editarEmpresa.propietario_registro" required minlength="5" disabled />
+                        </div>
+
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="propietario" name="propietario" [(ngModel)]="editarEmpresa.propietario_registro" required minlength="5" />
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Industria</label>
+                            <div class="col-22">
+                                <select class="form-control" id="industria" name="industria" [(ngModel)]="editarEmpresa.industria" required>
+                                        ><label for="industria">--seleccione--</label>
+                                        <option>Contabilidad</option>
+                                        <option>Aviación</option>
+                                        <option>Medicina</option>
+                                        <option>Banca</option>
+                                        <option>Productos químicos</option>
+                                        <option>Ingeniería civil</option>
+                                        <option>Bienes y raices</option>
+                                    </select>
+
+                                <small *ngIf="fEditarEmpresa.submitted &&
+                                                    fEditarEmpresa.controls['industria'].errors" class="text-danger">
+                                        Campo obligatorio
+                                    </small>
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Número de
+                                    teléfono</label>
+                            <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="editarEmpresa.no_telefono" required minlength="8" />
+
+                            <small *ngIf="fEditarEmpresa.submitted &&
+                                                fEditarEmpresa.controls['telefono'].errors" class="text-danger">
+                                    Campo obligatorio | Mínimo 8 numeros
+                                </small>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Tipo</label>
+                            <div class="col-22">
+                                <select class="form-control" id="tipo" name="tipo" [(ngModel)]="editarEmpresa.tipo_cliente" required>
+
+                                        <option>Cliente potencial</option>
+                                        <option>Socio</option>
+                                        <option>Revendedor</option>
+                                        <option>Proveedor</option>
+                                        <option>Otra</option>
+                                    </select>
+
+                                <small *ngIf="fEditarEmpresa.submitted &&
+                                                    fEditarEmpresa.controls['tipo'].errors" class="text-danger">
+                                        Campo obligatorio
+                                    </small>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Ciudad</label>
+                            <input type="text" class="form-control" id="ciudad" name="ciudad" [(ngModel)]="editarEmpresa.ciudad" required />
+
+                            <small *ngIf="fEditarEmpresa.submitted &&
+                                                fEditarEmpresa.controls['ciudad'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Estado o
+                                    región</label>
+                            <input type="text" class="form-control" id="etapa" name="estado" [(ngModel)]="editarEmpresa.estado_region" required />
+
+                            <small *ngIf="fEditarEmpresa.submitted &&
+                                                fEditarEmpresa.controls['estado'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Código
+                                    postal</label>
+                            <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="editarEmpresa.codigo_postal" required />
+
+                            <small *ngIf="fEditarEmpresa.submitted &&
+                                                fEditarEmpresa.controls['codigo'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Número de
+                                    empleados</label>
+                            <input type="text" class="form-control" id="empleados" name="empleados" [(ngModel)]="editarEmpresa.no_empleados" required />
+
+                            <small *ngIf="fEditarEmpresa.submitted &&
+                                                fEditarEmpresa.controls['empleados'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
+
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Ingresos
+                                    anuales</label>
+                            <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="editarEmpresa.ingresos_anuales" required />
+
+                            <small *ngIf="fEditarEmpresa.submitted &&
+                                                fEditarEmpresa.controls['ingresos'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Zona
+                                    horaria</label>
+                            <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="editarEmpresa.zona_horaria" required />
+
+                            <small *ngIf="fEditarEmpresa.submitted &&
+                                                fEditarEmpresa.controls['zona'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Descripción</label>
+                            <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="editarEmpresa.descripcion" required />
+
+
+                            <small *ngIf="fEditarEmpresa.submitted &&
+                                                fEditarEmpresa.controls['descripcion'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
+                        </div>
+
+
+
+                        <div class="form-group">
+                            <label for="recipient-name" class="col-form-label">Página
+                                    corporativa</label>
+                            <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="editarEmpresa.pagina_corporativa" required />
+
+                            <small *ngIf="fEditarEmpresa.submitted &&
+                                                fEditarEmpresa.controls['pagina'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="id_empresa" name="idEmpresa" required [(ngModel)]="editarEmpresa.id_empresa" />
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="submit" class="btn
+                                                estilosBotonesHover
+                                                estilosBotones">
+                                    Actualizar
+                                </button>
+                            <button type="submit" class="btn
+                                                estilosBotonesHover
+                                                estilosBotones">
+                                    Crear y agregar otra
+                                </button>
+                            <button (click)="vaciarFormulario()" class="btn
+                                                estilosBotonesHover
+                                                estilosBotones" data-dismiss="modal">
+                                    Cancelar
+                                </button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Fin formulario modal editar empresa-->
+
 </div>

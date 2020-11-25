@@ -1,20 +1,21 @@
 import { Injectable } from '@angular/core';
-import { NegocioModel } from '../../models/negocio.model';
 import { URL_SERVICIOS } from '../../config/config';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/Operators';
 import Swal from 'sweetalert2';
+import { NegociosEmpresaModel } from '../../models/negociosEmpresa';
+
 @Injectable({
   providedIn: 'root'
 })
-export class NegociosContactosService {
+export class NegociosEmpresasService {
   token: any;
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
    }
 
-  crearNegocio(negocio: NegocioModel): any {
-    let url = URL_SERVICIOS + '/negociosContactos/';
+  crearNegocio(negocio: NegociosEmpresaModel): any {
+    let url = URL_SERVICIOS + '/negociosEmpresas/';
     url += '?token=' + this.token;
 
     return this.http.post(url, negocio).pipe(
@@ -29,7 +30,7 @@ export class NegociosContactosService {
 
 
   eliminarNegocio(id: string): any {
-    let url = URL_SERVICIOS + '/negociosContactos/' + id;
+    let url = URL_SERVICIOS + '/negociosEmpresas/' + id;
     url += '?token=' + this.token;
 
     return this.http.delete(url)
@@ -47,9 +48,9 @@ export class NegociosContactosService {
       );
   }
 
-  actualizarNegocio(negocio: NegocioModel): any {
+  actualizarNegocio(negocio: NegociosEmpresaModel): any {
 
-    let url = URL_SERVICIOS + '/negociosContactos/' + negocio.id_negocio;
+    let url = URL_SERVICIOS + '/negociosEmpresas/' + negocio.id_negocio;
     url += '?token=' + this.token;
 
     return this.http.put(url, negocio)
@@ -68,8 +69,8 @@ export class NegociosContactosService {
       );
   }
 
-  cargarNegociosConContacto(fkcontacto: string): any {
-    let url = URL_SERVICIOS + '/negociosContactos/fkcontacto/' + fkcontacto;
+  cargarNegociosConEmpresa(fkempresa: string): any {
+    let url = URL_SERVICIOS + '/negociosEmpresas/fkempresa/' + fkempresa;
     url += '?token=' + this.token;
 
     return this.http.get(url)
@@ -83,13 +84,14 @@ export class NegociosContactosService {
   }
 
   cargarNegocios(): any {
-    let url = URL_SERVICIOS + '/negociosContactos/negocios/';
+    let url = URL_SERVICIOS + '/negociosEmpresas/negocios/';
     url += '?token=' + this.token;
 
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
+            console.log('Negocios Empresas Service', resp.negocios);
             return resp.negocios;
           }
         )

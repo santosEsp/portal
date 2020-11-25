@@ -14,7 +14,6 @@ export class EtapasNegociosService {
     this.token = localStorage.getItem('token');
   }
 
-
   cargarEtapas(): any {
     let url = URL_SERVICIOS + '/etapas/';
     url += '?token=' + this.token;
@@ -23,16 +22,13 @@ export class EtapasNegociosService {
       .pipe(
         map(
           (resp: any) => {
-            console.log('todas las etapas Service: ', resp.etapas);
             return resp.etapas;
           }
         )
       );
   }
 
-
   actualizarEtapa(etapas: EtapasNegocio): any {
-
     let url = URL_SERVICIOS + '/etapas/' + etapas.id_etapa;
     url += '?token=' + this.token;
     return this.http.put(url, etapas)
@@ -44,7 +40,6 @@ export class EtapasNegociosService {
               text: 'Actualizado correctamente',
               icon: 'success',
             });
-
             return resp.etapa;
           }
         )
