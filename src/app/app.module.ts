@@ -27,14 +27,6 @@ import { ModalSharedComponent } from './components/modal-shared/modal-shared.com
 
 
 
-import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
-import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
-import interactionPlugin from '@fullcalendar/daygrid'; // a plugin
-
-FullCalendarModule.registerPlugins([ // register FullCalendar plugins
-  dayGridPlugin,
-  interactionPlugin
-]);
 
 @NgModule({
   declarations: [
@@ -55,8 +47,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AppRoutingModule,
     FormsModule,
     ChartsModule,
-    HttpClientModule,
-    FullCalendarModule
+    HttpClientModule
   ],
   providers: [
   ],

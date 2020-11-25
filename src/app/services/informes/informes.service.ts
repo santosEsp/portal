@@ -17,7 +17,7 @@ export class InformesService {
   ];
 
   constructor(private http:HttpClient) { 
-    //console.log("Servicio de informaes funciona :) ")
+    console.log("Servicio de informaes funciona :) ")
     this.token = localStorage.getItem('token');
   }
   getInformes(): Informe[]{
@@ -37,7 +37,7 @@ cargarContactos(): any {
     .pipe(
       map(
         (resp: any) => {
-          //console.log('Numero de contactos registrado hoy : Service ', resp.informes[0].Num_Contactos);
+          console.log('Numero de contactos registrado hoy : Service ', resp.informes[0].Num_Contactos);
           return resp.informes;
         }
       )
@@ -52,7 +52,7 @@ cargarMejorSemana(): any {
   .pipe(
     map(
       (resp: any) => {
-       // console.log('Numero de contactos registrado de la mejor semana : Service ', resp.informes[0].Mayor,'Fecha de inicio ',resp.informes[0].FechaI,'Fecha de Final ',resp.informes[0].FechaF);
+        console.log('Numero de contactos registrado de la mejor semana : Service ', resp.informes[0].Mayor,'Fecha de inicio ',resp.informes[0].FechaI,'Fecha de Final ',resp.informes[0].FechaF);
         return resp.informes;
       }
     )
@@ -67,7 +67,7 @@ cargarContactossuma(): any {
     .pipe(
       map(
         (resp: any) => {
-          //console.log('Numero de contactos registrado en esta semana : Service ', resp.informes[0].Suma_Contactos);
+          console.log('Numero de contactos registrado en esta semana : Service ', resp.informes[0].Suma_Contactos);
           return resp.informes;
         }
       )
@@ -82,7 +82,7 @@ cargarFechaMinMax(): any {
     .pipe(
       map(
         (resp: any) => {
-         // console.log('Fecha Min y Fecha Max : Service ', resp.informes[0].FechaMin);
+          console.log('Fecha Min y Fecha Max : Service ', resp.informes[0].FechaMin);
           return resp.informes;
         }
       )
@@ -94,13 +94,13 @@ cargarHistorico(fecha: string): any {
   let url = URL_SERVICIOS + '/informes/historico/' + "'" + fecha  + "'";
   url += '?token=' + this.token;
 
-  //console.log('url consulta', url);
+  console.log('url consulta', url);
 
   return this.http.get(url)
     .pipe(
       map(
         (resp: any) => {
-         // console.log('Numero de contactos registrado en la semana elegida : Service ', resp.informes[0].Num_Contactos);
+          console.log('Numero de contactos registrado en la semana elegida : Service ', resp.informes[0].Num_Contactos);
           return resp.informes;
         }
       )
