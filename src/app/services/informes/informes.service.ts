@@ -99,10 +99,7 @@ cargarHistorico(fecha: string): any {
   return this.http.get(url)
     .pipe(
       map(
-        (resp: any) => {
-         // console.log('Numero de contactos registrado en la semana elegida : Service ', resp.informes[0].Num_Contactos);
-          return resp.informes;
-        }
+        (resp: any) => {return resp.informes;}
       )
     );
 }

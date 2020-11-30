@@ -50,6 +50,38 @@ export class EmpresaComponent implements OnInit {
     this.contadorMisEmpresasBD();
 
   }
+
+  buscarEmpresas(termino: string) {
+    if (termino.length <= 0) {
+      this.cargarEmpresas();
+      return;
+    }    
+    // this.cargando = true;
+    this._empresaService.buscarEmpresa(termino)
+      .subscribe(lista => {
+         this.empresas = lista
+         console.log(this.empresas);
+        });
+    // this.cargando = false;
+
+  }
+
+  buscarMisEmpresas(termino: string) {
+    if (termino.length <= 0) {
+      this.cargarMisEmpresas();
+      return;
+    }    
+    // this.cargando = true;
+    this._empresaService.buscarMiEmpresa(termino,parseInt(this.miId))
+      .subscribe(lista => {
+         this.listaMisEmpresas = lista
+         console.log(this.listaMisEmpresas);
+        });
+    // this.cargando = false;
+
+  }
+
+
   agregarEmpresa(form: NgForm): any {
     if (form.invalid) {
       return 'Formulario agregar empresa no válido';

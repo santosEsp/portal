@@ -194,5 +194,21 @@ export class ContactoService {
       );
   }
 
+  buscarCantacto(termino: string) {
+        
+    let url = URL_SERVICIOS + '/busqueda/contactos/' + "'" + termino + "'";
+    console.log(url);
+    return this.http.get(url)
+        .pipe(map((resp: any) => resp.contactos));
+}
+   
+buscarMiCantacto(termino: string,id: number) {
+        
+  let url = URL_SERVICIOS + '/busqueda/miscontactos/' + id  + '/' + "'" + termino + "'";
+  console.log(url);
+  return this.http.get(url)
+      .pipe(map((resp: any) => resp.contactos));
+}
+
 
 }
