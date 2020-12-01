@@ -1,25 +1,15 @@
 <app-navbar>
 </app-navbar>
-
-
 <div class="mt-5 container ">
-
     <div class="col-sm table-responsive">
         <h4> Total de contactos creados por semana</h4>
         <br>
         <form #f="ngForm">
             <input class="float-right form-control" type="date" id="historico" name="historico" (change)="historicoSemana(f)" [(ngModel)]="historico.fechaI" max={{fechaMax}} min={{fechaMin}} style="width: min-content;">
         </form>
-
-
         <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend" [chartType]="barChartType" width="390%" height="285%"></canvas>
-
-
-
     </div>
-
     <div class="col-sm table-responsive">
-
         <h4> Cantidad de contactos</h4>
         <br>
         <button class="btn estilosBotones estilosBotonesHover  float-right form-control" (click)="exportarinformes()" style="width: max-content;" type="button" id="dropdownMenu2" aria-haspopup="true" aria-expanded="false">
@@ -59,5 +49,4 @@
             </div>
         </div>
     </div>
-
 </div>

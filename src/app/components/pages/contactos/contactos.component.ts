@@ -30,7 +30,8 @@ export class ContactosComponent implements OnInit {
   llamadasRealizadas: any = [];
   listaMisContactos: ContactoModel[] = [];
   reunionesRealizadas: any = [];
-
+  proveedores;
+  Contacto: any = [];
 
   desde: number;
 
@@ -83,6 +84,31 @@ export class ContactosComponent implements OnInit {
     }
 
     console.log(form);
+  }
+
+  buscarContactos(termino: string) {
+    if (termino.length <= 0) {
+      this.cargarContactos();
+      return;
+    }    
+    // this.cargando = true;
+    this._ContactoService.buscarCantacto(termino)
+      .subscribe(lista => {
+         this.contactos = lista
+        });
+    // this.cargando = false;
+
+  }
+  buscarMisContactos(termino: string) {
+    if (termino.length <= 0) {
+      this.cargarMisContactos();
+      return;
+    }    
+    // this.cargando = true;
+    this._ContactoService.buscarMiCantacto(termino,this.miId)
+      .subscribe(lista => { this.listaMisContactos = lista});
+    // this.cargando = false;
+
   }
 
   contadorContactosBD() {
