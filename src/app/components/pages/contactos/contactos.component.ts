@@ -32,11 +32,8 @@ export class ContactosComponent implements OnInit {
   llamadasRealizadas: any = [];
   listaMisContactos: ContactoModel[] = [];
   reunionesRealizadas: any = [];
-<<<<<<< HEAD
-=======
   proveedores;
   Contacto: any = [];
->>>>>>> 6e241ac2eecf97835ec1518c0fd3fad1d965448e
 
   desde: number;
   divi;
