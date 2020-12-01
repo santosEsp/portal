@@ -28,7 +28,7 @@ export class LoginService {
     return this.http.post(url, usuario).pipe(
       map(
         (resp: any) => {
-          this.guardarStorage(resp.token, resp.usuario);
+          this.guardarStorage(resp.token, resp.usuario, resp.calculatedExpiresIn);
           return true;
         }
       )
@@ -47,8 +47,9 @@ export class LoginService {
     // Agregar el redireccionamiento
   }
 
-  guardarStorage(token: string, usuario: UsuarioModel): any {
+  guardarStorage(token: string, usuario: UsuarioModel, expiraEn: string): any {
     localStorage.setItem('token', token);
+    localStorage.setItem('calculatedExpiresIn', expiraEn);
     localStorage.setItem('usuario', JSON.stringify(usuario));
 
     this.usuario = usuario;
@@ -75,9 +76,7 @@ export class LoginService {
 
   estaAutenticado(): boolean {
     this.token = localStorage.getItem('token');
-    return (this.token.length > 5) ? true : false;
-
-    // const expira = Number(localStorage.getItem('expiraEn'));
+    // const expira = Number(localStorage.getItem('calculatedExpiresIn'));
     // const horaExpira = new Date();
     // horaExpira.setTime(expira);
 
@@ -86,6 +85,8 @@ export class LoginService {
     // } else {
     //   return false;
     // }
+
+    return (this.token.length > 5) ? true : false;
 
   }
 }

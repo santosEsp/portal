@@ -67,10 +67,10 @@
                     <form (ngSubmit)="recupera(fr)" #fr="ngForm">
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Ingrese su correo electrónico</label>
-                            <input type="text" class="form-control" id="recuperaPasword" name="recuperaPassword" [(ngModel)]="recuperarPassword.email" email required />
+                            <input type="text" class="form-control" id="recuperaPassword" name="recuperaPassword" [(ngModel)]="recuperaPasswordModel.email" email required />
 
                             <small *ngIf="fr.submitted && fr.controls['recuperaPassword'].errors" class="text-danger ">
-                                Ingresa un correo 
+                                Ingresa un correo válido
                               </small>
 
                         </div>

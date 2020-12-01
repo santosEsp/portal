@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import { LoginService } from '../../services/login/login.service';
 import Swal from 'sweetalert2';
 import { UsuarioModel } from '../../models/usuarios.model';
-import { RecuperarPasword } from '../../models/recuperarPassword.model';
+import { RecuperarPaswordModel } from '../../models/recuperarPassword.model';
+import { RecuperaPasswordService } from '../../services/recuperaPassword/recupera-password.service';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +15,15 @@ import { RecuperarPasword } from '../../models/recuperarPassword.model';
 export class LoginComponent implements OnInit {
 
   loginUser: UsuarioModel = new UsuarioModel();
-  recuperarPassword: RecuperarPasword = new RecuperarPasword();
+  recuperaPasswordModel: RecuperarPaswordModel = new RecuperarPaswordModel();
 
   recordarme = false;
   email: string;
 
   constructor(private router: Router,
-    private _loginService: LoginService) {
+    private _loginService: LoginService, private _recuperaPassService: RecuperaPasswordService) {
 
-     }
+  }
 
   ngOnInit(): void {
     // LocalStrogare del recordatorio del correo
@@ -64,14 +65,38 @@ export class LoginComponent implements OnInit {
     if (form1.invalid) {
       return;
     }
-    // Swal.fire({
-    //   allowOutsideClick: true,
-    //   text: 'Se ha enviado un mensaje a su correo ',
-    //   icon: 'info'
-    // });
+    this.recuperaPasswordModel = {
+      email: form1.value.recuperaPassword
+    }
 
-    // console.log(form1);
+    this._recuperaPassService.recuperarPass(this.recuperaPasswordModel).subscribe(
+      (resp: any) => {
 
+        Swal.fire({
+          title: 'Se ha enviado un correo',
+          text: 'Revise la bandeja de entrada de su correo',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              console.log('Clickeo OK'); 
+            }
+          });
+      },
+      (err) => {
+        Swal.fire({
+          title: 'Correo no registrado',
+          text: 'Verifique que ha introducido correctamente su correo',
+          icon: 'error',
+          allowOutsideClick: false
+        });
+      }
+    );
 
   }
+
 }

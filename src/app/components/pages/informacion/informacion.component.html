@@ -61,7 +61,7 @@
                     </button>
 
                     <!--Boton 2: Enviar correo -->
-                    <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons circular" data-target="#" data-toggle="modal" title="Enviar correo">
+                    <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons circular" data-target="#modalEnviarCorreo" data-toggle="modal" title="Enviar correo">
                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-envelope" fill="currentColor"
                             xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd"
@@ -548,3 +548,80 @@
         </div>
     </div>
     <!--fin del formulario modal-->
+
+
+    <!--Inicio del formulario modal ENVIAR  Correo-->
+    <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalEnviarCorreo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bgCorp">
+                    <h5 class="modal-title text-white" id="exampleModalLabel">
+                        Enviar correo
+                    </h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form (ngSubmit)="sendMail(fEnviarCorreo)" #fEnviarCorreo="ngForm">
+                        <div class="form-group">
+
+                            <table class="table-responsive">
+
+                                <tr>
+                                    <td style="width: 5vw;"><label for="recipient-name" class="col-form-label">De</label></td>
+                                    <td>
+                                        <input type="email" class="inputsECorreo" id="remitente" name="remitente" [(ngModel)]="modeloCorreo.remitenteEmail" required minlength="5" style="width: 50vw;" />
+                                        <small *ngIf="fEnviarCorreo.submitted && fEnviarCorreo.controls['remitente'].errors" class="text-danger">Campo obligatorio | Verificar correo</small>
+                                    </td>
+                                </tr>
+
+                                <hr style="background-color: #b4bdc5; margin-top: 0; margin-bottom: 0;">
+                                <tr>
+                                    <td style="width: 5vw;"><label for="recipient-name" class="col-form-label">Para</label></td>
+                                    <td>
+                                        <input type="email" class="inputsECorreo" id="destinatarioEmail" name="destinatarioEmail" [(ngModel)]="modeloCorreo.destinatario" required minlength="3" style="width: 50vw;" />
+                                        <small *ngIf="fEnviarCorreo.submitted && fEnviarCorreo.controls['destinatarioEmail'].errors" class="text-danger">Campo obligatorio | Verificar correo</small>
+                                    </td>
+                                </tr>
+                                <hr style="background-color: #b4bdc5; margin-top: 0; margin-bottom: 0;">
+                                <tr>
+                                    <td style="width: 5vw;"> <label for="recipient-name" class="col-form-label">Asunto</label></td>
+                                    <td>
+                                        <input type="text" class="inputsECorreo" id="asunto" name="asunto" [(ngModel)]="modeloCorreo.asunto" required minlength="3" style="width: 50vw;" />
+                                        <small *ngIf="fEnviarCorreo.submitted && fEnviarCorreo.controls['asunto'].errors" class="text-danger">Campo obligatorio </small>
+                                    </td>
+                                </tr>
+                                <hr style="background-color: #b4bdc5; margin-top: 0; margin-bottom: 0;">
+                            </table>
+                            <div class="dropdown-divider"></div>
+                            <div class="form-group">
+                                <textarea class="form-control" rows="7" id="descripcion" name="descripcion" [(ngModel)]="modeloCorreo.descripcionCorreo" required></textarea>
+                                <small *ngIf="fEnviarCorreo.submitted && fEnviarCorreo.controls['descripcion'].errors" class="text-danger">Campo obligatorio </small>
+                            </div>
+
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text" id="inputGroupFileAddon01">Adjuntos</span>
+                                </div>
+                                <div class="custom-file">
+                                    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
+                                    <label class="custom-file-label" for="inputGroupFile01">Seleccionar archivo</label>
+                                </div>
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button type="submit" class="btn estilosBotonesHover estilosBotones">
+                                Enviar
+                            </button>
+                                <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
+                                Cancelar
+                            </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>

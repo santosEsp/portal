@@ -18,8 +18,8 @@
 }
 
 .estiloBotonLogin {
-    border-color: #000000;
-    color: black;
+    background-color: #6C6B6D;
+    color: white;
 }
 
 .estilosBotonesLoginHover:hover {
@@ -42,4 +42,9 @@ html {
 
 .element {
     overflow: hidden;
+}
+
+.inputsECorreo {
+    outline: none;
+    border: 0;
 }

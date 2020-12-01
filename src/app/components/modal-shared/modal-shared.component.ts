@@ -36,9 +36,11 @@ export class ModalSharedComponent implements OnInit {
   miUsuario: string;
   miId: string;
   datos: any[] = [];
+  miEmail: string;
 
-
+  pass = 'nHrG_SEA_2020';
   nombrePropietario = new UsuarioModel();
+  emailDestinatario: string;
 
   // variable para la fecha
   fecha: Date = new Date();
@@ -50,7 +52,7 @@ export class ModalSharedComponent implements OnInit {
     private _negocioService: NegociosContactosService) {
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
     this.miId = this.miUsuario['id_usuario'];
-
+   
   }
 
   ngOnInit(): void {
@@ -63,6 +65,8 @@ export class ModalSharedComponent implements OnInit {
     );
     this.cargaNombreContacto();
     this.cargarEtapas();
+
+    
   }
 
   registrarNota(form: NgForm): any {
@@ -155,4 +159,6 @@ export class ModalSharedComponent implements OnInit {
       this.etapas = lista;
     });
   };
+
+
 }

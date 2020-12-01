@@ -10,7 +10,7 @@ import { ConfiguracionComponent } from './components/pages/configuracion/configu
 import { AuthGuard } from './guards/auth.guard';
 import { NegocioComponent } from './components/pages/negocios/negocios.component';
 import { InformacionEmpresaComponent } from './components/pages/informacion-empresa/informacion-empresa.component';
-
+import { RestablecerpswComponent } from './components/restablecerpsw/restablecerpsw/restablecerpsw.component';
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'contactos', component: ContactosComponent, canActivate: [AuthGuard] },
@@ -21,6 +21,7 @@ const routes: Routes = [
   {path: 'configuracion', component: ConfiguracionComponent, canActivate: [AuthGuard]},
   {path: 'negocios',component:NegocioComponent, canActivate: [AuthGuard]},
   {path: 'informacion-empresa/:tipo/:id', component: InformacionEmpresaComponent, canActivate:[AuthGuard]},
+  {path: 'reset/:token', component: RestablecerpswComponent},
   {path: '**', pathMatch: 'full', redirectTo: 'login'}
 
 ];

@@ -14,6 +14,7 @@ import { RegistrarLlamadaModel } from '../../../models/registrarLlamada.model';
 import { RegistrarReunionModel } from '../../../models/registrarReunion.model';
 import { NegocioModel } from '../../../models/negocio.model';
 
+import { EnviarCorreoModel } from '../../../models/enviarCorreo.model';
 // Importacion de servicios para contactos
 import { ContactoService } from '../../../services/contactos/contacto.service';
 import { NotasService } from '../../../services/notas/notas.service';
@@ -26,7 +27,7 @@ import { UsuarioModel } from 'src/app/models/usuarios.model';
 import Swal from 'sweetalert2';
 import { NegociosContactosService } from '../../../services/negociosContactos/negocios-contactos.service';
 import { EtapasNegociosService } from '../../../services/etapasNegocios/etapas-negocios.service';
-
+import { EnviarCorreoService } from '../../../services/enviarCorreo/enviar-correo.service';
 @Component({
   selector: 'app-perfil',
   templateUrl: './informacion.component.html',
@@ -52,28 +53,34 @@ export class InformacionComponent implements OnInit {
   fkempresaContacto: number;
   idContacto: string;
   nombrePropietario = new UsuarioModel();
-  fkpropietarioContacto: number;
 
+  modeloCorreo = new EnviarCorreoModel();
+  fkpropietarioContacto: number;
   miUsuario: string;
   miId: string;
-
+  pass = 'nHrG_SEA_2020';
+  guardaMiEmail: string;
   ruta: { tipo: string, id: string };
   etapas: any[] = [];
 
+  enviado: string;
   constructor(private rutaActiva: ActivatedRoute, private _contactoService: ContactoService, private _empresaService: EmpresaService,
     private _registrarCorreoService: RegistrarCorreoService, private _notasService: NotasService,
     private _llamadasService: LlamadasService, private _registrarReunionService: RegistrarReunionService,
     private _usuarioService: UsuarioService, private router: Router,
     private _negociosContactoService: NegociosContactosService,
-    private _etapasService: EtapasNegociosService
+    private _etapasService: EtapasNegociosService, private _enviarCorreoService: EnviarCorreoService
   ) {
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
     this.miId = this.miUsuario['id_usuario'];
     this.rutaActiva.params.subscribe(params => {
     });
+
   }
 
   ngOnInit(): void {
+
+
 
     this.ruta = {
       tipo: this.rutaActiva.snapshot.params.tipo,
@@ -144,6 +151,9 @@ export class InformacionComponent implements OnInit {
       this.fkpropietarioContacto = parseInt(this.unContacto.propietario_registro);
       this.cargaEmpresaDeContacto();
       this.cargaNombrePropietarioContacto();
+      this.modeloCorreo.destinatario = this.unContacto.email;
+      this.modeloCorreo.remitenteEmail = this.miUsuario['email'];
+      console.log('remitente email', this.modeloCorreo.remitenteEmail);
     });
   }
 
@@ -219,5 +229,80 @@ export class InformacionComponent implements OnInit {
     this._etapasService.cargarEtapas().subscribe(lista => {
       this.etapas = lista;
     });
+  }
+
+  // enviar correo
+
+
+  sendMail(formu: NgForm) {
+
+    if (formu.invalid) {
+      return console.log('Formulario invalido');
+    }
+    this.modeloCorreo = {
+      remitenteEmail: formu.value.remitente,
+      remitentePass: this.pass,
+      remitenteNombre: this.miUsuario['nombre'],
+      destinatario: formu.value.destinatarioEmail,
+      descripcionCorreo: formu.value.descripcion,
+      asunto: formu.value.asunto
+
+    }
+    Swal.fire({
+      title: 'Enviando Correo',
+      text: 'Por favor espere, enviando correo',
+      icon: 'info',
+    }),
+      Swal.showLoading(),
+      console.log('modeloCorreo:', this.modeloCorreo);
+    this._enviarCorreoService.enviarCorreo(this.modeloCorreo).subscribe(
+      (resp: any) => {
+        Swal.close();
+        Swal.fire({
+          title: 'Correo enviado',
+          text: 'Se ha enviado el correo',
+          icon: 'success',
+        });
+      },
+      (error): any => {
+
+        Swal.close();
+        Swal.fire({
+          title: 'Error: ' + error.error.mensaje,
+          text: 'Veirifique que todo esté correcto',
+          icon: 'error',
+        });
+        // if (error.error.errors.name === 'SequelizeUniqueConstraintError') {
+        //   Swal.fire({
+        //     title: 'El correo debe ser único para cada usuario',
+        //     text: 'Hubo un error, verifique',
+        //     icon: 'error',
+        //   });
+        // }
+
+      }
+   
+   
+      // dato => {
+      //   this.enviado = dato;
+          
+      //   if (!this.enviado) {
+      //     Swal.close();
+      //     Swal.fire({
+      //       title: 'Correo no enviado',
+      //       text: 'No se ha enviado el correo',
+      //       icon: 'error',
+      //     });
+      //   }
+
+      //   Swal.close();
+      //   Swal.fire({
+      //     title: 'Correo enviado',
+      //     text: 'Se ha enviado el correo',
+      //     icon: 'success',
+      //   });
+      // }
+
+    );
   }
 }
