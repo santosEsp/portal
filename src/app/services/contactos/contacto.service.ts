@@ -172,6 +172,7 @@ export class ContactoService {
       );
   }
 
+<<<<<<< HEAD
   
   cargarTodosLosContactos(): any {
     let url = URL_SERVICIOS + '/contactos/';
@@ -191,6 +192,24 @@ export class ContactoService {
   cargarTodosMisContactos(id: number): any {
     let url = URL_SERVICIOS + '/contactos/todosMisContactos/' + id;
     url += '?token=' + this.token;
+=======
+  buscarCantacto(termino: string) {
+        
+    let url = URL_SERVICIOS + '/busqueda/contactos/' + "'" + termino + "'";
+    console.log(url);
+    return this.http.get(url)
+        .pipe(map((resp: any) => resp.contactos));
+}
+   
+buscarMiCantacto(termino: string,id: number) {
+        
+  let url = URL_SERVICIOS + '/busqueda/miscontactos/' + id  + '/' + "'" + termino + "'";
+  console.log(url);
+  return this.http.get(url)
+      .pipe(map((resp: any) => resp.contactos));
+}
+
+>>>>>>> 6e241ac2eecf97835ec1518c0fd3fad1d965448e
 
     return this.http.get(url)
       .pipe(

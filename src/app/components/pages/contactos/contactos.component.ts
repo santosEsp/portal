@@ -32,6 +32,11 @@ export class ContactosComponent implements OnInit {
   llamadasRealizadas: any = [];
   listaMisContactos: ContactoModel[] = [];
   reunionesRealizadas: any = [];
+<<<<<<< HEAD
+=======
+  proveedores;
+  Contacto: any = [];
+>>>>>>> 6e241ac2eecf97835ec1518c0fd3fad1d965448e
 
   desde: number;
   divi;
@@ -73,6 +78,31 @@ export class ContactosComponent implements OnInit {
     if (form.invalid) {
       return 'Formulario inválido';
     }
+  }
+
+  buscarContactos(termino: string) {
+    if (termino.length <= 0) {
+      this.cargarContactos();
+      return;
+    }    
+    // this.cargando = true;
+    this._ContactoService.buscarCantacto(termino)
+      .subscribe(lista => {
+         this.contactos = lista
+        });
+    // this.cargando = false;
+
+  }
+  buscarMisContactos(termino: string) {
+    if (termino.length <= 0) {
+      this.cargarMisContactos();
+      return;
+    }    
+    // this.cargando = true;
+    this._ContactoService.buscarMiCantacto(termino,this.miId)
+      .subscribe(lista => { this.listaMisContactos = lista});
+    // this.cargando = false;
+
   }
 
   contadorContactosBD() {

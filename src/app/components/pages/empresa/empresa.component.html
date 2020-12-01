@@ -290,7 +290,11 @@
             <div class="tab-content con" id="myTabContent" style="height: 70vh;">
                 <!--Contenido tab 1-->
                 <div class="tab-pane fade show active" id="todosLosContactos" role="tabpanel" aria-labelledby="home-tab">
-
+                    <!--cuadro de busqueda para empresas -->
+                    <div class="card-body">
+                        <input #input (keyup)="buscarEmpresas(input.value)" class="form-control" style="width: 30vh;" placeholder="Buscar empresa ...">
+                    </div>
+                    <!--aqui termina cuadro de busqueda para empresas -->
                     <div class="table-responsive" style="height: 57vh;">
                         <table class="table mt-3 table-hover">
                             <thead class="grisSecundario">
@@ -404,6 +408,11 @@
                 </div>
                 <!--Contenido tab 2-->
                 <div class="tab-pane fade" id="misContactos" role="tabpanel" aria-labelledby="profile-tab">
+                    <!--cuadro de busqueda para mis empresas -->
+                    <div class="card-body">
+                        <input #input2 (keyup)="buscarMisEmpresas(input2.value)" class="form-control" style="width: 30vh;" placeholder="Buscar mi empresa ...">
+                    </div>
+                    <!--aqui termina cuadro de busqueda para mis empresas -->
                     <div class="table-responsive" style="height: 57vh;">
                         <table class="table mt-3 table-hover">
                             <thead class="grisSecundario">

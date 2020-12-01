@@ -78,10 +78,19 @@
 
                 <!--Contenido de los tabs
     ---------------------------->
+
                 <div class="tab-content" id="myTabContent" style="height: 70vh;">
                     <!--Contenido tab 1-->
                     <div class="tab-pane fade show active" id="todosLosContactos" role="tabpanel" aria-labelledby="home-tab">
-
+                        <!--
+                    cuadro de busqueda para contactos
+                -->
+                        <div class="card-body">
+                            <input #input (keyup)="buscarContactos(input.value)" class="form-control" style="width: 30vh;" placeholder="Buscar contacto ...">
+                        </div>
+                        <!--
+                   aqui termina cuadro de busqueda para contactos
+                -->
 
 
                         <div class="table-responsive" style="height: 57vh;">
@@ -189,8 +198,15 @@
                     </div>
                     <!--Contenido tab 2-->
                     <div class="tab-pane fade" id="misContactos" role="tabpanel" aria-labelledby="profile-tab">
-
-
+                        <!--
+                    cuadro de busqueda para mis contactos
+                     -->
+                        <div class="card-body">
+                            <input #input2 (keyup)="buscarMisContactos(input2.value)" class="form-control" style="width: 30vh;" placeholder="Buscar mis contactos...">
+                        </div>
+                        <!--
+                    aqui termina cuadro de busqueda para mis contactos
+                     -->
                         <div class="table-responsive" style="height: 57vh;">
                             <table id="tablaContactos" class="table mt-3 display table-hover">
                                 <thead class="grisSecundario">
