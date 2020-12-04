@@ -179,24 +179,21 @@ export class EmpresaService {
         )
       );
   }
-<<<<<<< HEAD
-=======
 
   buscarEmpresa(termino: string) {
-        
+
     let url = URL_SERVICIOS + '/busqueda/empresas/' + "'" + termino + "'";
     console.log(url);
     return this.http.get(url)
-        .pipe(map((resp: any) => resp.empresas));
-}
-   
-  buscarMiEmpresa(termino: string, id: number) {
-        
-    let url = URL_SERVICIOS + '/busqueda/misempresas/' + id  + '/' + "'" + termino + "'";
-    console.log(url);
-    return this.http.get(url)
-    .pipe(map((resp: any) => resp.empresas));
+      .pipe(map((resp: any) => resp.empresas));
   }
 
->>>>>>> 6e241ac2eecf97835ec1518c0fd3fad1d965448e
+  buscarMiEmpresa(termino: string, id: number) {
+
+    let url = URL_SERVICIOS + '/busqueda/misempresas/' + id + '/' + "'" + termino + "'";
+    console.log(url);
+    return this.http.get(url)
+      .pipe(map((resp: any) => resp.empresas));
+  }
+
 }

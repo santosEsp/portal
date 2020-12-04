@@ -21,7 +21,6 @@ export class ContactoService {
     return this.http.post(url, contacto).pipe(
       map(
         (resp: any) => {
-          Swal.fire(contacto.nombre, 'Contacto agregado correctamente', 'success');
           return resp.contacto;
         }
       )
@@ -61,6 +60,7 @@ export class ContactoService {
               text: 'Actualizado correctamente',
               icon: 'success',
             });
+       
             return resp.contacto;
           }
         )
@@ -116,7 +116,7 @@ export class ContactoService {
   }
 
   contadorMisContactosBD(miId: number): any {
-    let url = URL_SERVICIOS + '/contactos/contadorMisContactos/'+ miId;
+    let url = URL_SERVICIOS + '/contactos/contadorMisContactos/' + miId;
     url += '?token=' + this.token;
 
     return this.http.get(url)
@@ -172,8 +172,7 @@ export class ContactoService {
       );
   }
 
-<<<<<<< HEAD
-  
+
   cargarTodosLosContactos(): any {
     let url = URL_SERVICIOS + '/contactos/';
     url += '?token=' + this.token;
@@ -189,28 +188,25 @@ export class ContactoService {
       );
   }
 
-  cargarTodosMisContactos(id: number): any {
-    let url = URL_SERVICIOS + '/contactos/todosMisContactos/' + id;
-    url += '?token=' + this.token;
-=======
+
   buscarCantacto(termino: string) {
-        
+
     let url = URL_SERVICIOS + '/busqueda/contactos/' + "'" + termino + "'";
     console.log(url);
     return this.http.get(url)
-        .pipe(map((resp: any) => resp.contactos));
-}
-   
-buscarMiCantacto(termino: string,id: number) {
-        
-  let url = URL_SERVICIOS + '/busqueda/miscontactos/' + id  + '/' + "'" + termino + "'";
-  console.log(url);
-  return this.http.get(url)
       .pipe(map((resp: any) => resp.contactos));
-}
+  }
 
->>>>>>> 6e241ac2eecf97835ec1518c0fd3fad1d965448e
+  buscarMiCantacto(termino: string, id: number) {
 
+    let url = URL_SERVICIOS + '/busqueda/miscontactos/' + id + '/' + "'" + termino + "'";
+    console.log(url);
+    return this.http.get(url)
+      .pipe(map((resp: any) => resp.contactos));
+  }
+  cargarTodosMisContactos(id: number): any {
+    let url = URL_SERVICIOS + '/contactos/todosMisContactos/' + id;
+    url += '?token=' + this.token;
     return this.http.get(url)
       .pipe(
         map(
