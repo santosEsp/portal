@@ -21,7 +21,6 @@ export class ContactoService {
     return this.http.post(url, contacto).pipe(
       map(
         (resp: any) => {
-          Swal.fire(contacto.nombre, 'Contacto agregado correctamente', 'success');
           return resp.contacto;
         }
       )
@@ -61,6 +60,7 @@ export class ContactoService {
               text: 'Actualizado correctamente',
               icon: 'success',
             });
+       
             return resp.contacto;
           }
         )

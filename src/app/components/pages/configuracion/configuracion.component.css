@@ -3,3 +3,78 @@
     font-size: 30px;
     margin-top: 10px;
 }
+
+
+/* Style the links inside the pill navigation menu */
+
+.pill-nav a {
+    display: inline-block;
+    color: black;
+    text-align: left;
+    padding: 10px;
+    text-decoration: none;
+    font-size: 17px;
+    border-radius: 5px;
+}
+
+
+/* Change the color of links on mouse-over */
+
+.pill-nav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+
+/* Add a color to the active/current link */
+
+.pill-nav a.active {
+    background-color: #E5B53A;
+    color: white;
+}
+
+
+/* LETRAS PARA EL NOMBRE DE USUARIO */
+
+
+/* ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: rgb(039, 089, 149);
+}
+
+
+li {
+    float: left;
+} */
+
+
+/* Change the link color to #111 (black) on hover */
+
+.contenedor {
+    /* SI */
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.centrado {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.colorIniciales {
+    color: white;
+    font-weight: bolder;
+    font-size: 35px;
+}
+
+.user-profile-image {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 10px;
+}

@@ -35,6 +35,10 @@ export class ContactosComponent implements OnInit {
   proveedores;
   Contacto: any = [];
 
+
+  propietarionombre: string;
+
+
   desde: number;
   divi;
   limiteC;
@@ -205,9 +209,21 @@ export class ContactosComponent implements OnInit {
       fkempresa: forma.value.fkempresa
     };
 
-    this._ContactoService.crearContacto(this.contacto).subscribe(() => {
-      this.cargarContactos();
-    });
+    this._ContactoService.crearContacto(this.contacto).subscribe(
+      (resp: any) => {
+        Swal.fire(this.contacto.nombre, 'Contacto creado correctamente', 'success');
+        this.cargarContactos();
+      },
+      (error): any => {
+        if (error.error.errors.name === 'SequelizeUniqueConstraintError') {
+          Swal.fire({
+            title: 'El correo debe ser único para cada contacto',
+            text: 'Hubo un error, verifique',
+            icon: 'error',
+          });
+        }
+      }   
+    );
   }
 
   vaciarFormulario(): any {
@@ -238,14 +254,20 @@ export class ContactosComponent implements OnInit {
       .then((borrar) => {
         if (borrar.isConfirmed) {
 
-          this._ContactoService.eliminarContacto(contacto.id_contacto).subscribe(() => {
-            Swal.fire(
-              'Eliminado',
-              'Usuario eliminado',
-              'success'
-            );
+          this._ContactoService.eliminarContacto(contacto.id_contacto).subscribe(
+            (resp: any) => {
+            Swal.fire('Eliminado','Contacto eliminado','success');
             this.cargarContactos();
-          });
+          },(error): any => {
+            if (error.error.error.name === 'SequelizeForeignKeyConstraintError') {
+              Swal.fire({
+                title: 'No puede eliminar a este contacto',
+                text: 'Ya que tiene varios eventos asignados',
+                icon: 'error',
+              });
+            }
+           }          
+          );
 
         }
       });
@@ -309,24 +331,32 @@ export class ContactosComponent implements OnInit {
     this.editarContacto.telefono = datos.telefono;
     this.editarContacto.fkempresa = datos.id_empresa;
     this.salvaIdUsuario = datos.id_usuario;
+    console.log('PN --->',datos.propietario);
+    this.propietarionombre=datos.propietario;
+    console.log('Pro Nom -->',this.propietarionombre);
   }
 
   actualizarContacto(form: NgForm): any {
+    if (form.invalid) {
+      return 'Formulario no válido';
+    }
     this.editarContacto = {
       id_contacto: form.value.idContacto,
       email: form.value.email,
       nombre: form.value.nombre,
       apellido: form.value.apellido,
-      propietario_registro: this.salvaIdUsuario,
+      propietario_registro: this.propietarionombre,
       departamento: form.value.departamento,
       telefono: form.value.telefono,
       fkempresa: form.value.fkempresa
     };
+    
     this._ContactoService.actualizarContacto(this.editarContacto).subscribe();
   }
 
 
   cargarInfoAlFormMC(datos: any) {
+    
     this.editarContacto.id_contacto = datos.id_contacto;
     this.editarContacto.email = datos.email;
     this.editarContacto.nombre = datos.nombre;
@@ -336,9 +366,16 @@ export class ContactosComponent implements OnInit {
     this.editarContacto.telefono = datos.telefono;
     this.editarContacto.fkempresa = datos.id_empresa;
     this.salvaIdUsuario = datos.id_usuario;
+    
+    
+    
   }
 
+  
   actualizarMiContacto(form: NgForm): any {
+    if (form.invalid) {
+      return 'Formulario no válido';
+    }
     this.contacto = {
       id_contacto: form.value.idContacto,
       email: form.value.email,

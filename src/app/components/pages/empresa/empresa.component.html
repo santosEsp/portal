@@ -11,7 +11,6 @@
               </svg>
             Agregar empresa
         </button>
-
             <button class="btn estilosBotones estilosBotonesHover mt-4 mr-4 dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi
             bi-download" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -25,23 +24,17 @@
     </svg>
             Exportar empresas
             </button>
-
             <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
                 <button (click)="exportarEmpresas()" class="dropdown-item estilosBotonesHover" type="button">Todas las empresas</button>
                 <button (click)="ExportarTodasMisEmpresas()" class="dropdown-item estilosBotonesHover" type="button">Mis empresas</button>
             </div>
-
         </div>
-
         <div>
-
             <div class="container-fluid">
                 <span class="encabezado">Empresas</span>
                 <br>
                 <br>
-
             </div>
-
             <!--Inicio del formulario modal agregar empresa-->
             <div class="modal fade" data-backdrop="static" data-keyboard="false" id="modalAgregarEmpresa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -56,38 +49,25 @@
                         </div>
                         <div class="modal-body">
                             <form (ngSubmit)="agregarEmpresa(f)" #f="ngForm">
-
-
-
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Nombre de
                                     la empresa </label>
-                                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="empresa.nombre" required minlength="5" />
-
-                                    <small *ngIf="f.submitted &&
-                                                f.controls['nombre'].errors" class="text-danger">
+                                    <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="empresa.nombre" required minlength="5" maxlength="50" />
+                                    <small *ngIf="f.submitted && f.controls['nombre'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
-
                                 </div>
-
-
-
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Propietario de registro</label>
-                                    <input type="text" class="form-control" id="pipeline" name="propietario" [(ngModel)]="propietario.propietario_registro" required disabled />
-
+                                    <input type="text" class="form-control" id="pipeline" name="propietario" [(ngModel)]="propietario.propietario_registro" required disabled minlength="3" maxlength="10" />
                                     <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
                                 </div>
-
-
-
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Industria</label>
                                     <div class="col-22">
-                                        <select class="form-control" id="industria" name="industria" [(ngModel)]="empresa.industria" required>
+                                        <select class="form-control" id="industria" name="industria" [(ngModel)]="empresa.industria" required minlength="3" maxlength="50">
                                         ><label for="industria">--seleccione--</label>
                                         <option>Contabilidad</option>
                                         <option>Aviación</option>
@@ -97,179 +77,110 @@
                                         <option>Ingeniería civil</option>
                                         <option>Bienes y raices</option>
                                     </select>
-
                                         <small *ngIf="f.submitted &&
                                                     f.controls['industria'].errors" class="text-danger">
                                         Campo obligatorio
                                     </small>
-
                                     </div>
                                 </div>
-
-
-
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Número de
                                     teléfono</label>
-                                    <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="empresa.no_telefono" required minlength="8" />
-
+                                    <input type="text" class="form-control" id="telefono" name="telefono" [(ngModel)]="empresa.no_telefono" required minlength="8" maxlength="15" />
                                     <small *ngIf="f.submitted &&
                                                 f.controls['telefono'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
                                 </div>
-
-
-
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Tipo</label>
                                     <div class="col-22">
-                                        <select class="form-control" id="tipo" name="tipo" [(ngModel)]="empresa.tipo_cliente" required>
-
+                                        <select class="form-control" id="tipo" name="tipo" [(ngModel)]="empresa.tipo_cliente" required minlength="3" maxlength="20">
                                         <option>Cliente potencial</option>
                                         <option>Socio</option>
                                         <option>Revendedor</option>
                                         <option>Proveedor</option>
                                         <option>Otra</option>
                                     </select>
-
-                                        <small *ngIf="f.submitted &&
-                                                    f.controls['tipo'].errors" class="text-danger">
+                                        <small *ngIf="f.submitted && f.controls['tipo'].errors" class="text-danger">
                                         Campo obligatorio
                                     </small>
                                     </div>
                                 </div>
-
-
-
-
-
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Ciudad</label>
-                                    <input type="text" class="form-control" id="ciudad" name="ciudad" [(ngModel)]="empresa.ciudad" required />
-
+                                    <input type="text" class="form-control" id="ciudad" name="ciudad" [(ngModel)]="empresa.ciudad" required minlength="3" maxlength="50" />
                                     <small *ngIf="f.submitted &&
                                                 f.controls['ciudad'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
                                 </div>
-
-
-
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Estado o
-                                    región</label>
-                                    <input type="text" class="form-control" id="etapa" name="estado" [(ngModel)]="empresa.estado_region" required />
-
+                                    <label for="recipient-name" class="col-form-label">Estado o región</label>
+                                    <input type="text" class="form-control" id="etapa" name="estado" [(ngModel)]="empresa.estado_region" required minlength="3" maxlength="50" />
                                     <small *ngIf="f.submitted &&
                                                 f.controls['estado'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
                                 </div>
-
-
-
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Código
-                                    postal</label>
-                                    <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="empresa.codigo_postal" required />
-
-                                    <small *ngIf="f.submitted &&
-                                                f.controls['codigo'].errors" class="text-danger">
+                                    <label for="recipient-name" class="col-form-label">Código postal</label>
+                                    <input type="text" class="form-control" id="codigo" name="codigo" [(ngModel)]="empresa.codigo_postal" required minlength="1" maxlength="6" />
+                                    <small *ngIf="f.submitted && f.controls['codigo'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
                                 </div>
-
-
-
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Número de
-                                    empleados</label>
-                                    <input type="text" class="form-control" id="empleados" name="empleados" [(ngModel)]="empresa.no_empleados" required />
-
-                                    <small *ngIf="f.submitted &&
-                                                f.controls['empleados'].errors" class="text-danger">
-                                    Campo obligatorio
-                                </small>
-
-                                </div>
-
-
-
-                                <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Ingresos
-                                    anuales</label>
-                                    <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="empresa.ingresos_anuales" required />
-
-                                    <small *ngIf="f.submitted &&
-                                                f.controls['ingresos'].errors" class="text-danger">
+                                    <label for="recipient-name" class="col-form-label">Número de empleados</label>
+                                    <input type="text" class="form-control" id="empleados" name="empleados" [(ngModel)]="empresa.no_empleados" required minlength="2" maxlength="10" />
+                                    <small *ngIf="f.submitted && f.controls['empleados'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
                                 </div>
-
-
-
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Zona
-                                    horaria</label>
-                                    <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="empresa.zona_horaria" required />
-
-                                    <small *ngIf="f.submitted &&
-                                                f.controls['zona'].errors" class="text-danger">
+                                    <label for="recipient-name" class="col-form-label">Ingresos anuales</label>
+                                    <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="empresa.ingresos_anuales" required minlength="5" max="20" />
+                                    <small *ngIf="f.submitted && f.controls['ingresos'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
                                 </div>
-
-
+                                <div class="form-group">
+                                    <label for="recipient-name" class="col-form-label">Zona horaria</label>
+                                    <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="empresa.zona_horaria" required minlength="10" maxlength="50" />
+                                    <small *ngIf="f.submitted && f.controls['zona'].errors" class="text-danger">
+                                    Campo obligatorio
+                                </small>
+                                </div>
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Descripción</label>
-                                    <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="empresa.descripcion" required />
-
-
-                                    <small *ngIf="f.submitted &&
-                                                f.controls['descripcion'].errors" class="text-danger">
+                                    <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="empresa.descripcion" required minlength="10" maxlength="50" />
+                                    <small *ngIf="f.submitted && f.controls['descripcion'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
                                 </div>
-
-
-
                                 <div class="form-group">
-                                    <label for="recipient-name" class="col-form-label">Página
-                                    corporativa</label>
-                                    <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="empresa.pagina_corporativa" required />
-
-                                    <small *ngIf="f.submitted &&
-                                                f.controls['pagina'].errors" class="text-danger">
+                                    <label for="recipient-name" class="col-form-label">Página corporativa</label>
+                                    <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="empresa.pagina_corporativa" required minlength="5" maxlength="50" />
+                                    <small *ngIf="f.submitted && f.controls['pagina'].errors" class="text-danger">
                                     Campo obligatorio
                                 </small>
                                 </div>
-
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn
-                                                estilosBotonesHover
-                                                estilosBotones">
+                                    <button type="submit" class="btn estilosBotonesHover estilosBotones">
                                     Crear
                                 </button>
-                                    <button type="submit" class="btn
-                                                estilosBotonesHover
-                                                estilosBotones">
+                                    <button type="submit" class="btn estilosBotonesHover estilosBotones">
                                     Crear y agregar otra
                                 </button>
-                                    <button (click)="vaciarFormulario()" class="btn
-                                                estilosBotonesHover
-                                                estilosBotones" data-dismiss="modal">
+                                    <button (click)="vaciarFormulario()" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
                                     Cancelar
                                 </button>
                                 </div>
-
                             </form>
                         </div>
-
                     </div>
                 </div>
             </div>
-
         </div>
         <!--Fin formulario crear contacto-->
 
@@ -539,12 +450,10 @@
                 <div class="modal-body">
                     <form (ngSubmit)="actualizarEmpresa(fEditarEmpresa)" #fEditarEmpresa="ngForm">
 
-
-
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Nombre de
                                     la empresa </label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="editarEmpresa.nombre" required minlength="4" />
+                            <input type="text" class="form-control" id="nombre" name="nombre" [(ngModel)]="editarEmpresa.nombre" required minlength="4" maxlength="50" />
 
                             <small *ngIf="fEditarEmpresa.submitted &&
                                                 fEditarEmpresa.controls['nombre'].errors" class="text-danger">
@@ -556,7 +465,7 @@
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Propietario de registro</label>
-                            <input type="text" class="form-control" id="propietario" name="propietarioVista" [(ngModel)]="editarEmpresa.propietario_registro" required minlength="5" disabled />
+                            <input type="text" class="form-control" id="propietario" name="propietarioVista" [(ngModel)]="editarEmpresa.propietario_registro" required minlength="3" maxlength="10" disabled />
                         </div>
 
                         <div class="form-group">
@@ -567,7 +476,7 @@
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Industria</label>
                             <div class="col-22">
-                                <select class="form-control" id="industria" name="industria" [(ngModel)]="editarEmpresa.industria" required>
+                                <select class="form-control" id="industria" name="industria" [(ngModel)]="editarEmpresa.industria" required minlength="3" maxlength="50">
                                         ><label for="industria">--seleccione--</label>
                                         <option>Contabilidad</option>
                                         <option>Aviación</option>
@@ -663,9 +572,8 @@
 
 
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Número de
-                                    empleados</label>
-                            <input type="text" class="form-control" id="empleados" name="empleados" [(ngModel)]="editarEmpresa.no_empleados" required />
+                            <label for="recipient-name" class="col-form-label">Número de empleados</label>
+                            <input type="text" class="form-control" id="empleados" name="empleados" [(ngModel)]="editarEmpresa.no_empleados" required minlength="2" maxlength="10" />
 
                             <small *ngIf="fEditarEmpresa.submitted &&
                                                 fEditarEmpresa.controls['empleados'].errors" class="text-danger">
@@ -677,9 +585,8 @@
 
 
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Ingresos
-                                    anuales</label>
-                            <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="editarEmpresa.ingresos_anuales" required />
+                            <label for="recipient-name" class="col-form-label">Ingresos anuales</label>
+                            <input type="text" class="form-control" id="ingresos" name="ingresos" [(ngModel)]="editarEmpresa.ingresos_anuales" required minlength="5" max="20" />
 
                             <small *ngIf="fEditarEmpresa.submitted &&
                                                 fEditarEmpresa.controls['ingresos'].errors" class="text-danger">
@@ -690,9 +597,8 @@
 
 
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Zona
-                                    horaria</label>
-                            <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="editarEmpresa.zona_horaria" required />
+                            <label for="recipient-name" class="col-form-label">Zona horaria</label>
+                            <input type="text" class="form-control" id="zona" name="zona" [(ngModel)]="editarEmpresa.zona_horaria" required minlength="10" maxlength="50" />
 
                             <small *ngIf="fEditarEmpresa.submitted &&
                                                 fEditarEmpresa.controls['zona'].errors" class="text-danger">
@@ -703,7 +609,7 @@
 
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Descripción</label>
-                            <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="editarEmpresa.descripcion" required />
+                            <input type="text" class="form-control" id="descripcion" name="descripcion" [(ngModel)]="editarEmpresa.descripcion" required minlength="10" maxlength="50" />
 
 
                             <small *ngIf="fEditarEmpresa.submitted &&
@@ -715,9 +621,8 @@
 
 
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Página
-                                    corporativa</label>
-                            <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="editarEmpresa.pagina_corporativa" required />
+                            <label for="recipient-name" class="col-form-label">Página corporativa</label>
+                            <input type="text" class="form-control" id="pagina" name="pagina" [(ngModel)]="editarEmpresa.pagina_corporativa" required minlength="5" maxlength="50" />
 
                             <small *ngIf="fEditarEmpresa.submitted &&
                                                 fEditarEmpresa.controls['pagina'].errors" class="text-danger">

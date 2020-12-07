@@ -3,7 +3,7 @@ export class ContactoModel{
     email: string;
     nombre: string;
     apellido: string;
-    propietario_registro: string;
+    propietario_registro?: string;
     departamento: string;
     telefono: string;
     fkempresa: number;
