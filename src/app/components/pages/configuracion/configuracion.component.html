@@ -19,9 +19,15 @@
                 <div class="card-body user-profile-card mb-3">
                     <table>
                         <tr>
-                            <th rowspan="2"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="user-profile-image rounded-circle" alt="" width="100" height="100" /></th>
+                            <th rowspan="2">
+                                <div class="contenedor">
+                                    <img src="../../assets/image/grisSecundario.png" class="user-profile-image rounded-circle" alt="" />
+                                    <div class="centrado colorIniciales">{{usuario.nombre | slice:0:1 | uppercase}}</div>
+
+                                </div>
+                            </th>
                             <th>
-                                <h4 class="m-3">ClickSoft</h4>
+                                <h4 class="m-3">{{usuario.nombre}}</h4>
                             </th>
                         </tr>
                         <tr>
@@ -46,16 +52,6 @@
                                   dd/mm/yyyy                          
                             </option>                    
                         </select>
-
-
-
-                        <br>
-                        <br>
-                        <br>
-                        <h5>Número de teléfono</h5>
-                        <div class="btn-group">
-                            <input style="width : 250px;" type="text" class="form-control" aria-label="Text input with dropdown button">
-                        </div>
                         <br>
                         <br>
                         <h5>Email</h5>
@@ -158,12 +154,13 @@
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Elige tu contraseña nueva</label>
-                        <input #input2 minlength="8" required type="password" class="form-control" id="con_nuevav1" name="con_nuevav1" [(ngModel)]="passActual.con_nueva">
+                        <input #input2 minlength="8" required type="password" class="form-control" id="con_nuevav1" name="con_nuevav1" [(ngModel)]="passActual.con_nueva" maxlength="30">
                         <span *ngIf="c.submitted && c.controls['con_nuevav1'].errors" class="text-danger animated fadeIn"><small>Al menos 8 letras</small></span>
+                        <span *ngIf="maxln===true" class="text-danger animated fadeIn"><small>Máximo 30 letras </small></span>
                     </div>
                     <div class="form-group">
                         <label for="recipient-name" class="col-form-label">Confirma tu contraseña nueva</label>
-                        <input #input3 (keyup)="cl(input2.value,input3.value)" minlength="8" required type="password" class="form-control" id="con_nuevav2" name="con_nuevav2">
+                        <input #input3 (keyup)="cl(input2.value,input3.value)" minlength="8" required type="password" class="form-control" id="con_nuevav2" name="con_nuevav2" maxlength="30">
                         <span *ngIf="c.submitted && c.controls['con_nuevav1'].errors" class="text-danger animated fadeIn"><small>Al menos 8 letras</small></span>
                         <span *ngIf="contrasenaIguales===false" class="text-danger animated fadeIn"><small>Contraseña no coincide</small></span>
                         <span *ngIf="contrasenaIguales===true" class="text-success animated fadeIn"><small>Contraseña correcta</small></span>

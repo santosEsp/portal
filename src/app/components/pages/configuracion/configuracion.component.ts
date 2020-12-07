@@ -30,7 +30,8 @@ export class ConfiguracionComponent implements OnInit {
   arrayEtapas: any[] = [];
   contrasenaActual :boolean;
   contrasenaIguales :boolean;
-
+  maxln : boolean;
+  maxln2 : boolean;
  
 
 
@@ -98,11 +99,13 @@ export class ConfiguracionComponent implements OnInit {
 
    cl(termino: string,termino2: string) {
       if(termino == termino2 && termino2.length > 0){
-          this.contrasenaIguales=true;
+          this.contrasenaIguales = true;
       }else {
-        this.contrasenaIguales=false;
+        this.contrasenaIguales = false;
       }
   }
+
+ 
 
   buscarContra(termino: string) {
     if (termino.length <= 0) {
@@ -118,12 +121,12 @@ export class ConfiguracionComponent implements OnInit {
       .subscribe(
         (resp: any) => {         
           //this.router.navigateByUrl('/negocios');
-          console.log('Contraseña validad');
-          this.contrasenaActual=true;
+          //console.log('Contraseña validad');
+          this.contrasenaActual = true;
         },
         (err) => {
-          console.log('Contraseña no validad');
-          this.contrasenaActual=false;
+          //console.log('Contraseña no validad');
+          this.contrasenaActual = false;
         }
    );
     // this.cargando = false;
