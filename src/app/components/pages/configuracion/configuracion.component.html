@@ -6,7 +6,7 @@
 
 <div class="row m-2">
     <div class="col-3">
-        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <div class="nav flex-column pill-nav" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <h5 class="ml-3">Tus preferencias</h5>
             <a class="nav-link active mt-3" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-profile" aria-selected="true">Información básica</a>
             <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-seguridad" role="tab" aria-controls="v-pills-settings" aria-selected="false">Seguridad</a>
@@ -19,47 +19,43 @@
                 <div class="card-body user-profile-card mb-3">
                     <table>
                         <tr>
-                            <th rowspan="2"><img src="https://bootdey.com/img/Content/avatar/avatar7.png" class="user-profile-image rounded-circle" alt="" width="100" height="100" /></th>
+                            <th rowspan="2">
+                                <div class="contenedor">
+                                    <img src="../../assets/image/grisSecundario.png" class="user-profile-image rounded-circle" alt="" />
+                                    <div class="centrado colorIniciales">{{usuario.nombre | slice:0:1 | uppercase}}</div>
+
+                                </div>
+                            </th>
                             <th>
-                                <h4 class="m-3">ClickSoft</h4>
+                                <h4 class="m-3">{{usuario.nombre}}</h4>
                             </th>
                         </tr>
                         <tr>
-                            <th><button type="button" class="btn btn-light">Super usuario</button></th>
+                            <th><button type="button" class="btn btn-light ml-3">{{rol}}</button></th>
                         </tr>
                     </table>
                     <br>
                     <div class="form-group">
                         <h5>Idioma</h5>
-                        <select class="form-group" style="width : 250px;">
-                            <option>Seleciona una opción</option>
-                            <option>Español</option>
-                            <option>Ingles</option>
+                        <select class="form-control" style="width: 250px;">
+                            <option  > 
+                                Español                     
+                            </option>                    
                         </select>
+
                         <br>
                         <br>
                         <h5>Formato de fecha y número</h5>
-                        <select style="width : 250px;">
-                            <option>Seleciona una opción</option>
-                            <option>México y Centroamérica</option>
-                            <option>América del Sur</option>
+
+                        <select class="form-control" style="width: 250px;">
+                            <option>    
+                                  dd/mm/yyyy                          
+                            </option>                    
                         </select>
                         <br>
                         <br>
-                        <br>
-                        <h5>Número de teléfono</h5>
-                        <div class="btn-group">
-                            <select style="width : 75px;">
-                                <option>México</option>
-                                <option>EUA</option>
-                                <option>Canada</option>
-                            </select>
-                            <input style="width : 175px;" type="text" class="form-control" aria-label="Text input with dropdown button">
-                        </div>
-                        <br>
-                        <br>
                         <h5>Email</h5>
-                        <input disabled style="width : 250px;" type="email" class="form-control" id="correo_actual" name="correo_actual" required email [(ngModel)]="correo.correo_actual">
+                        <input disabled style="width : 250px;" type="email" class="form-control" id="correo_actual" name="correo_actual" required email value="{{usuario.email}}">
 
                     </div>
 
@@ -69,25 +65,15 @@
                 <h3>Seguridad</h3>
                 <br>
                 <h5>Dirección de correo</h5>
-                <input type="text" class="form-control" style="width : 400px;">
-                <br>
-                <button style="width : 300px; " type="button" class="btn btn-outline-primary margenBoton" data-toggle="modal" data-target="#edicorreo" data-whatever="@mdo"><svg width="1.2em" height="1.2em"
-                    viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd"
-                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                </svg>Editar dirección de correo</button>
-
-                <br>
+                <input type="text" class="form-control" style="width : 300px;" value="{{usuario.email}}" disabled>
                 <br>
                 <h5>Contraseña</h5>
-                <button style="width : 300px;" type="button" class="btn btn-outline-primary margenBoton" data-toggle="modal" data-target="#contra" data-whatever="@mdo"><svg width="1.2em" height="1.2em"
+                <button style="width : 300px;" type="button" class="btn btn-block estilosBotones estilosBotonesHover" data-toggle="modal" data-target="#edicontra" data-whatever="@mdo"><svg width="1.2em" height="1.2em"
                     viewBox="0 0 16 16" class="bi bi-plus" fill="currentColor"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
                         d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                </svg>Restablecer contraseña</button>
-                <h5>Restablecido por ultima vez el 1/10/2020</h5>
+                </svg>Cambiar contraseña</button>
 
             </div>
 
@@ -104,7 +90,6 @@
                                 <th scope="col">Nombre de la etapa</th>
                                 <th scope="col">Probabilidad de ganar</th>
                                 <th scope="col">Editar</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -149,78 +134,43 @@
         </div>
     </div>
 </div>
-<div class="modal fade " data-backdrop="static " data-keyboard="false " id="contra " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true ">
-    <div class="modal-dialog " role="document ">
-        <div class="modal-content ">
-            <div class="modal-header bg-primary ">
-                <h5 class="modal-title text-white " id="exampleModalLabel ">Restablecer contraseña
+<div class="modal fade" data-backdrop="static" data-keyboard="false" id="edicontra" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header bgCorp">
+                <h5 class="modal-title text-white" id="exampleModalLabel">Cambiar contraseña
                 </h5>
-                <button type="button " class="close " data-dismiss="modal " aria-label="Close ">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true ">&times;</span>
                             </button>
             </div>
-            <div class="modal-body ">
-                <form (ngSubmit)="onCon(c) " #c="ngForm">
-                    <div class="form-group ">
-                        <label for="recipient-name " class="col-form-label ">Ingresa tu contraseña actual</label>
-                        <input minlength="8 " required type="password " class="form-control " id="con_actual " name="con_actual " [(ngModel)]="contrasena.con_actual ">
-                        <span *ngIf="c.submitted && c.controls[ 'con_actual'].errors " class="text-danger animated fadeIn "><small>Al menos 8 letras</small></span>
+            <div class="modal-body">
+                <form (ngSubmit)="cambiarCon(c)" #c="ngForm">
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Ingresa tu contraseña actual</label>
+                        <input #input (keyup)="buscarContra(input.value)" minlength="8" color="#ff0000" required type="password" class="form-control" id="con_actual" name="con_actual">
+                        <span *ngIf="contrasenaActual===false" class="text-danger animated fadeIn"><small>Contraseña no coincide</small></span>
+                        <span *ngIf="contrasenaActual===true" class="text-success animated fadeIn"><small>Contraseña correcta</small></span>
                     </div>
-
-                    <div class="form-group ">
-                        <label for="recipient-name " class="col-form-label ">Elige tu contraseña nueva</label>
-                        <input minlength="8 " required type="password " class="form-control " id="con_nuevav1 " name="con_nuevav1 " [(ngModel)]="contrasena.con_nueva ">
-                        <span *ngIf="c.submitted && c.controls[ 'con_nuevav1'].errors " class="text-danger animated fadeIn "><small>Al menos 8 letras</small></span>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Elige tu contraseña nueva</label>
+                        <input #input2 minlength="8" required type="password" class="form-control" id="con_nuevav1" name="con_nuevav1" [(ngModel)]="passActual.con_nueva" maxlength="30">
+                        <span *ngIf="c.submitted && c.controls['con_nuevav1'].errors" class="text-danger animated fadeIn"><small>Al menos 8 letras</small></span>
+                        <span *ngIf="maxln===true" class="text-danger animated fadeIn"><small>Máximo 30 letras </small></span>
                     </div>
-                    <div class="form-group ">
-                        <label for="recipient-name " class="col-form-label ">Confirma tu contraseña nueva</label>
-                        <input minlength="8 " required type="password " class="form-control " id="con_nuevav2 " name="con_nuevav2 " [(ngModel)]="contrasena.con_nueva ">
-                        <span *ngIf="c.submitted && c.controls[ 'con_nuevav2'].errors " class="text-danger animated fadeIn "><small>Al menos 8 letras</small></span>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">Confirma tu contraseña nueva</label>
+                        <input #input3 (keyup)="cl(input2.value,input3.value)" minlength="8" required type="password" class="form-control" id="con_nuevav2" name="con_nuevav2" maxlength="30">
+                        <span *ngIf="c.submitted && c.controls['con_nuevav1'].errors" class="text-danger animated fadeIn"><small>Al menos 8 letras</small></span>
+                        <span *ngIf="contrasenaIguales===false" class="text-danger animated fadeIn"><small>Contraseña no coincide</small></span>
+                        <span *ngIf="contrasenaIguales===true" class="text-success animated fadeIn"><small>Contraseña correcta</small></span>
                     </div>
-                    <div class="modal-footer ">
-                        <button type="button " class="btn btn-outline-primary ">Restlabecer contraseña</button>
-                        <button type="button " class="btn btn-outline-primary " data-dismiss="modal ">Cancelar</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<div class="modal fade " data-backdrop="static " data-keyboard="false " id="edicorreo " tabindex="-1 " role="dialog " aria-labelledby="exampleModalLabel " aria-hidden="true ">
-    <div class="modal-dialog " role="document ">
-        <div class="modal-content ">
-            <div class="modal-header bg-primary ">
-                <h5 class="modal-title text-white " id="exampleModalLabel ">Editar dirección de correo
-                </h5>
-                <button type="button " class="close " data-dismiss="modal " aria-label="Close ">
-                                <span aria-hidden="true ">&times;</span>
-                            </button>
-            </div>
-            <div class="modal-body ">
-                <form (ngSubmit)="onCorreo(f) " #f="ngForm">
-                    <div class="form-group ">
-
-                        <label for="recipient-name " class="col-form-label ">Ingresa tu correo actual</label>
-
-                        <input type="email " class="form-control " id="correo_actual " name="correo_actual " required email [(ngModel)]="correo.correo_actual ">
-                        <span *ngIf="f.submitted && f.controls[ 'correo_actual'].errors " class="text-danger animated fadeIn "><small>El correo es obligatorio</small></span>
-                    </div>
-
-                    <div class="form-group ">
-                        <label for="recipient-name " class="col-form-label ">Elige tu correo nuevo</label>
-
-                        <input type="text " class="form-control " id="correo " required email name="correo_nuevo " [(ngModel)]="correo.correo_nuevo ">
-                        <span *ngIf="f.submitted && f.controls[ 'correo_nuevo'].errors " class="text-danger animated fadeIn "><small>El correo es obligatorio</small> </span>
-                    </div>
-                    <div class="modal-footer ">
-                        <button type="button " class="btn btn-outline-primary ">Guardar correo</button>
-                        <button type="button " class="btn btn-outline-primary " data-dismiss="modal ">Cancelar</button>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn estilosBotones estilosBotonesHover" [disabled]="contrasenaIguales===false || contrasenaActual===false">Cambiar contraseña</button>
+                        <button type="button" class="btn estilosBotones estilosBotonesHover" data-dismiss="modal">Cancelar</button>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>

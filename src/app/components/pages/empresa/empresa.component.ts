@@ -170,14 +170,23 @@ export class EmpresaComponent implements OnInit {
     })
       .then((borrar) => {
         if (borrar.isConfirmed) {
-          this._empresaService.eliminarEmpresa(empresa.id_empresa).subscribe(() => {
-            Swal.fire(
-              'Eliminado',
+          this._empresaService.eliminarEmpresa(empresa.id_empresa).subscribe(
+            (resp: any) => {
+            Swal.fire('Eliminado',
               'Empresa eliminada',
               'success'
             );
             this.cargarEmpresas();
-          });
+          },(error): any => {
+            if (error.error.error.name === 'SequelizeForeignKeyConstraintError') {
+              Swal.fire({
+                title: 'No puede eliminar a esta empresa',
+                text: 'Ya que tiene varios eventos asignados',
+                icon: 'error',
+              });
+            }
+           } 
+          );
 
         }
       });

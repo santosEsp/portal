@@ -77,8 +77,7 @@ export class UsuariosComponent implements OnInit {
     usuarioLogeado = JSON.parse(localStorage.getItem('usuario'));
 
     if (usuario.id_usuario === usuarioLogeado.id_usuario) {
-      Swal.fire('No se puede eliminar',
-        'No se puede eliminar a sí mismo', 'error');
+      Swal.fire('No se puede eliminar','No se puede eliminar a sí mismo', 'error');
       return;
     }
     Swal.fire({
@@ -93,19 +92,34 @@ export class UsuariosComponent implements OnInit {
     })
       .then((borrar) => {
         if (borrar.isConfirmed) {
-          this._usuarioService.eliminarUsuario(usuario.id_usuario).subscribe(() => {
-            Swal.fire(
-              'Eliminado',
-              'Usuario eliminado',
-              'success'
-            );
+          this._usuarioService.eliminarUsuario(usuario.id_usuario).subscribe(
+            (resp: any) => {
+            Swal.fire('Eliminado','Usuario eliminado', 'success' );
             this.cargarUsuarios();
-          });
+          },(error): any => {
+            if (error.error.error.name === 'SequelizeForeignKeyConstraintError') {
+              Swal.fire({
+                title: 'No puede eliminar a este usuario',
+                text: 'Ya que tiene varios eventos asignados',
+                icon: 'error',
+              });
+            }
+           }
+          );
         }
       });
   }
 
   actualizarUsuario(usuario: UsuarioModel): any {
+    console.log('usuario --->',usuario);
+    if(usuario.nombre.trim() =="" || usuario.email.trim() ==""){
+      Swal.fire({
+        title: 'Existen campos vacios',
+        text: 'Verifique los datos ingresados',
+        icon: 'error',
+      });
+        return ;
+    }
     this._usuarioService.actualizarUsuario(usuario).subscribe();
   }
 
