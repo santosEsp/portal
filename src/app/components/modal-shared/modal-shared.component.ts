@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 // Importación de modelos
@@ -19,7 +19,7 @@ import { EtapasNegociosService } from '../../services/etapasNegocios/etapas-nego
 import { NegociosContactosService } from '../../services/negociosContactos/negocios-contactos.service';
 
 // importando clase sw informacion.component.ts
-
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -47,12 +47,20 @@ export class ModalSharedComponent implements OnInit {
   idContacto: string;
   etapas: any[] = [];
 
+  // ViewChilds para cerrar los modales 
+
+
+  @ViewChild('closeModalNota') closeModalNota;
+  @ViewChild('closeModalCorreo') closeModalCorreo;
+  @ViewChild('closeModalNegocio') closeModalNegocio;
+  @ViewChild('closeModalReunion') closeModalReunion;
+  @ViewChild('closeModalLlamada') closeModalLlamada;
   constructor(private rutaActiva: ActivatedRoute, private _notasService: NotasService, private _contactoService: ContactoService, private _registrarReunion: RegistrarReunionService,
     private _llamadaService: LlamadasService, private _correosService: RegistrarCorreoService, private _etapasService: EtapasNegociosService,
     private _negocioService: NegociosContactosService) {
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
     this.miId = this.miUsuario['id_usuario'];
-   
+
   }
 
   ngOnInit(): void {
@@ -66,7 +74,7 @@ export class ModalSharedComponent implements OnInit {
     this.cargaNombreContacto();
     this.cargarEtapas();
 
-    
+
   }
 
   registrarNota(form: NgForm): any {
@@ -78,8 +86,44 @@ export class ModalSharedComponent implements OnInit {
       fkusuario: this.miId,
       fkcontacto: this.idContacto
     };
-    this._notasService.crearNota(this.notaContacto).subscribe(() => {
-    });
+    Swal.showLoading();
+    this._notasService.crearNota(this.notaContacto).subscribe(
+      (resp: any) => {
+        Swal.fire({
+          title: 'Nota registrada',
+          text: 'Se ha registrado la nota correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              console.log('Clickeo OK');
+              this.closeModalNota.nativeElement.click();
+              form.resetForm();
+            }
+          });
+      },
+      (err: any) => {
+
+        Swal.fire({
+          title: 'No agregado',
+          text: 'Error al registrar nota',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
 
   cargaNombreContacto() {
@@ -101,8 +145,43 @@ export class ModalSharedComponent implements OnInit {
       descripcion: form.value.descripcionReunion,
       fkusuario: this.miId
     };
-    this._registrarReunion.registrarReunion(this.reunionContacto).subscribe(() => {
-    });
+    this._registrarReunion.registrarReunion(this.reunionContacto).subscribe(
+      (resp: any) => {
+        Swal.fire({
+          title: 'Reunion registrado',
+          text: 'Se ha registrado la reunión correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              console.log('Clickeo OK');
+              this.closeModalReunion.nativeElement.click();
+              form.resetForm();
+            }
+          });
+      },
+      (err: any) => {
+
+        Swal.fire({
+          title: 'No registrado',
+          text: 'Error al registrar correo',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
 
   registrarLlamada(form: NgForm): any {
@@ -117,8 +196,43 @@ export class ModalSharedComponent implements OnInit {
       descripcion: form.value.descripcionLlamada,
       fkusuario: this.miId
     };
-    this._llamadaService.crearLlamada(this.llamadaContacto).subscribe(() => {
-    });
+    this._llamadaService.crearLlamada(this.llamadaContacto).subscribe(
+      (resp: any) => {
+        Swal.fire({
+          title: 'Llamada registrada',
+          text: 'Se ha registrado la llamada correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              console.log('Clickeo OK');
+              this.closeModalLlamada.nativeElement.click();
+              form.resetForm();
+            }
+          });
+      },
+      (err: any) => {
+
+        Swal.fire({
+          title: 'No registrado',
+          text: 'Error al registrar correo',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
 
   registrarCorreo(form: NgForm): any {
@@ -133,8 +247,43 @@ export class ModalSharedComponent implements OnInit {
       descripcion: form.value.descripcionCorreo,
 
     };
-    this._correosService.registrarCorreo(this.correoContacto).subscribe(() => {
-    });
+    this._correosService.registrarCorreo(this.correoContacto).subscribe(
+      (resp: any) => {
+        Swal.fire({
+          title: 'Correo registrado',
+          text: 'Se ha registrado el correo correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              console.log('Clickeo OK');
+              this.closeModalCorreo.nativeElement.click();
+              form.resetForm();
+            }
+          });
+      },
+      (err: any) => {
+
+        Swal.fire({
+          title: 'No registrado',
+          text: 'Error al registrar correo',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
 
   registrarNegocio(form: NgForm): any {
@@ -150,8 +299,43 @@ export class ModalSharedComponent implements OnInit {
       fkcontacto: parseInt(this.idContacto),
       fkusuario: parseInt(this.miId)
     };
-    this._negocioService.crearNegocio(this.negocioContacto).subscribe(() => {
-    });
+    this._negocioService.crearNegocio(this.negocioContacto).subscribe(
+      (resp: any) => {
+        Swal.fire({
+          title: 'Negocio registrado',
+          text: 'Se ha registrado el negocio correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              console.log('Clickeo OK');
+              this.closeModalNegocio.nativeElement.click();
+              form.resetForm();
+            }
+          });
+      },
+      (err: any) => {
+
+        Swal.fire({
+          title: 'No registrado',
+          text: 'Error al registrar correo',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
 
   cargarEtapas(): any {

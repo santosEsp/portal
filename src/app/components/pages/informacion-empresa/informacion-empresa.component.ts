@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 // Rutas activas
@@ -58,6 +58,14 @@ export class InformacionEmpresaComponent implements OnInit {
 
   ruta: { tipo: string, id: string };
   etapas: any[] = [];
+
+
+  @ViewChild('closeModalNota') closeModalNota;
+  @ViewChild('closeModalReunion') closeModalReunion;
+  @ViewChild('closeModalLlamada') closeModalLlamada;
+  @ViewChild('closeModalCorreo') closeModalCorreo;
+  @ViewChild('closeModalNegocio') closeModalNegocio;
+  @ViewChild('closeModalEditarNegocio') closeModalEditarNegocio;
   constructor(private rutaActiva: ActivatedRoute, private _empresaService: EmpresaService,
     private _contactoService: ContactoService,
     private _notasEmpresasService: NotasEmpresasService, private _reunionesEmpresas: ReunionesEmpresasService,
@@ -164,8 +172,45 @@ export class InformacionEmpresaComponent implements OnInit {
       fkusuario: this.miId,
       fkempresa: this.idEmpresa
     };
-    this._notasEmpresasService.crearNota(this.notaEmpresa).subscribe(() => {
-    });
+    this._notasEmpresasService.crearNota(this.notaEmpresa).subscribe(
+      (resp: any) => {
+        Swal.fire({
+          title: 'Nota registrada',
+          text: 'Se ha registrado la nota correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              this.closeModalNota.nativeElement.click();
+              this.cargarNotasEmpresas();
+              form.resetForm();
+            }
+          });
+      },
+      (err: any) => {
+
+        Swal.fire({
+          title: 'No registrado',
+          text: 'Error al registrar nota',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
 
   registrarCorreo(form: NgForm): any {
@@ -182,8 +227,45 @@ export class InformacionEmpresaComponent implements OnInit {
     };
 
     console.log('Info correo Emp', this.correoEmpresa);
-    this._correosEmpresas.registrarCorreo(this.correoEmpresa).subscribe(() => {
-    });
+    this._correosEmpresas.registrarCorreo(this.correoEmpresa).subscribe(
+      (resp: any) => {
+        Swal.fire({
+          title: 'Correo registrado',
+          text: 'El correo se ha registrado correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              this.closeModalCorreo.nativeElement.click();
+              this.cargarCorreosEmpresas();
+              form.resetForm();
+            }
+          });
+      },
+      (err: any) => {
+
+        Swal.fire({
+          title: 'No registrado',
+          text: 'Error al registrar reunión',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
 
   registrarLlamada(form: NgForm): any {
@@ -200,8 +282,45 @@ export class InformacionEmpresaComponent implements OnInit {
     };
 
     console.log('Datos llamada', this.llamadaEmpresa);
-    this._llamadasEmpresa.crearLlamada(this.llamadaEmpresa).subscribe(() => {
-    });
+    this._llamadasEmpresa.crearLlamada(this.llamadaEmpresa).subscribe(
+      (resp: any) => {
+        Swal.fire({
+          title: 'Llamada registrada',
+          text: 'Se ha registrado la llamada correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok', 
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              this.closeModalLlamada.nativeElement.click();
+              this.cargarLlamadasEmpresas();
+              form.resetForm();
+            }
+          });
+      },
+      (err: any) => {
+
+        Swal.fire({
+          title: 'No registrado',
+          text: 'Error al registrar llamada',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
 
   registrarReunion(form: NgForm): any {
@@ -220,16 +339,53 @@ export class InformacionEmpresaComponent implements OnInit {
 
     console.log('Reunion empresa', this.reunionEmpresa);
 
-    this._reunionesEmpresas.registrarReunion(this.reunionEmpresa).subscribe(() => {
-    });
+    this._reunionesEmpresas.registrarReunion(this.reunionEmpresa).subscribe(
+      (resp: any) => {
+        Swal.fire({
+          title: 'Reunión registrado',
+          text: 'Se ha registrado la reunión correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              this.closeModalReunion.nativeElement.click();
+              this.cargarReunionesEmpresas();
+              form.resetForm();
+            }
+          });
+      },
+      (err: any) => {
+
+        Swal.fire({
+          title: 'No registrado',
+          text: 'Error al registrar reunión',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
-  
+
 
   registrarNegocio(form: NgForm): any {
     if (form.invalid) {
       return 'Formulario no válido';
     }
-    
+
     this.negocioEmpresa = {
       nombre_negocio: form.value.nombreNegocio,
       pipeline: form.value.pipelineNegocio,
@@ -239,15 +395,52 @@ export class InformacionEmpresaComponent implements OnInit {
       fkempresa: parseInt(this.idEmpresa),
       fkusuario: parseInt(this.miId)
     };
-    console.log('Negocio COMP',this.negocioEmpresa);
-    this._negociosEmpresas.crearNegocio(this.negocioEmpresa).subscribe(() => {
-    });
+    console.log('Negocio COMP', this.negocioEmpresa);
+    this._negociosEmpresas.crearNegocio(this.negocioEmpresa).subscribe(
+      (resp: any) => {
+        Swal.fire({
+          title: 'Negocio registrado',
+          text: 'Se ha registrado el negocio correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              this.closeModalNegocio.nativeElement.click();
+              this.cargarNegociosDeEmpresa();
+              form.resetForm();
+            }
+          });
+      },
+      (err: any) => {
+
+        Swal.fire({
+          title: 'No registrado',
+          text: 'Error al registrar negocio',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
 
   cargarNegociosDeEmpresa(): any {
     this._negociosEmpresas.cargarNegociosConEmpresa(this.idEmpresa).subscribe(listaNegocios => {
       this.negociosEmpresa = listaNegocios;
-      console.log('Negocios empresa',this.negociosEmpresa);
+      console.log('Negocios empresa', this.negociosEmpresa);
     });
   }
 
@@ -268,7 +461,9 @@ export class InformacionEmpresaComponent implements OnInit {
       confirmButtonColor: '#d33',
       cancelButtonColor: '#E5B53A',
       confirmButtonText: 'Eliminar',
-      cancelButtonText: 'Cancelar'
+      cancelButtonText: 'Cancelar',
+      allowOutsideClick: false,
+      allowEscapeKey: false
     })
       .then((borrar) => {
         if (borrar.isConfirmed) {
@@ -285,7 +480,7 @@ export class InformacionEmpresaComponent implements OnInit {
   }
 
   cargarInfoAlForm(datos: any) {
-    console.log('Datos al form',datos);
+    console.log('Datos al form', datos);
     this.editarNegocio.id_negocio = datos.id_negocio;
     this.editarNegocio.nombre_negocio = datos.nombre_negocio;
     this.editarNegocio.pipeline = datos.pipeline;
@@ -308,6 +503,44 @@ export class InformacionEmpresaComponent implements OnInit {
     }
 
     console.log('EditarNegocio', this.negocioEmpresa);
-    this._negociosEmpresas.actualizarNegocio(this.negocioEmpresa).subscribe();
+    this._negociosEmpresas.actualizarNegocio(this.negocioEmpresa).subscribe(
+      (resp: any) => {
+        Swal.fire({
+          title: 'Negocio editado',
+          text: 'Se ha editado el negocio correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              this.closeModalEditarNegocio.nativeElement.click();
+              this.cargarNegociosDeEmpresa();
+              form.resetForm();
+            }
+          });
+      },
+      (err: any) => {
+
+        Swal.fire({
+          title: 'No registrado',
+          text: 'Error al registrar negocio',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false,
+          allowEscapeKey: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
 }

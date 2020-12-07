@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild } from '@angular/core';
 import { NotaModel } from '../../../models/nota.model';
 import { NgForm } from '@angular/forms';
 
@@ -13,8 +13,8 @@ import { RegistrarCorreoModel } from '../../../models/registrarCorreo.model';
 import { RegistrarLlamadaModel } from '../../../models/registrarLlamada.model';
 import { RegistrarReunionModel } from '../../../models/registrarReunion.model';
 import { NegocioModel } from '../../../models/negocio.model';
-
 import { EnviarCorreoModel } from '../../../models/enviarCorreo.model';
+
 // Importacion de servicios para contactos
 import { ContactoService } from '../../../services/contactos/contacto.service';
 import { NotasService } from '../../../services/notas/notas.service';
@@ -36,7 +36,6 @@ import { EnviarCorreoService } from '../../../services/enviarCorreo/enviar-corre
 export class InformacionComponent implements OnInit {
 
   // Variables, modelos y arrays para obtener info de contactos
-
   correo = new RegistrarCorreoModel();
   llamada = new RegistrarLlamadaModel();
   reunion = new RegistrarReunionModel();
@@ -58,12 +57,17 @@ export class InformacionComponent implements OnInit {
   fkpropietarioContacto: number;
   miUsuario: string;
   miId: string;
-  pass = 'nHrG_SEA_2020';
+  
   guardaMiEmail: string;
   ruta: { tipo: string, id: string };
   etapas: any[] = [];
-
   enviado: string;
+
+  // viewchilds para cerrar modales
+
+  @ViewChild('closeEditarNegocio') closeEditarNegocio;
+  @ViewChild('closeModalEnviarCorreo') closeModalEnviarCorreo;
+  
   constructor(private rutaActiva: ActivatedRoute, private _contactoService: ContactoService, private _empresaService: EmpresaService,
     private _registrarCorreoService: RegistrarCorreoService, private _notasService: NotasService,
     private _llamadasService: LlamadasService, private _registrarReunionService: RegistrarReunionService,
@@ -197,7 +201,43 @@ export class InformacionComponent implements OnInit {
       fkcontacto: parseInt(this.idContacto),
       fkusuario: parseInt(this.miId)
     }
-    this._negociosContactoService.actualizarNegocio(this.negocio).subscribe();
+    this._negociosContactoService.actualizarNegocio(this.negocio).subscribe(
+      (resp: any) => {
+        Swal.fire({
+          title: 'Actualizado',
+          text: 'Negocio actualizado correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              console.log('Clickeo OK');
+              this.closeEditarNegocio.nativeElement.click();
+              form.resetForm();
+            }
+          });
+      },
+      (err: any) =>{
+
+        Swal.fire({
+          title: 'No actualizado',
+          text: 'Error al actualizar negocio',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
 
   eliminarNegocio(datos: any): any {
@@ -241,7 +281,7 @@ export class InformacionComponent implements OnInit {
     }
     this.modeloCorreo = {
       remitenteEmail: formu.value.remitente,
-      remitentePass: this.pass,
+      
       remitenteNombre: this.miUsuario['nombre'],
       destinatario: formu.value.destinatarioEmail,
       descripcionCorreo: formu.value.descripcion,
@@ -252,6 +292,8 @@ export class InformacionComponent implements OnInit {
       title: 'Enviando Correo',
       text: 'Por favor espere, enviando correo',
       icon: 'info',
+      allowEscapeKey: false,
+      allowOutsideClick: false
     }),
       Swal.showLoading(),
       console.log('modeloCorreo:', this.modeloCorreo);
@@ -262,10 +304,13 @@ export class InformacionComponent implements OnInit {
           title: 'Correo enviado',
           text: 'Se ha enviado el correo',
           icon: 'success',
+        }).then((ok) => {
+          if (ok.isConfirmed) {
+            this.closeModalEnviarCorreo.nativeElement.click();
+          }
         });
       },
       (error): any => {
-
         Swal.close();
         Swal.fire({
           title: 'Error: ' + error.error.mensaje,

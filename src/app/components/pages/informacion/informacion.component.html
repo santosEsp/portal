@@ -69,16 +69,6 @@
                         </svg>
                     </button>
 
-                    <!--Boton 3: Programar reunion -->
-                    <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons circular" data-target="#moda" data-toggle="modal" title="Programar reunion">
-                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar2-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H2z"/>
-                            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5V4z"/>
-                            <path fill-rule="evenodd" d="M8 8a.5.5 0 0 1 .5.5V10H10a.5.5 0 0 1 0 1H8.5v1.5a.5.5 0 0 1-1 0V11H6a.5.5 0 0 1 0-1h1.5V8.5A.5.5 0 0 1 8 8z"/>
-                          </svg>
-                    </button>
-
-
 
                     <!--Boton 5: Lista de acciones  -->
                     <button type="button" class="btn estilosBotonesHover estilosBotones paddingButtons circular dropdown" title="Registrar Reunión" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Registrar reunión">
@@ -471,7 +461,7 @@
                     <h5 class="modal-title text-white" id="exampleModalLabel">
                         Editar negocio
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" #closeEditarNegocio class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                 </div>
@@ -522,7 +512,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="recipient-name" class="col-form-label">Fecha de cierre</label>
+                            <label for="recipient-name" class="col-form-label">Fecha de cierre: {{editarNegocio.fcierre}}</label>
                             <input class="form-control" type="date" value="" id="cierreNegocio" name="cierreNegocio" required [(ngModel)]="editarNegocio.fcierre" />
                             <small *ngIf="fNegocio.submitted && fNegocio.controls['cierreNegocio'].errors " class="text-danger">
                                                     Campo obligatorio
@@ -556,7 +546,7 @@
                     <h5 class="modal-title text-white" id="exampleModalLabel">
                         Enviar correo
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" class="close" #closeModalEnviarCorreo data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
@@ -597,17 +587,6 @@
                                 <textarea class="form-control" rows="7" id="descripcion" name="descripcion" [(ngModel)]="modeloCorreo.descripcionCorreo" required></textarea>
                                 <small *ngIf="fEnviarCorreo.submitted && fEnviarCorreo.controls['descripcion'].errors" class="text-danger">Campo obligatorio </small>
                             </div>
-
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text" id="inputGroupFileAddon01">Adjuntos</span>
-                                </div>
-                                <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01">
-                                    <label class="custom-file-label" for="inputGroupFile01">Seleccionar archivo</label>
-                                </div>
-                            </div>
-
 
                             <div class="modal-footer">
                                 <button type="submit" class="btn estilosBotonesHover estilosBotones">

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login/login.service';
@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { UsuarioModel } from '../../models/usuarios.model';
 import { RecuperarPaswordModel } from '../../models/recuperarPassword.model';
 import { RecuperaPasswordService } from '../../services/recuperaPassword/recupera-password.service';
+
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,8 @@ export class LoginComponent implements OnInit {
 
   loginUser: UsuarioModel = new UsuarioModel();
   recuperaPasswordModel: RecuperarPaswordModel = new RecuperarPaswordModel();
+  @ViewChild('closebutton') closebutton;
+  
 
   recordarme = false;
   email: string;
@@ -83,7 +86,9 @@ export class LoginComponent implements OnInit {
         })
           .then((ok) => {
             if (ok.isConfirmed) {
-              console.log('Clickeo OK'); 
+              console.log('Clickeo OK');
+              this.closebutton.nativeElement.click();
+              form1.resetForm();
             }
           });
       },

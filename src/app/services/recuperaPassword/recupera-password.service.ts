@@ -12,7 +12,7 @@ export class RecuperaPasswordService {
   recuperarPass(correo: RecuperarPaswordModel): any {
 
     console.log('Esto recibo ppara enviar Service: ', correo);
-    let url = URL_SERVICIOS + '/recuperarPassword';
+    let url = URL_SERVICIOS + '/recuperarPassword/';
     return this.http.post(url, correo).pipe(
       map(
         (resp: any) => {

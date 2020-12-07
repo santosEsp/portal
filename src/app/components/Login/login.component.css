@@ -9,10 +9,10 @@
     /* Fijamos la imagen a la ventana para que no supere el alto de la ventana */
     /* background-attachment: fixed; */
     /* El fonde se re-escala automáticamente */
-    background-size: cover;
+    /* background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
-    -o-background-size: cover;
+    -o-background-size: cover; */
     background-size: cover;
     /* Color de fondo si la imagen no se encuentra o mientras se está cargando */
     /* background-color: rgb(56, 211, 185); */

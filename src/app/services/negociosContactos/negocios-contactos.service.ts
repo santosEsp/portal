@@ -56,12 +56,6 @@ export class NegociosContactosService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Negocio actualizado',
-              text: 'Actualizado correctamente',
-              icon: 'success',
-            });
-
             return resp.negocio;
           }
         )

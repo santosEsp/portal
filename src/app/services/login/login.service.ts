@@ -11,6 +11,7 @@ import { URL_SERVICIOS } from '../../config/config';
 export class LoginService {
   usuario: UsuarioModel;
   token: any;
+  rol: string;
   constructor(private http: HttpClient) {
 
   }
@@ -87,6 +88,16 @@ export class LoginService {
     // }
 
     return (this.token.length > 5) ? true : false;
+
+  }
+
+
+  rolAdmin(): boolean {
+    this.usuario = JSON.parse(localStorage.getItem('usuario'));
+    this.rol = this.usuario['rol'];
+    console.log('Rol obtenido LOgin service', this.rol);
+
+    return (this.rol === 'ADMIN') ? true : false;
 
   }
 }

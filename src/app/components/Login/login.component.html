@@ -1,12 +1,12 @@
-<div class="d-lg-flex  flex-column justify-content-center divAltura">
-    <div class="container topDivForm" style="width: 45vw; height: 55vh;">
+<div class=" d-sm-flex d-lg-flex d-xl-flex  flex-column justify-content-center divAltura">
+    <div class="container topDivForm " style="width: 550px; height: 55vh;">
 
 
         <img class="img-fluid rounded mx-auto d-block" src="../../assets/image/logoTransparente.png" alt="ClickSoft" width="48%" height="48%" />
 
 
         <form (ngSubmit)="login(f)" #f="ngForm">
-            <div class="container card colorFondo d-flex flex-column justify-content-around" style="width: 35vw; height: 45vh;">
+            <div class="container card colorFondo justify-content-around" style="width: 450px; height: 55vh;">
 
                 <div class="form-group mt-5 ml-2 mr-2">
                     <label for="email">Dirección de correo</label>
@@ -59,7 +59,7 @@
                     <h5 class="modal-title text-white" id="exampleModalLabel">
                         Recuperar contraseña
                     </h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <button type="button" #closebutton class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
                 </div>
@@ -67,7 +67,7 @@
                     <form (ngSubmit)="recupera(fr)" #fr="ngForm">
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Ingrese su correo electrónico</label>
-                            <input type="text" class="form-control" id="recuperaPassword" name="recuperaPassword" [(ngModel)]="recuperaPasswordModel.email" email required />
+                            <input type="text" class="form-control" #resetInput id="recuperaPassword" name="recuperaPassword" [(ngModel)]="recuperaPasswordModel.email" email required />
 
                             <small *ngIf="fr.submitted && fr.controls['recuperaPassword'].errors" class="text-danger ">
                                 Ingresa un correo válido
