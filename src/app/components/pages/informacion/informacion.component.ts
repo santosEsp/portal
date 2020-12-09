@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NotaModel } from '../../../models/nota.model';
 import { NgForm } from '@angular/forms';
 
@@ -28,6 +28,7 @@ import Swal from 'sweetalert2';
 import { NegociosContactosService } from '../../../services/negociosContactos/negocios-contactos.service';
 import { EtapasNegociosService } from '../../../services/etapasNegocios/etapas-negocios.service';
 import { EnviarCorreoService } from '../../../services/enviarCorreo/enviar-correo.service';
+import { ConfigurarCorreoService } from '../../../services/configurarCorreo/configurar-correo.service';
 @Component({
   selector: 'app-perfil',
   templateUrl: './informacion.component.html',
@@ -57,23 +58,26 @@ export class InformacionComponent implements OnInit {
   fkpropietarioContacto: number;
   miUsuario: string;
   miId: string;
-  
+
   guardaMiEmail: string;
   ruta: { tipo: string, id: string };
   etapas: any[] = [];
   enviado: string;
 
+  emailConfigurado: boolean;
+
   // viewchilds para cerrar modales
 
   @ViewChild('closeEditarNegocio') closeEditarNegocio;
   @ViewChild('closeModalEnviarCorreo') closeModalEnviarCorreo;
-  
+
   constructor(private rutaActiva: ActivatedRoute, private _contactoService: ContactoService, private _empresaService: EmpresaService,
     private _registrarCorreoService: RegistrarCorreoService, private _notasService: NotasService,
     private _llamadasService: LlamadasService, private _registrarReunionService: RegistrarReunionService,
     private _usuarioService: UsuarioService, private router: Router,
     private _negociosContactoService: NegociosContactosService,
-    private _etapasService: EtapasNegociosService, private _enviarCorreoService: EnviarCorreoService
+    private _etapasService: EtapasNegociosService, private _enviarCorreoService: EnviarCorreoService,
+    private _configCorreoService: ConfigurarCorreoService
   ) {
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
     this.miId = this.miUsuario['id_usuario'];
@@ -112,8 +116,9 @@ export class InformacionComponent implements OnInit {
       this.cargarLlamadas();
       this.cargarReuniones();
       this.cargarNegociosDeContacto();
-      Swal.close();
       this.cargarEtapas();
+      this.verificaConfig();
+      Swal.close();
     }
     else {
       Swal.fire(
@@ -220,7 +225,7 @@ export class InformacionComponent implements OnInit {
             }
           });
       },
-      (err: any) =>{
+      (err: any) => {
 
         Swal.fire({
           title: 'No actualizado',
@@ -281,7 +286,7 @@ export class InformacionComponent implements OnInit {
     }
     this.modeloCorreo = {
       remitenteEmail: formu.value.remitente,
-      
+
       remitenteNombre: this.miUsuario['nombre'],
       destinatario: formu.value.destinatarioEmail,
       descripcionCorreo: formu.value.descripcion,
@@ -314,7 +319,7 @@ export class InformacionComponent implements OnInit {
         Swal.close();
         Swal.fire({
           title: 'Error: ' + error.error.mensaje,
-          text: 'Veirifique que todo esté correcto',
+          text: 'Verifique que todo esté correcto',
           icon: 'error',
         });
         // if (error.error.errors.name === 'SequelizeUniqueConstraintError') {
@@ -326,11 +331,11 @@ export class InformacionComponent implements OnInit {
         // }
 
       }
-   
-   
+
+
       // dato => {
       //   this.enviado = dato;
-          
+
       //   if (!this.enviado) {
       //     Swal.close();
       //     Swal.fire({
@@ -348,6 +353,14 @@ export class InformacionComponent implements OnInit {
       //   });
       // }
 
+    );
+  }
+
+
+  verificaConfig() {
+    this._configCorreoService.verificaConfiguracion(parseInt(this.miId)).subscribe(
+      configEmail => (this.emailConfigurado = configEmail.ok, console.log(this.emailConfigurado)
+      )
     );
   }
 }

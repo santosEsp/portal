@@ -544,13 +544,26 @@
             <div class="modal-content">
                 <div class="modal-header bgCorp">
                     <h5 class="modal-title text-white" id="exampleModalLabel">
-                        Enviar correo
+                        Enviar correo <svg *ngIf="emailConfigurado == true" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-check-circle ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                          </svg>
+
+                        <svg *ngIf="emailConfigurado == false" width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle ml-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path fill-rule="evenodd" d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                          </svg>
+                        <small *ngIf="emailConfigurado == false"><a href="/configuracion" class="text-white ml-2"> Ir a configuración <svg width="1.3em" height="1.3em" viewBox="0 0 16 16" class="bi bi-arrow-right-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path fill-rule="evenodd" d="M4 8a.5.5 0 0 0 .5.5h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5A.5.5 0 0 0 4 8z"/>
+                          </svg></a></small>
                     </h5>
                     <button type="button" class="close" #closeModalEnviarCorreo data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
                 </div>
                 <div class="modal-body">
+                    <p *ngIf="emailConfigurado == false" class="text-center" style="color: red;">Correo no configurado</p>
                     <form (ngSubmit)="sendMail(fEnviarCorreo)" #fEnviarCorreo="ngForm">
                         <div class="form-group">
 
@@ -559,7 +572,7 @@
                                 <tr>
                                     <td style="width: 5vw;"><label for="recipient-name" class="col-form-label">De</label></td>
                                     <td>
-                                        <input type="email" class="inputsECorreo" id="remitente" name="remitente" [(ngModel)]="modeloCorreo.remitenteEmail" required minlength="5" style="width: 50vw;" />
+                                        <input [disabled]="emailConfigurado == false" type="email" class="inputsECorreo" id="remitente" name="remitente" [(ngModel)]="modeloCorreo.remitenteEmail" required minlength="5" style="width: 50vw;" />
                                         <small *ngIf="fEnviarCorreo.submitted && fEnviarCorreo.controls['remitente'].errors" class="text-danger">Campo obligatorio | Verificar correo</small>
                                     </td>
                                 </tr>
@@ -568,7 +581,7 @@
                                 <tr>
                                     <td style="width: 5vw;"><label for="recipient-name" class="col-form-label">Para</label></td>
                                     <td>
-                                        <input type="email" class="inputsECorreo" id="destinatarioEmail" name="destinatarioEmail" [(ngModel)]="modeloCorreo.destinatario" required minlength="3" style="width: 50vw;" />
+                                        <input [disabled]="emailConfigurado == false" type="email" class="inputsECorreo" id="destinatarioEmail" name="destinatarioEmail" [(ngModel)]="modeloCorreo.destinatario" required minlength="3" style="width: 50vw;" />
                                         <small *ngIf="fEnviarCorreo.submitted && fEnviarCorreo.controls['destinatarioEmail'].errors" class="text-danger">Campo obligatorio | Verificar correo</small>
                                     </td>
                                 </tr>
@@ -576,7 +589,7 @@
                                 <tr>
                                     <td style="width: 5vw;"> <label for="recipient-name" class="col-form-label">Asunto</label></td>
                                     <td>
-                                        <input type="text" class="inputsECorreo" id="asunto" name="asunto" [(ngModel)]="modeloCorreo.asunto" required minlength="3" style="width: 50vw;" />
+                                        <input [disabled]="emailConfigurado == false" type="text" class="inputsECorreo" id="asunto" name="asunto" [(ngModel)]="modeloCorreo.asunto" required minlength="3" style="width: 50vw;" />
                                         <small *ngIf="fEnviarCorreo.submitted && fEnviarCorreo.controls['asunto'].errors" class="text-danger">Campo obligatorio </small>
                                     </td>
                                 </tr>
@@ -584,12 +597,12 @@
                             </table>
                             <div class="dropdown-divider"></div>
                             <div class="form-group">
-                                <textarea class="form-control" rows="7" id="descripcion" name="descripcion" [(ngModel)]="modeloCorreo.descripcionCorreo" required></textarea>
+                                <textarea [disabled]="emailConfigurado == false" class="form-control" rows="7" id="descripcion" name="descripcion" [(ngModel)]="modeloCorreo.descripcionCorreo" required></textarea>
                                 <small *ngIf="fEnviarCorreo.submitted && fEnviarCorreo.controls['descripcion'].errors" class="text-danger">Campo obligatorio </small>
                             </div>
 
                             <div class="modal-footer">
-                                <button type="submit" class="btn estilosBotonesHover estilosBotones">
+                                <button [disabled]="emailConfigurado == false" type="submit" class="btn estilosBotonesHover estilosBotones">
                                 Enviar
                             </button>
                                 <button type="button" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">

@@ -10,7 +10,9 @@
             <h5 class="ml-3">Tus preferencias</h5>
             <a class="nav-link active mt-3" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-profile" aria-selected="true">Información básica</a>
             <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-seguridad" role="tab" aria-controls="v-pills-settings" aria-selected="false">Seguridad</a>
-            <a class="nav-link" id="v-pills-nego-tab" data-toggle="pill" href="#v-pills-nego" role="tab" aria-controls="v-pills-nego" aria-selected="false">Negocios</a> </div>
+            <a class="nav-link" id="v-pills-nego-tab" data-toggle="pill" href="#v-pills-nego" role="tab" aria-controls="v-pills-nego" aria-selected="false">Negocios</a>
+            <a class="nav-link" id="v-pills-correo-tab" data-toggle="pill" href="#v-pills-correo" role="tab" aria-controls="v-pills-nego" aria-selected="false">Correo</a>
+        </div>
     </div>
     <div class="col-9">
         <div class="tab-content" id="v-pills-tabContent">
@@ -129,6 +131,78 @@
                         </tbody>
                     </table>
                 </div>
+            </div>
+
+
+            <div class="tab-pane fade" id="v-pills-correo" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                <h3>Configura el correo</h3>
+                <!---------------------------Formulario Configracion de email--------------------->
+                <div class=" container">
+                    <div class="container mt-3 ">
+
+
+                        <form (ngSubmit)="configurarCorreo(fConfigCorreo)" #fConfigCorreo="ngForm">
+
+                            <div *ngIf="emailConfigurado == true" class="form-group ml-2 mr-2">
+                                <div class="alert alert-success" role="alert">
+                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-check-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path fill-rule="evenodd" d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.236.236 0 0 1 .02-.022z"/>
+                                      </svg> Correo configurado
+                                </div>
+                            </div>
+                            <div *ngIf="emailConfigurado == false" class="form-group ml-2 mr-2">
+                                <div class="alert alert-dark" role="alert">
+                                    <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                                        <circle cx="8" cy="4.5" r="1"/>
+                                      </svg> Correo no configurado
+                                </div>
+                            </div>
+
+                            <div class="form-group ml-2 mr-2">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fas fa-server"></i></div>
+                                    </div>
+                                    <input type="text" class="form-control" id="servidor" name="servidor" placeholder="Servidor de correo saliente" [(ngModel)]="configCorreo.host" required />
+                                </div>
+                                <small *ngIf="fConfigCorreo.submitted && fConfigCorreo.controls['servidor'].errors" class="text-danger ">Campo abligatorio</small>
+                            </div>
+
+                            <div class="form-group ml-2 mr-2">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fas fa-at"></i></div>
+                                    </div>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="Dirección de correo electrónico" [(ngModel)]="configCorreo.email" required />
+                                </div>
+                                <small *ngIf="fConfigCorreo.submitted && fConfigCorreo.controls['email'].errors" class="text-danger ">Campo obligatorio</small>
+                            </div>
+
+                            <div class="form-group ml-2 mr-2">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fas fa-key"></i></div>
+                                    </div>
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Contraseña" [(ngModel)]="configCorreo.password" required />
+                                </div>
+                                <small *ngIf="fConfigCorreo.submitted && fConfigCorreo.controls['password'].errors" class="text-danger ">Campo obligatorio</small>
+                            </div>
+
+                            <button [disabled]="emailConfigurado == true" type="submit" class="btn estilosBotonesHover estilosBotones ml-2">
+                                Guardar
+                            </button>
+
+                            <button [disabled]="emailConfigurado == false" type="submit" class="btn estilosBotonesHover estilosBotones ml-2">
+                                Actualizar
+                            </button>
+
+                        </form>
+                    </div>
+                </div>
+
             </div>
 
         </div>
