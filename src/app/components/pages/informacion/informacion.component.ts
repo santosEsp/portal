@@ -28,6 +28,9 @@ import Swal from 'sweetalert2';
 import { NegociosContactosService } from '../../../services/negociosContactos/negocios-contactos.service';
 import { EtapasNegociosService } from '../../../services/etapasNegocios/etapas-negocios.service';
 import { EnviarCorreoService } from '../../../services/enviarCorreo/enviar-correo.service';
+
+
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './informacion.component.html',
@@ -36,7 +39,9 @@ import { EnviarCorreoService } from '../../../services/enviarCorreo/enviar-corre
 export class InformacionComponent implements OnInit {
 
   // Variables, modelos y arrays para obtener info de contactos
-
+  accionU: string;
+  accion: string;
+  accionF: string;
   correo = new RegistrarCorreoModel();
   llamada = new RegistrarLlamadaModel();
   reunion = new RegistrarReunionModel();
@@ -75,6 +80,7 @@ export class InformacionComponent implements OnInit {
     this.miId = this.miUsuario['id_usuario'];
     this.rutaActiva.params.subscribe(params => {
     });
+    
 
   }
 
@@ -119,6 +125,16 @@ export class InformacionComponent implements OnInit {
       );
     }
   }
+
+   accionultima(acc:string){
+      //console.log('Accion que esta en la vista de informacion de contactos',acc);
+      var sepa=acc.split("/",3);
+      //console.log('sepa n--->',sepa);
+      //console.log('sepa --->',sepa[0]);
+      //console.log('sepa --->',sepa[1]);
+      this.accion = sepa[0];
+      this.accionF = sepa[1];
+   }
   // Métodos para cargar info de contactos
   cargarCorreosRegistrados(): any {
     this._registrarCorreoService.cargarCorreos(this.idContacto).subscribe(listaCorreosR => {
@@ -154,6 +170,8 @@ export class InformacionComponent implements OnInit {
       this.modeloCorreo.destinatario = this.unContacto.email;
       this.modeloCorreo.remitenteEmail = this.miUsuario['email'];
       console.log('remitente email', this.modeloCorreo.remitenteEmail);
+
+      console.log('un contacto infor ---> ',this.unContacto);
     });
   }
 
@@ -186,6 +204,16 @@ export class InformacionComponent implements OnInit {
     this.editarNegocio.fketapa = datos.id_etapa;
   }
 
+  actualidadAccion(id: string, fechaAc: string){
+    //var id = '138';
+    //var fechaAc = '2020-12-12'; 
+    this._contactoService.ultimaAccion(id, fechaAc).subscribe(
+      (resp: any) => {
+          console.log('Se actualizo la ultima actividad');
+      }
+    )
+  }
+
   actualizarNegocio(form: NgForm) {
     this.negocio = {
       id_negocio: form.value.idNegocio,
@@ -197,7 +225,11 @@ export class InformacionComponent implements OnInit {
       fkcontacto: parseInt(this.idContacto),
       fkusuario: parseInt(this.miId)
     }
-    this._negociosContactoService.actualizarNegocio(this.negocio).subscribe();
+
+    
+    this._negociosContactoService.actualizarNegocio(this.negocio).subscribe(
+      
+      );
   }
 
   eliminarNegocio(datos: any): any {
@@ -257,19 +289,20 @@ export class InformacionComponent implements OnInit {
       console.log('modeloCorreo:', this.modeloCorreo);
     this._enviarCorreoService.enviarCorreo(this.modeloCorreo).subscribe(
       (resp: any) => {
-        Swal.close();
+        Swal.close();  
         Swal.fire({
           title: 'Correo enviado',
           text: 'Se ha enviado el correo',
           icon: 'success',
         });
+        this.accion = 'Se envio un correo';
       },
       (error): any => {
 
         Swal.close();
         Swal.fire({
           title: 'Error: ' + error.error.mensaje,
-          text: 'Veirifique que todo esté correcto',
+          text: 'Verifique que todo esté correcto',
           icon: 'error',
         });
         // if (error.error.errors.name === 'SequelizeUniqueConstraintError') {

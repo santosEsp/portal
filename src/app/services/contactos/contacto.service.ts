@@ -26,6 +26,21 @@ export class ContactoService {
       )
     );
   }
+  ultimaAccion( id: string, accion: string): any {
+    console.log('id U -->',id);  
+    let url = URL_SERVICIOS + '/contactos/ultima/' + id + '/' + accion;
+    url += '/?token=' + this.token;
+    console.log('url ultima ---->', url);
+    return this.http.put(url,id)
+      .pipe(
+        map(
+          (resp: any) => {
+            console.log('ultima actividad actualizada');
+            return resp.contacto;
+          }
+        )
+      );
+  }
 
   eliminarContacto(id: string): any {
     let url = URL_SERVICIOS + '/contactos/' + id;

@@ -1,6 +1,10 @@
-<!--Inicio del formulario modal nota
+<!--Inicio del formulario modal 
+
                     --------------------------------------------------
                         ------------------------------------------------>
+
+
+
 
 <div class="modal fade text-left" data-backdrop="static" data-keyboard="false" id="modalNota" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -24,7 +28,7 @@
                                                     Campo obligatorio
                                                 </small>
 
-                        <textarea class="form-control" id="message-text" rows="5" id="nota" name="descripcion" [(ngModel)]="notaContacto.comentario" required></textarea>
+                        <textarea class="form-control" id="message-text" rows="5" id="nota" name="descripcion" [(ngModel)]="notaContacto.comentario" required maxlength="200"></textarea>
                     </div>
 
                     <div class="modal-footer">
@@ -93,7 +97,7 @@
                             Campo obligatorio
                         </small>
 
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Descripción del correo" name="descripcionCorreo" [(ngModel)]="correoContacto.descripcion" required>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Descripción del correo" name="descripcionCorreo" [(ngModel)]="correoContacto.descripcion" required maxlength="200">
                         </textarea>
 
                         <div class="modal-footer">
@@ -194,7 +198,7 @@
                                 Campo obligatorio
                             </small>
 
-                            <textarea class="form-control" id="descripcionLlamada" rows="5" cols="20" placeholder="Descripción de la llamada" name="descripcionLlamada" required [(ngModel)]="llamadaContacto.descripcion"></textarea>
+                            <textarea class="form-control" id="descripcionLlamada" rows="5" cols="20" placeholder="Descripción de la llamada" name="descripcionLlamada" required [(ngModel)]="llamadaContacto.descripcion" maxlength="200"></textarea>
                         </div>
 
                         <div class="modal-footer">
@@ -305,7 +309,7 @@
                         </small>
                         <div class="form-group">
 
-                            <textarea class="form-control" id="descripcionReunion" rows="5" placeholder="Descripción de la reunión" name="descripcionReunion" required [(ngModel)]="reunionContacto.descripcion"></textarea>
+                            <textarea class="form-control" id="descripcionReunion" rows="5" placeholder="Descripción de la reunión" name="descripcionReunion" required [(ngModel)]="reunionContacto.descripcion" maxlength="200"></textarea>
                         </div>
 
                         <div class="modal-footer">

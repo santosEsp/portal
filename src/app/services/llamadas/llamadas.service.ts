@@ -37,7 +37,8 @@ export class LlamadasService {
       map(
         (resp: any) => {
           Swal.fire('Llamada', 'Llamada agregada correctamente', 'success');
-          return resp.llamada;
+          var respuesta = resp.llamada.fkcontacto + '/' + resp.llamada.createdAt;
+          return respuesta;
         }
       )
     );

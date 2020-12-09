@@ -9,7 +9,8 @@ import Swal from 'sweetalert2';
   providedIn: 'root'
 })
 export class NotasService {
-  token: string;
+  token: string
+  accionUltima: String;
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
   }
@@ -19,13 +20,18 @@ crearNota(nota: NotaModel): any {
     url += '?token=' + this.token;
     return this.http.post(url, nota).pipe(
       map(
-        (resp: any) => {
+        (resp: any) => {    
           Swal.fire('Nota', 'Nota agregada correctamente', 'success');
-          return resp.nota;
+          //console.log('Nota creada', resp.nota.createdAt);
+          //console.log('id -->',resp,nota.fkcontacto);  
+          this.accionUltima= resp.nota.createdAt + "/" + resp.nota.fkcontactos;     
+          return this.accionUltima;
         }
       )
     );
   }
+
+ 
 
   eliminarNota(id: string): any {
     let url = URL_SERVICIOS + '/notas/' + id;

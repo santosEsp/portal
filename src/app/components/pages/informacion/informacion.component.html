@@ -1,6 +1,6 @@
 <app-navbar>
 </app-navbar>
-<app-modal-shared></app-modal-shared>
+<app-modal-shared (accionEnviar)="accionultima($event)"></app-modal-shared>
 <!-- start page main wrapper -->
 
 <div id="main-wrapper" class="ocultarScrollV">
@@ -130,7 +130,7 @@
                                 <td><small class="text-muted">Número de teléfono</small><br>{{unContacto.telefono}}</td>
                             </tr>
                             <tr>
-                                <td><small class="text-muted">Contactado por última vez</small><br/> ------</td>
+                                <td><small class="text-muted">Contactado por última vez</small><br>{{unContacto.ultima_actividad | date:"dd-MM-yyyy"}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -594,7 +594,7 @@
                             </table>
                             <div class="dropdown-divider"></div>
                             <div class="form-group">
-                                <textarea class="form-control" rows="7" id="descripcion" name="descripcion" [(ngModel)]="modeloCorreo.descripcionCorreo" required></textarea>
+                                <textarea class="form-control" rows="7" id="descripcion" name="descripcion" [(ngModel)]="modeloCorreo.descripcionCorreo" required maxlength="200"></textarea>
                                 <small *ngIf="fEnviarCorreo.submitted && fEnviarCorreo.controls['descripcion'].errors" class="text-danger">Campo obligatorio </small>
                             </div>
 
