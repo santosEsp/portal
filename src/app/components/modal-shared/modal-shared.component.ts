@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit,Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 // Importación de modelos
@@ -18,6 +18,7 @@ import { RegistrarCorreoService } from '../../services/registrarCorreo/registrar
 import { EtapasNegociosService } from '../../services/etapasNegocios/etapas-negocios.service';
 import { NegociosContactosService } from '../../services/negociosContactos/negocios-contactos.service';
 
+import Swal from 'sweetalert2';
 // importando clase sw informacion.component.ts
 
 
@@ -27,6 +28,8 @@ import { NegociosContactosService } from '../../services/negociosContactos/negoc
   templateUrl: './modal-shared.component.html'
 })
 export class ModalSharedComponent implements OnInit {
+  
+  @Output() accionEnviar = new EventEmitter<string> ();
 
   notaContacto = new NotaModel();
   correoContacto = new RegistrarCorreoModel();
@@ -37,6 +40,9 @@ export class ModalSharedComponent implements OnInit {
   miId: string;
   datos: any[] = [];
   miEmail: string;
+  
+  ultimaaccion: boolean;
+  accion: string;
 
   pass = 'nHrG_SEA_2020';
   nombrePropietario = new UsuarioModel();
@@ -46,12 +52,14 @@ export class ModalSharedComponent implements OnInit {
   fecha: Date = new Date();
   idContacto: string;
   etapas: any[] = [];
+  accionU: string;
 
   constructor(private rutaActiva: ActivatedRoute, private _notasService: NotasService, private _contactoService: ContactoService, private _registrarReunion: RegistrarReunionService,
     private _llamadaService: LlamadasService, private _correosService: RegistrarCorreoService, private _etapasService: EtapasNegociosService,
     private _negocioService: NegociosContactosService) {
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
     this.miId = this.miUsuario['id_usuario'];
+    
    
   }
 
@@ -65,10 +73,10 @@ export class ModalSharedComponent implements OnInit {
     );
     this.cargaNombreContacto();
     this.cargarEtapas();
-
+     
     
   }
-
+ 
   registrarNota(form: NgForm): any {
     if (form.invalid) {
       return 'Formulario no válido';
@@ -78,8 +86,36 @@ export class ModalSharedComponent implements OnInit {
       fkusuario: this.miId,
       fkcontacto: this.idContacto
     };
-    this._notasService.crearNota(this.notaContacto).subscribe(() => {
-    });
+    this._notasService.crearNota(this.notaContacto).subscribe(
+      lista => {                
+          this.accionU=lista;
+          console.log('fecha de crear nota --->',this.accionU);
+          this.accion = 'Se creó una nota' +" /"+ this.accionU;
+          this.accionEnviar.emit(this.accion);
+          var sepa=this.accion.split("/",3);
+          console.log('sepa 1 ',sepa[0]);
+          console.log('sepa 2 ',sepa[1]);
+          console.log('sepa 3 ',sepa[2]);
+          var id=sepa[1];
+          var fechaAc=sepa[2];
+
+          console.log('id ----> ',id);
+          console.log('fecha ----> ',fechaAc);
+          this.accionEnviar.emit(this.accion);
+          
+          this.actualidadAccion(id, fechaAc);
+          
+      });
+  }
+
+  actualidadAccion(id: string, fechaAc: string){
+    //var id = '138';
+    //var fechaAc = '2020-12-12'; 
+    this._contactoService.ultimaAccion(id, fechaAc).subscribe(
+      (resp: any) => {
+          console.log('Se actualizo la ultima actividad');
+      }
+    )
   }
 
   cargaNombreContacto() {
@@ -101,7 +137,25 @@ export class ModalSharedComponent implements OnInit {
       descripcion: form.value.descripcionReunion,
       fkusuario: this.miId
     };
-    this._registrarReunion.registrarReunion(this.reunionContacto).subscribe(() => {
+    this._registrarReunion.registrarReunion(this.reunionContacto).subscribe(
+      lista => {
+        this.accionU=lista;
+          console.log('fecha de crear nota --->',this.accionU);
+          this.accion = 'Se registró una reunión' +" /"+ this.accionU;
+          this.accionEnviar.emit(this.accion);
+          var sepa=this.accion.split("/",3);
+          console.log('sepa 1 ',sepa[0]);
+          console.log('sepa 2 ',sepa[1]);
+          console.log('sepa 3 ',sepa[2]);
+          var id=sepa[2];
+          var fechaAc=sepa[1];
+
+          console.log('id ----> ',id);
+          console.log('fecha ----> ',fechaAc);
+          this.accionEnviar.emit(this.accion);
+          
+          this.actualidadAccion(id, fechaAc);
+
     });
   }
 
@@ -117,7 +171,24 @@ export class ModalSharedComponent implements OnInit {
       descripcion: form.value.descripcionLlamada,
       fkusuario: this.miId
     };
-    this._llamadaService.crearLlamada(this.llamadaContacto).subscribe(() => {
+    this._llamadaService.crearLlamada(this.llamadaContacto).subscribe(
+      (lista) => {
+        this.accionU=lista;
+          console.log('fecha de crear nota --->',this.accionU);
+          this.accion = 'Se registró una llamada' +" /"+ this.accionU;
+          this.accionEnviar.emit(this.accion);
+          var sepa=this.accion.split("/",3);
+          console.log('sepa 1 ',sepa[0]);
+          console.log('sepa 2 ',sepa[1]);
+          console.log('sepa 3 ',sepa[2]);
+          var id=sepa[1];
+          var fechaAc=sepa[2];
+
+          console.log('id ----> ',id);
+          console.log('fecha ----> ',fechaAc);
+          this.accionEnviar.emit(this.accion);
+          
+          this.actualidadAccion(id, fechaAc);
     });
   }
 
@@ -133,7 +204,25 @@ export class ModalSharedComponent implements OnInit {
       descripcion: form.value.descripcionCorreo,
 
     };
-    this._correosService.registrarCorreo(this.correoContacto).subscribe(() => {
+    this._correosService.registrarCorreo(this.correoContacto).subscribe(
+      lista => {
+        this.accionU=lista;
+          console.log('fecha de crear nota --->',this.accionU);
+          this.accion = 'Se registró una reunión' +" /"+ this.accionU;
+          this.accionEnviar.emit(this.accion);
+          var sepa=this.accion.split("/",3);
+          console.log('sepa 1 ',sepa[0]);
+          console.log('sepa 2 ',sepa[1]);
+          console.log('sepa 3 ',sepa[2]);
+          var id=sepa[1];
+          var fechaAc=sepa[2];
+
+          console.log('id ----> ',id);
+          console.log('fecha ----> ',fechaAc);
+          this.accionEnviar.emit(this.accion);
+          
+          this.actualidadAccion(id, fechaAc);
+
     });
   }
 
@@ -150,7 +239,24 @@ export class ModalSharedComponent implements OnInit {
       fkcontacto: parseInt(this.idContacto),
       fkusuario: parseInt(this.miId)
     };
-    this._negocioService.crearNegocio(this.negocioContacto).subscribe(() => {
+    this._negocioService.crearNegocio(this.negocioContacto).subscribe(
+      (lista) => {
+        this.accionU = lista;
+          console.log('fecha de crear nota --->',this.accionU);
+          this.accion = 'Se registró una reunión' +" /"+ this.accionU;
+          this.accionEnviar.emit(this.accion);
+          var sepa=this.accion.split("/",3);
+          console.log('sepa 1 ',sepa[0]);
+          console.log('sepa 2 ',sepa[1]);
+          console.log('sepa 3 ',sepa[2]);
+          var id=sepa[1];
+          var fechaAc=sepa[2];
+
+          console.log('id ----> ',id);
+          console.log('fecha ----> ',fechaAc);
+          this.accionEnviar.emit(this.accion);
+          
+          this.actualidadAccion(id, fechaAc);
     });
   }
 

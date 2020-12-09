@@ -7,6 +7,6 @@ export class ContactoModel{
     departamento: string;
     telefono: string;
     fkempresa: number;
-    ultimaActividad?: string;
+    ultima_actividad?: string;
     createdAt?: string;
 }

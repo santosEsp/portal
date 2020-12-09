@@ -35,7 +35,9 @@ export class ContactosComponent implements OnInit {
   proveedores;
   Contacto: any = [];
 
+
   propietarionombre: string;
+
 
   desde: number;
   divi;
