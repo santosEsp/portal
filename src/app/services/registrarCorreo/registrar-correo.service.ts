@@ -21,7 +21,11 @@ export class RegistrarCorreoService {
       map(
         (resp: any) => {
           Swal.fire('Correo', 'Correo registrado', 'success');
-          return resp.correo;
+          console.log('respuesta correo --->',resp.correo);
+          console.log('respuesta correo --->',resp.correo.fkcontacto);
+          console.log('respuesta correo --->',resp.correo.createdAt);
+          var respuesta = resp.correo.fkcontacto + '/' + resp.correo.createdAt;
+          return respuesta;
         }
       )
     );

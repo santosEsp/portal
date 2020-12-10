@@ -11,7 +11,7 @@ export class NegociosContactosService {
   token: any;
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
-   }
+  }
 
   crearNegocio(negocio: NegocioModel): any {
     let url = URL_SERVICIOS + '/negociosContactos/';
@@ -20,8 +20,10 @@ export class NegociosContactosService {
     return this.http.post(url, negocio).pipe(
       map(
         (resp: any) => {
-          Swal.fire(negocio.createdAt,  'Negocio agregado correctamente', 'success');
-          return resp.negocio;
+          Swal.fire(negocio.createdAt, 'Negocio agregado correctamente', 'success');
+          console.log('respuesta de creacion de negocio :', resp.negocio);
+          let respuesta = resp.negocio.fkcontacto + '/' + resp.negocio.createdAt;
+          return respuesta;
         }
       )
     );
@@ -51,11 +53,17 @@ export class NegociosContactosService {
 
     let url = URL_SERVICIOS + '/negociosContactos/' + negocio.id_negocio;
     url += '?token=' + this.token;
-
+    console.log('url actualizar engocios --->', url);
     return this.http.put(url, negocio)
       .pipe(
         map(
           (resp: any) => {
+            Swal.fire({
+              title: 'Negocio actualizado',
+              text: 'Actualizado correctamente',
+              icon: 'success',
+            });
+            // console.log('respuesta de negocio --->',resp);
             return resp.negocio;
           }
         )

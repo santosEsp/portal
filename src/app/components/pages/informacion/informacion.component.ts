@@ -29,6 +29,7 @@ import { NegociosContactosService } from '../../../services/negociosContactos/ne
 import { EtapasNegociosService } from '../../../services/etapasNegocios/etapas-negocios.service';
 import { EnviarCorreoService } from '../../../services/enviarCorreo/enviar-correo.service';
 import { ConfigurarCorreoService } from '../../../services/configurarCorreo/configurar-correo.service';
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './informacion.component.html',
@@ -37,6 +38,10 @@ import { ConfigurarCorreoService } from '../../../services/configurarCorreo/conf
 export class InformacionComponent implements OnInit {
 
   // Variables, modelos y arrays para obtener info de contactos
+
+  accionU: string;
+  accion: string;
+  accionF: string;
   correo = new RegistrarCorreoModel();
   llamada = new RegistrarLlamadaModel();
   reunion = new RegistrarReunionModel();
@@ -84,6 +89,7 @@ export class InformacionComponent implements OnInit {
     this.rutaActiva.params.subscribe(params => {
     });
 
+
   }
 
   ngOnInit(): void {
@@ -128,6 +134,16 @@ export class InformacionComponent implements OnInit {
       );
     }
   }
+
+  accionultima(acc: string) {
+    //console.log('Accion que esta en la vista de informacion de contactos',acc);
+    var sepa = acc.split("/", 3);
+    //console.log('sepa n--->',sepa);
+    //console.log('sepa --->',sepa[0]);
+    //console.log('sepa --->',sepa[1]);
+    this.accion = sepa[0];
+    this.accionF = sepa[1];
+  }
   // Métodos para cargar info de contactos
   cargarCorreosRegistrados(): any {
     this._registrarCorreoService.cargarCorreos(this.idContacto).subscribe(listaCorreosR => {
@@ -163,6 +179,8 @@ export class InformacionComponent implements OnInit {
       this.modeloCorreo.destinatario = this.unContacto.email;
       this.modeloCorreo.remitenteEmail = this.miUsuario['email'];
       console.log('remitente email', this.modeloCorreo.remitenteEmail);
+
+      console.log('un contacto infor ---> ', this.unContacto);
     });
   }
 
@@ -193,6 +211,16 @@ export class InformacionComponent implements OnInit {
     this.editarNegocio.cantidad = datos.cantidad;
     this.editarNegocio.fcierre = datos.fcierre;
     this.editarNegocio.fketapa = datos.id_etapa;
+  }
+
+  actualidadAccion(id: string, fechaAc: string) {
+    //var id = '138';
+    //var fechaAc = '2020-12-12'; 
+    this._contactoService.ultimaAccion(id, fechaAc).subscribe(
+      (resp: any) => {
+        console.log('Se actualizo la ultima actividad');
+      }
+    )
   }
 
   actualizarNegocio(form: NgForm) {
@@ -242,6 +270,8 @@ export class InformacionComponent implements OnInit {
           });
 
       }
+    );
+    this._negociosContactoService.actualizarNegocio(this.negocio).subscribe(
     );
   }
 
@@ -314,6 +344,7 @@ export class InformacionComponent implements OnInit {
             this.closeModalEnviarCorreo.nativeElement.click();
           }
         });
+        this.accion = 'Se envio un correo';
       },
       (error): any => {
         Swal.close();
