@@ -10,13 +10,12 @@ import { CorreosEmpresasModel } from '../../models/correosEmpresas';
 })
 export class CorreosEmpresasService {
   token: string;
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
   }
 
 
   registrarCorreo(correo: CorreosEmpresasModel): any {
-    console.log('Registrar correoService', correo);
     let url = URL_SERVICIOS + '/correosempresas/';
     url += '?token=' + this.token;
     return this.http.post(url, correo).pipe(
@@ -76,15 +75,12 @@ export class CorreosEmpresasService {
 
   cargarCorreos(idContacto: string): any {
 
-    console.log('Correos empresa service Id', idContacto);
     let url = URL_SERVICIOS + '/correosempresas/' + idContacto;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('Correos empresas service: ', resp.correos);
             return resp.correos;
           }
         )

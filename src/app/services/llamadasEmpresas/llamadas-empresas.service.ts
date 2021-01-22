@@ -15,16 +15,12 @@ export class LlamadasEmpresasService {
   }
 
   cargarLlamadas(id: string): any {
-
-    console.log('Cargar llamadas empresas service', id);
     let url = URL_SERVICIOS + '/llamadasempresas/' + id;
     url += '?token=' + this.token;
-    console.log('url consulta', url);
     return this.http.get(url)
       .pipe(
         map(
           (resp: any) => {
-            console.log('Llamadas empresas service: ', resp.llamadas);
             return resp.llamadas;
           }
         )
@@ -32,7 +28,6 @@ export class LlamadasEmpresasService {
   }
 
   crearLlamada(llamada: LlamadasEmpresasModel): any {
-    console.log('llamada empresa service', llamada);
     let url = URL_SERVICIOS + '/llamadasempresas/';
     url += '?token=' + this.token;
 

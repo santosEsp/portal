@@ -1,6 +1,6 @@
 import { DatePipe } from '@angular/common';
 
-export class RegistrarCorreoModel{
+export class RegistrarCorreoModel {
     id?: string;
     fkusuario: string;
     fkcontacto: string;

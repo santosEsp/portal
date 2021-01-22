@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
 import Swal from 'sweetalert2';
@@ -16,6 +16,8 @@ export class UsuariosComponent implements OnInit {
   usuariosDesde: number;
   masPaginasU: boolean;
   salvaContadorUsuarios: number;
+
+  @ViewChild('closeModal') closeModal;
 
   constructor(private _usuarioService: UsuarioService) {
 
@@ -39,12 +41,29 @@ export class UsuariosComponent implements OnInit {
       nombre: forma.value.nombre,
       rol: forma.value.rol
     };
-
+    Swal.showLoading();
     this._usuarioService.crearUsuario(this.usuario).subscribe(
       (resp: any) => {
-        Swal.fire(this.usuario.nombre, 'Usuario creado correctamente', 'success');
+        Swal.close();
+        Swal.fire({
+          title: 'Usuario creado',
+          text: 'Usuario creado correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              this.cargarUsuarios();
+              this.contadorUsuariosBD();
+              this.closeModal.nativeElement.click();
+            }
+          });
       },
       (error): any => {
+        Swal.close();
         if (error.error.errors.name === 'SequelizeUniqueConstraintError') {
           Swal.fire({
             title: 'El correo debe ser único para cada usuario',
@@ -77,7 +96,7 @@ export class UsuariosComponent implements OnInit {
     usuarioLogeado = JSON.parse(localStorage.getItem('usuario'));
 
     if (usuario.id_usuario === usuarioLogeado.id_usuario) {
-      Swal.fire('No se puede eliminar','No se puede eliminar a sí mismo', 'error');
+      Swal.fire('No se puede eliminar', 'No se puede eliminar a sí mismo', 'error');
       return;
     }
     Swal.fire({
@@ -92,35 +111,87 @@ export class UsuariosComponent implements OnInit {
     })
       .then((borrar) => {
         if (borrar.isConfirmed) {
+          Swal.close();
+          Swal.showLoading();
           this._usuarioService.eliminarUsuario(usuario.id_usuario).subscribe(
             (resp: any) => {
-            Swal.fire('Eliminado','Usuario eliminado', 'success' );
-            this.cargarUsuarios();
-          },(error): any => {
-            if (error.error.error.name === 'SequelizeForeignKeyConstraintError') {
+              Swal.close();
               Swal.fire({
-                title: 'No puede eliminar a este usuario',
-                text: 'Ya que tiene varios eventos asignados',
+                title: 'Usuario Eliminado',
+                text: 'Usuario eliminado correctamente',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#E5B53A',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false
+              })
+                .then((ok) => {
+                  if (ok.isConfirmed) {
+                    this.cargarUsuarios();
+                    this.contadorUsuariosBD();
+                  }
+                });
+            },
+            (error): any => {
+              Swal.close();
+              Swal.fire({
+                title: 'Error',
+                text: 'Error al eliminar',
                 icon: 'error',
-              });
+                showCancelButton: false,
+                confirmButtonColor: '#E5B53A',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false
+              })
             }
-           }
           );
         }
       });
   }
 
   actualizarUsuario(usuario: UsuarioModel): any {
-    console.log('usuario --->',usuario);
-    if(usuario.nombre.trim() =="" || usuario.email.trim() ==""){
+    if (usuario.nombre.trim() == "" || usuario.email.trim() == "") {
       Swal.fire({
         title: 'Existen campos vacios',
         text: 'Verifique los datos ingresados',
         icon: 'error',
       });
-        return ;
+      return;
     }
-    this._usuarioService.actualizarUsuario(usuario).subscribe();
+
+    Swal.showLoading();
+    this._usuarioService.actualizarUsuario(usuario).subscribe(
+      (resp: any) => {
+        Swal.close();
+        Swal.fire({
+          title: 'Usuario actualizado',
+          text: 'Usuario actualizado correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+      },
+      (error): any => {
+        Swal.close();
+
+        Swal.fire({
+          title: 'No actualizado',
+          text: 'Error al actualizar usuario, verifique los datos',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        });
+
+      }
+    );
   }
 
   contadorUsuariosBD() {

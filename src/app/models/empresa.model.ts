@@ -1,4 +1,4 @@
-export class EmpresaModel{
+export class EmpresaModel {
     id_empresa?: any;
     nombre: string;
     propietario_registro: string;

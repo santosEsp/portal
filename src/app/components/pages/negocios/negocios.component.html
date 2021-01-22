@@ -20,57 +20,10 @@
         <table class="table table-bordered">
             <thead class="grisSecundario">
                 <tr class="text-center">
-                    <th scope="col">
-                        GENERACIÓN DE LEAD
+                    <th scope="col" *ngFor="let etapa of arrayEtapas; let i = index" style="text-transform: uppercase;">
+                        {{etapa.nombre}}
                         <div class="progress" style="height:10px">
                             <div class="progress-bar" role="progressbar" style="width: 11%; background-color:#E5B53A;" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </th>
-                    <th scope="col">CALIFICADO PARA LA COMPRA
-                        <div class="progress" style="height:10px">
-                            <div class="progress-bar" role="progressbar" style="width: 22%;  background-color:#E5B53A;" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </th>
-                    <th scope="col">CITA DE PRESENTACIÓN
-
-                        <div class="progress" style="height:10px;">
-                            <div class="progress-bar" role="progressbar" style="width: 33%;  background-color:#E5B53A;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </th>
-                    <th scope="col">INVOLUCRAMIENTO DE DECISIONES
-                        <div class="progress" style="height:10px">
-                            <div class="progress-bar" role="progressbar" style="width: 44%;  background-color:#E5B53A;" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </th>
-                    <th>PRESENTACIÓN DE DEMOSTRACIÓN
-                        <div class="progress" style="height:10px">
-                            <div class="progress-bar" role="progressbar" style="width: 55%;  background-color:#E5B53A;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </th>
-                    <th>GENERACIÓN DE PROPUESTA
-                        <div class="progress" style="height:10px">
-                            <div class="progress-bar" role="progressbar" style="width: 66%;  background-color:#E5B53A;" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </th>
-                    <th>INVOLUCRAMIENTO DE PROCESOS
-                        <div class="progress" style="height:10px">
-                            <div class="progress-bar" role="progressbar" style="width: 77%;  background-color:#E5B53A;" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </th>
-                    <th>CIERRE DE CONTRATO
-                        <div class="progress" style="height:10px">
-                            <div class="progress-bar" role="progressbar" style="width: 88%;  background-color:#E5B53A;" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </th>
-                    <th>CIERRES GANADOS
-                        <div class="progress" style="height:10px">
-                            <div class="progress-bar" role="progressbar" style="width: 100%;  background-color:#E5B53A;" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </th>
-
-                    <th>CIERRES PERDIDOS
-                        <div class="progress " style="height:10px">
-                            <div class="progress-bar" role="progressbar" style="width: 0%;  background-color:#E5B53A;" aria-valuenow="100" aria-valuemin="80" aria-valuemax="100"></div>
                         </div>
                     </th>
                 </tr>

@@ -13,14 +13,13 @@ export class UsuarioService {
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
   }
-  
-  buscarcontra(termino: String,id: number): any {
+
+  buscarcontra(termino: String, id: number): any {
 
     const url = URL_SERVICIOS + '/usuarios/password/' + id + '/' + termino;
-    return this.http.post(url,termino).pipe(
+    return this.http.post(url, termino).pipe(
       map(
         (resp: any) => {
-          //console.log(resp.usuario);
           return true;
         }
       )
@@ -28,20 +27,20 @@ export class UsuarioService {
 
   }
 
-  cambiarContraseña(passsword: string,id: number): any {
-    let url = URL_SERVICIOS + '/usuarios/cambiar/' + passsword + "/"+id;
+  cambiarContraseña(passsword: string, id: number): any {
+    let url = URL_SERVICIOS + '/usuarios/cambiar/' + passsword + "/" + id;
     url += '?token=' + this.token;
-    return this.http.put(url,passsword).pipe(
+    return this.http.put(url, passsword).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Se ha actualizado tu contraseña','Actualizado Correctamente','success');
+          Swal.fire('Se ha actualizado tu contraseña', 'Actualizado Correctamente', 'success');
           return resp.usuario;
         }
       )
     );
   }
-  
-  
+
+
 
   crearUsuario(usuario: UsuarioModel): any {
 
@@ -80,7 +79,6 @@ export class UsuarioService {
     return this.http.put(url, usuario).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Usuario actualizado', usuario.nombre, 'success');
           return resp.usuario;
         }
       )

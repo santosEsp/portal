@@ -4,4 +4,6 @@ export class EnviarCorreoModel {
     destinatario: string;
     descripcionCorreo: string;
     asunto: string;
+    fkcontacto: string;
+    fkusuario: string;
 }

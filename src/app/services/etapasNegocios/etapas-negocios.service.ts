@@ -35,11 +35,6 @@ export class EtapasNegociosService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Etapa actualizada',
-              text: 'Actualizado correctamente',
-              icon: 'success',
-            });
             return resp.etapa;
           }
         )

@@ -12,7 +12,7 @@ export class NegociosEmpresasService {
   token: any;
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
-   }
+  }
 
   crearNegocio(negocio: NegociosEmpresaModel): any {
     let url = URL_SERVICIOS + '/negociosEmpresas/';
@@ -21,7 +21,7 @@ export class NegociosEmpresasService {
     return this.http.post(url, negocio).pipe(
       map(
         (resp: any) => {
-          Swal.fire(negocio.createdAt,  'Negocio agregado correctamente', 'success');
+          Swal.fire(negocio.createdAt, 'Negocio agregado correctamente', 'success');
           return resp.negocio;
         }
       )
@@ -91,7 +91,6 @@ export class NegociosEmpresasService {
       .pipe(
         map(
           (resp: any) => {
-            console.log('Negocios Empresas Service', resp.negocios);
             return resp.negocios;
           }
         )

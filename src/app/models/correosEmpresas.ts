@@ -1,4 +1,4 @@
-export class CorreosEmpresasModel{
+export class CorreosEmpresasModel {
     id_rcorreo?: string;
     fkempresa: string;
     fkusuario: string;

@@ -95,8 +95,6 @@ export class LoginService {
   rolAdmin(): boolean {
     this.usuario = JSON.parse(localStorage.getItem('usuario'));
     this.rol = this.usuario['rol'];
-    console.log('Rol obtenido LOgin service', this.rol);
-
     return (this.rol === 'ADMIN') ? true : false;
 
   }

@@ -1,4 +1,4 @@
-export class LlamadasEmpresasModel{
+export class LlamadasEmpresasModel {
     id_llamada?: string;
     fkempresa: string;
     resultado_llamada: string;

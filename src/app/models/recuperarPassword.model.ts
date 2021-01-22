@@ -1,4 +1,4 @@
-export class RecuperarPaswordModel{
+export class RecuperarPaswordModel {
     email: string;
-  
+
 }

@@ -1,4 +1,4 @@
-export class ContactoModel{
+export class ContactoModel {
     id_contacto?: string;
     email: string;
     nombre: string;

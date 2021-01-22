@@ -22,12 +22,41 @@ export class EnviarCorreoService {
       .pipe(
         map(
           (resp: any) => {
-            console.log('Respuesta recibida service', resp);
-            console.log('Respuesta OK', resp.ok);
-            return resp;
+            return resp.correos;
           }
         )
       );
   }
+
+  obtenerCorreos(fkContacto: string) {
+    let url = URL_SERVICIOS + '/enviarCorreo/enviados/' + fkContacto;
+    url += '?token=' + this.token;
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            return resp.eCorreos;
+          }
+        )
+      );
+  }
+
+
+  reporteUltimosCorreosEnviados(): any {
+    let url = URL_SERVICIOS + '/enviarCorreo/reporte';
+    url += '?token=' + this.token;
+
+    return this.http.get(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            return resp.reporteCorreos;
+          }
+        )
+      );
+  }
+
+
+
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ContraseñaModel } from '../../../models/contraseña.model';
 import { CorreoModel } from '../../../models/correo.model';
 import { EtapasNegocio } from '../../../models/etapasNegocio';
@@ -20,7 +20,7 @@ import { stringify } from 'querystring';
 })
 export class ConfiguracionComponent implements OnInit {
 
-  cerrarmodal: string;
+
   passencrip: string;
   rol: string;
   passActual = new ContraseñaModel();
@@ -38,6 +38,7 @@ export class ConfiguracionComponent implements OnInit {
   configCorreo = new configCorreoModel();
   emailConfigurado = false;
 
+  @ViewChild('closeModal') closeModal;
 
   constructor(private router: Router, private _etapasService: EtapasNegociosService, private _usuario: UsuarioService, private _loginService: LoginService,
     private _configCorreoService: ConfigurarCorreoService) {
@@ -52,7 +53,6 @@ export class ConfiguracionComponent implements OnInit {
     this.cargarInfoEtapas();
 
     this.contrasena = new ContraseñaModel();
-    console.log('password encriptado --->', this.passencrip);
     this.verificaConfig();
   }
   cambiarCon(forma: NgForm): any {
@@ -62,9 +62,8 @@ export class ConfiguracionComponent implements OnInit {
     this.passActual = {
       con_nueva: forma.value.con_nuevav1
     };
-    console.log('Password Actual', this.passActual);
     this.cambiarPassword(this.passActual);
-    this.cerrarmodal = 'modal';
+
 
   }
 
@@ -76,27 +75,33 @@ export class ConfiguracionComponent implements OnInit {
           text: 'Puede iniciar sesión con su nueva contraseña',
           icon: 'success',
           confirmButtonColor: '#E5B53A',
-          confirmButtonText: 'Ok'
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
 
         })
           .then((ok) => {
             if (ok.isConfirmed) {
+              this.closeModal.nativeElement.click();
+              this.salir();
             }
           });
+      },
+      (error: any) => {
+
       }
     );
+  }
 
 
+  salir(): any {
+    this._loginService.logout();
+    this.router.navigateByUrl('/login');
   }
 
   onSubmit(form: NgForm): any {
     if (form.invalid) {
-      console.log('Algo salio mal :(');
-      console.log(form);
       return;
     }
-    console.log('Etapa nueva Agregada');
-    console.log(form);
   }
 
   cl(termino: string, termino2: string) {
@@ -116,18 +121,14 @@ export class ConfiguracionComponent implements OnInit {
     }
 
     if (termino === this.passencrip) {
-      console.log('Si se pudo');
     }
     // this.cargando = true;
     this._usuario.buscarcontra(termino, this.miId)
       .subscribe(
         (resp: any) => {
-          //this.router.navigateByUrl('/negocios');
-          //console.log('Contraseña validad');
           this.contrasenaActual = true;
         },
         (err) => {
-          //console.log('Contraseña no validad');
           this.contrasenaActual = false;
         }
       );
@@ -136,28 +137,18 @@ export class ConfiguracionComponent implements OnInit {
   }
   onCon(form: NgForm): any {
     if (form.invalid) {
-      console.log('Algo salio mal :(');
       return;
     }
-    console.log('Nueva Contraseña Agregada');
-    console.log(this.contrasena);
-    console.log(form);
   }
   onCorreo(form: NgForm) {
     if (form.invalid) {
-      console.log('Algo salio mal :(');
       return;
     }
-    console.log('Correo nuevo Agregado');
-    console.log(this.correo);
-    console.log(form);
   }
-
 
   cargarInfoEtapas() {
     this._etapasService.cargarEtapas().subscribe(lista => {
       this.arrayEtapas = lista;
-      console.log('EtapasRecibidas:', this.arrayEtapas);
     });
   }
 
@@ -167,8 +158,37 @@ export class ConfiguracionComponent implements OnInit {
       nombre: etapas.nombre,
       probabilidad: etapas.probabilidad
     }
-    console.log('Esto se enviará', this.etapasNegocio);
-    this._etapasService.actualizarEtapa(this.etapasNegocio).subscribe();
+    this._etapasService.actualizarEtapa(this.etapasNegocio).subscribe(
+      (resp: any) => {
+        Swal.close();
+        Swal.fire({
+          title: 'Actualizado',
+          text: 'Etapa actualizada correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+
+            }
+          });
+      },
+      (err: any) => {
+        Swal.close();
+        Swal.fire({
+          title: 'No actualizado',
+          text: 'Error al actualizar etapa',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+      }
+    );
   }
 
 
@@ -176,9 +196,6 @@ export class ConfiguracionComponent implements OnInit {
     if (form.invalid) {
       return;
     }
-
-    console.log('Datos del formulario: ', form);
-
     this.configCorreo = {
       email: form.value.email,
       host: form.value.servidor,
@@ -194,7 +211,6 @@ export class ConfiguracionComponent implements OnInit {
           icon: 'success',
         }).then((ok) => {
           if (ok.isConfirmed) {
-            console.log('Clicked Ok');
           }
         });
       },
@@ -210,15 +226,13 @@ export class ConfiguracionComponent implements OnInit {
     );
   }
 
-
   verificaConfig() {
     this._configCorreoService.verificaConfiguracion(this.miId).subscribe(
       configEmail => (this.configCorreo.host = configEmail.configuracion.host,
         this.configCorreo.email = configEmail.configuracion.email,
         this.configCorreo.password = configEmail.configuracion.password,
         this.emailConfigurado = configEmail.ok
-        ),
-        console.log(this.configCorreo)
+      )
     );
   }
 

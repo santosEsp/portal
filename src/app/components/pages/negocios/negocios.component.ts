@@ -4,6 +4,7 @@ import { NgForm } from '@angular/forms';
 import { EmpresaModel } from '../../../models/empresa.model';
 import { NegociosContactosService } from '../../../services/negociosContactos/negocios-contactos.service';
 import { NegociosEmpresasService } from '../../../services/negocioEmpresas/negocios-empresas.service';
+import { EtapasNegociosService } from '../../../services/etapasNegocios/etapas-negocios.service';
 @Component({
   selector: 'app-negocio',
   templateUrl: './negocios.component.html',
@@ -17,9 +18,10 @@ export class NegocioComponent implements OnInit {
   arraySuma: any = [];
   suma1 = 0; suma2 = 0; suma3 = 0; suma4 = 0; suma5 = 0;
   suma6 = 0; suma7 = 0; suma8 = 0; suma9 = 0; suma10 = 0;
+  arrayEtapas: any[] = [];
 
   constructor(private _negociosContactoService: NegociosContactosService,
-    private _negociosEmpresaService: NegociosEmpresasService) { }
+    private _negociosEmpresaService: NegociosEmpresasService, private _etapasService: EtapasNegociosService) { }
 
   ngOnInit(): void {
     this.negocio = new NegocioModel();
@@ -28,17 +30,20 @@ export class NegocioComponent implements OnInit {
     this.negocio.cantidad = 1;
     this.cargarNegociosConContactos();
     this.cargarNegociosConEmpresas();
+    this.cargarInfoEtapas();
   }
 
   onSubmit(form: NgForm) {
 
     if (form.invalid) {
-      console.log("Algo salio mal :(");
-      console.log(form);
       return;
     }
-    console.log("Negocio agregado ..:)");
-    console.log(form);
+  }
+
+  cargarInfoEtapas() {
+    this._etapasService.cargarEtapas().subscribe(lista => {
+      this.arrayEtapas = lista;
+    });
   }
 
   cargarNegociosConContactos() {
@@ -46,7 +51,6 @@ export class NegocioComponent implements OnInit {
       lista => {
         this.listaNegocios = lista;
         this.contadorNegocios = this.listaNegocios.length;
-        console.log('Negocios contactos: ', this.listaNegocios);
         for (let i = 0; i < this.listaNegocios.length; i++) {
 
           if (this.listaNegocios[i].fketapa === 1) {
@@ -96,8 +100,7 @@ export class NegocioComponent implements OnInit {
   cargarNegociosConEmpresas() {
     this._negociosEmpresaService.cargarNegocios().subscribe(
       lista => {
-        this.listaNegociosEmpresas = lista,
-          console.log('Negocios con empresas:', this.listaNegociosEmpresas);
+        this.listaNegociosEmpresas = lista;
 
         for (let i = 0; i < this.listaNegociosEmpresas.length; i++) {
 

@@ -12,9 +12,9 @@ export class ReunionesEmpresasService {
   token: string;
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
-   }
+  }
 
-   registrarReunion(reunion: ReunionesEmpresasModel): any {
+  registrarReunion(reunion: ReunionesEmpresasModel): any {
     let url = URL_SERVICIOS + '/reunionesempresas/';
     url += '?token=' + this.token;
     return this.http.post(url, reunion).pipe(

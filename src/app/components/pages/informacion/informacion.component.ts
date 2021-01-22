@@ -30,6 +30,7 @@ import { EtapasNegociosService } from '../../../services/etapasNegocios/etapas-n
 import { EnviarCorreoService } from '../../../services/enviarCorreo/enviar-correo.service';
 import { ConfigurarCorreoService } from '../../../services/configurarCorreo/configurar-correo.service';
 
+
 @Component({
   selector: 'app-perfil',
   templateUrl: './informacion.component.html',
@@ -54,6 +55,7 @@ export class InformacionComponent implements OnInit {
   llamadasR: RegistrarLlamadaModel[] = [];
   reunionesR: RegistrarReunionModel[] = [];
   negociosContacto: any[] = [];
+  correosEnviados: any[] = [];
   nombreEmpresa = new EmpresaModel();
   fkempresaContacto: number;
   idContacto: string;
@@ -75,7 +77,7 @@ export class InformacionComponent implements OnInit {
 
   @ViewChild('closeEditarNegocio') closeEditarNegocio;
   @ViewChild('closeModalEnviarCorreo') closeModalEnviarCorreo;
-
+  @ViewChild('correostab') tabCorreos;
   constructor(private rutaActiva: ActivatedRoute, private _contactoService: ContactoService, private _empresaService: EmpresaService,
     private _registrarCorreoService: RegistrarCorreoService, private _notasService: NotasService,
     private _llamadasService: LlamadasService, private _registrarReunionService: RegistrarReunionService,
@@ -124,6 +126,7 @@ export class InformacionComponent implements OnInit {
       this.cargarNegociosDeContacto();
       this.cargarEtapas();
       this.verificaConfig();
+      this.cargarCorreosEnviados();
       Swal.close();
     }
     else {
@@ -136,11 +139,7 @@ export class InformacionComponent implements OnInit {
   }
 
   accionultima(acc: string) {
-    //console.log('Accion que esta en la vista de informacion de contactos',acc);
     var sepa = acc.split("/", 3);
-    //console.log('sepa n--->',sepa);
-    //console.log('sepa --->',sepa[0]);
-    //console.log('sepa --->',sepa[1]);
     this.accion = sepa[0];
     this.accionF = sepa[1];
   }
@@ -178,9 +177,6 @@ export class InformacionComponent implements OnInit {
       this.cargaNombrePropietarioContacto();
       this.modeloCorreo.destinatario = this.unContacto.email;
       this.modeloCorreo.remitenteEmail = this.miUsuario['email'];
-      console.log('remitente email', this.modeloCorreo.remitenteEmail);
-
-      console.log('un contacto infor ---> ', this.unContacto);
     });
   }
 
@@ -204,7 +200,6 @@ export class InformacionComponent implements OnInit {
   }
 
   cargarInfoAlForm(datos: any) {
-    console.log(datos);
     this.editarNegocio.id_negocio = datos.id_negocio;
     this.editarNegocio.nombre_negocio = datos.nombre_negocio;
     this.editarNegocio.pipeline = datos.pipeline;
@@ -218,7 +213,6 @@ export class InformacionComponent implements OnInit {
     //var fechaAc = '2020-12-12'; 
     this._contactoService.ultimaAccion(id, fechaAc).subscribe(
       (resp: any) => {
-        console.log('Se actualizo la ultima actividad');
       }
     )
   }
@@ -247,7 +241,6 @@ export class InformacionComponent implements OnInit {
         })
           .then((ok) => {
             if (ok.isConfirmed) {
-              console.log('Clickeo OK');
               this.closeEditarNegocio.nativeElement.click();
               form.resetForm();
             }
@@ -270,8 +263,6 @@ export class InformacionComponent implements OnInit {
           });
 
       }
-    );
-    this._negociosContactoService.actualizarNegocio(this.negocio).subscribe(
     );
   }
 
@@ -312,15 +303,16 @@ export class InformacionComponent implements OnInit {
   sendMail(formu: NgForm) {
 
     if (formu.invalid) {
-      return console.log('Formulario invalido');
+      return;
     }
     this.modeloCorreo = {
       remitenteEmail: formu.value.remitente,
-
       remitenteNombre: this.miUsuario['nombre'],
       destinatario: formu.value.destinatarioEmail,
       descripcionCorreo: formu.value.descripcion,
-      asunto: formu.value.asunto
+      asunto: formu.value.asunto,
+      fkcontacto: this.idContacto,
+      fkusuario: this.miId
 
     }
     Swal.fire({
@@ -331,67 +323,225 @@ export class InformacionComponent implements OnInit {
       allowOutsideClick: false
     }),
       Swal.showLoading(),
-      console.log('modeloCorreo:', this.modeloCorreo);
-    this._enviarCorreoService.enviarCorreo(this.modeloCorreo).subscribe(
-      (resp: any) => {
-        Swal.close();
-        Swal.fire({
-          title: 'Correo enviado',
-          text: 'Se ha enviado el correo',
-          icon: 'success',
-        }).then((ok) => {
-          if (ok.isConfirmed) {
-            this.closeModalEnviarCorreo.nativeElement.click();
-          }
-        });
-        this.accion = 'Se envio un correo';
-      },
-      (error): any => {
-        Swal.close();
-        Swal.fire({
-          title: 'Error: ' + error.error.mensaje,
-          text: 'Verifique que todo esté correcto',
-          icon: 'error',
-        });
-        // if (error.error.errors.name === 'SequelizeUniqueConstraintError') {
+      this._enviarCorreoService.enviarCorreo(this.modeloCorreo).subscribe(
+        (resp: any) => {
+          Swal.close();
+          Swal.fire({
+            title: 'Correo enviado',
+            text: 'Se ha enviado el correo',
+            icon: 'success',
+          }).then((ok) => {
+            if (ok.isConfirmed) {
+              this.closeModalEnviarCorreo.nativeElement.click();
+            }
+          });
+          this.accion = 'Se envio un correo';
+        },
+        (error): any => {
+          Swal.close();
+          Swal.fire({
+            title: 'Error: ' + error.error.mensaje,
+            text: 'Verifique que todo esté correcto',
+            icon: 'error',
+          });
+          // if (error.error.errors.name === 'SequelizeUniqueConstraintError') {
+          //   Swal.fire({
+          //     title: 'El correo debe ser único para cada usuario',
+          //     text: 'Hubo un error, verifique',
+          //     icon: 'error',
+          //   });
+          // }
+
+        }
+
+
+        // dato => {
+        //   this.enviado = dato;
+
+        //   if (!this.enviado) {
+        //     Swal.close();
+        //     Swal.fire({
+        //       title: 'Correo no enviado',
+        //       text: 'No se ha enviado el correo',
+        //       icon: 'error',
+        //     });
+        //   }
+
+        //   Swal.close();
         //   Swal.fire({
-        //     title: 'El correo debe ser único para cada usuario',
-        //     text: 'Hubo un error, verifique',
-        //     icon: 'error',
+        //     title: 'Correo enviado',
+        //     text: 'Se ha enviado el correo',
+        //     icon: 'success',
         //   });
         // }
 
-      }
-
-
-      // dato => {
-      //   this.enviado = dato;
-
-      //   if (!this.enviado) {
-      //     Swal.close();
-      //     Swal.fire({
-      //       title: 'Correo no enviado',
-      //       text: 'No se ha enviado el correo',
-      //       icon: 'error',
-      //     });
-      //   }
-
-      //   Swal.close();
-      //   Swal.fire({
-      //     title: 'Correo enviado',
-      //     text: 'Se ha enviado el correo',
-      //     icon: 'success',
-      //   });
-      // }
-
-    );
+      );
   }
 
 
   verificaConfig() {
     this._configCorreoService.verificaConfiguracion(parseInt(this.miId)).subscribe(
-      configEmail => (this.emailConfigurado = configEmail.ok, console.log(this.emailConfigurado)
+      configEmail => (this.emailConfigurado = configEmail.ok
       )
     );
+  }
+
+
+  eliminarNota(datos: any): any {
+    Swal.fire({
+      title: '¿Está seguro de esos cambios?',
+      text: 'Eliminar nota',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#E5B53A',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    })
+      .then((borrar) => {
+        if (borrar.isConfirmed) {
+          this._notasService.eliminarNota(datos.id_nota).subscribe(
+            (resp) => {
+              Swal.fire(
+                'Eliminado',
+                'Nota eliminada',
+                'success'
+              );
+              this.cargarNotas();
+            },
+            (err) => {
+              Swal.fire(
+                'Error',
+                'Ocurrió un error',
+                'error'
+              );
+            }
+
+          );
+        }
+      });
+  }
+
+
+  eliminarCorreo(datos: any): any {
+    Swal.fire({
+      title: '¿Está seguro de esos cambios?',
+      text: 'Eliminar correo registrado',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#E5B53A',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    })
+      .then((borrar) => {
+        if (borrar.isConfirmed) {
+          this._registrarCorreoService.eliminarCorreo(datos.id_rcorreo).subscribe(
+            (resp) => {
+              Swal.fire(
+                'Eliminado',
+                'Correo eliminado',
+                'success'
+              );
+              this.cargarCorreosRegistrados();
+            },
+            (err) => {
+              Swal.fire(
+                'Error',
+                'Ocurrió un error',
+                'error'
+              );
+            }
+
+          );
+        }
+      });
+  }
+
+
+
+  eliminarLlamada(datos: any): any {
+    Swal.fire({
+      title: '¿Está seguro de esos cambios?',
+      text: 'Eliminar llamada registrada',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#E5B53A',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    })
+      .then((borrar) => {
+        if (borrar.isConfirmed) {
+
+          this._llamadasService.eliminarLlamada(datos.id_llamada).subscribe(
+            (resp) => {
+              Swal.fire(
+                'Eliminado',
+                'Llamada eliminada',
+                'success'
+              );
+              this.cargarLlamadas();
+            },
+            (err) => {
+              Swal.fire(
+                'Error',
+                'Ocurrió un error',
+                'error'
+              );
+            }
+
+          );
+
+        }
+      });
+  }
+
+
+  eliminarReunion(datos: any): any {
+    Swal.fire({
+      title: '¿Está seguro de esos cambios?',
+      text: 'Eliminar reunión registrada',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#E5B53A',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    })
+      .then((borrar) => {
+        if (borrar.isConfirmed) {
+
+          this._registrarReunionService.eliminarReunion(datos.id_regisreunion).subscribe(
+            (resp) => {
+              Swal.fire(
+                'Eliminado',
+                'Reunión eliminada',
+                'success'
+              );
+              this.cargarReuniones();
+            },
+            (err) => {
+              Swal.fire(
+                'Error',
+                'Ocurrió un error',
+                'error'
+              );
+            }
+
+          );
+
+        }
+      });
+  }
+
+  correosRegistrados() {
+    this.tabCorreos.nativeElement.click();
+  }
+
+  cargarCorreosEnviados() {
+
+    this._enviarCorreoService.obtenerCorreos(this.idContacto).subscribe((resp) => { this.correosEnviados = resp });
+
   }
 }

@@ -21,9 +21,6 @@ export class RegistrarCorreoService {
       map(
         (resp: any) => {
           Swal.fire('Correo', 'Correo registrado', 'success');
-          console.log('respuesta correo --->',resp.correo);
-          console.log('respuesta correo --->',resp.correo.fkcontacto);
-          console.log('respuesta correo --->',resp.correo.createdAt);
           var respuesta = resp.correo.fkcontacto + '/' + resp.correo.createdAt;
           return respuesta;
         }
@@ -32,8 +29,8 @@ export class RegistrarCorreoService {
   }
 
 
-  eliminarCorreo(idNota: string): any {
-    let url = URL_SERVICIOS + '/rcorreos/' + idNota;
+  eliminarCorreo(idCorreo: string): any {
+    let url = URL_SERVICIOS + '/rcorreos/' + idCorreo;
     url += '?token=' + this.token;
 
     return this.http.delete(url)

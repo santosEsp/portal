@@ -28,20 +28,7 @@ export class ExportarExcelService {
     const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
     FileSaver.saveAs(data, fileName + '-XLSX-' + this.contadorExcel + EXCEL_EXTENSION);
   }
-
-  // public contactosCsv(jsonDatos: any[], excelFileName: string): void {
-  //   this.contadorCsv += 1;
-  //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonDatos);
-  //   const workbook: XLSX.WorkBook = { Sheets: { 'contactos': worksheet }, SheetNames: ['contactos'] };
-  //   const excelBuffer: any = XLSX.write(workbook, { bookType: 'csv', type: 'array' });
-  //   this.saveAsCsvFile(excelBuffer, excelFileName);
-  // }
-  // private saveAsCsvFile(buffer: any, fileName: string): void {
-  //   const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
-  //   FileSaver.saveAs(data, fileName + '-CSV-' + this.contadorCsv + CSV_EXTENSION);
-  // }
-
-// Guardar mis contactos, services
+  // Guardar mis contactos, services
   public MisContactosExcel(jsonDatos: any[], excelFileName: string): void {
     this.contadorExcelMisContactos += 1;
     this.contadorExcel += 1;
@@ -55,17 +42,4 @@ export class ExportarExcelService {
     FileSaver.saveAs(data, fileName + '-XLSX-' + this.contadorExcelMisContactos + EXCEL_EXTENSION);
   }
 
-  // public MisContactosCsv(jsonDatos: any[], excelFileName: string): void {
-  //   this.contadorCsvMisContactos += 1;
-  //   console.log('service guardar MC CSV', jsonDatos);
-  //   this.contadorCsv += 1;
-  //   const worksheet: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonDatos);
-  //   const workbook: XLSX.WorkBook = { Sheets: { 'MisContactos': worksheet }, SheetNames: ['MisContactos'] };
-  //   const excelBuffer: any = XLSX.write(workbook, { bookType: 'csv', type: 'array' });
-  //   this.saveAsCsvFile2(excelBuffer, excelFileName);
-  // }
-  // private saveAsCsvFile2(buffer: any, fileName: string): void {
-  //   const data: Blob = new Blob([buffer], { type: EXCEL_TYPE });
-  //   FileSaver.saveAs(data, fileName + '-CSV-' + this.contadorCsvMisContactos + CSV_EXTENSION);
-  // }
 }

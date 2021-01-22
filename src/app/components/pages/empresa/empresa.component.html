@@ -43,7 +43,7 @@
                             <h5 class="modal-title text-white" id="exampleModalLabel">
                                 Agregar empresa
                             </h5>
-                            <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
+                            <button (click)="vaciarFormulario()" #closeModalEmpresa class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                         </div>
@@ -59,10 +59,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Propietario de registro</label>
-                                    <input type="text" class="form-control" id="pipeline" name="propietario" [(ngModel)]="propietario.propietario_registro" required disabled minlength="3" maxlength="10" />
-                                    <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger">
-                                    Campo obligatorio
-                                </small>
+                                    <input type="text" class="form-control" id="pipeline" name="propietario" placeholder="{{propietarionombre}}" required disabled minlength="3" maxlength="10" />
+
                                 </div>
                                 <div class="form-group">
                                     <label for="recipient-name" class="col-form-label">Industria</label>
@@ -166,10 +164,10 @@
                                 </small>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="submit" class="btn estilosBotonesHover estilosBotones">
+                                    <button type="submit" (click)="numeroBotonSeleccionado(1)" class="btn estilosBotonesHover estilosBotones">
                                     Crear
                                 </button>
-                                    <button type="submit" class="btn estilosBotonesHover estilosBotones">
+                                    <button type="submit" (click)="numeroBotonSeleccionado(2)" class="btn estilosBotonesHover estilosBotones">
                                     Crear y agregar otra
                                 </button>
                                     <button (click)="vaciarFormulario()" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">
@@ -182,7 +180,7 @@
                 </div>
             </div>
         </div>
-        <!--Fin formulario crear contacto-->
+        <!--Fin formulario crear empresa-->
 
         <!--Tabs-->
         <div class="container-fluid pt-3">
@@ -443,7 +441,7 @@
                     <h5 class="modal-title text-white" id="exampleModalLabel">
                         Editar empresa
                     </h5>
-                    <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
+                    <button (click)="vaciarFormulario()" #closeModalEditarEmpresa class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                 </div>
@@ -640,11 +638,7 @@
                                                 estilosBotones">
                                     Actualizar
                                 </button>
-                            <button type="submit" class="btn
-                                                estilosBotonesHover
-                                                estilosBotones">
-                                    Crear y agregar otra
-                                </button>
+
                             <button (click)="vaciarFormulario()" class="btn
                                                 estilosBotonesHover
                                                 estilosBotones" data-dismiss="modal">

@@ -26,16 +26,13 @@ export class ContactoService {
       )
     );
   }
-  ultimaAccion( id: string, accion: string): any {
-    console.log('id U -->',id);  
+  ultimaAccion(id: string, accion: string): any {
     let url = URL_SERVICIOS + '/contactos/ultima/' + id + '/' + accion;
     url += '/?token=' + this.token;
-    console.log('url ultima ---->', url);
-    return this.http.put(url,id)
+    return this.http.put(url, id)
       .pipe(
         map(
           (resp: any) => {
-            console.log('ultima actividad actualizada');
             return resp.contacto;
           }
         )
@@ -75,7 +72,7 @@ export class ContactoService {
               text: 'Actualizado correctamente',
               icon: 'success',
             });
-       
+
             return resp.contacto;
           }
         )
@@ -196,7 +193,6 @@ export class ContactoService {
       .pipe(
         map(
           (resp: any) => {
-            console.log(resp.contactos);
             return resp.contactos;
           }
         )
@@ -207,7 +203,6 @@ export class ContactoService {
   buscarCantacto(termino: string) {
 
     let url = URL_SERVICIOS + '/busqueda/contactos/' + "'" + termino + "'";
-    console.log(url);
     return this.http.get(url)
       .pipe(map((resp: any) => resp.contactos));
   }
@@ -215,7 +210,6 @@ export class ContactoService {
   buscarMiCantacto(termino: string, id: number) {
 
     let url = URL_SERVICIOS + '/busqueda/miscontactos/' + id + '/' + "'" + termino + "'";
-    console.log(url);
     return this.http.get(url)
       .pipe(map((resp: any) => resp.contactos));
   }
@@ -226,7 +220,6 @@ export class ContactoService {
       .pipe(
         map(
           (resp: any) => {
-            console.log(resp.contactos);
             return resp.contactos;
           }
         )

@@ -1,3 +1,3 @@
-export class ContraseñaModel{
-    con_nueva:string;
+export class ContraseñaModel {
+    con_nueva: string;
 }

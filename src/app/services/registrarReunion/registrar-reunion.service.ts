@@ -11,7 +11,7 @@ export class RegistrarReunionService {
   token: string;
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
-    
+
   }
 
   registrarReunion(reunion: RegistrarReunionModel): any {
@@ -21,8 +21,7 @@ export class RegistrarReunionService {
       map(
         (resp: any) => {
           Swal.fire('Reunión', 'Reunión registrado', 'success');
-          console.log('respuesta --->',resp.reunion);
-          var respuesta =   resp.reunion.createdAt + '/' + resp.reunion.fkcontacto;
+          var respuesta = resp.reunion.createdAt + '/' + resp.reunion.fkcontacto;
           return respuesta;
         }
       )
@@ -39,7 +38,7 @@ export class RegistrarReunionService {
         map(
           (resp: any) => {
             Swal.fire({
-              title: 'Reunión eliminado',
+              title: 'Reunión eliminada',
               text: 'Eliminado correctamente',
               icon: 'success',
             });

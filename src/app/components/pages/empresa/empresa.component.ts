@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UsuarioModel } from 'src/app/models/usuarios.model';
 import { EmpresaService } from 'src/app/services/empresas/empresa.service';
@@ -16,7 +16,7 @@ export class EmpresaComponent implements OnInit {
   editarEmpresa = new EmpresaModel();
   propietario = new EmpresaModel();
   empresas: EmpresaModel[] = [];
-  
+
   todasLasEmpresas: EmpresaModel[] = [];
   listaMisEmpresas: EmpresaModel[] = [];
   listaTodasMisEmpresas: EmpresaModel[] = [];
@@ -28,6 +28,8 @@ export class EmpresaComponent implements OnInit {
   miUsuario: string;
   empresasDesde: number;
   misEmpresasDesde: number;
+  propietarionombre: string;
+  numeroBoton = 1;
 
   // Para obtener el id_del usuario
   usuarioActual: UsuarioModel;
@@ -35,6 +37,11 @@ export class EmpresaComponent implements OnInit {
   salvaContadorMisEmpresas: number;
   masPaginasE: boolean;
   masPaginasME: boolean;
+
+  //Cerra Forms
+
+  @ViewChild('closeModalEmpresa') closeModalEmpresa;
+  @ViewChild('closeModalEditarEmpresa') closeModalEditarEmpresa;
 
   constructor(
     private _empresaService: EmpresaService, private _excelService: ExcelEmpresasService) {
@@ -44,6 +51,8 @@ export class EmpresaComponent implements OnInit {
     this.miId = this.miUsuario['id_usuario'];
     this.empresasDesde = 0;
     this.misEmpresasDesde = 0;
+
+    this.propietarionombre = this.miUsuario['nombre'];
   }
 
   ngOnInit(): void {
@@ -60,13 +69,12 @@ export class EmpresaComponent implements OnInit {
     if (termino.length <= 0) {
       this.cargarEmpresas();
       return;
-    }    
+    }
     // this.cargando = true;
     this._empresaService.buscarEmpresa(termino)
       .subscribe(lista => {
-         this.empresas = lista
-         console.log(this.empresas);
-        });
+        this.empresas = lista
+      });
     // this.cargando = false;
 
   }
@@ -75,15 +83,18 @@ export class EmpresaComponent implements OnInit {
     if (termino.length <= 0) {
       this.cargarMisEmpresas();
       return;
-    }    
+    }
     // this.cargando = true;
-    this._empresaService.buscarMiEmpresa(termino,parseInt(this.miId))
+    this._empresaService.buscarMiEmpresa(termino, parseInt(this.miId))
       .subscribe(lista => {
-         this.listaMisEmpresas = lista
-         console.log(this.listaMisEmpresas);
-        });
+        this.listaMisEmpresas = lista
+      });
     // this.cargando = false;
 
+  }
+
+  numeroBotonSeleccionado(numero: number) {
+    this.numeroBoton = numero;
   }
 
 
@@ -109,7 +120,49 @@ export class EmpresaComponent implements OnInit {
       descripcion: form.value.descripcion,
       pagina_corporativa: form.value.pagina
     };
-    this._empresaService.crearEmpresa(this.empresa).subscribe();
+    this._empresaService.crearEmpresa(this.empresa).subscribe(
+      (resp: any) => {
+        this.cargarTodasLasEmpresas();
+        this.cargarTodasMisEmpresas();
+        this.cargarEmpresas();
+        this.cargarMisEmpresas();
+        this.contadorEmpresasBD();
+        this.contadorMisEmpresasBD();
+
+        Swal.close();
+        Swal.fire({
+          title: 'Empresa registrada',
+          text: 'Empresa registrada correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              if (this.numeroBoton == 1) {
+                this.closeModalEmpresa.nativeElement.click();
+                form.resetForm();
+                this.propietarionombre = this.miUsuario['nombre'];
+              }
+              if (this.numeroBoton == 2) {
+                form.resetForm();
+                this.propietarionombre = this.miUsuario['nombre'];
+              }
+            }
+          });
+      },
+      (error): any => {
+        Swal.close();
+        Swal.fire({
+          title: 'Error al agregar empresa',
+          text: 'Hubo un error, verifique los datos',
+          icon: 'error',
+        });
+
+      }
+    );
     this.cargarEmpresas();
   }
 
@@ -149,7 +202,7 @@ export class EmpresaComponent implements OnInit {
     });
 
   }
-  
+
   cargarTodasMisEmpresas(): any {
     this._empresaService.cargarTodasMisEmpresas(parseInt(this.miId)).subscribe(listaMisEmpresas => {
       this.listaTodasMisEmpresas = listaMisEmpresas;
@@ -172,20 +225,30 @@ export class EmpresaComponent implements OnInit {
         if (borrar.isConfirmed) {
           this._empresaService.eliminarEmpresa(empresa.id_empresa).subscribe(
             (resp: any) => {
-            Swal.fire('Eliminado',
-              'Empresa eliminada',
-              'success'
-            );
-            this.cargarEmpresas();
-          },(error): any => {
-            if (error.error.error.name === 'SequelizeForeignKeyConstraintError') {
               Swal.fire({
-                title: 'No puede eliminar a esta empresa',
-                text: 'Ya que tiene varios eventos asignados',
-                icon: 'error',
+                title: 'Empresa eliminada',
+                text: 'Empresa eliminada correctamente',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#E5B53A',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false
               });
+              this.cargarEmpresas();
+              this.cargarMisEmpresas();
+              this.cargarTodasLasEmpresas();
+              this.cargarTodasMisEmpresas();
+              this.contadorEmpresasBD();
+              this.contadorMisEmpresasBD();
+            }, (error): any => {
+              if (error.error.error.name === 'SequelizeForeignKeyConstraintError') {
+                Swal.fire({
+                  title: 'No puede eliminar a esta empresa',
+                  text: 'Ya que tiene varios eventos asignados',
+                  icon: 'error',
+                });
+              }
             }
-           } 
           );
 
         }
@@ -313,6 +376,48 @@ export class EmpresaComponent implements OnInit {
       descripcion: form.value.descripcion,
       pagina_corporativa: form.value.pagina
     }
-    this._empresaService.actualizarEmpresa(this.editarEmpresa).subscribe();
+    this._empresaService.actualizarEmpresa(this.editarEmpresa).subscribe(
+
+      (resp: any) => {
+        Swal.close();
+        Swal.fire({
+          title: 'Actualizado',
+          text: 'Empresa actualizada correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              this.closeModalEditarEmpresa.nativeElement.click();
+              this.cargarEmpresas();
+              this.cargarMisEmpresas();
+              this.cargarTodasLasEmpresas();
+              this.cargarTodasMisEmpresas();
+            }
+          });
+      },
+      (err: any) => {
+        Swal.close();
+        Swal.fire({
+          title: 'No actualizada',
+          text: 'Error al actualizar empresa',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+
+
+    );
   }
 }

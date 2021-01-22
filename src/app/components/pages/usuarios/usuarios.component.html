@@ -32,7 +32,7 @@
                             <path fill-rule="evenodd" d="M8 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM6 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H1s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10zM13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
                           </svg><span style="border-left: thin solid white; margin-left: 10px;"></span>&nbsp; Crear usuario
                         </h5>
-                        <button (click)="vaciarForm()" class="close" data-dismiss="modal" aria-label="Close">
+                        <button (click)="vaciarForm()" class="close" #closeModal data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
                     </div>
@@ -100,7 +100,7 @@
                         <th scope="col">Nombre</th>
                         <th scope="col">Correo</th>
                         <th scope="col">Rol</th>
-                        <th scope="col">Guardar</th>
+                        <th scope="col">Editar</th>
                         <th scope="col">Eliminar</th>
                     </tr>
                 </thead>
@@ -109,7 +109,7 @@
                     <tr *ngFor="let usuario of usuarios; let i = index">
 
                         <th scope="row">
-                            {{ i + 1 }}
+                            {{ usuariosDesde + ( i + 1 )}}
                         </th>
 
                         <td> <input [(ngModel)]="usuario.nombre" type="text" name="nombre" class="form-control" placeholder="nombre" minlength="5" maxlength="50" required></td>

@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   loginUser: UsuarioModel = new UsuarioModel();
   recuperaPasswordModel: RecuperarPaswordModel = new RecuperarPaswordModel();
   @ViewChild('closebutton') closebutton;
-  
+
 
   recordarme = false;
   email: string;
@@ -86,7 +86,6 @@ export class LoginComponent implements OnInit {
         })
           .then((ok) => {
             if (ok.isConfirmed) {
-              console.log('Clickeo OK');
               this.closebutton.nativeElement.click();
               form1.resetForm();
             }

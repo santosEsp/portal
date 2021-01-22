@@ -1,3 +1,3 @@
-export class InformesModel{
+export class InformesModel {
     fechaI: string;
 }

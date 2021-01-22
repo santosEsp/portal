@@ -92,10 +92,6 @@ export class InformacionEmpresaComponent implements OnInit {
       (params: Params) => {
         this.ruta.tipo = params.tipo;
         this.ruta.id = params.id;
-
-        console.log('Tipo', this.ruta.tipo);
-        console.log('Id', this.ruta.id);
-
       }
     );
 
@@ -115,7 +111,6 @@ export class InformacionEmpresaComponent implements OnInit {
   infoEmpresa(): any {
     this._empresaService.cargarUnaEmpresa(parseInt(this.idEmpresa)).subscribe(empresa => {
       this.unaEmpresa = empresa;
-      console.log('UnaEmpresa', this.unaEmpresa);
       this.fkpropietarioEmpresa = parseInt(this.unaEmpresa.propietario_registro);
       this.cargaNombrePropietarioEmpresa();
       this.cargarContactosRelacionados();
@@ -226,7 +221,6 @@ export class InformacionEmpresaComponent implements OnInit {
 
     };
 
-    console.log('Info correo Emp', this.correoEmpresa);
     this._correosEmpresas.registrarCorreo(this.correoEmpresa).subscribe(
       (resp: any) => {
         Swal.fire({
@@ -281,7 +275,6 @@ export class InformacionEmpresaComponent implements OnInit {
       fkusuario: this.miId
     };
 
-    console.log('Datos llamada', this.llamadaEmpresa);
     this._llamadasEmpresa.crearLlamada(this.llamadaEmpresa).subscribe(
       (resp: any) => {
         Swal.fire({
@@ -290,7 +283,7 @@ export class InformacionEmpresaComponent implements OnInit {
           icon: 'success',
           showCancelButton: false,
           confirmButtonColor: '#E5B53A',
-          confirmButtonText: 'Ok', 
+          confirmButtonText: 'Ok',
           allowOutsideClick: false,
           allowEscapeKey: false
         })
@@ -337,7 +330,6 @@ export class InformacionEmpresaComponent implements OnInit {
       descripcion: form.value.descripcionReunion
     };
 
-    console.log('Reunion empresa', this.reunionEmpresa);
 
     this._reunionesEmpresas.registrarReunion(this.reunionEmpresa).subscribe(
       (resp: any) => {
@@ -395,7 +387,6 @@ export class InformacionEmpresaComponent implements OnInit {
       fkempresa: parseInt(this.idEmpresa),
       fkusuario: parseInt(this.miId)
     };
-    console.log('Negocio COMP', this.negocioEmpresa);
     this._negociosEmpresas.crearNegocio(this.negocioEmpresa).subscribe(
       (resp: any) => {
         Swal.fire({
@@ -440,14 +431,12 @@ export class InformacionEmpresaComponent implements OnInit {
   cargarNegociosDeEmpresa(): any {
     this._negociosEmpresas.cargarNegociosConEmpresa(this.idEmpresa).subscribe(listaNegocios => {
       this.negociosEmpresa = listaNegocios;
-      console.log('Negocios empresa', this.negociosEmpresa);
     });
   }
 
   cargarEtapas(): any {
     this._etapasService.cargarEtapas().subscribe(lista => {
       this.etapas = lista;
-      console.log('Etapas de negocios', this.etapas);
     });
   }
 
@@ -480,7 +469,6 @@ export class InformacionEmpresaComponent implements OnInit {
   }
 
   cargarInfoAlForm(datos: any) {
-    console.log('Datos al form', datos);
     this.editarNegocio.id_negocio = datos.id_negocio;
     this.editarNegocio.nombre_negocio = datos.nombre_negocio;
     this.editarNegocio.pipeline = datos.pipeline;
@@ -490,7 +478,6 @@ export class InformacionEmpresaComponent implements OnInit {
   }
 
   actualizarNegocio(form: NgForm) {
-    console.log('Info recibido:', form);
     this.negocioEmpresa = {
       id_negocio: form.value.idNegocio,
       nombre_negocio: form.value.nombreNegocio,
@@ -502,7 +489,6 @@ export class InformacionEmpresaComponent implements OnInit {
       fkusuario: parseInt(this.miId)
     }
 
-    console.log('EditarNegocio', this.negocioEmpresa);
     this._negociosEmpresas.actualizarNegocio(this.negocioEmpresa).subscribe(
       (resp: any) => {
         Swal.fire({

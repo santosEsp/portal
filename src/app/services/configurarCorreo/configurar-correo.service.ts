@@ -33,7 +33,6 @@ export class ConfigurarCorreoService {
     return this.http.get(url).pipe(
       map(
         (resp: any) => {
-          console.log('Config email service: ', resp);
           return resp;
         }
       )

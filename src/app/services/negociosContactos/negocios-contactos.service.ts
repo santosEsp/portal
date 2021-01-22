@@ -21,7 +21,6 @@ export class NegociosContactosService {
       map(
         (resp: any) => {
           Swal.fire(negocio.createdAt, 'Negocio agregado correctamente', 'success');
-          console.log('respuesta de creacion de negocio :', resp.negocio);
           let respuesta = resp.negocio.fkcontacto + '/' + resp.negocio.createdAt;
           return respuesta;
         }
@@ -53,7 +52,6 @@ export class NegociosContactosService {
 
     let url = URL_SERVICIOS + '/negociosContactos/' + negocio.id_negocio;
     url += '?token=' + this.token;
-    console.log('url actualizar engocios --->', url);
     return this.http.put(url, negocio)
       .pipe(
         map(
@@ -63,7 +61,6 @@ export class NegociosContactosService {
               text: 'Actualizado correctamente',
               icon: 'success',
             });
-            // console.log('respuesta de negocio --->',resp);
             return resp.negocio;
           }
         )

@@ -15,23 +15,21 @@ export class NotasService {
     this.token = localStorage.getItem('token');
   }
 
-crearNota(nota: NotaModel): any {
+  crearNota(nota: NotaModel): any {
     let url = URL_SERVICIOS + '/notas/';
     url += '?token=' + this.token;
     return this.http.post(url, nota).pipe(
       map(
-        (resp: any) => {    
+        (resp: any) => {
           Swal.fire('Nota', 'Nota agregada correctamente', 'success');
-          //console.log('Nota creada', resp.nota.createdAt);
-          //console.log('id -->',resp,nota.fkcontacto);  
-          this.accionUltima= resp.nota.createdAt + "/" + resp.nota.fkcontactos;     
+          this.accionUltima = resp.nota.createdAt + "/" + resp.nota.fkcontactos;
           return this.accionUltima;
         }
       )
     );
   }
 
- 
+
 
   eliminarNota(id: string): any {
     let url = URL_SERVICIOS + '/notas/' + id;

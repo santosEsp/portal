@@ -12,7 +12,6 @@ export class NotasEmpresasService {
   constructor(private http: HttpClient) { this.token = localStorage.getItem('token'); }
 
   crearNota(nota: NotasEmpresasModel): any {
-    console.log('nota de empresa service', nota);
     let url = URL_SERVICIOS + '/notasempresas/';
     url += '?token=' + this.token;
 

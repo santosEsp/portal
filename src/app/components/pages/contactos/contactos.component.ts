@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ContactoModel } from '../../../models/contacto.model';
 import { ContactoService } from '../../../services/contactos/contacto.service';
@@ -9,6 +9,8 @@ import { GuardarLlamadasService } from '../../../services/excelService/guardar-l
 import { LlamadasService } from '../../../services/llamadas/llamadas.service';
 import { RegistrarReunionService } from '../../../services/registrarReunion/registrar-reunion.service';
 import { GuardarReunionesService } from '../../../services/excelService/guardar-reuniones.service';
+import { GuardarCorreosService } from '../../../services/excelService/guardar-correos.service'
+import { EnviarCorreoService } from '../../../services/enviarCorreo/enviar-correo.service'
 
 
 @Component({
@@ -16,7 +18,12 @@ import { GuardarReunionesService } from '../../../services/excelService/guardar-
   templateUrl: './contactos.component.html',
   styleUrls: ['./contactos.component.css'],
 })
+
+
 export class ContactosComponent implements OnInit {
+
+  @ViewChild('closeModalContacto') closeModalContacto;
+  @ViewChild('closeModalEditarContacto') closeModalEditarContacto;
 
   contacto = new ContactoModel();
   propietario = new ContactoModel();
@@ -32,6 +39,7 @@ export class ContactosComponent implements OnInit {
   llamadasRealizadas: any = [];
   listaMisContactos: ContactoModel[] = [];
   reunionesRealizadas: any = [];
+  correosEnviados: any = [];
   proveedores;
   Contacto: any = [];
 
@@ -49,14 +57,17 @@ export class ContactosComponent implements OnInit {
   salvaContadorContactos: number;
   salvaIdUsuario: any;
   editarContacto = new ContactoModel();
+  numeroBoton = 1;
 
   constructor(private _ContactoService: ContactoService, private _EmpresaService: EmpresaService,
     private _excelService: ExportarExcelService, private _guardarLlamadasService: GuardarLlamadasService, private _llamadasService: LlamadasService,
-    private _registrarReunionService: RegistrarReunionService, private _guardarReunionesService: GuardarReunionesService) {
+    private _registrarReunionService: RegistrarReunionService, private _guardarReunionesService: GuardarReunionesService,
+    private _guardarCorreosEnviadosService: GuardarCorreosService, private _correosService: EnviarCorreoService) {
 
     this.tipo = 'contacto';
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
     this.propietario.propietario_registro = this.miUsuario['nombre'];
+    this.propietarionombre = this.miUsuario['nombre'];
     this.miId = this.miUsuario['id_usuario'];
 
     this.desde = 0;
@@ -73,6 +84,7 @@ export class ContactosComponent implements OnInit {
     this.cargarReunionesRealizadas();
     this.cargarTodosLosContactos();
     this.cargarTodosMisContactos();
+    this.cargarCorreosEnviados();
   }
 
   onSubmit(form: NgForm): any {
@@ -85,12 +97,12 @@ export class ContactosComponent implements OnInit {
     if (termino.length <= 0) {
       this.cargarContactos();
       return;
-    }    
+    }
     // this.cargando = true;
     this._ContactoService.buscarCantacto(termino)
       .subscribe(lista => {
-         this.contactos = lista
-        });
+        this.contactos = lista
+      });
     // this.cargando = false;
 
   }
@@ -98,10 +110,10 @@ export class ContactosComponent implements OnInit {
     if (termino.length <= 0) {
       this.cargarMisContactos();
       return;
-    }    
+    }
     // this.cargando = true;
-    this._ContactoService.buscarMiCantacto(termino,this.miId)
-      .subscribe(lista => { this.listaMisContactos = lista});
+    this._ContactoService.buscarMiCantacto(termino, this.miId)
+      .subscribe(lista => { this.listaMisContactos = lista });
     // this.cargando = false;
 
   }
@@ -184,7 +196,6 @@ export class ContactosComponent implements OnInit {
     });
   }
 
-
   cargarTodosMisContactos(): any {
 
     this._ContactoService.cargarTodosMisContactos(this.miId).subscribe(listaMisContactos => {
@@ -193,6 +204,10 @@ export class ContactosComponent implements OnInit {
   }
   cargarListaEmpresas(): any {
     this._EmpresaService.cargarListaEmpresas().subscribe(lista => this.listaEmpresas = lista);
+  }
+
+  numeroBotonSeleccionado(numero: number) {
+    this.numeroBoton = numero;
   }
 
   agregarContacto(forma: NgForm): any {
@@ -209,12 +224,45 @@ export class ContactosComponent implements OnInit {
       fkempresa: forma.value.fkempresa
     };
 
+    Swal.showLoading();
+
     this._ContactoService.crearContacto(this.contacto).subscribe(
       (resp: any) => {
-        Swal.fire(this.contacto.nombre, 'Contacto creado correctamente', 'success');
         this.cargarContactos();
+        this.cargarMisContactos();
+        this.cargarTodosLosContactos();
+        this.cargarTodosMisContactos();
+        this.contadorContactosBD();
+        this.contadorMisContactosBD();
+
+        Swal.close();
+        Swal.fire({
+          title: 'Contacto registrado',
+          text: 'Contacto registrado correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+
+              if (this.numeroBoton == 1) {
+                this.closeModalContacto.nativeElement.click();
+                forma.resetForm();
+                this.propietarionombre = this.miUsuario['nombre'];
+              }
+
+              if (this.numeroBoton == 2) {
+                forma.resetForm();
+                this.propietarionombre = this.miUsuario['nombre'];
+              }
+            }
+          });
       },
       (error): any => {
+        Swal.close();
         if (error.error.errors.name === 'SequelizeUniqueConstraintError') {
           Swal.fire({
             title: 'El correo debe ser único para cada contacto',
@@ -222,7 +270,7 @@ export class ContactosComponent implements OnInit {
             icon: 'error',
           });
         }
-      }   
+      }
     );
   }
 
@@ -237,7 +285,6 @@ export class ContactosComponent implements OnInit {
       fkempresa: 0
     };
   }
-
 
   eliminarContacto(contacto: ContactoModel): any {
 
@@ -256,17 +303,30 @@ export class ContactosComponent implements OnInit {
 
           this._ContactoService.eliminarContacto(contacto.id_contacto).subscribe(
             (resp: any) => {
-            Swal.fire('Eliminado','Contacto eliminado','success');
-            this.cargarContactos();
-          },(error): any => {
-            if (error.error.error.name === 'SequelizeForeignKeyConstraintError') {
               Swal.fire({
-                title: 'No puede eliminar a este contacto',
-                text: 'Ya que tiene varios eventos asignados',
-                icon: 'error',
+                title: 'Empresa eliminada',
+                text: 'Empresa eliminada correctamente',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#E5B53A',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false
               });
+              this.cargarContactos();
+              this.cargarMisContactos();
+              this.cargarTodosLosContactos();
+              this.cargarTodosMisContactos();
+              this.contadorContactosBD();
+              this.contadorMisContactosBD();
+            }, (error): any => {
+              if (error.error.error.name === 'SequelizeForeignKeyConstraintError') {
+                Swal.fire({
+                  title: 'No puede eliminar a este contacto',
+                  text: 'Ya que tiene varios eventos asignados',
+                  icon: 'error',
+                });
+              }
             }
-           }          
           );
 
         }
@@ -321,6 +381,21 @@ export class ContactosComponent implements OnInit {
     this._guardarReunionesService.reunionesExcel(this.reunionesRealizadas, 'ReunionesRealizadas');
   }
 
+
+  cargarCorreosEnviados() {
+    this._correosService.reporteUltimosCorreosEnviados().subscribe(lista => {
+      this.correosEnviados = lista
+    });
+  }
+  exportarCorreosEnviados() {
+    Swal.fire({
+      icon: 'success',
+      title: 'Se están exportando los correos enviados (Excel)',
+      showConfirmButton: false,
+      timer: 3000
+    });
+    this._guardarCorreosEnviadosService.correosExcel(this.correosEnviados, 'CorreosEnviados');
+  }
   cargarInfoAlForm(datos: any) {
     this.editarContacto.id_contacto = datos.id_contacto;
     this.editarContacto.email = datos.email;
@@ -331,9 +406,7 @@ export class ContactosComponent implements OnInit {
     this.editarContacto.telefono = datos.telefono;
     this.editarContacto.fkempresa = datos.id_empresa;
     this.salvaIdUsuario = datos.id_usuario;
-    console.log('PN --->',datos.propietario);
-    this.propietarionombre=datos.propietario;
-    console.log('Pro Nom -->',this.propietarionombre);
+    this.propietarionombre = datos.propietario;
   }
 
   actualizarContacto(form: NgForm): any {
@@ -350,13 +423,55 @@ export class ContactosComponent implements OnInit {
       telefono: form.value.telefono,
       fkempresa: form.value.fkempresa
     };
-    
-    this._ContactoService.actualizarContacto(this.editarContacto).subscribe();
+    Swal.showLoading();
+    this._ContactoService.actualizarContacto(this.editarContacto).subscribe(
+
+      (resp: any) => {
+        Swal.close();
+
+
+        Swal.fire({
+          title: 'Actualizado',
+          text: 'Contacto actualizado correctamente',
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+              this.cargarContactos();
+              this.cargarMisContactos();
+              this.cargarTodosLosContactos();
+              this.cargarTodosMisContactos();
+              this.closeModalEditarContacto.nativeElement.click();
+            }
+          });
+      },
+      (err: any) => {
+        Swal.close();
+        Swal.fire({
+          title: 'No actualizado',
+          text: 'Error al actualizar contacto',
+          icon: 'error',
+          showCancelButton: false,
+          confirmButtonColor: '#E5B53A',
+          confirmButtonText: 'Ok',
+          allowOutsideClick: false
+        })
+          .then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+
+      }
+    );
   }
 
 
   cargarInfoAlFormMC(datos: any) {
-    
+
     this.editarContacto.id_contacto = datos.id_contacto;
     this.editarContacto.email = datos.email;
     this.editarContacto.nombre = datos.nombre;
@@ -366,12 +481,12 @@ export class ContactosComponent implements OnInit {
     this.editarContacto.telefono = datos.telefono;
     this.editarContacto.fkempresa = datos.id_empresa;
     this.salvaIdUsuario = datos.id_usuario;
-    
-    
-    
+
+
+
   }
 
-  
+
   actualizarMiContacto(form: NgForm): any {
     if (form.invalid) {
       return 'Formulario no válido';
@@ -388,5 +503,7 @@ export class ContactosComponent implements OnInit {
     }
     this._ContactoService.actualizarContacto(this.contacto).subscribe();
   }
+
+
 
 }

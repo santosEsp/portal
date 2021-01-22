@@ -1,4 +1,4 @@
-export class NegocioModel{
+export class NegocioModel {
     id_negocio?: string;
     nombre_negocio: string;
     pipeline: string;

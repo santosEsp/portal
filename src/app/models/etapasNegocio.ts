@@ -1,4 +1,4 @@
-export class EtapasNegocio{
+export class EtapasNegocio {
     id_etapa?: number;
     nombre: string;
     probabilidad: string;

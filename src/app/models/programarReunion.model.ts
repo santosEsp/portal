@@ -1,4 +1,4 @@
-export class ProgramarReunion{
+export class ProgramarReunion {
     asistentes: number;
     inicio: string;
     duracion: string;

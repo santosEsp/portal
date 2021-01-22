@@ -22,7 +22,6 @@ export class RestablecerpswComponent implements OnInit {
 
     this.routeActivated.params.subscribe(params => {
       this.resetToken = params.token;
-      console.log('reset token', this.resetToken);
     });
   }
 
@@ -33,17 +32,15 @@ export class RestablecerpswComponent implements OnInit {
   restablecer(form: NgForm) {
 
     if (form.invalid) {
-      return ;
+      return;
     }
     this.cadena1 = form.value.password1;
     this.cadena2 = form.value.password2;
     if (this.cadena1 === this.cadena2) {
-      console.log('Si coinciden ');
       this.resetModel = {
         password: form.value.password2,
         tokenReset: `Bearer ${this.resetToken}`
       };
-      console.log('Reset model', this.resetModel);
       this._resetService.resetPassword(this.resetModel).subscribe(
         (resp: any) => {
 

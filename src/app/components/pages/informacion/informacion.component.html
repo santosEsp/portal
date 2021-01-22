@@ -144,7 +144,7 @@
                     <a class="nav-link" id="notas-tab" data-toggle="tab" href="#notas" role="tab" aria-controls="profile" aria-selected="false">Notas</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="correos-tab" data-toggle="tab" href="#correos" role="tab" aria-controls="profile" aria-selected="false">Correos</a>
+                    <a class="nav-link" id="correos-tab" data-toggle="tab" href="#correos" (click)="correosRegistrados()" role="tab" aria-controls="profile" aria-selected="false">Correos</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" id="llamadas-tab" data-toggle="tab" href="#llamadas" role="tab" aria-controls="profile" aria-selected="false">Llamadas</a>
@@ -215,6 +215,10 @@
                         <div class="card-body">
                             <blockquote class="blockquote mb-0">
                                 <p><small class="text-muted">Descripción: </small><br>{{notas.comentario}}</p>
+
+                                <small class="float-sm-right text-sm-right"><a href="#" (click)="eliminarNota(notas)" data-toggle="modal" data-target="evitaRedirigir">Eliminar</a></small>
+
+
                             </blockquote>
                         </div>
                     </div>
@@ -226,47 +230,130 @@
                 <div class="tab-pane fade active" id="correos" role="tabpanel" aria-labelledby="correos-tab">
 
 
-                    <div class="row mt-3" *ngIf="correosR.length == 0">
-                        <div class="col-md-12">
-                            <div class="alert alert-secondary" role="alert">
-                                <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <ul class="nav nav-tabs mb-0 mt-3 nav-justified" id="myTab2" role="tablist">
+
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="correos-tab" #correostab data-toggle="tab" href="#correos-registrados" role="tab" aria-controls="profile" aria-selected="false">Correos registrados</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="correos-enviadostab" #correostab data-toggle="tab" href="#correos-enviados" role="tab" aria-controls="profile" aria-selected="false">Correos enviados</a>
+                        </li>
+
+                    </ul>
+
+
+
+                    <div class="tab-content " id="myTabContent" *ngIf="ruta.tipo=='contacto'">
+
+
+                        <div class="tab-pane fade" id="correos-registrados" role="tabpanel" aria-labelledby="correos-tab">
+
+                            <div class="row mt-3" *ngIf="correosR.length == 0">
+                                <div class="col-md-12">
+                                    <div class="alert alert-secondary" role="alert">
+                                        <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                     <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                     <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
                                     <circle cx="8" cy="4.5" r="1"/>
                                   </svg> &nbsp;&nbsp; No hay correos registrados para este contacto, empieza a crearlos y aparecerán aquí
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div class="card mt-4 cardColorBorde" *ngFor="let correos of correosR">
-                        <div class="card-header grisSecundario ">
-                            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <div class="card mt-3 cardColorBorde" *ngFor="let correos of correosR">
+                                <div class="card-header grisSecundario ">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
                             </svg>&nbsp; Correo registrado
 
-                            <div class="float-right">
-                                {{ correos.createdAt | date }}
+                                    <div class="float-right">
+                                        {{ correos.createdAt | date }}
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <td><small class="text-muted">Contactado: </small><br>{{unContacto.nombre}} {{unContacto.apellido}}</td>
+                                                    <td><small class="text-muted">Fecha: </small><br>{{ correos.fecha | date }}</td>
+                                                    <td><small class="text-muted">Hora: </small><br>{{correos.hora}}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td><small class="text-muted ">Descripción: </small><br>{{correos.descripcion}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+
+                                        <small class="float-sm-right text-sm-right"><a href="#" (click)="eliminarCorreo(correos)" data-toggle="modal" data-target="evitaRedirigir">Eliminar</a></small>
+
+                                    </blockquote>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <blockquote class="blockquote mb-0">
 
-                                <table class="table table-borderless">
-                                    <tbody>
-                                        <tr>
-                                            <td><small class="text-muted">Contactado: </small><br>{{unContacto.nombre}} {{unContacto.apellido}}</td>
-                                            <td><small class="text-muted">Fecha: </small><br>{{ correos.fecha | date }}</td>
-                                            <td><small class="text-muted">Hora: </small><br>{{correos.hora}}</td>
-                                        </tr>
-                                        <tr>
-                                            <td><small class="text-muted ">Descripción: </small><br>{{correos.descripcion}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </blockquote>
+
+                        <div class="tab-pane fade" id="correos-enviados" role="tabpanel" aria-labelledby="correos-enviadostab">
+
+                            <div class="row mt-3" *ngIf="correosEnviados.length == 0">
+                                <div class="col-md-12">
+                                    <div class="alert alert-secondary" role="alert">
+                                        <svg width="3em" height="3em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                    <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+                                    <circle cx="8" cy="4.5" r="1"/>
+                                  </svg> &nbsp;&nbsp; Sin registros
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card mt-3 cardColorBorde" *ngFor="let correos of correosEnviados">
+                                <div class="card-header grisSecundario ">
+                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-calendar-check-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M4 .5a.5.5 0 0 0-1 0V1H2a2 2 0 0 0-2 2v1h16V3a2 2 0 0 0-2-2h-1V.5a.5.5 0 0 0-1 0V1H4V.5zM16 14V5H0v9a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2zm-5.146-5.146a.5.5 0 0 0-.708-.708L7.5 10.793 6.354 9.646a.5.5 0 1 0-.708.708l1.5 1.5a.5.5 0 0 0 .708 0l3-3z"/>
+                            </svg>&nbsp; Correo registrado
+
+                                    <div class="float-right">
+                                        {{ correos.createdAt | date }} {{correos.hora |slice: 11:19}}
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+
+                                        <table class="table table-borderless">
+                                            <tbody>
+                                                <tr>
+                                                    <td><label class="text-muted">Destinatario:</label></td>
+                                                    <td>{{correos.destinatario}}</td>
+
+                                                </tr>
+                                                <td><label class="text-muted">Remitente:</label></td>
+                                                <td> {{ correos.remitente }}</td>
+                                                <tr>
+
+                                                </tr>
+                                                <td><label class="text-muted">Asunto:  </label> </td>
+                                                <td> {{ correos.asunto}}</td>
+                                                <tr>
+                                                    <td><label class="text-muted ">Descripción: </label><br>{{correos.descripcion}}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </blockquote>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
+
+
+
                 </div>
+
+
+
 
                 <!---------------------------------Tab 4 --------------------------
             ------------------------------------------------------------------>
@@ -311,6 +398,9 @@
                                         </tr>
                                     </tbody>
                                 </table>
+
+                                <small class="float-sm-right text-sm-right"><a href="#" (click)="eliminarLlamada(llamadas)" data-toggle="modal" data-target="evitaRedirigir">Eliminar</a></small>
+
                             </blockquote>
                         </div>
                     </div>
@@ -364,6 +454,8 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                <small class="float-sm-right text-sm-right"><a href="#" (click)="eliminarReunion(reuniones)" data-toggle="modal" data-target="evitaRedirigir">Eliminar</a></small>
+
                             </blockquote>
                         </div>
                     </div>

@@ -44,7 +44,7 @@ export class LlamadasService {
     );
   }
 
-  
+
   reporteLlamadas(): any {
     let url = URL_SERVICIOS + '/llamadas/reporte';
     url += '?token=' + this.token;
@@ -54,6 +54,28 @@ export class LlamadasService {
         map(
           (resp: any) => {
             return resp.reporteLlamadas;
+          }
+        )
+      );
+  }
+
+
+
+
+  eliminarLlamada(idLlamada: string): any {
+    let url = URL_SERVICIOS + '/llamadas/' + idLlamada;
+    url += '?token=' + this.token;
+
+    return this.http.delete(url)
+      .pipe(
+        map(
+          (resp: any) => {
+            Swal.fire({
+              title: 'Llamada eliminada',
+              text: 'Eliminado correctamente',
+              icon: 'success',
+            });
+            return true;
           }
         )
       );

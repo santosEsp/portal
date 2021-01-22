@@ -45,7 +45,7 @@
             </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenu3">
                     <button (click)="exportarLlamadasRealizadas()" class="dropdown-item estilosBotonesHover" type="button">Llamadas realizadas</button>
-                    <button class="dropdown-item estilosBotonesHover" type="button">Correos enviados</button>
+                    <button (click)="exportarCorreosEnviados()" class="dropdown-item estilosBotonesHover" type="button">Correos enviados</button>
                     <button (click)="exportarReunionesRealizadas()" class="dropdown-item estilosBotonesHover" type="button">Reuniones realizadas</button>
                 </div>
             </div>
@@ -282,7 +282,7 @@
                     <h5 class="modal-title text-white" id="exampleModalLabel">
                         Agregar contacto
                     </h5>
-                    <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
+                    <button (click)="vaciarFormulario()" #closeModalContacto class="close" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
                 </div>
@@ -312,10 +312,8 @@
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Propietario de registro</label>
-                            <input type="text" class="form-control" id="pipeline" name="propietario" [(ngModel)]="propietario.propietario_registro" required disabled />
-                            <small *ngIf="f.submitted && f.controls['propietario'].errors" class="text-danger">
-                        Campo obligatorio
-                    </small>
+                            <input type="text" class="form-control" id="pipeline" name="propietario" placeholder="{{propietarionombre}}" disabled />
+
                         </div>
                         <div class="form-group">
                             <label for="recipient-name" class="col-form-label">Empresa</label>
@@ -346,8 +344,8 @@
                     </small>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn estilosBotonesHover estilosBotones">Crear</button>
-                            <button type="submit" class="btn estilosBotonesHover estilosBotones">Crear y agregar otro</button>
+                            <button type="submit" (click)="numeroBotonSeleccionado(1)" class="btn estilosBotonesHover estilosBotones">Crear</button>
+                            <button type="submit" (click)="numeroBotonSeleccionado(2)" class="btn estilosBotonesHover estilosBotones">Crear y agregar otro</button>
                             <button (click)="vaciarFormulario()" class="btn estilosBotonesHover estilosBotones" data-dismiss="modal">Cancelar</button>
                         </div>
                     </form>
@@ -363,7 +361,7 @@
                     <h5 class="modal-title text-white" id="exampleModalLabel">
                         Editar contacto
                     </h5>
-                    <button (click)="vaciarFormulario()" class="close" data-dismiss="modal" aria-label="Close">
+                    <button (click)="vaciarFormulario()" #closeModalEditarContacto class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>
                 </div>
