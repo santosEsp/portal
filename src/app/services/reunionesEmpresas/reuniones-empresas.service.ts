@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { map } from 'rxjs/Operators';
-import Swal from 'sweetalert2';
 import { ReunionesEmpresasModel } from '../../models/reunionesEmpresas';
 
 @Injectable({
@@ -20,14 +19,13 @@ export class ReunionesEmpresasService {
     return this.http.post(url, reunion).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Reunión', 'Reunión registrado', 'success');
           return resp.reunion;
         }
       )
     );
   }
 
-  eliminarCorreo(id: string): any {
+  eliminarReunion(id: string): any {
     let url = URL_SERVICIOS + '/reunionesempresas/' + id;
     url += '?token=' + this.token;
 
@@ -35,35 +33,25 @@ export class ReunionesEmpresasService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Reunión eliminado',
-              text: 'Eliminado correctamente',
-              icon: 'success',
-            });
             return true;
           }
         )
       );
   }
 
-  actualizarReunion(reunion: ReunionesEmpresasModel): any {
-    let url = URL_SERVICIOS + '/reunionesempresas/' + reunion.id;
-    url += '?token=' + this.token;
+  // actualizarReunion(reunion: ReunionesEmpresasModel): any {
+  //   let url = URL_SERVICIOS + '/reunionesempresas/' + reunion.id;
+  //   url += '?token=' + this.token;
 
-    return this.http.put(url, reunion)
-      .pipe(
-        map(
-          (resp: any) => {
-            Swal.fire({
-              title: 'Reunión actualizado',
-              text: 'Actualizado correctaente',
-              icon: 'success',
-            });
-            return resp.reunion;
-          }
-        )
-      );
-  }
+  //   return this.http.put(url, reunion)
+  //     .pipe(
+  //       map(
+  //         (resp: any) => {
+  //           return resp.reunion;
+  //         }
+  //       )
+  //     );
+  // }
 
   cargarReuniones(id: string): any {
     let url = URL_SERVICIOS + '/reunionesempresas/' + id;

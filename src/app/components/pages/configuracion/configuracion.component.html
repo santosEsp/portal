@@ -191,11 +191,11 @@
                                 <small *ngIf="fConfigCorreo.submitted && fConfigCorreo.controls['password'].errors" class="text-danger ">Campo obligatorio</small>
                             </div>
 
-                            <button [disabled]="emailConfigurado == true" type="submit" class="btn estilosBotonesHover estilosBotones ml-2">
+                            <button [disabled]="emailConfigurado == true" type="submit" (click)="verificaCambioConfig(1)" class="btn estilosBotonesHover estilosBotones ml-2">
                                 Guardar
                             </button>
 
-                            <button [disabled]="emailConfigurado == false" type="submit" class="btn estilosBotonesHover estilosBotones ml-2">
+                            <button [disabled]="emailConfigurado == false" type="submit" (click)="verificaCambioConfig(2)" class="btn estilosBotonesHover estilosBotones ml-2">
                                 Actualizar
                             </button>
 

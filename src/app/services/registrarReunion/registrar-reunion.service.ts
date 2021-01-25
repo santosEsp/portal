@@ -37,11 +37,6 @@ export class RegistrarReunionService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Reunión eliminada',
-              text: 'Eliminado correctamente',
-              icon: 'success',
-            });
             return true;
           }
         )
@@ -49,24 +44,19 @@ export class RegistrarReunionService {
   }
 
 
-  actualizarReunion(reunion: RegistrarReunionModel): any {
-    let url = URL_SERVICIOS + '/reuniones/' + reunion.id;
-    url += '?token=' + this.token;
+  // actualizarReunion(reunion: RegistrarReunionModel): any {
+  //   let url = URL_SERVICIOS + '/reuniones/' + reunion.id;
+  //   url += '?token=' + this.token;
 
-    return this.http.put(url, reunion)
-      .pipe(
-        map(
-          (resp: any) => {
-            Swal.fire({
-              title: 'Reunión actualizado',
-              text: 'Actualizado correctaente',
-              icon: 'success',
-            });
-            return resp.reunion;
-          }
-        )
-      );
-  }
+  //   return this.http.put(url, reunion)
+  //     .pipe(
+  //       map(
+  //         (resp: any) => {
+  //           return resp.reunion;
+  //         }
+  //       )
+  //     );
+  // }
 
   cargarReuniones(id: string): any {
     let url = URL_SERVICIOS + '/reuniones/' + id;

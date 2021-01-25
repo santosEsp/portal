@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { URL_SERVICIOS } from 'src/app/config/config';
 import { EmpresaModel } from 'src/app/models/empresa.model';
-import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +23,6 @@ export class EmpresaService {
       .pipe(
         map(
           (resp: any) => {
-
-            Swal.fire(empresa.nombre, 'Empresa agregada correctamente', 'success');
             return resp.empresa;
           }
         )
@@ -80,11 +77,6 @@ export class EmpresaService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Empresa eliminada',
-              text: 'Eliminado correctamente',
-              icon: 'success',
-            });
             return true;
           }
         )
@@ -99,11 +91,6 @@ export class EmpresaService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Empresa actualizada',
-              text: 'Actualizada correctamente',
-              icon: 'success',
-            });
             return resp.empresa;
           }
         )

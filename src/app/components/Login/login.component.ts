@@ -76,8 +76,8 @@ export class LoginComponent implements OnInit {
       (resp: any) => {
 
         Swal.fire({
-          title: 'Se ha enviado un correo',
-          text: 'Revise la bandeja de entrada de su correo',
+          title: 'Correo enviado',
+          text: 'Revise su correo y siga las instrucciones',
           icon: 'success',
           showCancelButton: false,
           confirmButtonColor: '#E5B53A',
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
       (err) => {
         Swal.fire({
           title: 'Correo no registrado',
-          text: 'Verifique que ha introducido correctamente su correo',
+          text: 'Verifique que ha introducido correctamente su correo registrado previamente',
           icon: 'error',
           allowOutsideClick: false
         });

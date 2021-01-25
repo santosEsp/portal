@@ -37,6 +37,7 @@ export class ConfiguracionComponent implements OnInit {
   maxln2: boolean;
   configCorreo = new configCorreoModel();
   emailConfigurado = false;
+  numeroConfig = 1;
 
   @ViewChild('closeModal') closeModal;
 
@@ -191,39 +192,80 @@ export class ConfiguracionComponent implements OnInit {
     );
   }
 
+  verificaCambioConfig(numero: number){
+    this.numeroConfig = numero;
+  }
 
   configurarCorreo(form: NgForm) {
     if (form.invalid) {
       return;
     }
-    this.configCorreo = {
-      email: form.value.email,
-      host: form.value.servidor,
-      password: form.value.password,
-      fkusuario: this.miId
-    }
-    this._configCorreoService.guardarConfiguracion(this.configCorreo).subscribe(
-      (resp: any) => {
-        Swal.close();
-        Swal.fire({
-          title: 'Configuracion guardada',
-          text: 'Se ha guadado la configuración',
-          icon: 'success',
-        }).then((ok) => {
-          if (ok.isConfirmed) {
-          }
-        });
-      },
-      (error): any => {
-        Swal.close();
-        Swal.fire({
-          title: 'Error: ' + error.error.mensaje,
-          text: 'Verifique que todo esté correcto',
-          icon: 'error',
-        });
 
+    if(this.numeroConfig == 1){
+
+      console.log('Validacion 1');
+      this.configCorreo = {
+        email: form.value.email,
+        host: form.value.servidor,
+        password: form.value.password,
+        fkusuario: this.miId
       }
-    );
+      this._configCorreoService.guardarConfiguracion(this.configCorreo).subscribe(
+        (resp: any) => {
+          Swal.close();
+          Swal.fire({
+            title: 'Configuracion guardada',
+            text: 'Se ha guadado la configuración',
+            icon: 'success',
+          }).then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+        },
+        (error): any => {
+          Swal.close();
+          Swal.fire({
+            title: 'Error: ' + error.error.mensaje,
+            text: 'Verifique que todo esté correcto',
+            icon: 'error',
+          });
+  
+        }
+      );
+    }
+
+    if(this.numeroConfig == 2){
+      this.configCorreo = {
+        email: form.value.email,
+        host: form.value.servidor,
+        password: form.value.password,
+        fkusuario: this.miId
+      }
+      this._configCorreoService.actualizarConfiguracion(this.configCorreo).subscribe(
+        (resp: any) => {
+          Swal.close();
+          Swal.fire({
+            title: 'Configuracion actualizada',
+            text: 'Se ha actualizado la configuración',
+            icon: 'success',
+          }).then((ok) => {
+            if (ok.isConfirmed) {
+            }
+          });
+        },
+        (error): any => {
+          Swal.close();
+          Swal.fire({
+            title: 'Error: ' + error.error.mensaje,
+            text: 'Verifique que todo esté correcto',
+            icon: 'error',
+          });
+  
+        }
+      );
+    }
+
+ 
   }
 
   verificaConfig() {

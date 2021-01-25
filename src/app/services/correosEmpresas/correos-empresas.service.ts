@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { map } from 'rxjs/Operators';
-import Swal from 'sweetalert2';
 import { CorreosEmpresasModel } from '../../models/correosEmpresas';
 
 @Injectable({
@@ -21,7 +20,6 @@ export class CorreosEmpresasService {
     return this.http.post(url, correo).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Correo', 'Correo registrado', 'success');
           return resp.correo;
         }
       )
@@ -29,21 +27,15 @@ export class CorreosEmpresasService {
   }
 
 
-  eliminarCorreo(idNota: string): any {
+  eliminarCorreo(idCorreo: string): any {
 
-    let url = URL_SERVICIOS + '/correosempresas/' + idNota;
+    let url = URL_SERVICIOS + '/correosempresas/' + idCorreo;
     url += '?token=' + this.token;
 
     return this.http.delete(url)
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Correo eliminado',
-              text: 'Eliminado correctamente',
-              icon: 'success',
-            });
-
             return true;
           }
         )
@@ -51,26 +43,20 @@ export class CorreosEmpresasService {
   }
 
 
-  actualizarNota(correo: CorreosEmpresasModel): any {
+  // actualizarNota(correo: CorreosEmpresasModel): any {
 
-    let url = URL_SERVICIOS + '/correosempresas/' + correo.id_rcorreo;
-    url += '?token=' + this.token;
+  //   let url = URL_SERVICIOS + '/correosempresas/' + correo.id_rcorreo;
+  //   url += '?token=' + this.token;
 
-    return this.http.put(url, correo)
-      .pipe(
-        map(
-          (resp: any) => {
-            Swal.fire({
-              title: 'Nota actualizada',
-              text: 'Actualizada correctaente',
-              icon: 'success',
-            });
-
-            return resp.correo;
-          }
-        )
-      );
-  }
+  //   return this.http.put(url, correo)
+  //     .pipe(
+  //       map(
+  //         (resp: any) => {
+  //           return resp.correo;
+  //         }
+  //       )
+  //     );
+  // }
 
 
   cargarCorreos(idContacto: string): any {

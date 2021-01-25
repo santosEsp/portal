@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { UsuarioModel } from '../../models/usuarios.model';
 import { map } from 'rxjs/operators';
 import { URL_SERVICIOS } from 'src/app/config/config';
-import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -33,7 +32,6 @@ export class UsuarioService {
     return this.http.put(url, passsword).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Se ha actualizado tu contraseña', 'Actualizado Correctamente', 'success');
           return resp.usuario;
         }
       )
@@ -65,8 +63,6 @@ export class UsuarioService {
     return this.http.delete(url).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Usuario eliminado', 'Eliminado Correctamente', 'success');
-
           return true;
         }
       )

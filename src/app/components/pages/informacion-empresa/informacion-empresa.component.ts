@@ -457,11 +457,16 @@ export class InformacionEmpresaComponent implements OnInit {
       .then((borrar) => {
         if (borrar.isConfirmed) {
           this._negociosEmpresas.eliminarNegocio(datos.id_negocio).subscribe(() => {
-            Swal.fire(
-              'Eliminado',
-              'Negocio eliminado',
-              'success'
-            );
+            Swal.fire({
+              title: 'Negocio Eliminado',
+              text: 'Se ha eliminado el negocio correctamente',
+              icon: 'success',
+              showCancelButton: false,
+              confirmButtonColor: '#E5B53A',
+              confirmButtonText: 'Ok',
+              allowOutsideClick: false,
+              allowEscapeKey: false
+            })
             this.cargarNegociosDeEmpresa();
           });
         }
@@ -492,7 +497,7 @@ export class InformacionEmpresaComponent implements OnInit {
     this._negociosEmpresas.actualizarNegocio(this.negocioEmpresa).subscribe(
       (resp: any) => {
         Swal.fire({
-          title: 'Negocio editado',
+          title: 'Negocio actualizado',
           text: 'Se ha editado el negocio correctamente',
           icon: 'success',
           showCancelButton: false,
@@ -506,6 +511,7 @@ export class InformacionEmpresaComponent implements OnInit {
               this.closeModalEditarNegocio.nativeElement.click();
               this.cargarNegociosDeEmpresa();
               form.resetForm();
+              this.negocioEmpresa = new NegociosEmpresaModel();
             }
           });
       },
@@ -528,5 +534,171 @@ export class InformacionEmpresaComponent implements OnInit {
 
       }
     );
+  }
+
+  
+  eliminarNota(datos: any): any {
+    Swal.fire({
+      title: '¿Está seguro de esos cambios?',
+      text: 'Eliminar nota',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#E5B53A',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    })
+      .then((borrar) => {
+        if (borrar.isConfirmed) {
+          Swal.showLoading();
+          this._notasEmpresasService.eliminarNota(datos.id_nota).subscribe(
+            (resp) => {
+              Swal.close();
+              Swal.fire({
+                title: 'Eliminado',
+                text: 'Nota eliminada correctamente',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#E5B53A',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false
+              })
+              this.cargarNotasEmpresas();
+            },
+
+            (err) => {
+              Swal.close();
+              Swal.fire(
+                'Error',
+                'Ocurrió un error',
+                'error'
+              );
+            }
+
+          );
+        }
+      });
+  }
+
+
+  eliminarCorreo(datos: any): any {
+    Swal.fire({
+      title: '¿Está seguro de esos cambios?',
+      text: 'Eliminar correo registrado',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#E5B53A',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    })
+      .then((borrar) => {
+        if (borrar.isConfirmed) {
+          this._correosEmpresas.eliminarCorreo(datos.id_rcorreo).subscribe(
+            (resp) => {
+              Swal.fire({
+                title: 'Eliminado',
+                text: 'Correo eliminado correctamente',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#E5B53A',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false
+              })
+              this.cargarCorreosEmpresas();
+            },
+            (err) => {
+              Swal.fire(
+                'Error',
+                'Ocurrió un error',
+                'error'
+              );
+            }
+
+          );
+        }
+      });
+  }
+
+  eliminarLlamada(datos: any): any {
+    Swal.fire({
+      title: '¿Está seguro de esos cambios?',
+      text: 'Eliminar llamada registrada',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#E5B53A',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    })
+      .then((borrar) => {
+        if (borrar.isConfirmed) {
+
+          this._llamadasEmpresa.eliminarLlamada(datos.id_llamada).subscribe(
+            (resp) => {
+              Swal.fire({
+                title: 'Eliminada',
+                text: 'Llamada eliminada correctamente',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#E5B53A',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false
+              });
+              this.cargarLlamadasEmpresas();
+            },
+            (err) => {
+              Swal.fire(
+                'Error',
+                'Ocurrió un error',
+                'error'
+              );
+            }
+
+          );
+
+        }
+      });
+  }
+
+  eliminarReunion(datos: any): any {
+    Swal.fire({
+      title: '¿Está seguro de esos cambios?',
+      text: 'Eliminar reunión registrada',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#E5B53A',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    })
+      .then((borrar) => {
+        if (borrar.isConfirmed) {
+
+          this._reunionesEmpresas.eliminarReunion(datos.id_regisreunion).subscribe(
+            (resp) => {
+              Swal.fire({
+                title: 'Eliminado',
+                text: 'Reunión eliminada correctamente',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#E5B53A',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false
+              });
+              this.cargarReunionesEmpresas();
+            },
+            (err) => {
+              Swal.fire(
+                'Error',
+                'Ocurrió un error',
+                'error'
+              );
+            }
+
+          );
+
+        }
+      });
   }
 }

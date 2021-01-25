@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { URL_SERVICIOS } from '../../config/config';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/Operators';
-import Swal from 'sweetalert2';
 import { EnviarCorreoModel } from '../../models/enviarCorreo.model';
 
 @Injectable({

@@ -3,7 +3,7 @@ import { URL_SERVICIOS } from '../../config/config';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/Operators';
 import { EtapasNegocio } from '../../models/etapasNegocio';
-import Swal from 'sweetalert2';
+
 @Injectable({
   providedIn: 'root'
 })

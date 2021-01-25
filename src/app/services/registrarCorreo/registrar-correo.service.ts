@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { map } from 'rxjs/Operators';
-import Swal from 'sweetalert2';
 import { RegistrarCorreoModel } from '../../models/registrarCorreo.model';
 
 @Injectable({
@@ -20,7 +19,6 @@ export class RegistrarCorreoService {
     return this.http.post(url, correo).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Correo', 'Correo registrado', 'success');
           var respuesta = resp.correo.fkcontacto + '/' + resp.correo.createdAt;
           return respuesta;
         }
@@ -37,11 +35,6 @@ export class RegistrarCorreoService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Correo eliminado',
-              text: 'Eliminado correctamente',
-              icon: 'success',
-            });
             return true;
           }
         )
@@ -49,25 +42,19 @@ export class RegistrarCorreoService {
   }
 
 
-  actualizarCorreo(correo: RegistrarCorreoModel): any {
-    let url = URL_SERVICIOS + '/rcorreos/' + correo.id;
-    url += '?token=' + this.token;
+  // actualizarCorreo(correo: RegistrarCorreoModel): any {
+  //   let url = URL_SERVICIOS + '/rcorreos/' + correo.id;
+  //   url += '?token=' + this.token;
 
-    return this.http.put(url, correo)
-      .pipe(
-        map(
-          (resp: any) => {
-            Swal.fire({
-              title: 'Nota actualizada',
-              text: 'Actualizada correctaente',
-              icon: 'success',
-            });
-
-            return resp.correo;
-          }
-        )
-      );
-  }
+  //   return this.http.put(url, correo)
+  //     .pipe(
+  //       map(
+  //         (resp: any) => {
+  //           return resp.correo;
+  //         }
+  //       )
+  //     );
+  // }
 
   cargarCorreos(idContacto: string): any {
     let url = URL_SERVICIOS + '/rcorreos/' + idContacto;

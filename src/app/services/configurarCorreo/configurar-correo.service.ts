@@ -26,6 +26,19 @@ export class ConfigurarCorreoService {
     );
   }
 
+  actualizarConfiguracion(config: configCorreoModel): any {
+    let url = URL_SERVICIOS + '/configurarCorreo/';
+    url += '?token=' + this.token;
+
+    return this.http.put(url, config).pipe(
+      map(
+        (resp: any) => {
+          return resp;
+        }
+      )
+    );
+  }
+
   verificaConfiguracion(id: number): any {
     let url = URL_SERVICIOS + '/configurarCorreo/?id=' + id + '&';
     url += 'token=' + this.token;

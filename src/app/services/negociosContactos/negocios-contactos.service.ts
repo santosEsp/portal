@@ -3,7 +3,7 @@ import { NegocioModel } from '../../models/negocio.model';
 import { URL_SERVICIOS } from '../../config/config';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/Operators';
-import Swal from 'sweetalert2';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +20,6 @@ export class NegociosContactosService {
     return this.http.post(url, negocio).pipe(
       map(
         (resp: any) => {
-          Swal.fire(negocio.createdAt, 'Negocio agregado correctamente', 'success');
           let respuesta = resp.negocio.fkcontacto + '/' + resp.negocio.createdAt;
           return respuesta;
         }
@@ -37,11 +36,6 @@ export class NegociosContactosService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Negocio eliminado',
-              text: 'Eliminado correctamente',
-              icon: 'success',
-            });
             return true;
           }
         )
@@ -56,11 +50,6 @@ export class NegociosContactosService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Negocio actualizado',
-              text: 'Actualizado correctamente',
-              icon: 'success',
-            });
             return resp.negocio;
           }
         )

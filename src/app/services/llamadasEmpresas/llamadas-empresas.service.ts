@@ -3,7 +3,6 @@ import { LlamadasEmpresasModel } from '../../models/llamadasEmpresas';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { map } from 'rxjs/Operators';
-import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -34,7 +33,6 @@ export class LlamadasEmpresasService {
     return this.http.post(url, llamada).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Llamada', 'Llamada agregada correctamente', 'success');
           return resp.llamadaempresa;
         }
       )
@@ -49,34 +47,23 @@ export class LlamadasEmpresasService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Nota eliminada',
-              text: 'Eliminada correctamente',
-              icon: 'success',
-            });
             return true;
           }
         )
       );
   }
 
-  actualizarLlamada(llamada: LlamadasEmpresasModel): any {
-    let url = URL_SERVICIOS + '/llamadasempresas/' + llamada.id_llamada;
-    url += '?token=' + this.token;
+  // actualizarLlamada(llamada: LlamadasEmpresasModel): any {
+  //   let url = URL_SERVICIOS + '/llamadasempresas/' + llamada.id_llamada;
+  //   url += '?token=' + this.token;
 
-    return this.http.put(url, llamada)
-      .pipe(
-        map(
-          (resp: any) => {
-            Swal.fire({
-              title: 'Nota actualizada',
-              text: 'Actualizada correctaente',
-              icon: 'success',
-            });
-
-            return resp.nota;
-          }
-        )
-      );
-  }
+  //   return this.http.put(url, llamada)
+  //     .pipe(
+  //       map(
+  //         (resp: any) => {
+  //           return resp.nota;
+  //         }
+  //       )
+  //     );
+  // }
 }

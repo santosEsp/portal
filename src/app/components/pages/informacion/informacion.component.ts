@@ -180,6 +180,11 @@ export class InformacionComponent implements OnInit {
     });
   }
 
+  cargarEmails(){
+    this.modeloCorreo.destinatario = this.unContacto.email;
+    this.modeloCorreo.remitenteEmail = this.miUsuario['email'];
+  }
+
   cargaEmpresaDeContacto() {
     this._empresaService.cargarUnaEmpresa(this.fkempresaContacto).subscribe(nombreEmpresa => {
       this.nombreEmpresa = nombreEmpresa;
@@ -230,6 +235,7 @@ export class InformacionComponent implements OnInit {
     }
     this._negociosContactoService.actualizarNegocio(this.negocio).subscribe(
       (resp: any) => {
+        this.cargarNegociosDeContacto();
         Swal.fire({
           title: 'Actualizado',
           text: 'Negocio actualizado correctamente',
@@ -279,14 +285,29 @@ export class InformacionComponent implements OnInit {
     })
       .then((borrar) => {
         if (borrar.isConfirmed) {
-          this._negociosContactoService.eliminarNegocio(datos.id_negocio).subscribe(() => {
-            Swal.fire(
-              'Eliminado',
-              'Negocio eliminado',
-              'success'
-            );
+          Swal.showLoading();
+          this._negociosContactoService.eliminarNegocio(datos.id_negocio).subscribe(
+            (resp) => {
+            Swal.close();
+            Swal.fire({
+              title: 'Eliminado',
+              text: 'Negocio eliminado correctamente',
+              icon: 'success',
+              showCancelButton: false,
+              confirmButtonColor: '#E5B53A',
+              confirmButtonText: 'Ok',
+              allowOutsideClick: false
+            })
             this.cargarNegociosDeContacto();
-          });
+          },
+          (err) => {
+            Swal.fire(
+              'Error',
+              'Ocurrió un error',
+              'error'
+            );
+          }
+          );
         }
       });
   }
@@ -315,24 +336,31 @@ export class InformacionComponent implements OnInit {
       fkusuario: this.miId
 
     }
+
     Swal.fire({
-      title: 'Enviando Correo',
+      title: 'Enviando correo',
       text: 'Por favor espere, enviando correo',
       icon: 'info',
-      allowEscapeKey: false,
+      showCancelButton: false,
       allowOutsideClick: false
     }),
       Swal.showLoading(),
       this._enviarCorreoService.enviarCorreo(this.modeloCorreo).subscribe(
         (resp: any) => {
+          this.cargarCorreosEnviados();
           Swal.close();
           Swal.fire({
             title: 'Correo enviado',
             text: 'Se ha enviado el correo',
             icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#E5B53A',
+            confirmButtonText: 'Ok',
+            allowOutsideClick: false
           }).then((ok) => {
             if (ok.isConfirmed) {
               this.closeModalEnviarCorreo.nativeElement.click();
+              formu.resetForm();
             }
           });
           this.accion = 'Se envio un correo';
@@ -402,11 +430,15 @@ export class InformacionComponent implements OnInit {
         if (borrar.isConfirmed) {
           this._notasService.eliminarNota(datos.id_nota).subscribe(
             (resp) => {
-              Swal.fire(
-                'Eliminado',
-                'Nota eliminada',
-                'success'
-              );
+              Swal.fire({
+                title: 'Eliminado',
+                text: 'Nota eliminada correctamente',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#E5B53A',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false
+              })
               this.cargarNotas();
             },
             (err) => {
@@ -438,11 +470,15 @@ export class InformacionComponent implements OnInit {
         if (borrar.isConfirmed) {
           this._registrarCorreoService.eliminarCorreo(datos.id_rcorreo).subscribe(
             (resp) => {
-              Swal.fire(
-                'Eliminado',
-                'Correo eliminado',
-                'success'
-              );
+              Swal.fire({
+                title: 'Eliminado',
+                text: 'Correo eliminado correctamente',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#E5B53A',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false
+              })
               this.cargarCorreosRegistrados();
             },
             (err) => {
@@ -476,11 +512,15 @@ export class InformacionComponent implements OnInit {
 
           this._llamadasService.eliminarLlamada(datos.id_llamada).subscribe(
             (resp) => {
-              Swal.fire(
-                'Eliminado',
-                'Llamada eliminada',
-                'success'
-              );
+              Swal.fire({
+                title: 'Eliminada',
+                text: 'Llamada eliminada correctamente',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#E5B53A',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false
+              });
               this.cargarLlamadas();
             },
             (err) => {
@@ -514,11 +554,15 @@ export class InformacionComponent implements OnInit {
 
           this._registrarReunionService.eliminarReunion(datos.id_regisreunion).subscribe(
             (resp) => {
-              Swal.fire(
-                'Eliminado',
-                'Reunión eliminada',
-                'success'
-              );
+              Swal.fire({
+                title: 'Eliminado',
+                text: 'Reunión eliminada correctamente',
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonColor: '#E5B53A',
+                confirmButtonText: 'Ok',
+                allowOutsideClick: false
+              });
               this.cargarReuniones();
             },
             (err) => {
@@ -541,7 +585,8 @@ export class InformacionComponent implements OnInit {
 
   cargarCorreosEnviados() {
 
-    this._enviarCorreoService.obtenerCorreos(this.idContacto).subscribe((resp) => { this.correosEnviados = resp });
+    console.log('idContacto', this.idContacto);
+    this._enviarCorreoService.obtenerCorreos(this.idContacto).subscribe((resp) => { this.correosEnviados = resp; console.log('Correos enviados', this.correosEnviados); });
 
   }
 }

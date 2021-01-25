@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { URL_SERVICIOS } from '../../config/config';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/Operators';
-import Swal from 'sweetalert2';
 import { NegociosEmpresaModel } from '../../models/negociosEmpresa';
 
 @Injectable({
@@ -21,7 +20,6 @@ export class NegociosEmpresasService {
     return this.http.post(url, negocio).pipe(
       map(
         (resp: any) => {
-          Swal.fire(negocio.createdAt, 'Negocio agregado correctamente', 'success');
           return resp.negocio;
         }
       )
@@ -37,11 +35,6 @@ export class NegociosEmpresasService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Negocio eliminado',
-              text: 'Eliminado correctamente',
-              icon: 'success',
-            });
             return true;
           }
         )
@@ -57,12 +50,6 @@ export class NegociosEmpresasService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Negocio actualizado',
-              text: 'Actualizado correctamente',
-              icon: 'success',
-            });
-
             return resp.negocio;
           }
         )

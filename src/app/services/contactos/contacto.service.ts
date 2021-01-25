@@ -3,7 +3,6 @@ import { ContactoModel } from '../../models/contacto.model';
 import { URL_SERVICIOS } from '../../config/config';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/Operators';
-import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root',
@@ -47,12 +46,6 @@ export class ContactoService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Contacto eliminado',
-              text: 'Eliminado correctamente',
-              icon: 'success',
-            });
-
             return true;
           }
         )
@@ -67,31 +60,6 @@ export class ContactoService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Contacto actualizado',
-              text: 'Actualizado correctamente',
-              icon: 'success',
-            });
-
-            return resp.contacto;
-          }
-        )
-      );
-  }
-
-  actualizarMiContacto(contacto: ContactoModel): any {
-    let url = URL_SERVICIOS + '/contactos/' + contacto.id_contacto;
-    url += '?token=' + this.token;
-
-    return this.http.put(url, contacto)
-      .pipe(
-        map(
-          (resp: any) => {
-            Swal.fire({
-              title: 'Contacto actualizado',
-              text: 'Actualizado correctaente',
-              icon: 'success',
-            });
             return resp.contacto;
           }
         )

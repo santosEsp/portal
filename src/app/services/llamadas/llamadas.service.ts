@@ -3,7 +3,6 @@ import { RegistrarLlamadaModel } from '../../models/registrarLlamada.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
 import { map } from 'rxjs/Operators';
-import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +35,6 @@ export class LlamadasService {
     return this.http.post(url, llamada).pipe(
       map(
         (resp: any) => {
-          Swal.fire('Llamada', 'Llamada agregada correctamente', 'success');
           var respuesta = resp.llamada.fkcontacto + '/' + resp.llamada.createdAt;
           return respuesta;
         }
@@ -70,11 +68,6 @@ export class LlamadasService {
       .pipe(
         map(
           (resp: any) => {
-            Swal.fire({
-              title: 'Llamada eliminada',
-              text: 'Eliminado correctamente',
-              icon: 'success',
-            });
             return true;
           }
         )

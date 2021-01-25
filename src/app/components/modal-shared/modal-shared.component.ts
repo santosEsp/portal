@@ -17,6 +17,7 @@ import { LlamadasService } from '../../services/llamadas/llamadas.service';
 import { RegistrarCorreoService } from '../../services/registrarCorreo/registrar-correo.service';
 import { EtapasNegociosService } from '../../services/etapasNegocios/etapas-negocios.service';
 import { NegociosContactosService } from '../../services/negociosContactos/negocios-contactos.service';
+import {InformacionComponent} from '../../components/pages/informacion/informacion.component'
 
 // importando clase sw informacion.component.ts
 import Swal from 'sweetalert2';
@@ -63,7 +64,7 @@ export class ModalSharedComponent implements OnInit {
   @ViewChild('closeModalLlamada') closeModalLlamada;
   constructor(private rutaActiva: ActivatedRoute, private _notasService: NotasService, private _contactoService: ContactoService, private _registrarReunion: RegistrarReunionService,
     private _llamadaService: LlamadasService, private _correosService: RegistrarCorreoService, private _etapasService: EtapasNegociosService,
-    private _negocioService: NegociosContactosService) {
+    private _negocioService: NegociosContactosService, private _informacionComponent: InformacionComponent) {
     this.miUsuario = JSON.parse(localStorage.getItem('usuario'));
     this.miId = this.miUsuario['id_usuario'];
   }
@@ -89,11 +90,25 @@ export class ModalSharedComponent implements OnInit {
       fkusuario: this.miId,
       fkcontacto: this.idContacto
     };
+    
     Swal.showLoading();
     this._notasService.crearNota(this.notaContacto).subscribe(
+      // lista =>
       (resp: any) => {
+        this._informacionComponent.cargarNotas();
+
+        // this.accionU = lista;
+        // this.accion = 'Se creó una nota' + " /" + this.accionU;
+        // this.accionEnviar.emit(this.accion);
+        // let sepa = this.accion.split("/", 3);
+        // let id = sepa[1];
+        // let fechaAc = sepa[2];
+        // this.accionEnviar.emit(this.accion);
+        // this.actualidadAccion(id, fechaAc);
+
+        Swal.close();
         Swal.fire({
-          title: 'Nota registrada',
+          title: 'Registrado',
           text: 'Se ha registrado la nota correctamente',
           icon: 'success',
           showCancelButton: false,
@@ -109,10 +124,10 @@ export class ModalSharedComponent implements OnInit {
           });
       },
       (err: any) => {
-
+        Swal.close();
         Swal.fire({
-          title: 'No agregado',
-          text: 'Error al registrar nota',
+          title: 'No registrado',
+          text: 'Error al registrar la nota',
           icon: 'error',
           showCancelButton: false,
           confirmButtonColor: '#E5B53A',
@@ -126,19 +141,6 @@ export class ModalSharedComponent implements OnInit {
 
       }
     );
-    this._notasService.crearNota(this.notaContacto).subscribe(
-      lista => {
-        this.accionU = lista;
-        this.accion = 'Se creó una nota' + " /" + this.accionU;
-        this.accionEnviar.emit(this.accion);
-        let sepa = this.accion.split("/", 3);
-        let id = sepa[1];
-        let fechaAc = sepa[2];
-        this.accionEnviar.emit(this.accion);
-
-        this.actualidadAccion(id, fechaAc);
-
-      });
   }
 
   actualidadAccion(id: string, fechaAc: string) {
@@ -167,9 +169,13 @@ export class ModalSharedComponent implements OnInit {
       descripcion: form.value.descripcionReunion,
       fkusuario: this.miId
     };
+    Swal.showLoading();
     this._registrarReunion.registrarReunion(this.reunionContacto).subscribe(
 
       (resp: any) => {
+        Swal.close();
+        this._informacionComponent.cargarReuniones();
+
         this.accionU = resp;
         this.accion = 'Se registró una reunión' + " /" + this.accionU;
         this.accionEnviar.emit(this.accion);
@@ -181,7 +187,7 @@ export class ModalSharedComponent implements OnInit {
         this.actualidadAccion(id, fechaAc);
 
         Swal.fire({
-          title: 'Reunion registrado',
+          title: 'Registrado',
           text: 'Se ha registrado la reunión correctamente',
           icon: 'success',
           showCancelButton: false,
@@ -197,9 +203,10 @@ export class ModalSharedComponent implements OnInit {
           });
       },
       (err: any) => {
+        Swal.close();
         Swal.fire({
           title: 'No registrado',
-          text: 'Error al registrar correo',
+          text: 'Error al registrar reunión',
           icon: 'error',
           showCancelButton: false,
           confirmButtonColor: '#E5B53A',
@@ -227,9 +234,12 @@ export class ModalSharedComponent implements OnInit {
       descripcion: form.value.descripcionLlamada,
       fkusuario: this.miId
     };
+    Swal.showLoading();
     this._llamadaService.crearLlamada(this.llamadaContacto).subscribe(
 
       (resp: any) => {
+
+        this._informacionComponent.cargarLlamadas();
 
         this.accionU = resp;
         this.accion = 'Se registró una llamada' + " /" + this.accionU;
@@ -240,9 +250,9 @@ export class ModalSharedComponent implements OnInit {
         this.accionEnviar.emit(this.accion);
 
         this.actualidadAccion(id, fechaAc);
-
+        Swal.close();
         Swal.fire({
-          title: 'Llamada registrada',
+          title: 'Registrado',
           text: 'Se ha registrado la llamada correctamente',
           icon: 'success',
           showCancelButton: false,
@@ -258,21 +268,16 @@ export class ModalSharedComponent implements OnInit {
           });
       },
       (err: any) => {
-
+        Swal.close();
         Swal.fire({
           title: 'No registrado',
-          text: 'Error al registrar correo',
+          text: 'Error al registrar llamada',
           icon: 'error',
           showCancelButton: false,
           confirmButtonColor: '#E5B53A',
           confirmButtonText: 'Ok',
           allowOutsideClick: false
-        })
-          .then((ok) => {
-            if (ok.isConfirmed) {
-            }
-          });
-
+        });
       }
     );
   }
@@ -292,6 +297,8 @@ export class ModalSharedComponent implements OnInit {
     this._correosService.registrarCorreo(this.correoContacto).subscribe(
 
       (resp: any) => {
+        this._informacionComponent.cargarCorreosRegistrados();
+
         this.accionU = resp;
         this.accion = 'Se registró una reunión' + " /" + this.accionU;
         this.accionEnviar.emit(this.accion);
@@ -302,7 +309,7 @@ export class ModalSharedComponent implements OnInit {
         this.actualidadAccion(id, fechaAc);
 
         Swal.fire({
-          title: 'Correo registrado',
+          title: 'Registrado',
           text: 'Se ha registrado el correo correctamente',
           icon: 'success',
           showCancelButton: false,
@@ -351,8 +358,10 @@ export class ModalSharedComponent implements OnInit {
     this._negocioService.crearNegocio(this.negocioContacto).subscribe(
 
       (resp: any) => {
+        this._informacionComponent.cargarNegociosDeContacto();
+
         this.accionU = resp;
-        this.accion = 'Se registró una reunión' + " /" + this.accionU;
+        this.accion = 'Se registró un negocio' + " /" + this.accionU;
         this.accionEnviar.emit(this.accion);
         let sepa = this.accion.split("/", 3);
         let id = sepa[1];
@@ -361,7 +370,7 @@ export class ModalSharedComponent implements OnInit {
 
         this.actualidadAccion(id, fechaAc);
         Swal.fire({
-          title: 'Negocio registrado',
+          title: 'Registrado',
           text: 'Se ha registrado el negocio correctamente',
           icon: 'success',
           showCancelButton: false,
@@ -379,7 +388,7 @@ export class ModalSharedComponent implements OnInit {
       (err: any) => {
         Swal.fire({
           title: 'No registrado',
-          text: 'Error al registrar correo',
+          text: 'Error al registrar el negocio',
           icon: 'error',
           showCancelButton: false,
           confirmButtonColor: '#E5B53A',
