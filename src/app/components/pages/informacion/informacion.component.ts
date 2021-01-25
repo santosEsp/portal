@@ -171,6 +171,7 @@ export class InformacionComponent implements OnInit {
   infoContacto(): any {
     this._contactoService.cargarUnContacto(this.idContacto).subscribe(contacto => {
       this.unContacto = contacto;
+      
       this.fkempresaContacto = this.unContacto.fkempresa;
       this.fkpropietarioContacto = parseInt(this.unContacto.propietario_registro);
       this.cargaEmpresaDeContacto();
@@ -347,6 +348,17 @@ export class InformacionComponent implements OnInit {
       Swal.showLoading(),
       this._enviarCorreoService.enviarCorreo(this.modeloCorreo).subscribe(
         (resp: any) => {
+
+      //   this.accionU = resp;
+      //   this.accion = 'Se registró un negocio' + " /" + this.accionU;
+      //  // this.accionEnviar.emit(this.accion);
+      //   let sepa = this.accion.split("/", 3);
+      //   let id = sepa[1];
+      //   let fechaAc = sepa[2];
+      //  // this.accionEnviar.emit(this.accion);
+
+      //   this.actualidadAccion(id, fechaAc);
+
           this.cargarCorreosEnviados();
           Swal.close();
           Swal.fire({
@@ -361,6 +373,7 @@ export class InformacionComponent implements OnInit {
             if (ok.isConfirmed) {
               this.closeModalEnviarCorreo.nativeElement.click();
               formu.resetForm();
+              this.cargarCorreosEnviados();
             }
           });
           this.accion = 'Se envio un correo';
@@ -585,7 +598,7 @@ export class InformacionComponent implements OnInit {
 
   cargarCorreosEnviados() {
 
-    console.log('idContacto', this.idContacto);
+    
     this._enviarCorreoService.obtenerCorreos(this.idContacto).subscribe((resp) => { this.correosEnviados = resp; console.log('Correos enviados', this.correosEnviados); });
 
   }

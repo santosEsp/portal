@@ -20,8 +20,8 @@ export class NotasService {
     return this.http.post(url, nota).pipe(
       map(
         (resp: any) => {
-         // this.accionUltima = resp.nota.createdAt + "/" + resp.nota.fkcontactos;
-          return resp.nota;
+         this.accionUltima = resp.nota.createdAt + "/" + resp.nota.fkcontactos;
+          return this.accionUltima;
         }
       )
     );

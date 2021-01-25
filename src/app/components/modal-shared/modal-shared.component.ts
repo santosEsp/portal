@@ -93,18 +93,21 @@ export class ModalSharedComponent implements OnInit {
     
     Swal.showLoading();
     this._notasService.crearNota(this.notaContacto).subscribe(
-      // lista =>
+   
       (resp: any) => {
         this._informacionComponent.cargarNotas();
+        
 
-        // this.accionU = lista;
-        // this.accion = 'Se creó una nota' + " /" + this.accionU;
-        // this.accionEnviar.emit(this.accion);
-        // let sepa = this.accion.split("/", 3);
-        // let id = sepa[1];
-        // let fechaAc = sepa[2];
-        // this.accionEnviar.emit(this.accion);
-        // this.actualidadAccion(id, fechaAc);
+        this.accionU = resp;
+        this.accion = 'Se registró una reunión' + " /" + this.accionU;
+        this.accionEnviar.emit(this.accion);
+        let sepa = this.accion.split("/", 3);
+        let id = sepa[2];
+        let fechaAc = sepa[1];
+        this.accionEnviar.emit(this.accion);
+        this.actualidadAccion(id, fechaAc);
+        
+        
 
         Swal.close();
         Swal.fire({
@@ -120,6 +123,7 @@ export class ModalSharedComponent implements OnInit {
             if (ok.isConfirmed) {
               this.closeModalNota.nativeElement.click();
               form.resetForm();
+              this._informacionComponent.infoContacto();
             }
           });
       },
@@ -199,6 +203,7 @@ export class ModalSharedComponent implements OnInit {
             if (ok.isConfirmed) {
               this.closeModalReunion.nativeElement.click();
               form.resetForm();
+              this._informacionComponent.infoContacto();
             }
           });
       },
@@ -264,6 +269,7 @@ export class ModalSharedComponent implements OnInit {
             if (ok.isConfirmed) {
               this.closeModalLlamada.nativeElement.click();
               form.resetForm();
+              this._informacionComponent.infoContacto();
             }
           });
       },
@@ -321,6 +327,7 @@ export class ModalSharedComponent implements OnInit {
             if (ok.isConfirmed) {
               this.closeModalCorreo.nativeElement.click();
               form.resetForm();
+              this._informacionComponent.infoContacto();
             }
           });
       },
@@ -382,6 +389,7 @@ export class ModalSharedComponent implements OnInit {
             if (ok.isConfirmed) {
               this.closeModalNegocio.nativeElement.click();
               form.resetForm();
+              this._informacionComponent.infoContacto();
             }
           });
       },

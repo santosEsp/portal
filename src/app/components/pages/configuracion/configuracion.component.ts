@@ -203,7 +203,6 @@ export class ConfiguracionComponent implements OnInit {
 
     if(this.numeroConfig == 1){
 
-      console.log('Validacion 1');
       this.configCorreo = {
         email: form.value.email,
         host: form.value.servidor,

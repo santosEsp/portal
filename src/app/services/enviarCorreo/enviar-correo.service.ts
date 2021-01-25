@@ -15,6 +15,8 @@ export class EnviarCorreoService {
 
 
   enviarCorreo(modeloCorreo: EnviarCorreoModel): any {
+
+    
     let url = URL_SERVICIOS + '/enviarCorreo/send';
     url += '?token=' + this.token;
     return this.http.post(url, modeloCorreo)
